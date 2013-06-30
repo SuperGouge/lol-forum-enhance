@@ -7,3 +7,4 @@ server/Settings.class.php
 server/SummonerIcons/*.jpg
 server/SummonerIcons/*.png
 server/SummonerIcons/*.gif
+server/SummonerIcons/*.bmp
