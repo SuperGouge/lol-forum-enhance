@@ -1,0 +1,1 @@
+# Gitignore# Exclude actual settings. You do not want to hand out your passwords to someone.server/Settings.class.php# Exclude summoner icons to keep the repo small.server/SummonerIcons/*.jpgserver/SummonerIcons/*.pngserver/SummonerIcons/*.gif
