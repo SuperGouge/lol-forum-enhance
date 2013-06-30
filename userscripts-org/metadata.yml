@@ -1,0 +1,10 @@
+UserscriptMetadata:
+    Name:               "LoL Forum Icons"
+    Summary:            "Displays the summoner icon of a summoner instead of the question mark image in the forums of League of Legends."
+    License:            "MIT License"
+    Markdown:           "true"
+    Description:        "description.md"
+    ScriptHomepage:     ""
+    RemoteLocation:     ""
+    Screenshots:        ""
+    Icons:              ""
