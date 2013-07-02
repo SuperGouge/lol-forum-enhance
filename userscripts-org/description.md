@@ -1,11 +1,13 @@
 # League of Legends Forum Icons
 
-# Description
+---
+
+## **Description**
 
 Displays the icon of a summoner instead of the question mark image in the forums of League of Legends. Works on `NA`, `EUW`, `EUNE` and `BR`. Once they are requested, the icons are cached for at least 12 hours or longer if we cannot get newer versions (e.g. servers are down).
 
 
-# Features
+## **Features**
 
 * Forum *summoner icon replacement* based on actual selected icon
 * No need to configure and *no log in to a third party site*
@@ -14,6 +16,6 @@ Displays the icon of a summoner instead of the question mark image in the forums
 * 12 hour caching to keep server usage low
 
 
-# Appendix
+## **Appendix**
 
 Powered by [elophant](http://www.elophant.com/ "LoL Champion and Summoner Stats")
