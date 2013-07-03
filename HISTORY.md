@@ -3,12 +3,16 @@ Repository Version History
 ### Goals:
 - [ ] Mark nonexistent summoners
 - [ ] Insert summoner icon when quick-replying
-- [?] Automatic update notifications
+- [x] Automatic update notifications
 - [ ] Show server status
 
 ---
 
-## Current Version: 0.0.3
+## Current Version: 0.1.0
+- Updated working as intended
+- fixed the bug in v0.0.3, which tried to run the script before the needed summonernames where loaded
+
+## 0.0.3
 - Quick reply box changed
 	- now appears full width
 	- only vertical scrollable to avoid those ugly effects
