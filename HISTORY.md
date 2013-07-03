@@ -2,13 +2,20 @@ Repository Version History
 ==========================
 ### Goals:
 - [ ] Mark nonexistent summoners
-- [ ] Insert summoner icon when quick-replying
+- [?] Insert summoner icon when quick-replying
 - [x] Automatic update notifications
 - [ ] Show server status
 
 ---
 
 # Newest Version:
+## 0.1.2
+- Using MutationObserver for QuickReply
+	- checking the number of posts
+	- if changed fills missing summoner icons
+	- still testing
+- wrapping more and more code in functions
+
 ## 0.1.1
 - new occurred bug from 0.1.0 fixed.
 
