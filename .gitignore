@@ -8,3 +8,8 @@ server/SummonerIcons/*.jpg
 server/SummonerIcons/*.png
 server/SummonerIcons/*.gif
 server/SummonerIcons/*.bmp
+
+client/SummonerIcons/*.jpg
+client/SummonerIcons/*.png
+client/SummonerIcons/*.gif
+client/SummonerIcons/*.bmp
