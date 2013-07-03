@@ -8,8 +8,10 @@ server/SummonerIcons/*.jpg
 server/SummonerIcons/*.png
 server/SummonerIcons/*.gif
 server/SummonerIcons/*.bmp
+server/SummonerIcons/Thumbs.db
 
 client/SummonerIcons/*.jpg
 client/SummonerIcons/*.png
 client/SummonerIcons/*.gif
 client/SummonerIcons/*.bmp
+client/SummonerIcons/Thumbs.db
