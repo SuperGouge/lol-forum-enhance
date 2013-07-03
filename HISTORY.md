@@ -8,7 +8,11 @@ Repository Version History
 
 ---
 
-## Current Version: 0.1.0
+# Newest Version:
+## 0.1.1
+- new occurred bug from 0.1.0 fixed.
+
+## 0.1.0
 - Updated working as intended
 - fixed the bug in v0.0.3, which tried to run the script before the needed summonernames where loaded
 

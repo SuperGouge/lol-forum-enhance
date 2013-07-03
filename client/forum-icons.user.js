@@ -5,8 +5,8 @@
 // @include     *.leagueoflegends.com/board/*
 // @downloadURL https://github.com/philippwiddra/lol-forum-enhance/raw/master/client/forum-icons.user.js
 // @updateURL   https://github.com/philippwiddra/lol-forum-enhance/raw/master/client/forum-icons.user.js
-// @version     0.1.0
-// @run-at      document-start
+// @version     0.1.1
+// @run-at      document-end
 // @grant       none
 // ==/UserScript==
 
@@ -83,26 +83,23 @@ if (match != null) // server found
 	var server = match[0];
 	//$('#lol-pvpnet-bar-inner').append($('<div style="line-height: 30px;">Server found: '+server+'</div>'));
 
-	// wait for SummonerNames (in this case all posts) to be loaded
-	$("#posts").ready(function() {
-		// get all Left items except those of rioters.
-		var allLeft = $('.forum_post img.user_summoner_icon').filter($('img[src="lol_theme/img/unknown_icon.jpg"]')).parent().parent().parent().parent();
-		allLeft.each(function(i, e) {
-			var name = $(e).find('big').text();
-			var image = $(e).find('img.user_summoner_icon');
-			
-			// TODO: level 1 caching
-			
-			// level 2 caching
-			var url = 'http://passwd.ohost.de/lcapi/getSummoner.php?summoner=' + name + '&server=' + server + '';			
-			$.ajax({
-				type: 'GET',
-				url: url,
-				async: true,
-				jsonpCallback: callbackFunction,
-				contentType: "text/javascript",
-				dataType: 'jsonp',
-			});
+	// get all Left items except those of rioters.
+	var allLeft = $('.forum_post img.user_summoner_icon').filter($('img[src="lol_theme/img/unknown_icon.jpg"]')).parent().parent().parent().parent();
+	allLeft.each(function(i, e) {
+		var name = $(e).find('big').text();
+		var image = $(e).find('img.user_summoner_icon');
+		
+		// TODO: level 1 caching
+		
+		// level 2 caching
+		var url = 'http://passwd.ohost.de/lcapi/getSummoner.php?summoner=' + name + '&server=' + server + '';			
+		$.ajax({
+			type: 'GET',
+			url: url,
+			async: true,
+			jsonpCallback: callbackFunction,
+			contentType: "text/javascript",
+			dataType: 'jsonp',
 		});
 	});
 }
