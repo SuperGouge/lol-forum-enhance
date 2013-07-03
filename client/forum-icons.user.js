@@ -5,10 +5,27 @@
 // @include     *.leagueoflegends.com/board/*
 // @downloadURL https://github.com/philippwiddra/lol-forum-enhance/raw/master/client/forum-icons.user.js
 // @updateURL   https://github.com/philippwiddra/lol-forum-enhance/raw/master/client/forum-icons.user.js
-// @version     0.0.2
+// @version     0.0.3
 // @run-at      document-start
-// @require     http://ajax.googleapis.com/ajax/libs/jquery/2.0.1/jquery.min.js
+// @grant       none
 // ==/UserScript==
+
+function addGlobalStyle(css)
+{
+	try {
+		var elmHead, elmStyle;
+		elmHead = document.getElementsByTagName('head')[0];
+		elmStyle = document.createElement('style');
+		elmStyle.type = 'text/css';
+		elmHead.appendChild(elmStyle);
+		elmStyle.innerHTML = css;
+	} catch (e) {
+		if (!document.styleSheets.length) {
+			document.createStyleSheet();
+		}
+		document.styleSheets[0].cssText += css;
+	}
+}
 
 function setCookie(name, value, expireDays)
 {
@@ -45,37 +62,42 @@ function getCookie(name)
 //setCookie("testtesttest", "abc", 1);
 //alert(getCookie("testtesttest"));
 
+// css style changes
+addGlobalStyle("div.panel > div {" + 
+					"min-width: 640px !important;" +
+					"width: auto !important;" +
+					"max-width: none !important;" +
+				"}" +
+				"textarea#vB_Editor_QR_textarea {" +
+					"width: 100% !important;" +
+					"resize: vertical !important;" +
+					"min-height: 100px !important;" +
+				"}");
 
-$(document).ready(function () {
-	var callbackFunction = "(function (json) { $('big').filter(function(){ return $(this).text() === json.name;}).parent().find('img.user_summoner_icon').attr('src', 'http://img.lolking.net/shared/riot/images/profile_icons/profileIcon' + json.profileIconId + '.jpg').parent().find('span.left_orb').text(json.summonerLevel); })";
-	callbackFunction = callbackFunction.replace(/\+/g, '%2B');
-	
-	var match = document.URL.match(/(na)|(euw)|(eune)|(br)/i);
-	if (match != null) // Server found
-	{
-		var server = match[0];
-		//$('#lol-pvpnet-bar-inner').append($('<div style="line-height: 30px;">Server found: '+server+'</div>'));
-		
-		// get all Left items except those of rioters.
-		var allLeft = $('.forum_post img.user_summoner_icon').filter($('img[src="lol_theme/img/unknown_icon.jpg"]')).parent().parent().parent().parent();
+var callbackFunction = "(function (json) { $('big').filter(function(){ return $(this).text() === json.name;}).parent().find('img.user_summoner_icon').attr('src', 'http://img.lolking.net/shared/riot/images/profile_icons/profileIcon' + json.profileIconId + '.jpg').parent().find('span.left_orb').text(json.summonerLevel); })";
+callbackFunction = callbackFunction.replace(/\+/g, '%2B');
 
-		allLeft.each(function(i, e) {
-			var name = $(e).find('big').text();
-			
-			var image = $(e).find('img.user_summoner_icon');
-			var url = 'http://passwd.ohost.de/lcapi/getSummoner.php?summoner=' + name + '&server=' + server + '';			
+var match = document.URL.match(/(na)|(euw)|(eune)|(br)/i);
+if (match != null) // server found
+{
+	var server = match[0];
+	//$('#lol-pvpnet-bar-inner').append($('<div style="line-height: 30px;">Server found: '+server+'</div>'));
 
-			$.ajax({
-				type: 'GET',
-				url: url,
-				async: true,
-				jsonpCallback: callbackFunction,
-				contentType: "text/javascript",
-				dataType: 'jsonp',
-			});
-
+	// get all Left items except those of rioters.
+	var allLeft = $('.forum_post img.user_summoner_icon').filter($('img[src="lol_theme/img/unknown_icon.jpg"]')).parent().parent().parent().parent();
+	allLeft.each(function(i, e) {
+		var name = $(e).find('big').text();
+		var image = $(e).find('img.user_summoner_icon');
+		var url = 'http://passwd.ohost.de/lcapi/getSummoner.php?summoner=' + name + '&server=' + server + '';			
+		$.ajax({
+			type: 'GET',
+			url: url,
+			async: true,
+			jsonpCallback: callbackFunction,
+			contentType: "text/javascript",
+			dataType: 'jsonp',
 		});
-	}
-	else // Server not found
-	{}
-});
+	});
+}
+else // server not found
+{}

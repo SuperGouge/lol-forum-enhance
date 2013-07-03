@@ -8,7 +8,13 @@ Repository Version History
 
 ---
 
-## Current Version: 0.0.2
+## Current Version: 0.0.3
+- Quick reply box changed
+	- now appears full width
+	- only vertical scrollable to avoid those ugly effects
+- now starts directly with site-load, instead of waiting for the page to load
+
+## 0.0.2
 - mainly cleanup
 - greasemonkey metadata added
 	- should update automatically now
