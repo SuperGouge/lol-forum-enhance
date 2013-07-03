@@ -1,5 +1,4 @@
-Repository Version History
-==========================
+# Repository Version History
 ### Goals:
 - [ ] Mark nonexistent summoners
 - [?] Insert summoner icon when quick-replying
@@ -8,28 +7,28 @@ Repository Version History
 
 ---
 
-# Newest Version:
-## 0.1.2
+## Newest Version:
+### 0.1.2
 - Using MutationObserver for QuickReply
 	- checking the number of posts
 	- if changed fills missing summoner icons
 	- still testing
 - wrapping more and more code in functions
 
-## 0.1.1
+### 0.1.1
 - new occurred bug from 0.1.0 fixed.
 
-## 0.1.0
+### 0.1.0
 - Updated working as intended
 - fixed the bug in v0.0.3, which tried to run the script before the needed summonernames where loaded
 
-## 0.0.3
+### 0.0.3
 - Quick reply box changed
 	- now appears full width
 	- only vertical scrollable to avoid those ugly effects
 - now starts directly with site-load, instead of waiting for the page to load
 
-## 0.0.2
+### 0.0.2
 - mainly cleanup
 - greasemonkey metadata added
 	- should update automatically now
@@ -39,5 +38,5 @@ Repository Version History
 - Summoner Images added for later use
 
 
-## 0.0.1
+### 0.0.1
 - Initial version
