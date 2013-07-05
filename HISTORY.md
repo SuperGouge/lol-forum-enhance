@@ -1,13 +1,21 @@
 # Repository Version History
 ### Goals:
 - [ ] Mark nonexistent summoners
-- [?] Insert summoner icon when quick-replying
+- [x] Insert summoner icon when quick-replying
 - [x] Automatic update notifications
 - [ ] Show server status
+- [x] Enlarge quick edit box
+- [ ] show own avatar besides quick edit box
 
 ---
 
 ## Newest Version:
+### 0.1.3
+- Code cleanup
+- added notes.md
+- MutationObserver working fine
+- new goal: show own avatar besides quick edit box
+
 ### 0.1.2
 - Using MutationObserver for QuickReply
 	- checking the number of posts
