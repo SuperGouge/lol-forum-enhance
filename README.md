@@ -1,5 +1,5 @@
 # League of Legends forum enhance
-## a Greasemonkey userscript
+## a greasemonkey userscript
 
 ### Description
 
@@ -18,5 +18,5 @@ Displays the icon of a summoner instead of the question mark image in the forums
 
 ### Appendix
 
-Powered by [elophant](http://www.elophant.com/ "LoL Champion and Summoner Stats")
-This userscript on [userscripts.org] (http://userscripts.org/scripts/show/172058 "LoL Forum Icons for Greasemonkey")
+* Powered by [elophant](http://www.elophant.com/ "LoL Champion and Summoner Stats")
+* This userscript on [userscripts.org] (http://userscripts.org/scripts/show/172058 "LoL Forum Icons for Greasemonkey")
