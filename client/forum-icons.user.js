@@ -5,7 +5,7 @@
 // @include     *.leagueoflegends.com/board/*
 // @downloadURL https://github.com/philippwiddra/lol-forum-enhance/raw/master/client/forum-icons.user.js
 // @updateURL   https://github.com/philippwiddra/lol-forum-enhance/raw/master/client/forum-icons.user.js
-// @version     0.1.2
+// @version     0.1.3
 // @run-at      document-end
 // @grant       none
 // ==/UserScript==
@@ -64,8 +64,11 @@ function countAllPosts()
 	return $('.forum_post img.user_summoner_icon').parent().parent().parent().parent().length;
 }
 
-function replaceImages()
+function replaceAvatars()
 {
+	var callbackFunction = "(function (json) { $('big').filter(function(){ return $(this).text() === json.name;}).parent().find('img.user_summoner_icon').attr('src', 'http://img.lolking.net/shared/riot/images/profile_icons/profileIcon' + json.profileIconId + '.jpg').parent().find('span.left_orb').text(json.summonerLevel); })";
+	callbackFunction = callbackFunction.replace(/\+/g, '%2B');
+
 	// get all Left items except those of rioters.
 	var allLeft = $('.forum_post img.user_summoner_icon').filter($('img[src="lol_theme/img/unknown_icon.jpg"]')).parent().parent().parent().parent();
 	allLeft.each(function(i, e) {
@@ -89,27 +92,38 @@ function replaceImages()
 
 function postCountChanged()
 {
-	//alert("post count changed!");
-	replaceImages();
+	replaceAvatars();
 }
 
-//setCookie("testtesttest", "abc", 1);
-//alert(getCookie("testtesttest"));
+function getServer()
+{
+	// get the server from url
+	var match = document.URL.match(/(na)|(euw)|(eune)|(br)/i);
+	if (match != null) // server found
+	{
+		return match[0];
+	}
+	else
+	{
+		return null;
+	}
+}
+
+//setCookie("test", "0", 1);
+//alert(getCookie("test"));
 
 
 // create an observer for the #posts div instance
-var posts_old = 0;
-var posts_initialized = false;
-var target = document.querySelector('#posts');
-var observer = new MutationObserver(function(mutations) {
+var observerPostsOld = 0;
+var observerPostsInitialized = false;
+var observerTarget = document.querySelector('#posts');
+var postsObserver = new MutationObserver(function(mutations) {
 	mutations.forEach(function(mutation) {
-		var posts_new = countAllPosts();
-		if ((posts_initialized) && (posts_new != posts_old)) postCountChanged();
-		//alert(mutation.type+" new:"+posts_new+" old:"+posts_old);
+		var observerPostsNew = countAllPosts();
+		if ((observerPostsInitialized) && (observerPostsNew != observerPostsOld)) postCountChanged();
 	});
 });
-var config = { childList: true, subtree: true };
-
+var observerConfig = { childList: true, subtree: true };
 
 // css style changes
 addGlobalStyle("div.panel > div {" + 
@@ -123,22 +137,21 @@ addGlobalStyle("div.panel > div {" +
 					"min-height: 100px !important;" +
 				"}");
 
-var callbackFunction = "(function (json) { $('big').filter(function(){ return $(this).text() === json.name;}).parent().find('img.user_summoner_icon').attr('src', 'http://img.lolking.net/shared/riot/images/profile_icons/profileIcon' + json.profileIconId + '.jpg').parent().find('span.left_orb').text(json.summonerLevel); })";
-callbackFunction = callbackFunction.replace(/\+/g, '%2B');
-
-var match = document.URL.match(/(na)|(euw)|(eune)|(br)/i);
-if (match != null) // server found
+// find server
+var server = getServer();
+if (server != null) // server found
 {
-	var server = match[0];
-	//$('#lol-pvpnet-bar-inner').append($('<div style="line-height: 30px;">Server found: '+server+'</div>'));
-
-	replaceImages();
+	// replace the summoner images and levels
+	replaceAvatars();
 	
-	posts_old = countAllPosts();
-	posts_initialized = true;
+	// initialize observer counts and mark as ready
+	observerPostsOld = countAllPosts();
+	observerPostsInitialized = true;
+	
+	// start observing #posts
+	postsObserver.observe(observerTarget, observerConfig);
 }
 else // server not found
-{}
-
-// start observing #posts
-observer.observe(target, config);
+{
+	// ...
+}

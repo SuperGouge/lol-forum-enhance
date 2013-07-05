@@ -38,3 +38,8 @@ Willkommen, NAME (
 ``` html
 <div style="clear: both;"></div>
 ```
+
+* adding text to pvp.net bar
+``` javascript
+$('#lol-pvpnet-bar-inner').append($('<div style="line-height: 30px;">Server found: '+server+'</div>'));
+```
