@@ -43,3 +43,14 @@ Willkommen, NAME (
 ``` javascript
 $('#lol-pvpnet-bar-inner').append($('<div style="line-height: 30px;">Server found: '+server+'</div>'));
 ```
+
+## `GM_*` Greasemonkey API functions
+wheather or not an API function is allowed to use or not is specified in the `*.xml`-file which contains the metadata of all scripts.
+(more precisely in the `<GRANT>` tags)
+This file will not update automatically, when you change the `@grant ...` metadata.
+You need to update **(?)** / install the userscript to change the actually used metadata.
+
+## `@resource` and updates
+Resource metadata acts completely the same like the grant (or **every** other) metadata in the case, that changes only take effect, when you update/reinstall the script.
+In addition to this, the resource data *(images, additional javascript, whatever)* will download the time you update **(?)** / install the script.
+As far as i know **only this one time** *(however, the greasemonkey wiki says, that resource-data is somehow able to update if changed)*
