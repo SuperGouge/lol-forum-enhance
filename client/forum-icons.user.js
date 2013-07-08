@@ -11,12 +11,13 @@
 // @grant       GM_getResourceText
 // @grant       GM_getResourceURL
 // @grant       GM_info
-// @grant 		GM_getValue
-// @grant 		GM_setValue
-// @grant 		GM_deleteValue
-// @grant 		GM_listValues
-// @grant 		GM_openInTab
-// @grant 		GM_registerMenuCommand
+// @grant       GM_getValue
+// @grant       GM_setValue
+// @grant       GM_deleteValue
+// @grant       GM_listValues
+// @grant       GM_openInTab
+// @grant       GM_registerMenuCommand
+// @require     http://code.jquery.com/jquery-2.0.2.min.js
 // @resource    iconUnknown http://passwd.ohost.de/lcapi/SummonerIcons/unknown.jpg
 // @resource    icon0 http://passwd.ohost.de/lcapi/SummonerIcons/0.jpg
 // @resource    icon1 http://passwd.ohost.de/lcapi/SummonerIcons/1.jpg
@@ -327,52 +328,51 @@ function getServer()
 	}
 }
 
-( function()
-{
-	//setCookie("test", "0", 1);
-	//alert(getCookie("test"));
 
 
-	// create an observer for the #posts div instance
-	var observerPostsOld = 0;
-	var observerPostsInitialized = false;
-	var observerTarget = document.querySelector('#posts');
-	var postsObserver = new MutationObserver(function(mutations) {
-		mutations.forEach(function(mutation) {
-			var observerPostsNew = countAllPosts();
-			if ((observerPostsInitialized) && (observerPostsNew != observerPostsOld)) postCountChanged();
-		});
+//setCookie("test", "0", 1);
+//alert(getCookie("test"));
+
+
+// create an observer for the #posts div instance
+var observerPostsOld = 0;
+var observerPostsInitialized = false;
+var observerTarget = document.querySelector('#posts');
+var postsObserver = new MutationObserver(function(mutations) {
+	mutations.forEach(function(mutation) {
+		var observerPostsNew = countAllPosts();
+		if ((observerPostsInitialized) && (observerPostsNew != observerPostsOld)) postCountChanged();
 	});
-	var observerConfig = { childList: true, subtree: true };
+});
+var observerConfig = { childList: true, subtree: true };
 
-	// css style changes
-	addGlobalStyle("div.panel > div {" + 
-						"min-width: 640px !important;" +
-						"width: auto !important;" +
-						"max-width: none !important;" +
-					"}" +
-					"textarea#vB_Editor_QR_textarea {" +
-						"width: 100% !important;" +
-						"resize: vertical !important;" +
-						"min-height: 100px !important;" +
-					"}");
+// css style changes
+addGlobalStyle("div.panel > div {" + 
+					"min-width: 640px !important;" +
+					"width: auto !important;" +
+					"max-width: none !important;" +
+				"}" +
+				"textarea#vB_Editor_QR_textarea {" +
+					"width: 100% !important;" +
+					"resize: vertical !important;" +
+					"min-height: 100px !important;" +
+				"}");
 
-	// find server
-	var server = getServer();
-	if (server != null) // server found
-	{
-		// replace the summoner images and levels
-		replaceAvatars();
-		
-		// initialize observer counts and mark as ready
-		observerPostsOld = countAllPosts();
-		observerPostsInitialized = true;
-		
-		// start observing #posts
-		postsObserver.observe(observerTarget, observerConfig);
-	}
-	else // server not found
-	{
-		// ...
-	}
-} )();
+// find server
+var server = getServer();
+if (server != null) // server found
+{
+	// replace the summoner images and levels
+	replaceAvatars();
+	
+	// initialize observer counts and mark as ready
+	observerPostsOld = countAllPosts();
+	observerPostsInitialized = true;
+	
+	// start observing #posts
+	postsObserver.observe(observerTarget, observerConfig);
+}
+else // server not found
+{
+	// ...
+}
