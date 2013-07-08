@@ -7,8 +7,83 @@
 // @updateURL   https://github.com/philippwiddra/lol-forum-enhance/raw/master/client/forum-icons.user.js
 // @version     0.1.3
 // @run-at      document-end
-// @grant       none
+// @grant       GM_xmlhttpRequest
+// @grant       GM_getResourceText
+// @grant       GM_getResourceURL
+// @grant       GM_info
+// @grant 		GM_getValue
+// @grant 		GM_setValue
+// @grant 		GM_deleteValue
+// @grant 		GM_listValues
+// @grant 		GM_openInTab
+// @grant 		GM_registerMenuCommand
+// @resource    icon1 http://img.lolking.net/shared/riot/images/profile_icons/profileIcon1.jpg
 // ==/UserScript==
+
+// GM_getResourceText and GM_getResourceURL 
+(
+	function () {	
+		//GM_registerMenuCommand
+		//GM_getResourceText
+		//GM_getResourceURL
+		
+		//GM_setValue("test", "abc");
+		//GM_deleteValue("test");
+		//GM_listValues();
+		//GM_getValue("test");
+		
+		//GM_openInTab("http://www.google.de/");
+		//GM_info
+		//GM_info.version // Greasemonkey-Version
+		//GM_registerMenuCommand("Say hi", function() { alert("Hi!"); }, "s");
+		
+		
+		/*
+		var level2Cache = new Level2Cache();
+		level2Cache.getSummoner("ButWhyMe", "euw", function(summoner) {
+			console.log(summoner);
+		});
+		*/
+		
+		var img = document.createElement('img');
+		img.src = GM_getResourceURL("icon1");
+		document.body.appendChild(img);
+		
+		
+		alert("done.");
+	}
+)();
+
+
+function Summoner(jsonData)
+{
+	this.data = JSON.parse(jsonData);
+	this.test = function()
+	{
+		alert("test");
+	}
+}
+
+function Level2Cache()
+{
+	var getSummonerUrl = "http://passwd.ohost.de/lcapi/getSummoner.php";
+	
+	this.getSummoner = function(name, server, done)
+	{
+		GM_xmlhttpRequest({
+			method: "GET",
+			url: getSummonerUrl + "?summoner=" + name + "&server=" + server + "",
+			onload: function(response) {
+				var s = new Summoner(response.responseText);
+				done(s);
+			}
+		});
+	}
+	
+}
+
+
+
 
 function addGlobalStyle(css)
 {
