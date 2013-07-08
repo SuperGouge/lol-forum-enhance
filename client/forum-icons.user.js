@@ -157,25 +157,17 @@ function Summoner(jsonData)
 		"summonerLevel": 30,
 		"summonerId": 21405713
 	} */
-	if (jsonData && (jsonData != null))
-	{
-		this.fromJsonString(jsonData);
-	}
-	else
-	{
-		this.data = {
-			internalName : null,
-			name : null,
-			server : null,
-			acctId : null,
-			profileIconId : null,
-			revisionDate : null,
-			currentDate : null,
-			summonerLevel : null,
-			summonerId : null
-		}
-	}
-	
+  this.data = {
+    internalName : null,
+    name : null,
+    server : null,
+    acctId : null,
+    profileIconId : null,
+    revisionDate : null,
+    currentDate : null,
+    summonerLevel : null,
+    summonerId : null
+  };
 	this.toJsonString = function()
 	{
 		return JSON.stringify(that.data);
@@ -217,10 +209,12 @@ function Level1Cache()
       // Summoner not found.
       
       // Perform a level2Cache call
-      level2Cache.getSummoner(name, server, function(summoner) {
+      level2Cache.getSummoner(name, server, function(s) {
+        // save summoner for this function
+        var summoner = s;
         
         // add summoner to level1Cache
-        that.addSummoner(summoner);
+        addSummoner(summoner);
         
         // return summoner normally
         done(summoner);
@@ -267,19 +261,11 @@ function Level1Cache()
     GM_setValue(cachedSummonerString, JSON.stringify(cachedSummoners));
   }
   
-  this.addSummoner = function(summoner)
+  function addSummoner(summoner)
   {
     cachedSummoners.push(summoner);
   }
 }
-
-//var img = document.createElement('img');
-//img.src = GM_getResourceURL("icon2");
-//document.body.appendChild(img);
-//GM_openInTab("http://www.google.de/");
-//GM_info
-//GM_info.version // Greasemonkey-Version
-//GM_registerMenuCommand("Say hi", function() { alert("Hi!"); }, "s");
 
 function Level2Cache()
 {
@@ -291,14 +277,31 @@ function Level2Cache()
 			method: "GET",
 			url: getSummonerUrl + "?summoner=" + name + "&server=" + server + "",
 			onload: function(response) {
-				var s = new Summoner(response.responseText);
+				var s = new Summoner();
+        s.fromJsonString(response.responseText);
 				done(s);
 			}
 		});
 	}
 }
 
+//var img = document.createElement('img');
+//img.src = GM_getResourceURL("icon2");
+//document.body.appendChild(img);
+//GM_openInTab("http://www.google.de/");
+//GM_info
+//GM_info.version // Greasemonkey-Version
+//GM_registerMenuCommand("Say hi", function() { alert("Hi!"); }, "s");
 
+/*
+var level1Cache = new Level1Cache();
+level1Cache.removeCache();
+level1Cache.loadCache();
+level1Cache.getSummoner("ButWhyMe", "euw", function(s) {
+    alert(s);
+    level1Cache.saveCache();
+  });
+*/
 
 
 function addGlobalStyle(css)
