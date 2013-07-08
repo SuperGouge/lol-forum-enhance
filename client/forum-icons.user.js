@@ -188,29 +188,102 @@ function Summoner(jsonData)
 
 function Level1Cache()
 {
-	//GM_setValue("test", "abc");
-	//GM_deleteValue("test");
-	//GM_listValues();
-	//GM_getValue("test");
-	//var img = document.createElement('img');
-	//img.src = GM_getResourceURL("icon2");
-	//document.body.appendChild(img);
+  var that = this;
+  var cachedSummoners = new Array();
+  var cachedSummonerString = "SummonerCache";
+  var level2Cache = new Level2Cache();
+
+	this.getSummoner = function(name, server, done)
+	{
+    var result = null;
+    for (var i = 0; i < cachedSummoners.length; i++)
+    {
+      var s = cachedSummoners[i];
+      if (s.data.name == name && s.data.server == server)
+      {
+        result = s;
+      }
+    }
+    
+    if (result != null)
+    {
+      // Summoner found.
+      
+      // return summoner
+      done(result);
+    }
+    else
+    {
+      // Summoner not found.
+      
+      // Perform a level2Cache call
+      level2Cache.getSummoner(name, server, function(summoner) {
+        
+        // add summoner to level1Cache
+        that.addSummoner(summoner);
+        
+        // return summoner normally
+        done(summoner);
+      });
+    }
+	}
+  
+  this.loadCache = function()
+  {
+    cachedSummoners = JSON.parse(GM_getValue(cachedSummonerString, "[]"));
+  }
+  
+  this.cleanCache = function()
+  {
+    // get yesterdays Date
+    var d = new Date();
+    d.setDate(d.getDate()-1);
+    
+    // new output array without old summoners
+    var temp = new Array();
+    
+    for (var i = 0; i < cachedSummoners.length; i++)
+    {
+      var s = cachedSummoners[i];
+      
+      // is Summonerdata not older than a day
+      if (s.data.currentDate > d)
+      {
+        temp.push(s);
+      }
+    }
+    
+    // only persist newer summoners
+    cachedSummoners = temp;
+  }
+  
+  this.removeCache = function()
+  {
+    GM_deleteValue(cachedSummonerString);
+  }
+  
+  this.saveCache = function()
+  {
+    GM_setValue(cachedSummonerString, JSON.stringify(cachedSummoners));
+  }
+  
+  this.addSummoner = function(summoner)
+  {
+    cachedSummoners.push(summoner);
+  }
 }
 
+//var img = document.createElement('img');
+//img.src = GM_getResourceURL("icon2");
+//document.body.appendChild(img);
 //GM_openInTab("http://www.google.de/");
 //GM_info
 //GM_info.version // Greasemonkey-Version
 //GM_registerMenuCommand("Say hi", function() { alert("Hi!"); }, "s");
 
-/*
-var level2Cache = new Level2Cache();
-level2Cache.getSummoner("ButWhyMe", "euw", function(summoner) {
-	console.log(summoner);
-});
-*/
 function Level2Cache()
 {
-	var getSummonerUrl = "http://passwd.ohost.de/lcapi/getSummoner.php";
+    var getSummonerUrl = "http://passwd.ohost.de/lcapi/getSummoner.php";
 	
 	this.getSummoner = function(name, server, done)
 	{
@@ -223,7 +296,6 @@ function Level2Cache()
 			}
 		});
 	}
-	
 }
 
 
