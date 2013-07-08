@@ -20,3 +20,12 @@ Displays the icon of a summoner instead of the question mark image in the forums
 
 * Powered by [elophant](http://www.elophant.com/ "LoL Champion and Summoner Stats")
 * This userscript on [userscripts.org] (http://userscripts.org/scripts/show/172058 "LoL Forum Icons for Greasemonkey")
+
+
+### FAQ
+
+* > Why does the installation / update of this script take this long?
+> > Usually, the first installation takes a longer time, because this script carries all summoner icons and some additional javascript along. *(about 5 to 10 MB, so not that much)*
+	
+* > Won't this script increase bandwidth usage with all these icons to be shown on every page?
+> > It won't. We just download the icons once at installation. After that they are stored locally on your harddrive *(5 to 10 MB, nothing to worry about)* and referenced from there. So no additional bandwidth is used to display them over and over again.
