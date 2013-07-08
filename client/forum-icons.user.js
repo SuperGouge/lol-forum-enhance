@@ -140,51 +140,73 @@
 // @resource    icon553 http://passwd.ohost.de/lcapi/SummonerIcons/553.jpg
 // ==/UserScript==
 
-// GM_getResourceText and GM_getResourceURL 
-(
-	function () {	
-		//GM_registerMenuCommand
-		//GM_getResourceText
-		//GM_getResourceURL
-		
-		//GM_setValue("test", "abc");
-		//GM_deleteValue("test");
-		//GM_listValues();
-		//GM_getValue("test");
-		
-		//GM_openInTab("http://www.google.de/");
-		//GM_info
-		//GM_info.version // Greasemonkey-Version
-		//GM_registerMenuCommand("Say hi", function() { alert("Hi!"); }, "s");
-		
-		
-		/*
-		var level2Cache = new Level2Cache();
-		level2Cache.getSummoner("ButWhyMe", "euw", function(summoner) {
-			console.log(summoner);
-		});
-		*/
-		
-		var img = document.createElement('img');
-		img.src = GM_getResourceURL("icon1");
-		document.body.appendChild(img);
-		
-		
-		alert("done.");
-	}
-)();
-
-
 function Summoner(jsonData)
 {
-	this.data = JSON.parse(jsonData);
-	this.test = function()
+	var that = this;
+	
+	// form:
+	/* {
+		"internalName": "butwhyme",
+		"name": "ButWhyMe",
+		"server": "euw",
+		"acctId": 24911708,
+		"profileIconId": 546,
+		"revisionDate": "2013-07-08 02:04:11",
+		"currentDate": "2013-07-08 12:12:01",
+		"summonerLevel": 30,
+		"summonerId": 21405713
+	} */
+	if (jsonData && (jsonData != null))
 	{
-		alert("test");
+		this.fromJsonString(jsonData);
+	}
+	else
+	{
+		this.data = {
+			internalName : null,
+			name : null,
+			server : null,
+			acctId : null,
+			profileIconId : null,
+			revisionDate : null,
+			currentDate : null,
+			summonerLevel : null,
+			summonerId : null
+		}
 	}
 	
+	this.toJsonString = function()
+	{
+		return JSON.stringify(that.data);
+	}
+	this.fromJsonString = function(json)
+	{
+		that.data = JSON.parse(json);
+	}
 }
 
+function Level1Cache()
+{
+	//GM_setValue("test", "abc");
+	//GM_deleteValue("test");
+	//GM_listValues();
+	//GM_getValue("test");
+	//var img = document.createElement('img');
+	//img.src = GM_getResourceURL("icon2");
+	//document.body.appendChild(img);
+}
+
+//GM_openInTab("http://www.google.de/");
+//GM_info
+//GM_info.version // Greasemonkey-Version
+//GM_registerMenuCommand("Say hi", function() { alert("Hi!"); }, "s");
+
+/*
+var level2Cache = new Level2Cache();
+level2Cache.getSummoner("ButWhyMe", "euw", function(summoner) {
+	console.log(summoner);
+});
+*/
 function Level2Cache()
 {
 	var getSummonerUrl = "http://passwd.ohost.de/lcapi/getSummoner.php";
