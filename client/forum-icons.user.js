@@ -327,49 +327,52 @@ function getServer()
 	}
 }
 
-//setCookie("test", "0", 1);
-//alert(getCookie("test"));
+( function()
+{
+	//setCookie("test", "0", 1);
+	//alert(getCookie("test"));
 
 
-// create an observer for the #posts div instance
-var observerPostsOld = 0;
-var observerPostsInitialized = false;
-var observerTarget = document.querySelector('#posts');
-var postsObserver = new MutationObserver(function(mutations) {
-	mutations.forEach(function(mutation) {
-		var observerPostsNew = countAllPosts();
-		if ((observerPostsInitialized) && (observerPostsNew != observerPostsOld)) postCountChanged();
+	// create an observer for the #posts div instance
+	var observerPostsOld = 0;
+	var observerPostsInitialized = false;
+	var observerTarget = document.querySelector('#posts');
+	var postsObserver = new MutationObserver(function(mutations) {
+		mutations.forEach(function(mutation) {
+			var observerPostsNew = countAllPosts();
+			if ((observerPostsInitialized) && (observerPostsNew != observerPostsOld)) postCountChanged();
+		});
 	});
-});
-var observerConfig = { childList: true, subtree: true };
+	var observerConfig = { childList: true, subtree: true };
 
-// css style changes
-addGlobalStyle("div.panel > div {" + 
-					"min-width: 640px !important;" +
-					"width: auto !important;" +
-					"max-width: none !important;" +
-				"}" +
-				"textarea#vB_Editor_QR_textarea {" +
-					"width: 100% !important;" +
-					"resize: vertical !important;" +
-					"min-height: 100px !important;" +
-				"}");
+	// css style changes
+	addGlobalStyle("div.panel > div {" + 
+						"min-width: 640px !important;" +
+						"width: auto !important;" +
+						"max-width: none !important;" +
+					"}" +
+					"textarea#vB_Editor_QR_textarea {" +
+						"width: 100% !important;" +
+						"resize: vertical !important;" +
+						"min-height: 100px !important;" +
+					"}");
 
-// find server
-var server = getServer();
-if (server != null) // server found
-{
-	// replace the summoner images and levels
-	replaceAvatars();
-	
-	// initialize observer counts and mark as ready
-	observerPostsOld = countAllPosts();
-	observerPostsInitialized = true;
-	
-	// start observing #posts
-	postsObserver.observe(observerTarget, observerConfig);
-}
-else // server not found
-{
-	// ...
-}
+	// find server
+	var server = getServer();
+	if (server != null) // server found
+	{
+		// replace the summoner images and levels
+		replaceAvatars();
+		
+		// initialize observer counts and mark as ready
+		observerPostsOld = countAllPosts();
+		observerPostsInitialized = true;
+		
+		// start observing #posts
+		postsObserver.observe(observerTarget, observerConfig);
+	}
+	else // server not found
+	{
+		// ...
+	}
+} )();
