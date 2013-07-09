@@ -398,25 +398,25 @@ function LolForums()
   this.replaceAvatars = function()
   {
     var callbackFunction = "(function (json) { $('big').filter(function(){ return $(this).text() === json.name;}).parent().find('img.user_summoner_icon').attr('src', 'http://img.lolking.net/shared/riot/images/profile_icons/profileIcon' + json.profileIconId + '.jpg').parent().find('span.left_orb').text(json.summonerLevel); })";
-    callbackFunction = callbackFunction.replace(/\+/g, '%2B');
+    callbackFunction = callbackFunction.replace(/\+/g, "%2B");
 
     // get all Left items except those of rioters.
-    var allLeft = $('.forum_post img.user_summoner_icon').filter($('img[src="lol_theme/img/unknown_icon.jpg"]')).parent().parent().parent().parent();
+    var allLeft = $(".forum_post img.user_summoner_icon").filter($('img[src="lol_theme/img/unknown_icon.jpg"]')).parent().parent().parent().parent();
     allLeft.each(function(i, e) {
-      var name = $(e).find('big').text();
-      var image = $(e).find('img.user_summoner_icon');
+      var name = $(e).find("big").text();
+      var image = $(e).find("img.user_summoner_icon");
 
       // TODO: level 1 caching
 
       // level 2 caching
-      var url = 'http://passwd.ohost.de/lcapi/getSummoner.php?summoner=' + name + '&server=' + server + '';
+      var url = "http://passwd.ohost.de/lcapi/getSummoner.php?summoner=" + name + "&server=" + that.server;
       $.ajax({
-        type: 'GET',
+        type: "GET",
         url: url,
         async: true,
         jsonpCallback: callbackFunction,
         contentType: "text/javascript",
-        dataType: 'jsonp',
+        dataType: "jsonp",
       });
     });
   }
