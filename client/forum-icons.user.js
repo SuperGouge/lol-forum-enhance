@@ -275,7 +275,7 @@ function Level2Cache()
   {
     GM_xmlhttpRequest({
       method: "GET",
-      url: getSummonerUrl + "?summoner=" + name + "&server=" + server + "",
+      url: getSummonerUrl + "?summoner=" + escape(name) + "&server=" + server + "",
       onload: function(response) {
         var s = new Summoner();
         s.fromJsonString(response.responseText);
