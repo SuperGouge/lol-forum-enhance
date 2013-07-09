@@ -371,6 +371,9 @@ script.addGlobalStyle("p { font-weight: bold; }");
 function LolForums()
 {
   var that = this;
+  var level1Cache = new Level1Cache();
+  level1Cache.cleanCache();
+  level1Cache.loadCache();
   
   this.server = getServer();
 
@@ -397,18 +400,29 @@ function LolForums()
   
   this.replaceAvatars = function()
   {
-    var callbackFunction = "(function (json) { $('big').filter(function(){ return $(this).text() === json.name;}).parent().find('img.user_summoner_icon').attr('src', 'http://img.lolking.net/shared/riot/images/profile_icons/profileIcon' + json.profileIconId + '.jpg').parent().find('span.left_orb').text(json.summonerLevel); })";
-    callbackFunction = callbackFunction.replace(/\+/g, "%2B");
+    //var callbackFunction = "(function (json) { $('big').filter(function(){ return $(this).text() === json.name;}).parent().find('img.user_summoner_icon').attr('src', 'http://img.lolking.net/shared/riot/images/profile_icons/profileIcon' + json.profileIconId + '.jpg').parent().find('span.left_orb').text(json.summonerLevel); })";
+    //callbackFunction = callbackFunction.replace(/\+/g, "%2B");
 
     // get all Left items except those of rioters.
     var allLeft = $(".forum_post img.user_summoner_icon").filter($('img[src="lol_theme/img/unknown_icon.jpg"]')).parent().parent().parent().parent();
-    allLeft.each(function(i, e) {
+    allLeft.each(function(i, e)
+    {
       var name = $(e).find("big").text();
       var image = $(e).find("img.user_summoner_icon");
-
-      // TODO: level 1 caching
-
+      var orb = $(e).find('span.left_orb');
+      
+      // Cache system (the level-1-cache automatically calls the level-2-cache if it doesnt have the result)
+      level1Cache.getSummoner(name, that.server, function(summoner) {
+        image.attr('src', 'http://img.lolking.net/shared/riot/images/profile_icons/profileIcon' + summoner.data.profileIconId + '.jpg')
+        orb.text(summoner.data.summonerLevel);
+        
+        level1Cache.saveCache();
+      });
+      
+      
       // level 2 caching
+      
+      /*
       var url = "http://passwd.ohost.de/lcapi/getSummoner.php?summoner=" + name + "&server=" + that.server;
       $.ajax({
         type: "GET",
@@ -418,6 +432,8 @@ function LolForums()
         contentType: "text/javascript",
         dataType: "jsonp",
       });
+      */
+      
     });
   }
 }
