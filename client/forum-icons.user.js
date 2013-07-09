@@ -17,7 +17,7 @@
 // @grant       GM_listValues
 // @grant       GM_openInTab
 // @grant       GM_registerMenuCommand
-// @resource    globalcss https://github.com/philippwiddra/lol-forum-enhance/raw/master/client/global.css
+// @resource    globalcss https://raw.github.com/philippwiddra/lol-forum-enhance/testing/client/global.css
 // @require     http://code.jquery.com/jquery-2.0.2.min.js
 // @resource    iconUnknown http://passwd.ohost.de/lcapi/SummonerIcons/unknown.jpg
 // @resource    icon0 http://passwd.ohost.de/lcapi/SummonerIcons/0.jpg
