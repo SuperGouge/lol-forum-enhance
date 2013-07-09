@@ -447,17 +447,7 @@ var postsObserver = new MutationObserver(function(mutations) {
 var observerConfig = { childList: true, subtree: true };
 
 // css style changes
-script.addGlobalStyle("div.panel > div { \
-                         min-width: 640px !important; \
-                         width: auto !important; \
-                         max-width: none !important; \
-                       } \
-                         textarea#vB_Editor_QR_textarea { \
-                         width: 100% !important; \
-                         resize: vertical !important; \
-                         min-height: 100px !important; \
-                       }");
-
+script.addGlobalStyle(GM_getResourceText("globalcss"));
 
 if (forums.server != null)
 {
