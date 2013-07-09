@@ -413,7 +413,8 @@ function LolForums()
       
       // Cache system (the level-1-cache automatically calls the level-2-cache if it doesnt have the result)
       level1Cache.getSummoner(name, that.server, function(summoner) {
-        image.attr('src', 'http://img.lolking.net/shared/riot/images/profile_icons/profileIcon' + summoner.data.profileIconId + '.jpg')
+        //image.attr('src', 'http://img.lolking.net/shared/riot/images/profile_icons/profileIcon' + summoner.data.profileIconId + '.jpg')
+        image.attr('src', GM_getResourceURL("icon" + summoner.data.profileIconId))
         orb.text(summoner.data.summonerLevel);
         
         level1Cache.saveCache();
