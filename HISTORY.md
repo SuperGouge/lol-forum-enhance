@@ -13,6 +13,13 @@
 
 ## Version history:
 
+### 0.3.-1
+- **Added** functionality for automatic version control to `Userscript` class
+  - **Added** `ToolkitVersion` and `ToolkitVersionPart` classes to handle mozilla and greasemonkey versioning
+  - **Added** functions to fetch local and remote version
+  - **Added** a function to force an userscript update
+- **Added** small `TestSuite` class to perform a lot of easy function-tests fast and clean.
+
 ### 0.2.1
 - **Changed** name of main script to `main.user.js` to classify it as the main, most important script which then requires other files
 - **Added** `main.meta.js` as updateURL, so checking the version not longer needs to load the whole script, just the meta-block
