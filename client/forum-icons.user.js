@@ -182,33 +182,18 @@ function Summoner(jsonData)
 function Level1Cache()
 {
   var that = this;
-  var cachedSummoners = new Array();
+  var cachedSummoners = {};
   var cachedSummonerString = "SummonerCache";
   var level2Cache = new Level2Cache();
 
   this.getSummoner = function(name, server, done)
   {
-    var result = null;
-    for (var i = 0; i < cachedSummoners.length; i++)
+    if (typeof cachedSummoners[name] != "undefined")
     {
-      var s = cachedSummoners[i];
-      if (s.data.name == name && s.data.server == server)
-      {
-        result = s;
-      }
-    }
-    
-    if (result != null)
-    {
-      // Summoner found.
-      
-      // return summoner
-      done(result);
+      done(cachedSummoners[name]);
     }
     else
     {
-      // Summoner not found.
-      
       // Perform a level2Cache call
       level2Cache.getSummoner(name, server, function(s) {
         // save summoner for this function
@@ -225,7 +210,22 @@ function Level1Cache()
   
   this.loadCache = function()
   {
-    cachedSummoners = JSON.parse(GM_getValue(cachedSummonerString, "[]"));
+    try
+    {
+      cachedSummoners = JSON.parse(GM_getValue(cachedSummonerString, "{}"));
+    }
+    catch (e)
+    {
+      if (e instanceof SyntaxError)
+      {
+        // error in JSON.parse (input may be not valid JSON)
+        cachedSummoners = {};
+      }
+      else
+      {
+        throw e;
+      }
+    }
   }
   
   this.cleanCache = function()
@@ -234,17 +234,16 @@ function Level1Cache()
     var d = new Date();
     d.setDate(d.getDate()-1);
     
-    // new output array without old summoners
-    var temp = new Array();
-    
-    for (var i = 0; i < cachedSummoners.length; i++)
+    var temp = {};
+    for (var key in cachedSummoners)
     {
-      var s = cachedSummoners[i];
-      
-      // is Summonerdata not older than a day
-      if (s.data.currentDate > d)
+      if (cachedSummoners.hasOwnProperty(key))
       {
-        temp.push(s);
+        // is Summonerdata not older than a day
+        if (cachedSummoners[key].data.currentData > d)
+        {
+          temp[key] = cachedSummoners[key];
+        }
       }
     }
     
@@ -264,7 +263,7 @@ function Level1Cache()
   
   function addSummoner(summoner)
   {
-    cachedSummoners.push(summoner);
+    cachedSummoners[summoner.data.name] = summoner;
   }
 }
 
