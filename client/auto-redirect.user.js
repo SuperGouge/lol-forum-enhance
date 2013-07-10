@@ -1,8 +1,10 @@
 // ==UserScript==
 // @name        LoL Auto Redirect
-// @namespace   sean
+// @namespace   https://github.com/philippwiddra
+// @description Automatically skips Riots redirect-page
 // @include     *.leagueoflegends.com/board/redirect.php*
-// @version     1
+// @version     0.1.0
+// @run-at      document-end
 // ==/UserScript==
 
 $(document).ready(function () {

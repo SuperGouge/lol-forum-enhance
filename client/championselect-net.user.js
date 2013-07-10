@@ -1,11 +1,11 @@
 // ==UserScript==
 // @name        Instant Championselect
-// @namespace   sean
+// @namespace   https://github.com/philippwiddra
+// @description Implements a In-UrlBar-Search for championselect.net
 // @include     *championselect.net/champ/*
-// @version     1
+// @version     0.1.0
+// @run-at      document-end
 // ==/UserScript==
-
-// @include     *lolcounter.com/champ/*
 
 function replaceAll(source, replace, replaceWith) {
 	var data = source;
