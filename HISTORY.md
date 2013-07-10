@@ -10,6 +10,24 @@
 ---
 
 ## Newest Version:
+
+### 0.2.0
+- **Added** FAQ to `README.md`
+- **Added** `client/SummonerIcons/files.txt` to list the automatically fetched picture files
+- **Added** rights to use the *greasemonkey api*
+- **Added** `client/global.css` to hold all style changes
+- **Added** `global.css` as resource to download it at install time
+- **Added** *jquery* as required script to download it at install time and use it in own script
+- **Added** *summoner icons* as resource to download them at install time
+- **Changed** a lot of code to be more object oriented and easier to read
+  - **Added** `Summoner` class
+  - **Added** `Level1Cache` class
+  - **Added** `Level2Cache` class
+  - **Added** `Userscript` class
+  - **Added** `LolForums` class
+- **Changed** the replacement of images and levels to be *asynchronous*
+- **Added** a local *cache*
+
 ### 0.1.3
 - Code cleanup
 - added notes.md
@@ -44,7 +62,6 @@
 	- loads (and caches) `jQuery v2.0.1`
 - basis for clientside level 1 caching with cookies done ( `getCookie(...)` / `setCookie(...)` )
 - Summoner Images added for later use
-
 
 ### 0.0.1
 - Initial version
