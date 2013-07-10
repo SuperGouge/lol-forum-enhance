@@ -66,7 +66,7 @@
 
 ### 0.0.2
 - mainly cleanup
-- *Added* greasemonkey metadata
+- **Added** greasemonkey metadata
 	- should *update automatically* now
 	- runs at page start now
 	- loads (and caches) `jQuery v2.0.1`
