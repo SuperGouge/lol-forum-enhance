@@ -1,5 +1,5 @@
-# Repository Version History
-### Goals:
+# Repository version history
+## Goals:
 - Mark nonexistent summoners
 - ~~Insert summoner icon when quick-replying~~
 - ~~Automatic update notifications~~
@@ -11,7 +11,7 @@
 
 ---
 
-## Newest Version:
+## Version history:
 
 ### 0.2.1
 - **Changed** name of main script to `main.user.js` to classify it as the main, most important script which then requires other files
