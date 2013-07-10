@@ -5,7 +5,7 @@
 // @include     *.leagueoflegends.com/board/*
 // @downloadURL https://github.com/philippwiddra/lol-forum-enhance/raw/master/client/forum-icons.user.js
 // @updateURL   https://github.com/philippwiddra/lol-forum-enhance/raw/master/client/forum-icons.user.js
-// @version     0.1.4testing
+// @version     0.2.0
 // @run-at      document-end
 // @grant       GM_xmlhttpRequest
 // @grant       GM_getResourceText
@@ -17,7 +17,7 @@
 // @grant       GM_listValues
 // @grant       GM_openInTab
 // @grant       GM_registerMenuCommand
-// @resource    globalcss https://raw.github.com/philippwiddra/lol-forum-enhance/testing/client/global.css
+// @resource    globalcss https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/global.css
 // @require     http://code.jquery.com/jquery-2.0.2.min.js
 // @resource    iconUnknown http://passwd.ohost.de/lcapi/SummonerIcons/unknown.jpg
 // @resource    icon0 http://passwd.ohost.de/lcapi/SummonerIcons/0.jpg
@@ -142,22 +142,9 @@
 // @resource    icon553 http://passwd.ohost.de/lcapi/SummonerIcons/553.jpg
 // ==/UserScript==
 
-function Summoner(jsonData)
+function Summoner()
 {
   var that = this;
-
-  // form:
-  /* {
-    "internalName": "butwhyme",
-    "name": "ButWhyMe",
-    "server": "euw",
-    "acctId": 24911708,
-    "profileIconId": 546,
-    "revisionDate": "2013-07-08 02:04:11",
-    "currentDate": "2013-07-08 12:12:01",
-    "summonerLevel": 30,
-    "summonerId": 21405713
-  } */
   this.data = {
     internalName : null,
     name : null,
@@ -342,31 +329,6 @@ function Userscript()
   }
 }
 
-// var img = document.createElement('img');
-// img.src = GM_getResourceURL("icon2");
-// document.body.appendChild(img);
-// GM_openInTab("http://www.google.de/");
-// GM_info
-// GM_info.version // Greasemonkey-Version
-// GM_registerMenuCommand("Say hi", function() { alert("Hi!"); }, "s");
-
-/*
-var level1Cache = new Level1Cache();
-level1Cache.removeCache();
-level1Cache.loadCache();
-level1Cache.getSummoner("ButWhyMe", "euw", function(s) {
-    alert(s);
-    level1Cache.saveCache();
-  });
-*/
-
-/*
-var script = new Userscript();
-script.setCookie("test", "0", 1);
-script.alert(getCookie("test"));
-script.addGlobalStyle("p { font-weight: bold; }");
-*/
-
 function LolForums()
 {
   var that = this;
@@ -399,9 +361,6 @@ function LolForums()
   
   this.replaceAvatars = function()
   {
-    //var callbackFunction = "(function (json) { $('big').filter(function(){ return $(this).text() === json.name;}).parent().find('img.user_summoner_icon').attr('src', 'http://img.lolking.net/shared/riot/images/profile_icons/profileIcon' + json.profileIconId + '.jpg').parent().find('span.left_orb').text(json.summonerLevel); })";
-    //callbackFunction = callbackFunction.replace(/\+/g, "%2B");
-
     // get all Left items except those of rioters.
     var allLeft = $(".forum_post img.user_summoner_icon").filter($('img[src="lol_theme/img/unknown_icon.jpg"]')).parent().parent().parent().parent();
     allLeft.each(function(i, e)
@@ -418,26 +377,21 @@ function LolForums()
         
         level1Cache.saveCache();
       });
-      
-      
-      // level 2 caching
-      
-      /*
-      var url = "http://passwd.ohost.de/lcapi/getSummoner.php?summoner=" + name + "&server=" + that.server;
-      $.ajax({
-        type: "GET",
-        url: url,
-        async: true,
-        jsonpCallback: callbackFunction,
-        contentType: "text/javascript",
-        dataType: "jsonp",
-      });
-      */
-      
     });
   }
 }
 
+/*
+  GM_openInTab("http://www.google.de/");
+  GM_info
+  GM_info.version // Greasemonkey-Version
+  GM_registerMenuCommand("Say hi", function() { alert("Hi!"); }, "s");
+
+  var script = new Userscript();
+  script.setCookie("test", "0", 1);
+  script.alert(getCookie("test"));
+  script.addGlobalStyle("p { font-weight: bold; }");
+*/
 
 /*******************************
  *    Start of Main Script.    *
