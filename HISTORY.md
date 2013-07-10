@@ -6,6 +6,8 @@
 - [ ] Show server status
 - [x] Enlarge quick edit box
 - [ ] show own avatar besides quick edit box
+- [x] Client- and serverside caching
+- [ ] Check compatibility to other/newer regions
 
 ---
 
