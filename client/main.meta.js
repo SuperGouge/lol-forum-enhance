@@ -1,4 +1,4 @@
-// ==UserScript==
+﻿// ==UserScript==
 // @name        LoL Forum Enhance
 // @namespace   https://github.com/philippwiddra
 // @description Supplements the League of Legends forums and sites with additional functions.
