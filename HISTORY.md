@@ -13,6 +13,10 @@
 
 ## Version history:
 
+## 0.3.0
+- **Added** `global.js` for later global style changes with javascript
+- Latest additions and changes tested successfully
+
 ### 0.3.-1
 - **Added** functionality for automatic version control to `Userscript` class
   - **Added** `ToolkitVersion` and `ToolkitVersionPart` classes to handle mozilla and greasemonkey versioning
