@@ -2,15 +2,93 @@
  *     Global Stylesheets      *
  *******************************/
 
-
-div.panel > div {
-  min-width:  640px    !important;
-  width:      auto     !important;
-  max-width:  none     !important;
+.userscript-textarea {
+  resize: vertical;
+  min-height: 80px;
 }
 
-textarea#vB_Editor_QR_textarea {
-  width:      100%     !important;
-  resize:     vertical !important;
-  min-height: 100px    !important;
+.userscript-clear {
+  clear: both;
 }
+
+.userscript-editor-container {
+  overflow: hidden;
+  position: relative;
+  left: -16px;
+  width: auto;
+  max-width: none;
+}
+
+.userscript-avatar {
+  float: left;
+  position: relative;
+  left: -16px;
+}
+
+.userscript-avatar div{
+  padding-top: 10px;
+  width: 205px;
+  text-align: center;
+}
+
+.userscript-avatar big {
+  display: block;
+  font-size: 13px;
+  font-weight: bold;
+  padding-bottom: 5px;
+  color: #333;
+}
+
+.userscript-avatar small {
+  display: block;
+  font-size: 11px;
+  font-weight: bold;
+  color: #333;
+}
+
+.userscript-avatar a {
+  position: relative;
+  display: block;
+  width: 145px;
+  height: 100px;
+  background: url("http://riot-web-static.s3.amazonaws.com/forum/ui/avatar.png") no-repeat;
+  margin: 0px auto;
+}
+
+.userscipt-user-summoner-icon {
+  width: 80px;
+  height: 80px;
+  margin: 7px 0 0 1px;
+}
+
+.userscript-left-orb {
+  display: block;
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  left: 6px;
+  bottom: 17px;
+  font-size: 11px;
+  font-weight: bold;
+  color: white;
+  line-height: 20px;
+  text-align: center;
+}
+
+.userscript-right-orb {
+  display: block;
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  bottom: 17px;
+  right: 4px;
+}
+
+
+
+
+
+
+
+
+

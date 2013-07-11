@@ -639,6 +639,51 @@ function LolForums()
   
   this.server = getServer();
 
+  this.localizations = {
+    regions: {
+      "na": "North America",
+      "euw": "EU West",
+      "eune": "EU Nordic & East",
+      "br": "Brazil"
+    },
+    langIds: {
+      1: "en",
+      2: "de",
+      3: "es",
+      4: "fr",
+      5: "pl",
+      6: "ro",
+      7: "el",
+      8: "pt",
+      9: "tr",
+      11: "it"
+    },
+    langNamesEn: {
+      "en": "English",
+      "de": "German",
+      "es": "Spanish",
+      "fr": "Frensh",
+      "pl": "Polish",
+      "ro": "Romanian",
+      "el": "Greek",
+      "pt": "Portuguese",
+      "tr": "Turkish",
+      "it": "Italian"
+    },
+    avatarSub: {
+      "en": "Me",
+      "de": "Ich",
+      "es": "Yo",
+      "fr": "Je",
+      "pl": "Ja",
+      "ro": "Eu",
+      "el": "egó",
+      "pt": "Eu",
+      "tr": "ben",
+      "it": "I"
+    }
+  };
+  
   function getServer()
   {
     // get the server from url
@@ -672,13 +717,61 @@ function LolForums()
       
       // Cache system (the level-1-cache automatically calls the level-2-cache if it doesnt have the result)
       level1Cache.getSummoner(name, that.server, function(summoner) {
-        //image.attr('src', 'http://img.lolking.net/shared/riot/images/profile_icons/profileIcon' + summoner.data.profileIconId + '.jpg')
+        
+        // replace image source
         image.attr('src', GM_getResourceURL("icon" + summoner.data.profileIconId))
+        
+        // replace level
         orb.text(summoner.data.summonerLevel);
         
+        // save whole cache
         level1Cache.saveCache();
       });
     });
+  }
+
+  this.getOwnName = function()
+  {
+    //TODO: Test languages on eune and asian servers. (euw and na working)
+    var raw = $("#lol-pvpnet-bar-account").find(".welcome_text").contents().first().text();
+    var match = raw.match(/.+, (.+)[\s]*\(/i)
+    if (match === null) return null
+    else
+    {
+      var name = match[1];
+      return name;
+    }
+  }
+  
+  this.replaceOwnAvatar = function(languageId)
+  {
+    // get name
+    var name = that.getOwnName();
+    
+    if (name != null)
+    {
+      // replace name
+      $("#userscript-avatar-name").text(name);
+      
+      // lookup subtitle
+      var language = that.localizations.langIds[languageId];
+      var subtitle = that.localizations.avatarSub[language];
+      
+      // replace subtitle
+      $("#userscript-avatar-subtitle").text(subtitle);
+      
+      // get summoner object
+      level1Cache.getSummoner(name, that.server, function(summoner) {      
+        // replace image source
+        $("#userscript-avatar-icon").attr('src', GM_getResourceURL("icon" + summoner.data.profileIconId))
+        
+        // replace level
+        $("#userscript-avatar-level").text(summoner.data.summonerLevel);
+        
+        // save whole cache
+        level1Cache.saveCache();
+      });
+    }
   }
 }
 
@@ -774,7 +867,13 @@ var observerConfig = { childList: true, subtree: true };
 if (forums.server != null)
 {
   // server found
-
+  
+  // get actual language
+  var languageId = script.getCookie("bblanguageid");
+  
+  // replace own avatar (if name and avatar available)
+  forums.replaceOwnAvatar(languageId);
+  
   // replace the summoner images and levels
   forums.replaceAvatars();
 
