@@ -5,7 +5,7 @@
 - ~~Automatic update notifications~~
 - Show server status
 - ~~Enlarge quick edit box~~
-- show own avatar besides quick edit box
+- ~~show own avatar besides quick edit box~~
 - ~~Client- and serverside caching~~
 - Check compatibility to other/newer regions
 
