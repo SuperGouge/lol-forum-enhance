@@ -143,6 +143,10 @@
 // @resource    icon553 http://passwd.ohost.de/lcapi/SummonerIcons/553.jpg
 // ==/UserScript==
 
+/*******************************
+ *    Definition of Classes    *
+ *******************************/
+
 function Summoner()
 {
   var that = this;
@@ -739,17 +743,18 @@ function TestSuite()
 }
 
 
-// GM_registerMenuCommand("Say hi", function() { alert("Hi!"); }, "s");
-
-
-
 /*******************************
- *    Start of Main Script.    *
+ *    Start of Main Script     *
  *******************************/
+
+// GM_registerMenuCommand("Say hi", function() { alert("Hi!"); }, "s");
 
 // Initiating main Objects
 var script = new Userscript();
 var forums = new LolForums();
+
+// css style changes
+script.addGlobalStyle(GM_getResourceText("globalcss"));
 
 // create an observer for the #posts div instance
 var observerPostsOld = 0;
@@ -765,9 +770,6 @@ var postsObserver = new MutationObserver(function(mutations) {
   });
 });
 var observerConfig = { childList: true, subtree: true };
-
-// css style changes
-script.addGlobalStyle(GM_getResourceText("globalcss"));
 
 if (forums.server != null)
 {
