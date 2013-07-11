@@ -5,7 +5,7 @@
 // @include     *.leagueoflegends.com/board/*
 // @downloadURL https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/main.user.js
 // @updateURL   https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/main.meta.js
-// @version     0.3.0
+// @version     0.4.0
 // @run-at      document-end
 // @grant       GM_xmlhttpRequest
 // @grant       GM_getResourceText
@@ -887,6 +887,4 @@ if (forums.server != null)
 else
 {
   // server not found
-
-  // ...
 }

@@ -16,7 +16,28 @@ Once they are requested, the icons are cached on our servers for at least 12 hou
 - 12 hour serverside caching to keep server usage low
 - 24 hour local caching so you won't load the same summoners data over and over again while just browse a conversation
 - *Rework quick edit box* to get it more useful and fitting better into the whole forums style
+- Show a small *avatar* with you own information besides the quick edit box
 - No performance loss, all request-functions are running async. The pages will load as fast as they always do.
+
+
+### How to install
+
+There are many different ways to install a userscript and the result will be the same for all.
+All of them are easy, all of them are fast and straightforward.
+Choose the way you like or which has the most recent version of the script.
+
+- via *userscript.org*
+  1. make sure you have a *(optimally the latest)* version of Greasemonkey installed. (for firefox you can find it on mozillas official addon page: [Greasemonkey on addons.mozilla.org] (https://addons.mozilla.org/de/firefox/addon/greasemonkey/ "Customize the way a web page displays or behaves, by using small bits of JavaScript."))
+  1. visit this scripts site on [userscripts.org] (http://userscripts.org/scripts/show/172058 "LoL Forum Enhance on userscripts.org") (http://userscripts.org/scripts/show/172058).
+  1. click the **Install** button on the page.
+  1. accept the userscript installation window popping up.
+- via *github*
+  1. make sure you have a *(optimally the latest)* version of Greasemonkey installed. (for firefox you can find it on mozillas official addon page: [Greasemonkey on addons.mozilla.org] (https://addons.mozilla.org/de/firefox/addon/greasemonkey/ "Customize the way a web page displays or behaves, by using small bits of JavaScript."))
+  1. find the mainscript in this repo (its here: [/client/main.user.js] (https://github.com/philippwiddra/lol-forum-enhance/blob/master/client/main.user.js "LoL Forum Enhance on github")).
+  1. *optional:* check wheather or not you trust this script. The code is there, just look at it.
+  1. click the **Raw** button in the code-windows header.
+  1. accept the userscript installation window popping up.
+- **fast forward:** [Click this to start installation.] (https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/main.user.js "Install LoL Forum Enhance via github")
 
 
 ### Appendix

@@ -13,6 +13,15 @@
 
 ## Version history:
 
+## 0.4.0
+- **Added** *How to install* section to `README.md`
+- **Added** own avatar besides quick edit box
+- **Added** basic script localization possibilities
+- **Added** functionality to fetch the own name if logged in
+- **Added** functionality to get the current forum language (via `bblanguageid` cookie)
+- **Changed** location of css style changes into `global.css`
+- **Changed** location of javascript style changes into `global.js`
+
 ## 0.3.0
 - **Added** `global.js` for later global style changes with javascript
 - Latest additions and changes tested successfully
