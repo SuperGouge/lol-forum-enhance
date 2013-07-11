@@ -677,7 +677,7 @@ function LolForums()
       "fr": "Je",
       "pl": "Ja",
       "ro": "Eu",
-      "el": "egó",
+      "el": "egÃ³",
       "pt": "Eu",
       "tr": "ben",
       "it": "I"
