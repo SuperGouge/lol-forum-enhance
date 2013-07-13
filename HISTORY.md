@@ -13,6 +13,9 @@
 
 ## Version history:
 
+## 0.4.1
+- **Added** new Summoner icons
+
 ## 0.4.0
 - **Added** *How to install* section to `README.md`
 - **Added** own avatar besides quick edit box

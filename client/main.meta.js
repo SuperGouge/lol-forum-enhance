@@ -5,7 +5,7 @@
 // @include     *.leagueoflegends.com/board/*
 // @downloadURL https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/main.user.js
 // @updateURL   https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/main.meta.js
-// @version     0.4.0
+// @version     0.4.1
 // @run-at      document-end
 // @grant       GM_xmlhttpRequest
 // @grant       GM_getResourceText
@@ -141,4 +141,20 @@
 // @resource    icon551 http://passwd.ohost.de/lcapi/SummonerIcons/551.jpg
 // @resource    icon552 http://passwd.ohost.de/lcapi/SummonerIcons/552.jpg
 // @resource    icon553 http://passwd.ohost.de/lcapi/SummonerIcons/553.jpg
+// @resource    icon553 http://passwd.ohost.de/lcapi/SummonerIcons/554.jpg
+// @resource    icon553 http://passwd.ohost.de/lcapi/SummonerIcons/555.jpg
+// @resource    icon553 http://passwd.ohost.de/lcapi/SummonerIcons/556.jpg
+// @resource    icon553 http://passwd.ohost.de/lcapi/SummonerIcons/557.jpg
+// @resource    icon553 http://passwd.ohost.de/lcapi/SummonerIcons/558.jpg
+// @resource    icon553 http://passwd.ohost.de/lcapi/SummonerIcons/559.jpg
+// @resource    icon553 http://passwd.ohost.de/lcapi/SummonerIcons/560.jpg
+// @resource    icon553 http://passwd.ohost.de/lcapi/SummonerIcons/561.jpg
+// @resource    icon553 http://passwd.ohost.de/lcapi/SummonerIcons/562.jpg
+// @resource    icon553 http://passwd.ohost.de/lcapi/SummonerIcons/563.jpg
+// @resource    icon553 http://passwd.ohost.de/lcapi/SummonerIcons/564.jpg
+// @resource    icon553 http://passwd.ohost.de/lcapi/SummonerIcons/565.jpg
+// @resource    icon553 http://passwd.ohost.de/lcapi/SummonerIcons/566.jpg
+// @resource    icon553 http://passwd.ohost.de/lcapi/SummonerIcons/567.jpg
+// @resource    icon553 http://passwd.ohost.de/lcapi/SummonerIcons/568.jpg
+// @resource    icon553 http://passwd.ohost.de/lcapi/SummonerIcons/569.jpg
 // ==/UserScript==
