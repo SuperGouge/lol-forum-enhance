@@ -1,47 +1,58 @@
 # Notes
 
-## fetching own Username
+## Enhances search usages
 
-```
-div#lol-pvpnet-bar-account > span.welcome_text InnerHtml:
+**Show user posts:** `http://euw.leagueoflegends.com/board/search.php?do=process&searchuser=ButWhyMe&exactname=1&showposts=1`
+**Show user threads:** `http://euw.leagueoflegends.com/board/search.php?do=process&searchuser=ButWhyMe&exactname=1&starteronly=1&showposts=0`
 
-Welcome, NAME (
-Willkommen, NAME (
+## JavaScript Popup Windows
 
-"[a-A]+, ([...]+) ("
-```
-
-## adding avatar next to quick edit box
-
-* `div#vB_Editor_QR` --> Parent --> add style `"float: left;"`
-
-* `div#vB_Editor_QR` --> Parent --> prepend:
-``` html
-<div style="float: left;">
-  <div style="padding-top: 20px; width: 205px; text-align: center;">
-    <big style="display: block; font-size: 13px; font-weight: bold; padding-bottom: 5px; color: rgb(51, 51, 51);">
-      FairyKevo
-    </big>
-    <a style="width: 145px; background: url(&quot;http://riot-web-static.s3.amazonaws.com/forum/ui/avatar.png&quot;) no-repeat scroll 0px 0px transparent; margin: 0px auto; position: relative; height: 100px; display: block;">
-      <img style="width: 80px; height: 80px; margin: 7px 0px 0px;" src="http://img.lolking.net/shared/riot/images/profile_icons/profileIcon26.jpg">
-      <span style="left: 6px; font-size: 11px; font-weight: bold; color: white; line-height: 20px; text-align: center; position: absolute; bottom: 17px; height: 20px; width: 20px; display: block;">
-        30
-      </span>
-      <span style="bottom: 17px; height: 20px; width: 20px; position: absolute; display: block; right: 4px;">
-      <img src="http://riot-web-static.s3.amazonaws.com/forum/ui/avatar_right_orb_blue.png"></span>
-    </a>
-  </div>
-</div>
-```
-
-* `div#vB_Editor_QR` --> Parent --> append:
-``` html
-<div style="clear: both;"></div>
-```
-
-* adding text to pvp.net bar
 ``` javascript
-$('#lol-pvpnet-bar-inner').append($('<div style="line-height: 30px;">Server found: '+server+'</div>'));
+alert('test');
+```
+
+``` javascript
+var confirmInput = confirm('Yes/No?');
+```
+
+``` javascript
+var promtInput = prompt('Question/Text/Description', 'Standart text');
+```
+
+## Avatars from [FEK by Worre](http://fek.worreh.com/)
+
+`http://videomatic3.diskstation.me/~worreh/avatar/na/TooMuchSoraka`
+
+``` javascript
+var image = 'http://videomatic3.diskstation.me/~worreh/avatar/' + region + '/' + encodeURI(user);
+```
+
+## Avatars from [WT](http://tools.wrenchbox.de/tools.php)
+
+**Input:**
+``` javascript
+var names = new Array();
+
+var name = 'Fictional Summoner Name';
+names.push(name);
+
+var jsonNames = encodeURIComponent(JSON.stringify(names));
+
+var output = getRequestTo('http://tools.wrenchbox.de/ajax_avatars.php?users=' + jsonNames);
+```
+
+**Output:**
+``` javascript
+//{"SummonerName1":"json formatted url", "SummonerName2":"json formatted url", ...}
+
+var url = output[name];
+```
+
+## HTML5 localStorage
+
+``` javascript
+localStorage.setItem("key", "wert");
+localStorage.getItem("key");
 ```
 
 ## `GM_*` Greasemonkey API functions
