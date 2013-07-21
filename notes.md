@@ -3,6 +3,7 @@
 ## Enhances search usages
 
 **Show user posts:** `http://euw.leagueoflegends.com/board/search.php?do=process&searchuser=ButWhyMe&exactname=1&showposts=1`
+
 **Show user threads:** `http://euw.leagueoflegends.com/board/search.php?do=process&searchuser=ButWhyMe&exactname=1&starteronly=1&showposts=0`
 
 ## JavaScript Popup Windows
@@ -21,7 +22,7 @@ var promtInput = prompt('Question/Text/Description', 'Standart text');
 
 ## Avatars from [FEK by Worre](http://fek.worreh.com/)
 
-`http://videomatic3.diskstation.me/~worreh/avatar/na/TooMuchSoraka`
+`http://videomatic3.diskstation.me/~worreh/avatar/euw/ButWhyMe`
 
 ``` javascript
 var image = 'http://videomatic3.diskstation.me/~worreh/avatar/' + region + '/' + encodeURI(user);
@@ -51,8 +52,11 @@ var url = output[name];
 ## HTML5 localStorage
 
 ``` javascript
-localStorage.setItem("key", "wert");
-localStorage.getItem("key");
+localStorage.setItem('key', 'value');
+
+var value;
+value = localStorage.getItem('key');
+value = localStorage['key'];
 ```
 
 ## `GM_*` Greasemonkey API functions
