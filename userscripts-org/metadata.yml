@@ -6,5 +6,5 @@ UserscriptMetadata:
     Description:        "description.md"
     ScriptHomepage:     "https://github.com/philippwiddra/lol-forum-enhance"
     RemoteLocation:     "https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/main.user.js"
-    Screenshots:        ""
+    Screenshots:        "../screenshots/"
     Icons:              ""
