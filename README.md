@@ -42,8 +42,9 @@ Choose the way you like or which has the most recent version of the script.
 
 ### Appendix
 
-- Powered by [elophant](http://www.elophant.com/ "LoL Champion and Summoner Stats")
-- This userscript on [userscripts.org] (http://userscripts.org/scripts/show/172058 "LoL Forum Icons for Greasemonkey")
+- Powered by [elophant](http://www.elophant.com/ "LoL Champion and Summoner Stats").
+- This userscript on [userscripts.org] (http://userscripts.org/scripts/show/172058 "LoL Forum Enhance for Greasemonkey").
+- This tool in the [german euw forums] (http://euw.leagueoflegends.com/board/showthread.php?p=12498364 "Lol Forum Enhance on german League EUW forums").
 
 
 ### Frequently Asked Questions - FAQ
@@ -52,6 +53,16 @@ Choose the way you like or which has the most recent version of the script.
 
 Usually, the first installation takes a longer time, because this script carries all summoner icons and some additional javascript along. *(about 5 to 10 MB, so not that much)*
 
+---
+
 > Won't this script increase bandwidth usage with all these icons to be shown on every page?
 
 It won't. We just download the icons once at installation. After that they are stored locally on your harddrive *(5 to 10 MB, nothing to worry about)* and referenced from there. So no additional bandwidth is used to display them over and over again.
+
+---
+
+> What's the difference between this script and the [FEK] (http://fek.worreh.com/ "Forum Enhancer Kit") or the [Wrenchman's Tools] (http://tools.wrenchbox.de/ "Wrenchman's Tools - Avatars")?
+
+All these tools may seem similar, but there are some major and minor differences. The biggest one is, that this script don't need to be configured, and doesn't force you to log in to a third person website. You can't use your own pictures, you are bound to the official ones. This also prevents you from seeing others with not-league-related avatars or icons you do not want to see at all.
+
+---
