@@ -1010,10 +1010,10 @@ var modal = $('\
               </td>\
               <td>\
                 <div class="btn-group" data-toggle="buttons-radio">\
-                  <button type="button" class="btn btn-primary">Posts</button>\
-                  <button type="button" class="btn btn-primary">Threads</button>\
-                  <button type="button" class="btn btn-primary">Selection</button>\
-                  <button type="button" class="btn btn-primary">None</button>\
+                  <button type="button" class="btn btn-mini">Posts</button>\
+                  <button type="button" class="btn btn-mini">Threads</button>\
+                  <button type="button" class="btn btn-info btn-mini">Selection</button>\
+                  <button type="button" class="btn btn-mini">None</button>\
                 </div>\
               </td>\
             </tr>\
@@ -1023,8 +1023,8 @@ var modal = $('\
               </td>\
               <td>\
                 <div class="btn-group" data-toggle="buttons-radio">\
-                  <button type="button" class="btn btn-primary">On</button>\
-                  <button type="button" class="btn btn-primary">Off</button>\
+                  <button type="button" class="btn btn-info btn-mini">On</button>\
+                  <button type="button" class="btn btn-mini">Off</button>\
                 </div>\
               </td>\
             </tr>\
