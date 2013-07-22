@@ -1041,15 +1041,19 @@ script.addGlobalStyle(GM_getResourceText('bootstrapcss'));
 // Modal Testing:
 
 // Button to trigger modal
-var button = $('<div id="lol-forum-enhance-settings" class="lol-pvpnet-bar-support-link"><a href="#lfeOptionsModal" role="button" data-toggle="modal">LFE Options</a></div>');
+var modalButton = $('<div id="lol-forum-enhance-settings" class="lol-pvpnet-bar-support-link"><a href="#lfeOptionsModal" role="button" data-toggle="modal">LFE Options</a></div>');
 
 // Modal
 var modalLang = 'en'; // TODO: Add localization for options modal.
 var modal = $(GM_getResourceText('options-modal-' + modalLang));
 
 // Add Modal
-button.insertAfter('#lol-pvpnet-bar-activator');
-$('#forum_body').append(modal);
+$('#lol-pvpnet-bar-activator').load(function() {
+  modalButton.insertAfter('#lol-pvpnet-bar-activator');
+});
+$('#forum_body').load(function() {
+  $('#forum_body').append(modal);
+});
 
 // Load options into modal when shown
 $('#lfeOptionsModal').on('shown', function () {
