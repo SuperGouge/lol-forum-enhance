@@ -5,7 +5,7 @@
 // @include     *.leagueoflegends.com/board/*
 // @downloadURL https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/main.user.js
 // @updateURL   https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/main.meta.js
-// @version     0.4.2
+// @version     0.4.3popup
 // @run-at      document-end
 // @grant       GM_xmlhttpRequest
 // @grant       GM_getResourceText
@@ -20,6 +20,8 @@
 // @resource    globalcss https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/global.css
 // @require     http://code.jquery.com/jquery-2.0.2.min.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/global.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/bootstrap-popups/client/bootstrap/js/bootstrap.min.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/bootstrap-popups/client/bootstrap/css/bootstrap.min.css
 // @resource    iconUnknown http://passwd.ohost.de/lcapi/SummonerIcons/unknown.jpg
 // @resource    icon0 http://passwd.ohost.de/lcapi/SummonerIcons/0.jpg
 // @resource    icon1 http://passwd.ohost.de/lcapi/SummonerIcons/1.jpg
