@@ -1041,8 +1041,7 @@ script.addGlobalStyle(GM_getResourceText('bootstrapcss'));
 // Modal Testing:
 
 // Button to trigger modal
-var button = $('<div style="float: right;" id="lol-forum-enhance-settings"><a href="#lfeOptionsModal" role="button" data-toggle="modal">LFE Options</a></div>');
-
+var button = $('<div id="lol-forum-enhance-settings" class="lol-pvpnet-bar-support-link"><a href="#lfeOptionsModal" role="button" data-toggle="modal">LFE Options</a></div>');
 
 // Modal
 var modalLang = 'en'; // TODO: Add localization for options modal.
@@ -1072,7 +1071,12 @@ $('#lfe-o-link-' + options.data.link).addClass('active');
 
 
 // Register save-options function
-// ...
+$('#lfe-o-save').click(function() {
+  alert("Save!");
+}
+$('#lfe-o-close').click(function() {
+  alert("Close!");
+}
 
 // register greasemonkey userscript menu commands
 forums.registerMenuCommands(script);
