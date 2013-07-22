@@ -13,6 +13,11 @@
 
 ## Version history:
 
+## 0.4.2
+- **Added** userscript commands to *force an update*, *check for updates* and *clear the local cache*.
+- **Added** localization for userscript commands.
+- **Fixed** removing locally cached summoner-data older than a day.
+
 ## 0.4.1
 - **Added** new Summoner icons
 
