@@ -17,9 +17,9 @@
 // @grant       GM_listValues
 // @grant       GM_openInTab
 // @grant       GM_registerMenuCommand
-// @resource    globalcss https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/global.css
+// @resource    globalcss https://raw.github.com/philippwiddra/lol-forum-enhance/lol-forum-enhance/client/global.css
 // @require     http://code.jquery.com/jquery-2.0.2.min.js
-// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/global.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/lol-forum-enhance/client/global.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/bootstrap-popups/client/bootstrap/js/bootstrap.min.js
 // @resource    bootstrapcss https://raw.github.com/philippwiddra/lol-forum-enhance/bootstrap-popups/client/bootstrap/css/bootstrap.min.css
 // @resource    options-modal-en https://raw.github.com/philippwiddra/lol-forum-enhance/bootstrap-popups/client/options-modal-en.html
@@ -165,6 +165,8 @@
 // TODO: Change branchname to master on bootstrapcss
 // TODO: Change branchname to master on options-modal-en
 // TODO: Change branchname to master on bootstrap.min.js
+// TODO: Change branchname to master on global.css
+// TODO: Change branchname to master on global.js
 
 /*******************************
  *    Definition of Classes    *
