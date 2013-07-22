@@ -650,8 +650,8 @@ function LolForums()
 {
   var that = this;
   var level1Cache = new Level1Cache();
-  level1Cache.cleanCache();
   level1Cache.loadCache();
+  level1Cache.cleanCache();
   
   this.server = getServer();
 
@@ -895,7 +895,7 @@ var forums = new LolForums();
 
 // css style changes
 script.addGlobalStyle(GM_getResourceText("globalcss"));
-forums.registerMenuCommands();
+forums.registerMenuCommands(script);
 
 // create an observer for the #posts div instance
 var observerPostsOld = 0;
