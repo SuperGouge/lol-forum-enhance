@@ -1034,7 +1034,7 @@ var modal = $('\
           <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>\
           <button class="btn btn-primary">Save changes</button>\
         </div>\
-      </table>
+      </table>\
     </div>\
 ');
 
