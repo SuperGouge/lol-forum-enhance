@@ -997,15 +997,19 @@ script.addGlobalStyle(GM_getResourceText('bootstrapcss'));
 // Modal Testing:
 
 // Button to trigger modal
-var button = $('<a href="#myModal" role="button" class="btn" data-toggle="modal">Launch demo modal</a>');
+var button = $('<a href="#myModal" role="button" class="btn" data-toggle="modal">Launch demo modal</a>'); // TODO: Change Button appearance
      
 // Modal
 var modalLang = 'en'; // TODO: Add localization for options modal.
 var modal = $(GM_getResourceText('options-modal-' + modalLang));
 
 // Add Modal
-$('#threadtools').append(button);
+$('#threadtools').append(button); // TODO: Change button position
 $('#forum_body').append(modal);
+
+// TODO: set current selection to .active
+// ...
+
  
 // register greasemonkey userscript menu commands
 forums.registerMenuCommands(script);
