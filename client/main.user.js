@@ -997,7 +997,7 @@ script.addGlobalStyle(GM_getResourceText('bootstrapcss'));
 // Modal Testing:
 
 // Button to trigger modal
-var button = $('<a href="#myModal" role="button" class="btn" data-toggle="modal">Launch demo modal</a>'); // TODO: Change Button appearance
+var button = $('<a href="#myModal" role="button" class="btn btn-mini btn-inverse" data-toggle="modal">LoL Forum Enhance - Options</a>'); // TODO: Change Button appearance
      
 // Modal
 var modalLang = 'en'; // TODO: Add localization for options modal.
