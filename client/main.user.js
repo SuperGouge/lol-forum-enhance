@@ -170,6 +170,46 @@
  *    Definition of Classes    *
  *******************************/
 
+function LfeOptions()
+{
+  var that = this;
+  var lfeOptionsString = "LFEOptions";
+  
+  this.data = {
+    updates: true;
+    enlarge: true;
+    avatar: true;
+    wt: false;
+    fek: false;
+    link: 'selection';
+  }
+  
+  this.loadLocal = function()
+  {
+    try
+    {
+      var data = GM_getValue(lfeOptionsString);
+      if (data !== undefined) that.data = JSON.parse(data);
+    }
+    catch (e)
+    {
+      if (e instanceof SyntaxError)
+      {
+        // error in JSON.parse (input may be not valid JSON)
+        cachedSummoners = {};
+      }
+      else
+      {
+        throw e;
+      }
+    }
+  }
+  this.saveLocal = function()
+  {
+    GM_setValue(lfeOptionsString, JSON.stringify(that.data));
+  }
+}
+ 
 function Summoner()
 {
   var that = this;
@@ -989,6 +1029,10 @@ function TestSuite()
 // Initiating main Objects
 var script = new Userscript();
 var forums = new LolForums();
+var options = new LfeOptions();
+
+// load global script options
+options.loadLocal();
 
 // css style changes
 script.addGlobalStyle(GM_getResourceText('globalcss'));
@@ -997,20 +1041,39 @@ script.addGlobalStyle(GM_getResourceText('bootstrapcss'));
 // Modal Testing:
 
 // Button to trigger modal
-var button = $('<a href="#myModal" role="button" class="btn btn-mini btn-inverse" data-toggle="modal">LoL Forum Enhance - Options</a>'); // TODO: Change Button appearance
-     
+var button = $('<div style="float: right;" id="lol-forum-enhance-settings"><a href="#lfeOptionsModal" role="button" data-toggle="modal">LFE Options</a></div>');
+
+
 // Modal
 var modalLang = 'en'; // TODO: Add localization for options modal.
 var modal = $(GM_getResourceText('options-modal-' + modalLang));
 
 // Add Modal
-$('#threadtools').append(button); // TODO: Change button position
+button.insertAfter('#lol-pvpnet-bar-activator');
 $('#forum_body').append(modal);
 
-// TODO: set current selection to .active
+// Load options into modal
+if (options.data.updates) $('#lfe-o-updates-on').addClass('active');
+else $('#lfe-o-updates-off').addClass('active');
+
+if (options.data.enlarge) $('#lfe-o-enlarge-on').addClass('active');
+else $('#lfe-o-enlarge-off').addClass('active');
+
+if (options.data.avatar) $('#lfe-o-avatar-on').addClass('active');
+else $('#lfe-o-avatar-off').addClass('active');
+
+if (options.data.wt) $('#lfe-o-wt-on').addClass('active');
+else $('#lfe-o-wt-off').addClass('active');
+
+if (options.data.fek) $('#lfe-o-fek-on').addClass('active');
+else $('#lfe-o-fek-off').addClass('active');
+
+$('#lfe-o-link-' + options.data.link).addClass('active');
+
+
+// Register save-options function
 // ...
 
- 
 // register greasemonkey userscript menu commands
 forums.registerMenuCommands(script);
 
