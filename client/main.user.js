@@ -1002,7 +1002,8 @@ var modal = $('\
         <h3 id="myModalLabel">Modal header</h3>\
       </div>\
       <div class="modal-body">\
-        <p>One fine body…</p>\
+        <p>Line 1…</p>\
+        <p>Line 2.../p>\
       </div>\
       <div class="modal-footer">\
         <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>\
@@ -1013,7 +1014,7 @@ var modal = $('\
 
 // Add Modal
 $('#threadtools').append(button);
-$('#threadtools').append(modal);
+$('#forum_body').append(modal);
  
 // register greasemonkey userscript menu commands
 forums.registerMenuCommands(script);
