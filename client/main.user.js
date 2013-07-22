@@ -884,7 +884,10 @@ function LolForums()
     //TODO: Test languages on eune and asian servers. (euw and na working)
     var raw = $("#lol-pvpnet-bar-account").find(".welcome_text").contents().first().text();
     var match = raw.match(/.+, (.+)[\s]*\(/i)
-    if (match === null) return null;
+    if (match === null)
+    {
+      return null;
+    }
     else
     {
       var name = match[1];
@@ -921,6 +924,7 @@ function LolForums()
         level1Cache.saveCache();
       });
     }
+    else alert('name not found');
   }
 
   this.registerMenuCommands = function(userscript)
@@ -1048,10 +1052,10 @@ var modalLang = 'en'; // TODO: Add localization for options modal.
 var modal = $(GM_getResourceText('options-modal-' + modalLang));
 
 // Add Modal
-$('#lol-pvpnet-bar-activator').load(function() {
+$('#lol-pvpnet-bar-activator').on('load', function() {
   modalButton.insertAfter('#lol-pvpnet-bar-activator');
 });
-$('#forum_body').load(function() {
+$('#forum_body').on('load', function() {
   $('#forum_body').append(modal);
 });
 
