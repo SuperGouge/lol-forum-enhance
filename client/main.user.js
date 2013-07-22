@@ -983,6 +983,9 @@ var forums = new LolForums();
 
 // css style changes
 script.addGlobalStyle(GM_getResourceText("globalcss"));
+script.addGlobalStyle(GM_getResourceText("bootstrapcss"));
+
+// register greasemonkey userscript menu commands
 forums.registerMenuCommands(script);
 
 // create an observer for the #posts div instance
