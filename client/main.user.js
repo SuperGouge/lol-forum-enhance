@@ -1073,7 +1073,7 @@ $('#lfeOptionsModal').on('shown', function () {
 
 // Register save-options function
 $('#lfe-o-save').click(function() {
-  alert($("#lfe-o-updates .active").data("value");)
+  alert($('#lfe-o-updates .active').data('value'));
   
   
   //alert("Saved!");
