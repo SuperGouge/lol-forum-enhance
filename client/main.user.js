@@ -924,7 +924,6 @@ function LolForums()
         level1Cache.saveCache();
       });
     }
-    else alert('name not found');
   }
 
   this.registerMenuCommands = function(userscript)
@@ -1052,8 +1051,9 @@ var modalLang = 'en'; // TODO: Add localization for options modal.
 var modal = $(GM_getResourceText('options-modal-' + modalLang));
 
 // Add Modal
-$('#lol-pvpnet-bar-activator').on('load', function() {
-  modalButton.insertAfter('#lol-pvpnet-bar-activator');
+
+$('#pvpnet-bar-inner').on('load', function() {
+  $('#pvpnet-bar-inner').prepend(modalButton);
 });
 $('#forum_body').on('load', function() {
   $('#forum_body').append(modal);
