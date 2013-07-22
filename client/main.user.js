@@ -22,6 +22,7 @@
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/global.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/bootstrap-popups/client/bootstrap/js/bootstrap.min.js
 // @resource    bootstrapcss https://raw.github.com/philippwiddra/lol-forum-enhance/bootstrap-popups/client/bootstrap/css/bootstrap.min.css
+// @resource    options-modal-en https://raw.github.com/philippwiddra/lol-forum-enhance/bootstrap-popups/client/options-modal-en.html
 // @resource    iconUnknown http://passwd.ohost.de/lcapi/SummonerIcons/unknown.jpg
 // @resource    icon0 http://passwd.ohost.de/lcapi/SummonerIcons/0.jpg
 // @resource    icon1 http://passwd.ohost.de/lcapi/SummonerIcons/1.jpg
@@ -160,6 +161,10 @@
 // @resource    icon568 http://passwd.ohost.de/lcapi/SummonerIcons/568.jpg
 // @resource    icon569 http://passwd.ohost.de/lcapi/SummonerIcons/569.jpg
 // ==/UserScript==
+
+// TODO: Change branchname to master on bootstrapcss
+// TODO: Change branchname to master on options-modal-en
+// TODO: Change branchname to master on bootstrap.min.js
 
 /*******************************
  *    Definition of Classes    *
@@ -986,8 +991,8 @@ var script = new Userscript();
 var forums = new LolForums();
 
 // css style changes
-script.addGlobalStyle(GM_getResourceText("globalcss"));
-script.addGlobalStyle(GM_getResourceText("bootstrapcss"));
+script.addGlobalStyle(GM_getResourceText('globalcss'));
+script.addGlobalStyle(GM_getResourceText('bootstrapcss'));
 
 // Modal Testing:
 
@@ -995,48 +1000,8 @@ script.addGlobalStyle(GM_getResourceText("bootstrapcss"));
 var button = $('<a href="#myModal" role="button" class="btn" data-toggle="modal">Launch demo modal</a>');
      
 // Modal
-var modal = $('\
-    <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">\
-      <div class="modal-header">\
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>\
-        <h3 id="myModalLabel">Modal header</h3>\
-      </div>\
-      <div class="modal-body">\
-        <table class="table table-striped">\
-          <tbody>\
-            <tr>\
-              <td>\
-                Link usernames with:\
-              </td>\
-              <td>\
-                <div class="btn-group" data-toggle="buttons-radio">\
-                  <button type="button" class="btn btn-mini">Posts</button>\
-                  <button type="button" class="btn btn-mini">Threads</button>\
-                  <button type="button" class="btn btn-info btn-mini">Selection</button>\
-                  <button type="button" class="btn btn-mini">None</button>\
-                </div>\
-              </td>\
-            </tr>\
-            <tr>\
-              <td>\
-                Check for updates automatically:\
-              </td>\
-              <td>\
-                <div class="btn-group" data-toggle="buttons-radio">\
-                  <button type="button" class="btn btn-info btn-mini">On</button>\
-                  <button type="button" class="btn btn-mini">Off</button>\
-                </div>\
-              </td>\
-            </tr>\
-          </tbody>\
-        </table>\
-      </div>\
-      <div class="modal-footer">\
-        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>\
-        <button class="btn btn-primary">Save changes</button>\
-      </div>\
-    </div>\
-');
+var modalLang = 'en'; // TODO: Add localization for options modal.
+var modal = $(GM_getResourceText('options-modal-' + modalLang));
 
 // Add Modal
 $('#threadtools').append(button);
