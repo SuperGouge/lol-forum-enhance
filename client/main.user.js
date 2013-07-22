@@ -1073,10 +1073,10 @@ $('#lfe-o-link-' + options.data.link).addClass('active');
 // Register save-options function
 $('#lfe-o-save').click(function() {
   alert("Save!");
-}
+});
 $('#lfe-o-close').click(function() {
   alert("Close!");
-}
+});
 
 // register greasemonkey userscript menu commands
 forums.registerMenuCommands(script);
