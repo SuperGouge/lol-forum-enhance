@@ -1044,7 +1044,7 @@ script.addGlobalStyle(GM_getResourceText('bootstrapcss'));
 // Modal Testing:
 
 // Button to trigger modal
-var modalButton = $('<div id="lol-forum-enhance-settings" class="lol-pvpnet-bar-support-link"><a href="#lfeOptionsModal" role="button" data-toggle="modal">LFE Options</a></div>');
+var modalButton = $('<div id="lol-forum-enhance-settings" class="userscript-pvpnet-bar"><a href="#lfeOptionsModal" role="button" data-toggle="modal">LFE Options</a></div>');
 
 // Modal
 var modalLang = 'en'; // TODO: Add localization for options modal.
