@@ -884,7 +884,7 @@ function LolForums()
     //TODO: Test languages on eune and asian servers. (euw and na working)
     var raw = $("#lol-pvpnet-bar-account").find(".welcome_text").contents().first().text();
     var match = raw.match(/.+, (.+)[\s]*\(/i)
-    if (match === null) return null
+    if (match === null) return null;
     else
     {
       var name = match[1];
