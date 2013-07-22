@@ -1051,31 +1051,33 @@ var modal = $(GM_getResourceText('options-modal-' + modalLang));
 button.insertAfter('#lol-pvpnet-bar-activator');
 $('#forum_body').append(modal);
 
-// Load options into modal
-if (options.data.updates) $('#lfe-o-updates-on').addClass('active');
-else $('#lfe-o-updates-off').addClass('active');
+// Load options into modal when shown
+$('#lfeOptionsModal').on('shown', function () {
+  if (options.data.updates) $('#lfe-o-updates-on').addClass('active');
+  else $('#lfe-o-updates-off').addClass('active');
 
-if (options.data.enlarge) $('#lfe-o-enlarge-on').addClass('active');
-else $('#lfe-o-enlarge-off').addClass('active');
+  if (options.data.enlarge) $('#lfe-o-enlarge-on').addClass('active');
+  else $('#lfe-o-enlarge-off').addClass('active');
 
-if (options.data.avatar) $('#lfe-o-avatar-on').addClass('active');
-else $('#lfe-o-avatar-off').addClass('active');
+  if (options.data.avatar) $('#lfe-o-avatar-on').addClass('active');
+  else $('#lfe-o-avatar-off').addClass('active');
 
-if (options.data.wt) $('#lfe-o-wt-on').addClass('active');
-else $('#lfe-o-wt-off').addClass('active');
+  if (options.data.wt) $('#lfe-o-wt-on').addClass('active');
+  else $('#lfe-o-wt-off').addClass('active');
 
-if (options.data.fek) $('#lfe-o-fek-on').addClass('active');
-else $('#lfe-o-fek-off').addClass('active');
+  if (options.data.fek) $('#lfe-o-fek-on').addClass('active');
+  else $('#lfe-o-fek-off').addClass('active');
 
-$('#lfe-o-link-' + options.data.link).addClass('active');
-
+  $('#lfe-o-link-' + options.data.link).addClass('active');
+});
 
 // Register save-options function
 $('#lfe-o-save').click(function() {
-  alert("Save!");
-});
-$('#lfe-o-close').click(function() {
-  alert("Close!");
+  alert($("#lfe-o-updates .active").data("value");)
+  
+  
+  //alert("Saved!");
+  $('#lfeOptionsModal').modal('hide');
 });
 
 // register greasemonkey userscript menu commands
