@@ -96,3 +96,7 @@
   border-left: 1px solid rgb(43, 43, 43);
   border-right: 1px solid rgba(35, 35, 35, 0.7);
 }
+
+.userscript-pvpnet-bar {
+  float: right;
+}

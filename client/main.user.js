@@ -1054,12 +1054,12 @@ var modal = $(GM_getResourceText('options-modal-' + modalLang));
 
 // Add Modal
 
-$('#pvpnet-bar-inner').on('load', function() {
+//$('#pvpnet-bar-inner').on('load', function() {
   $('#pvpnet-bar-inner').prepend(modalButton);
-});
-$('#forum_body').on('load', function() {
+//});
+//$('#forum_body').on('load', function() {
   $('#forum_body').append(modal);
-});
+//});
 
 // Load options into modal when shown
 $('#lfeOptionsModal').on('shown', function () {
