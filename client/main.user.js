@@ -972,6 +972,10 @@ function TestSuite()
   }
 }
 
+// Tooltip Testing:
+//var tt = $('<br><br><a id="tt-test" href="#" data-toggle="tooltip" title="first tooltip">hover over me</a>');
+//$('#post_message_11390315 > p:nth-child(1)').append(tt);
+//$('#tt-test').tooltip();
 
 /*******************************
  *    Start of Main Script     *
@@ -985,10 +989,32 @@ var forums = new LolForums();
 script.addGlobalStyle(GM_getResourceText("globalcss"));
 script.addGlobalStyle(GM_getResourceText("bootstrapcss"));
 
-var tt = $('<br><br><a id="tt-test" href="#" data-toggle="tooltip" title="first tooltip">hover over me</a>');
-$('#post_message_11390315 > p:nth-child(1)').append(tt);
-$('#tt-test').tooltip();
+// Modal Testing:
 
+// Button to trigger modal
+var button = $('<a href="#myModal" role="button" class="btn" data-toggle="modal">Launch demo modal</a>');
+     
+// Modal
+var modal = $('\
+    <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">\
+      <div class="modal-header">\
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>\
+        <h3 id="myModalLabel">Modal header</h3>\
+      </div>\
+      <div class="modal-body">\
+        <p>One fine body…</p>\
+      </div>\
+      <div class="modal-footer">\
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>\
+        <button class="btn btn-primary">Save changes</button>\
+      </div>\
+    </div>\
+');
+
+// Add Modal
+$('#threadtools').append(button);
+$('#threadtools').append(modal);
+ 
 // register greasemonkey userscript menu commands
 forums.registerMenuCommands(script);
 
