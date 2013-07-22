@@ -985,6 +985,10 @@ var forums = new LolForums();
 script.addGlobalStyle(GM_getResourceText("globalcss"));
 script.addGlobalStyle(GM_getResourceText("bootstrapcss"));
 
+var tt = $('<br><br><a id="tt-test" href="#" data-toggle="tooltip" title="first tooltip">hover over me</a>');
+$('#post_message_11390315 > p:nth-child(1)').append(tt);
+$('#tt-test').tooltip();
+
 // register greasemonkey userscript menu commands
 forums.registerMenuCommands(script);
 
