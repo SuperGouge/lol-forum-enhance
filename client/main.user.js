@@ -1002,23 +1002,39 @@ var modal = $('\
         <h3 id="myModalLabel">Modal header</h3>\
       </div>\
       <div class="modal-body">\
-        <p>Link usernames with:</p>\
-        <div class="btn-group" data-toggle="buttons-radio">\
-          <button type="button" class="btn btn-primary">Posts</button>\
-          <button type="button" class="btn btn-primary">Threads</button>\
-          <button type="button" class="btn btn-primary">Selection</button>\
-          <button type="button" class="btn btn-primary">None</button>\
+        <table class="table table-striped">\
+          <tbody>\
+            <tr>\
+              <td>\
+                Link usernames with:\
+              </td>\
+              <td>\
+                <div class="btn-group" data-toggle="buttons-radio">\
+                  <button type="button" class="btn btn-primary">Posts</button>\
+                  <button type="button" class="btn btn-primary">Threads</button>\
+                  <button type="button" class="btn btn-primary">Selection</button>\
+                  <button type="button" class="btn btn-primary">None</button>\
+                </div>\
+              </td>\
+            </tr>\
+            <tr>\
+              <td>\
+                Check for updates automatically:\
+              </td>\
+              <td>\
+                <div class="btn-group" data-toggle="buttons-radio">\
+                  <button type="button" class="btn btn-primary">On</button>\
+                  <button type="button" class="btn btn-primary">Off</button>\
+                </div>\
+              </td>\
+            </tr>\
+          </tbody>\
         </div>\
-        <p>Check for updates automatically:</p>\
-        <div class="btn-group" data-toggle="buttons-radio">\
-          <button type="button" class="btn btn-primary">On</button>\
-          <button type="button" class="btn btn-primary">Off</button>\
+        <div class="modal-footer">\
+          <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>\
+          <button class="btn btn-primary">Save changes</button>\
         </div>\
-      </div>\
-      <div class="modal-footer">\
-        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>\
-        <button class="btn btn-primary">Save changes</button>\
-      </div>\
+      </table>
     </div>\
 ');
 
