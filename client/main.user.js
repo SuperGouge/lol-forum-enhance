@@ -173,15 +173,15 @@
 function LfeOptions()
 {
   var that = this;
-  var lfeOptionsString = "LFEOptions";
+  var lfeOptionsString = 'LFEOptions';
   
   this.data = {
-    updates: true;
-    enlarge: true;
-    avatar: true;
-    wt: false;
-    fek: false;
-    link: 'selection';
+    updates: true,
+    enlarge: true,
+    avatar: true,
+    wt: false,
+    fek: false,
+    link: 'selection'
   }
   
   this.loadLocal = function()
