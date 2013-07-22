@@ -612,7 +612,7 @@ function Userscript()
   {
     return GM_info.script.version;
   }
-  this.getRemoteVersion = function()
+  this.getRemoteVersion = function(callback)
   {
     var updateURL = GM_info.scriptMetaStr.match(/\@updateURL[ |\t]+(.+)/i)[1];
     GM_xmlhttpRequest({
@@ -622,7 +622,7 @@ function Userscript()
         if (response.status == 200)
         {
           var serverVersion = response.responseText.match(/\@version[ |\t]+(.+)/i)[1];
-          return serverVersion;
+          callback(serverVersion)
         }
         else
         {
@@ -631,13 +631,15 @@ function Userscript()
       }
     });
   }
-  this.updateNeccessary = function()
+  this.updateNeccessary = function(callback)
   {
     var currentVersion = that.getLocalVersion();
-    var remoteVersion = that.getRemoteVersion();
-    var comparison = that.compareVersions(currentVersion, remoteVersion);
-    if (comparison < 0) return true;
-    else return false;
+    that.getRemoteVersion(function(remoteVersion) {
+      var comparison = that.compareVersions(currentVersion, remoteVersion);
+      if (comparison < 0) callback(true);
+      else callback(false);
+    });
+    
   }
   this.forceUpdate = function()
   {
@@ -697,6 +699,90 @@ function LolForums()
       "pt": "Eu",
       "tr": "ben",
       "it": "I"
+    },
+    forceUpdateCaption: { // TODO: Add translations
+      "en": "Force update",
+      "de": "",
+      "es": "",
+      "fr": "",
+      "pl": "",
+      "ro": "",
+      "el": "",
+      "pt": "",
+      "tr": "",
+      "it": ""
+    },
+    checkUpdatesCaption: { // TODO: Add translations
+      "en": "Check for updates",
+      "de": "",
+      "es": "",
+      "fr": "",
+      "pl": "",
+      "ro": "",
+      "el": "",
+      "pt": "",
+      "tr": "",
+      "it": ""
+    },
+    updatesConfirmMessage: { // TODO: Add translations
+      "en": "There are updates available. Do you want to install them now?",
+      "de": "",
+      "es": "",
+      "fr": "",
+      "pl": "",
+      "ro": "",
+      "el": "",
+      "pt": "",
+      "tr": "",
+      "it": ""
+    },
+    updatesStartMessage: { // TODO: Add translations
+      "en": "Update started.\nPlease confirm the installation promt.",
+      "de": "",
+      "es": "",
+      "fr": "",
+      "pl": "",
+      "ro": "",
+      "el": "",
+      "pt": "",
+      "tr": "",
+      "it": ""
+    },
+    updatesCanceledMessage: { // TODO: Add translations
+      "en": "Updating canceled.",
+      "de": "",
+      "es": "",
+      "fr": "",
+      "pl": "",
+      "ro": "",
+      "el": "",
+      "pt": "",
+      "tr": "",
+      "it": ""
+    },
+    noUpdatesMessage: { // TODO: Add translations
+      "en": "No updates available.\nYou are using the most recent version.",
+      "de": "",
+      "es": "",
+      "fr": "",
+      "pl": "",
+      "ro": "",
+      "el": "",
+      "pt": "",
+      "tr": "",
+      "it": ""
+    },
+    clearCacheCaption: { // TODO: Add translations
+      "en": "Clear local cache",
+      "de": "",
+      "es": "",
+      "fr": "",
+      "pl": "",
+      "ro": "",
+      "el": "",
+      "pt": "",
+      "tr": "",
+      "it": ""
     }
   };
   
@@ -792,30 +878,30 @@ function LolForums()
 
   this.registerMenuCommands = function(userscript)
   {
-    // GM_registerMenuCommand('Say hi', function() { alert('Hi!'); }, "s");
-    
     // Force update
-    GM_registerMenuCommand('Force update', function() {
+    GM_registerMenuCommand(that.localizations.forceUpdateCaption['en'], function() { // TODO: switch to current language
       userscript.forceUpdate();
     }, 'F');
     
     // Check for updates
-    GM_registerMenuCommand('Check for updates', function() {
-      if (userscript.updateNeccessary()) {
-        var confirmInput = confirm('There are updates available. Do you want to install them now?');
-        if (confirmInput) {
-          alert('Update started.\nPlease confirm the installation promt.');
-          userscript.forceUpdate();
+    GM_registerMenuCommand(that.localizations.checkUpdatesCaption['en'], function() { // TODO: switch to current language
+      userscript.updateNeccessary(function(updateNecc) {
+        if (updateNecc) {
+          var confirmInput = confirm(that.localizations.updatesConfirmMessage['en']); // TODO: switch to current language
+          if (confirmInput) {
+            alert(that.localizations.updatesStartMessage['en']); // TODO: switch to current language
+            userscript.forceUpdate();
+          } else {
+            alert(that.localizations.updatesCanceledMessage['en']); // TODO: switch to current language
+          }
         } else {
-          alert('Updating cancled.');
+          alert(that.localizations.noUpdatesMessage['en']); // TODO: switch to current language
         }
-      } else {
-        alert('No updates available.\nYou are using the most recent version.');
-      }
+      });
     }, 'u');
     
     // Clear local cache
-    GM_registerMenuCommand('Clear local cache', function() {
+    GM_registerMenuCommand(that.localizations.clearCacheCaption['en'], function() { // TODO: switch to current language
       level1Cache.removeCache();
       level1Cache.loadCache();
     }, 'C');
