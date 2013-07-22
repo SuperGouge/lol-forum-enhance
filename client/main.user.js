@@ -240,7 +240,7 @@ function Level1Cache()
   {
     // get yesterdays Date
     var d = new Date();
-    d.setDate(d.getDate()-1);
+    d.setDate(d.getDate() - 1);
     
     var temp = {};
     for (var key in cachedSummoners)
@@ -248,7 +248,7 @@ function Level1Cache()
       if (cachedSummoners.hasOwnProperty(key))
       {
         // is Summonerdata not older than a day
-        if (cachedSummoners[key].data.currentData > d)
+        if (cachedSummoners[key].data.currentDate > d)
         {
           temp[key] = cachedSummoners[key];
         }
@@ -789,6 +789,39 @@ function LolForums()
       });
     }
   }
+
+  this.registerMenuCommands = function(userscript)
+  {
+    // GM_registerMenuCommand('Say hi', function() { alert('Hi!'); }, "s");
+    
+    // Force update
+    GM_registerMenuCommand('Force update', function() {
+      userscript.forceUpdate();
+    }, 'F');
+    
+    // Check for updates
+    GM_registerMenuCommand('Check for updates', function() {
+      if (userscript.updateNeccessary()) {
+        var confirmInput = confirm('There are updates available. Do you want to install them now?');
+        if (confirmInput) {
+          alert('Update started.\nPlease confirm the installation promt.');
+          userscript.forceUpdate();
+        } else {
+          alert('Updating cancled.');
+        }
+      } else {
+        alert('No updates available.\nYou are using the most recent version.');
+      }
+    }, 'u');
+    
+    // Clear local cache
+    GM_registerMenuCommand('Clear local cache', function() {
+      level1Cache.removeCache();
+      level1Cache.loadCache();
+    }, 'C');
+  }
+  
+  
 }
 
 function TestSuite()
@@ -856,14 +889,13 @@ function TestSuite()
  *    Start of Main Script     *
  *******************************/
 
-// GM_registerMenuCommand("Say hi", function() { alert("Hi!"); }, "s");
-
 // Initiating main Objects
 var script = new Userscript();
 var forums = new LolForums();
 
 // css style changes
 script.addGlobalStyle(GM_getResourceText("globalcss"));
+forums.registerMenuCommands();
 
 // create an observer for the #posts div instance
 var observerPostsOld = 0;
