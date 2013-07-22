@@ -883,6 +883,7 @@ function LolForums()
 
   this.getOwnName = function()
   {
+    /* Old Version:
     //TODO: Test languages on eune and asian servers. (euw and na working)
     var raw = $("#lol-pvpnet-bar-account").find(".welcome_text").contents().first().text();
     var match = raw.match(/.+, (.+)[\s]*\(/i)
@@ -893,6 +894,17 @@ function LolForums()
     else
     {
       var name = match[1];
+      return name;
+    }
+    */
+    
+    var name = $('#pvpnet-bar-account-button').text();
+    if (name == '')
+    {
+      return null;
+    }
+    else
+    {
       return name;
     }
   }
