@@ -1053,6 +1053,8 @@ $('#forum_body').append(modal);
 
 // Load options into modal when shown
 $('#lfeOptionsModal').on('shown', function () {
+  $('#lfeOptionsModal button.active').removeClass('active');
+
   if (options.data.updates) $('#lfe-o-updates-on').addClass('active');
   else $('#lfe-o-updates-off').addClass('active');
 
@@ -1073,9 +1075,13 @@ $('#lfeOptionsModal').on('shown', function () {
 
 // Register save-options function
 $('#lfe-o-save').click(function() {
-  alert($('#lfe-o-updates .active').data('value'));
-  
-  
+  options.data.updates = $('#lfe-o-updates .active').data('value');
+  options.data.enlarge = $('#lfe-o-enlarge .active').data('value');
+  options.data.avatar = $('#lfe-o-avatar .active').data('value');
+  options.data.wt = $('#lfe-o-wt .active').data('value');
+  options.data.fek = $('#lfe-o-fek .active').data('value');
+  options.data.link = $('#lfe-o-link .active').data('value');
+  options.saveLocal();
   //alert("Saved!");
   $('#lfeOptionsModal').modal('hide');
 });
