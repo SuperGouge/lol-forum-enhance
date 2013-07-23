@@ -1162,7 +1162,8 @@ function LolForums()
 
   this.registerMenuCommands = function(userscript)
   {
-    var languageId = script.getCookie("bblanguageid");
+    //var languageId = script.getCookie('bblanguageid');
+    var languageId = script.getCookie('LOLLANG');
   
     // Force update
     GM_registerMenuCommand(that.localizations.get(languageId, 'forceUpdateCaption'), function() { // TODO: switch to current language
@@ -1274,7 +1275,8 @@ var options = new LfeOptions();
 options.loadLocal();
 
 // get actual language
-var languageId = script.getCookie("bblanguageid");
+//var languageId = script.getCookie('bblanguageid');
+var languageId = script.getCookie('LOLLANG');
 
 // css style changes
 script.addGlobalStyle(GM_getResourceText('globalcss'));
