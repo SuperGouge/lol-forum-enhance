@@ -22,7 +22,7 @@
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/bootstrap-popups/client/global.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/bootstrap-popups/client/bootstrap/js/bootstrap.min.js
 // @resource    bootstrapcss https://raw.github.com/philippwiddra/lol-forum-enhance/bootstrap-popups/client/bootstrap/css/bootstrap.min.css
-// @resource    options-modal-en https://raw.github.com/philippwiddra/lol-forum-enhance/bootstrap-popups/client/options-modal-en.html
+// @resource    options-modal https://raw.github.com/philippwiddra/lol-forum-enhance/bootstrap-popups/client/options-modal.html
 // @resource    iconUnknown http://passwd.ohost.de/lcapi/SummonerIcons/unknown.jpg
 // @resource    icon0 http://passwd.ohost.de/lcapi/SummonerIcons/0.jpg
 // @resource    icon1 http://passwd.ohost.de/lcapi/SummonerIcons/1.jpg
@@ -163,7 +163,7 @@
 // ==/UserScript==
 
 // TODO: Change branchname to master on bootstrapcss
-// TODO: Change branchname to master on options-modal-en
+// TODO: Change branchname to master on options-modal
 // TODO: Change branchname to master on bootstrap.min.js
 // TODO: Change branchname to master on global.css
 // TODO: Change branchname to master on global.js
@@ -844,8 +844,213 @@ function LolForums()
       "pt": "",
       "tr": "",
       "it": ""
+    },
+    optionsModalTitleCaption: {  // lfe-o-captions-title
+      "en": "LoL Forum Enhance - Options",
+      "de": "",
+      "es": "",
+      "fr": "",
+      "pl": "",
+      "ro": "",
+      "el": "",
+      "pt": "",
+      "tr": "",
+      "it": ""
+    },
+    optionsModalUpdatesCaption: { // lfe-o-captions-updates
+      "en": "Check for updates automatically:",
+      "de": "",
+      "es": "",
+      "fr": "",
+      "pl": "",
+      "ro": "",
+      "el": "",
+      "pt": "",
+      "tr": "",
+      "it": ""
+    },
+    optionsModalEnlargeCaption: { // lfe-o-captions-enlarge
+      "en": "Enlarge Quick-Edit-Box:",
+      "de": "",
+      "es": "",
+      "fr": "",
+      "pl": "",
+      "ro": "",
+      "el": "",
+      "pt": "",
+      "tr": "",
+      "it": ""
+    },
+    optionsModalAvatarCaption: { // lfe-o-captions-avatar
+      "en": "Show own avatar next to Quick-Edit-Box:",
+      "de": "",
+      "es": "",
+      "fr": "",
+      "pl": "",
+      "ro": "",
+      "el": "",
+      "pt": "",
+      "tr": "",
+      "it": ""
+    },
+    optionsModalWtCaption: { // lfe-o-captions-wt
+      "en": "Use Wrenchman's Tools Icons if available:",
+      "de": "",
+      "es": "",
+      "fr": "",
+      "pl": "",
+      "ro": "",
+      "el": "",
+      "pt": "",
+      "tr": "",
+      "it": ""
+    },
+    optionsModalFekCaption: { // lfe-o-captions-fek
+      "en": "User Forum Enhancement Kit's Icons if available:",
+      "de": "",
+      "es": "",
+      "fr": "",
+      "pl": "",
+      "ro": "",
+      "el": "",
+      "pt": "",
+      "tr": "",
+      "it": ""
+    },
+    optionsModalLinkCaption: { // lfe-o-captions-link
+      "en": "Link usernames with:",
+      "de": "",
+      "es": "",
+      "fr": "",
+      "pl": "",
+      "ro": "",
+      "el": "",
+      "pt": "",
+      "tr": "",
+      "it": ""
+    },
+    optionsModalAnswersOnCaption: { // lfe-o-captions-answers-on
+      "en": "On",
+      "de": "",
+      "es": "",
+      "fr": "",
+      "pl": "",
+      "ro": "",
+      "el": "",
+      "pt": "",
+      "tr": "",
+      "it": ""
+    },
+    optionsModalAnswersOffCaption: { // lfe-o-captions-answers-off
+      "en": "Off",
+      "de": "",
+      "es": "",
+      "fr": "",
+      "pl": "",
+      "ro": "",
+      "el": "",
+      "pt": "",
+      "tr": "",
+      "it": ""
+    },
+    optionsModalAnswersPostsCaption: { // lfe-o-captions-answers-posts
+      "en": "Posts",
+      "de": "",
+      "es": "",
+      "fr": "",
+      "pl": "",
+      "ro": "",
+      "el": "",
+      "pt": "",
+      "tr": "",
+      "it": ""
+    },
+    optionsModalAnswersThreadsCaption: { // lfe-o-captions-answers-threads
+      "en": "Threads",
+      "de": "",
+      "es": "",
+      "fr": "",
+      "pl": "",
+      "ro": "",
+      "el": "",
+      "pt": "",
+      "tr": "",
+      "it": ""
+    },
+    optionsModalAnswersSelectionCaption: { // lfe-o-captions-answers-selection
+      "en": "Selection",
+      "de": "",
+      "es": "",
+      "fr": "",
+      "pl": "",
+      "ro": "",
+      "el": "",
+      "pt": "",
+      "tr": "",
+      "it": ""
+    },
+    optionsModalAnswersNoneCaption: { // lfe-o-captions-answers-none
+      "en": "None",
+      "de": "",
+      "es": "",
+      "fr": "",
+      "pl": "",
+      "ro": "",
+      "el": "",
+      "pt": "",
+      "tr": "",
+      "it": ""
+    },
+    optionsModalPresetInfoCaption: { // lfe-o-captions-preset-info
+      "en": "Preset values are presented in this color",
+      "de": "",
+      "es": "",
+      "fr": "",
+      "pl": "",
+      "ro": "",
+      "el": "",
+      "pt": "",
+      "tr": "",
+      "it": ""
+    },
+    optionsModalButtonSaveCaption: { // lfe-o-captions-button-save
+      "en": "Save changes",
+      "de": "",
+      "es": "",
+      "fr": "",
+      "pl": "",
+      "ro": "",
+      "el": "",
+      "pt": "",
+      "tr": "",
+      "it": ""
+    },
+    optionsModalButtonDiscardCaption: { // lfe-o-captions-button-discard
+      "en": "Discard changes",
+      "de": "",
+      "es": "",
+      "fr": "",
+      "pl": "",
+      "ro": "",
+      "el": "",
+      "pt": "",
+      "tr": "",
+      "it": ""
     }
   };
+  
+  this.localizations.get = function(lang, key)
+  {
+    var l = lang;
+    if (typeof lang == 'number')
+    {
+      l = that.localizations.langIds[lang];
+    }
+    
+    var output = that.localizations[key][l];
+    if (output == '') output = that.localizations[key]["en"];
+    return output;
+  }
   
   function getServer()
   {
@@ -1098,7 +1303,10 @@ if (options.data.updates && !dismissed)
 // options modal
 var modalLang = 'en'; // TODO: Add localization for options modal.
 var modalButton = $('<div id="lol-forum-enhance-settings" class="userscript-pvpnet-bar"><a href="#lfeOptionsModal" role="button" data-toggle="modal">' + forums.localizations.optionsModalButtonCaption[modalLang] + '</a></div>');
-var modal = $(GM_getResourceText('options-modal-' + modalLang));
+var modal = $(GM_getResourceText('options-modal'));
+
+// TODO: Add localization for options modal.
+
 $('#pvpnet-bar-inner').prepend(modalButton);
 $('#forum_body').append(modal);
 
