@@ -8,15 +8,25 @@
 - ~~show own avatar besides quick edit box~~
 - ~~Client- and serverside caching~~
 - Check compatibility to other/newer regions
+- rework normal edit box
+- add about link
+- add click and search functionality to summoner names
 
 ---
 
 ## Version history:
 
+## 0.5.0
+- **Added** Options Window
+- **Added** Automatic update notifications
+- **Added** further localization
+- **Fixed** Fetching of own summoner name for the new forum version
+- **Changed** main server address. Now its running on piltover-libraries.net
+
 ## 0.4.2
-- **Added** userscript commands to *force an update*, *check for updates* and *clear the local cache*.
-- **Added** localization for userscript commands.
-- **Fixed** removing locally cached summoner-data older than a day.
+- **Added** userscript commands to *force an update*, *check for updates* and *clear the local cache*
+- **Added** localization for userscript commands
+- **Fixed** removing locally cached summoner-data older than a day
 
 ## 0.4.1
 - **Added** new Summoner icons
