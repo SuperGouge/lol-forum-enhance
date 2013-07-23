@@ -832,6 +832,18 @@ function LolForums()
       "pt": "",
       "tr": "",
       "it": ""
+    },
+    optionsModalButtonCaption: { // TODO: Add translations
+      "en": "LFE Options",
+      "de": "",
+      "es": "",
+      "fr": "",
+      "pl": "",
+      "ro": "",
+      "el": "",
+      "pt": "",
+      "tr": "",
+      "it": ""
     }
   };
   
@@ -1055,23 +1067,40 @@ options.loadLocal();
 script.addGlobalStyle(GM_getResourceText('globalcss'));
 script.addGlobalStyle(GM_getResourceText('bootstrapcss'));
 
-// Modal Testing:
+// auto-updates
+var dismissed = script.getCookie('lfe-update-dismissed');
+if (options.data.updates && !dismissed)
+{
+  script.updateNeccessary(function(updateNecc) {
+    if (updateNecc) {
+      $('body').prepend($('\
+        <div id="lfe-update-alert" class="alert container" style="top: 10px; position: relative; z-index: 100; width: 550px;">\
+          <button id="lfe-update-dismiss" type="button" class="close" data-dismiss="alert">&times;</button>\
+          <h5 style="margin: 0;">Updates available.</h5>\
+          <p>There is a newer Version of <strong>LoL Forum Enhance</strong> available. Click here to install the latest updates.</p>\
+          <p style="margin-bottom: 0;"><a id="lfe-update-install" class="btn btn-warning" href="#">Update</a></p>\
+        </div>\
+      '));
+      //$('#lfe-update-dismiss').click();
+      //$('#lfe-update-alert').remove();
+      
+      $('#lfe-update-dismiss').on('click', function () {
+        script.setCookie('lfe-update-dismissed', 'true', 1);
+      });
+      
+      $('#lfe-update-install').on('click', function () {
+        script.forceUpdate();
+      });
+    }
+  });
+}
 
-// Button to trigger modal
-var modalButton = $('<div id="lol-forum-enhance-settings" class="userscript-pvpnet-bar"><a href="#lfeOptionsModal" role="button" data-toggle="modal">LFE Options</a></div>');
-
-// Modal
+// options modal
 var modalLang = 'en'; // TODO: Add localization for options modal.
+var modalButton = $('<div id="lol-forum-enhance-settings" class="userscript-pvpnet-bar"><a href="#lfeOptionsModal" role="button" data-toggle="modal">' + forums.localizations.optionsModalButtonCaption[modalLang] + '</a></div>');
 var modal = $(GM_getResourceText('options-modal-' + modalLang));
-
-// Add Modal
-
-//$('#pvpnet-bar-inner').on('load', function() {
-  $('#pvpnet-bar-inner').prepend(modalButton);
-//});
-//$('#forum_body').on('load', function() {
-  $('#forum_body').append(modal);
-//});
+$('#pvpnet-bar-inner').prepend(modalButton);
+$('#forum_body').append(modal);
 
 // Load options into modal when shown
 $('#lfeOptionsModal').on('shown', function () {
@@ -1104,7 +1133,6 @@ $('#lfe-o-save').click(function() {
   options.data.fek = $('#lfe-o-fek .active').data('value');
   options.data.link = $('#lfe-o-link .active').data('value');
   options.saveLocal();
-  //alert("Saved!");
   $('#lfeOptionsModal').modal('hide');
 });
 
