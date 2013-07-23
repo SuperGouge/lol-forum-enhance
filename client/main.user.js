@@ -1140,16 +1140,17 @@ $('#lfe-o-save').click(function() {
 forums.registerMenuCommands(script);
 
 // create an observer for the #posts div instance
-var observerPostsOld = 0;
-var observerPostsInitialized = false;
+//var observerPostsOld = 0;
+//var observerPostsInitialized = false;
 var observerTarget = document.querySelector('#posts');
 var postsObserver = new MutationObserver(function(mutations) {
   mutations.forEach(function(mutation) {
-    var observerPostsNew = forums.countAllPosts();
-    if ((observerPostsInitialized) && (observerPostsNew != observerPostsOld))
-    {
+    //var observerPostsNew = forums.countAllPosts();
+    //if ((observerPostsInitialized) && (observerPostsNew != observerPostsOld))
+    //{
+      alert(mutation);
       forums.replaceAvatars();
-    }
+    //}
   });
 });
 var observerConfig = { childList: true, subtree: true };
@@ -1168,8 +1169,8 @@ if (forums.server != null)
   forums.replaceAvatars();
 
   // initialize observer counts and mark as ready
-  observerPostsOld = forums.countAllPosts();
-  observerPostsInitialized = true;
+  //observerPostsOld = forums.countAllPosts();
+  //observerPostsInitialized = true;
 
   // start observing #posts
   postsObserver.observe(observerTarget, observerConfig);
