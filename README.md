@@ -49,7 +49,10 @@ Special thanks go to [**SuperGouge**](https://github.com/SuperGouge) for providi
 - Powered by [elophant](http://www.elophant.com/ "LoL Champion and Summoner Stats").
 - This userscript on [userscripts.org](http://userscripts.org/scripts/show/172058 "LoL Forum Enhance for Greasemonkey").
 - This tool in the [german euw forums](http://euw.leagueoflegends.com/board/showthread.php?p=12498364 "Lol Forum Enhance on german League EUW forums").
-
+- We are using these third-party libraries:
+  - [jQuery](https://github.com/jquery/jquery "jQuery on github")
+  - [Twitter Bootstrap](https://github.com/twitter/bootstrap "Bootstrap on github")
+  - [bootstrapx-clickover](https://github.com/lecar-red/bootstrapx-clickover "bootstrapx-clickover on github")
 
 ### Frequently Asked Questions - FAQ
 
