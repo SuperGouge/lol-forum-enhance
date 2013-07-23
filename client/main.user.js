@@ -1268,6 +1268,9 @@ var options = new LfeOptions();
 // load global script options
 options.loadLocal();
 
+// get actual language
+var languageId = script.getCookie("bblanguageid");
+
 // css style changes
 script.addGlobalStyle(GM_getResourceText('globalcss'));
 script.addGlobalStyle(GM_getResourceText('bootstrapcss'));
@@ -1286,8 +1289,6 @@ if (options.data.updates && !dismissed)
           <p style="margin-bottom: 0;"><a id="lfe-update-install" class="btn btn-warning" href="#">Update</a></p>\
         </div>\
       '));
-      //$('#lfe-update-dismiss').click();
-      //$('#lfe-update-alert').remove();
       
       $('#lfe-update-dismiss').on('click', function () {
         script.setCookie('lfe-update-dismissed', 'true', 1);
@@ -1295,14 +1296,16 @@ if (options.data.updates && !dismissed)
       
       $('#lfe-update-install').on('click', function () {
         script.forceUpdate();
+        $('#lfe-update-alert').remove();
       });
     }
   });
 }
 
 // options modal
-var modalLang = 'en'; // TODO: Add localization for options modal.
-var modalButton = $('<div id="lol-forum-enhance-settings" class="userscript-pvpnet-bar"><a href="#lfeOptionsModal" role="button" data-toggle="modal">' + forums.localizations.optionsModalButtonCaption[modalLang] + '</a></div>');
+//var modalLang = 'en'; // TODO: Add localization for options modal.
+//var modalButton = $('<div id="lol-forum-enhance-settings" class="userscript-pvpnet-bar"><a href="#lfeOptionsModal" role="button" data-toggle="modal">' + forums.localizations.optionsModalButtonCaption[modalLang] + '</a></div>');
+var modalButton = $('<div id="lol-forum-enhance-settings" class="userscript-pvpnet-bar"><a href="#lfeOptionsModal" role="button" data-toggle="modal">' + forums.localizations.get(languageId, 'optionsModalButtonCaption') + '</a></div>');
 var modal = $(GM_getResourceText('options-modal'));
 
 // TODO: Add localization for options modal.
@@ -1359,9 +1362,6 @@ var observerConfig = { childList: true, subtree: true };
 if (forums.server != null)
 {
   // server found
-  
-  // get actual language
-  var languageId = script.getCookie("bblanguageid");
   
   // replace own avatar (if name and avatar available)
   forums.replaceOwnAvatar(languageId);
