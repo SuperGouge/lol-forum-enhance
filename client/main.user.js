@@ -1124,6 +1124,43 @@ function LolForums()
     });
   }
 
+  this.replaceNames = function()
+  {
+    var server = that.server;
+    var allNames = $('.forum_post .avatar big');
+    allNames.each(function(i, e) {
+      var bigNameElement = $(e);
+      var name = bigNameElement.html();
+      bigNameElement.html('\
+        <button class="btn btn-link" style="margin: 0px; padding: 0px; font-weight: bold; font-size: 13px; line-height: 16px;">\
+          '+ name + '\
+        </button>\
+      ');
+
+      bigNameElement.clickover({
+        content: '\
+          <div class="btn-group btn-group-vertical">\
+            <button class="btn btn-mini summoner-clickover" style="width: 160px" data-href="http://' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&showposts=1">Posts of this user</button>\
+            <button class="btn btn-mini summoner-clickover" style="width: 160px" data-href="http://' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&starteronly=1&showposts=0">Threads of this user</button>\
+          </div>\
+          <button id="userscript-clickover-close" style="display: none;" data-toggle="button" data-dismiss="clickover">Close</button>\
+        ',
+        animation: true,
+        html: true,
+        placement: 'top',
+        esc_close: 'false',
+        onShown: function() {
+          $('.summoner-clickover').on('click', function() {
+            var link = $(this).attr('data-href');
+            //alert(link);
+            GM_openInTab(link);
+            $('#userscript-clickover-close').click();
+          });
+        }
+      });
+    });
+  }
+  
   this.getOwnName = function()
   {
     /* Old Version:
@@ -1292,39 +1329,6 @@ function TestSuite()
 //$('#post_message_11390315 > p:nth-child(1)').append(tt);
 //$('#tt-test').tooltip();
 
-// Popover testing:
-// var x = $('#post12571431 > table:nth-child(2) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(1) > div:nth-child(1) > div:nth-child(1) > big:nth-child(1)');
-
-// posts of this user
-// http://euw.leagueoflegends.com/board/search.php?do=process&searchuser=ButWhyMe&exactname=1&showposts=1
-
-// threads of this user
-// http://euw.leagueoflegends.com/board/search.php?do=process&searchuser=ButWhyMe&exactname=1&starteronly=1&showposts=0
-
-// var name = x.html();
-/*
-x.html('\
-  <button class="btn btn-link" style="margin: 0px; padding: 0px; font-weight: bold; font-size: 13px; line-height: 16px;">\
-    '+ name + '\
-  </button>\
-');
-*/
-
-/*
-x.popover({
-  trigger: 'click',
-  content: '\
-    <div class="btn-group btn-group-vertical">\
-      <button class="btn" style="width: 200px">posts of this user</button>\
-      <button class="btn" style="width: 200px">threads of this user</button>\
-    </div>\
-  ',
-  animation: false,
-  html: true,
-  placement: 'bottom'
-});
-*/
-
 
 /*******************************
  *    Start of Main Script     *
@@ -1441,6 +1445,9 @@ if (forums.server != null)
   
   // replace own avatar (if name and avatar available)
   forums.replaceOwnAvatar(languageId);
+  
+  // replace Names to provide linking
+  forums.replaceNames();
   
   // replace the summoner images and levels
   forums.replaceAvatars();
