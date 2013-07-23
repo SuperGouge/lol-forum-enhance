@@ -5,7 +5,7 @@
 // @include     *.leagueoflegends.com/board/*
 // @downloadURL https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/main.user.js
 // @updateURL   https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/main.meta.js
-// @version     0.4.3popup
+// @version     0.5.0
 // @run-at      document-end
 // @grant       GM_xmlhttpRequest
 // @grant       GM_getResourceText
@@ -17,13 +17,13 @@
 // @grant       GM_listValues
 // @grant       GM_openInTab
 // @grant       GM_registerMenuCommand
-// @resource    globalcss https://raw.github.com/philippwiddra/lol-forum-enhance/bootstrap-popups/client/global.css
+// @resource    globalcss https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/global.css
 // @require     http://code.jquery.com/jquery-2.0.2.min.js
-// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/bootstrap-popups/client/global.js
-// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/bootstrap-popups/client/bootstrap/js/bootstrap.min.js
-// @resource    bootstrapcss https://raw.github.com/philippwiddra/lol-forum-enhance/bootstrap-popups/client/bootstrap/css/bootstrap.min.css
-// @resource    options-modal https://raw.github.com/philippwiddra/lol-forum-enhance/bootstrap-popups/client/options-modal.html
-// @resource    update-alert https://raw.github.com/philippwiddra/lol-forum-enhance/bootstrap-popups/client/update-alert.html
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/global.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/bootstrap/js/bootstrap.min.js
+// @resource    bootstrapcss https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/bootstrap/css/bootstrap.min.css
+// @resource    options-modal https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/options-modal.html
+// @resource    update-alert https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/update-alert.html
 // @resource    iconUnknown http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/unknown.jpg
 // @resource    icon0 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/0.jpg
 // @resource    icon1 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/1.jpg
@@ -162,13 +162,6 @@
 // @resource    icon568 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/568.jpg
 // @resource    icon569 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/569.jpg
 // ==/UserScript==
-
-// TODO: Change branchname to master on bootstrapcss
-// TODO: Change branchname to master on options-modal
-// TODO: Change branchname to master on bootstrap.min.js
-// TODO: Change branchname to master on global.css
-// TODO: Change branchname to master on global.js
-// TODO: Change branchname to master on update-alert
 
 /*******************************
  *    Definition of Classes    *
@@ -848,7 +841,7 @@ function LolForums()
       "tr": "",
       "it": ""
     },
-    optionsModalTitleCaption: {  // lfe-o-captions-title
+    optionsModalTitleCaption: {  // TODO: Add translations
       "en": "LoL Forum Enhance - Options",
       "de": "",
       "es": "",
@@ -860,7 +853,7 @@ function LolForums()
       "tr": "",
       "it": ""
     },
-    optionsModalUpdatesCaption: { // lfe-o-captions-updates
+    optionsModalUpdatesCaption: { // TODO: Add translations
       "en": "Check for updates automatically:",
       "de": "",
       "es": "",
@@ -872,7 +865,7 @@ function LolForums()
       "tr": "",
       "it": ""
     },
-    optionsModalEnlargeCaption: { // lfe-o-captions-enlarge
+    optionsModalEnlargeCaption: { // TODO: Add translations
       "en": "Enlarge Quick-Edit-Box:",
       "de": "",
       "es": "",
@@ -884,7 +877,7 @@ function LolForums()
       "tr": "",
       "it": ""
     },
-    optionsModalAvatarCaption: { // lfe-o-captions-avatar
+    optionsModalAvatarCaption: { // TODO: Add translations
       "en": "Show own avatar next to Quick-Edit-Box:",
       "de": "",
       "es": "",
@@ -896,7 +889,7 @@ function LolForums()
       "tr": "",
       "it": ""
     },
-    optionsModalWtCaption: { // lfe-o-captions-wt
+    optionsModalWtCaption: { // TODO: Add translations
       "en": "Use Wrenchman's Tools Icons if available:",
       "de": "",
       "es": "",
@@ -908,7 +901,7 @@ function LolForums()
       "tr": "",
       "it": ""
     },
-    optionsModalFekCaption: { // lfe-o-captions-fek
+    optionsModalFekCaption: { // TODO: Add translations
       "en": "User Forum Enhancement Kit's Icons if available:",
       "de": "",
       "es": "",
@@ -920,7 +913,7 @@ function LolForums()
       "tr": "",
       "it": ""
     },
-    optionsModalLinkCaption: { // lfe-o-captions-link
+    optionsModalLinkCaption: { // TODO: Add translations
       "en": "Link usernames with:",
       "de": "",
       "es": "",
@@ -932,7 +925,7 @@ function LolForums()
       "tr": "",
       "it": ""
     },
-    optionsModalAnswersOnCaption: { // lfe-o-captions-answers-on
+    optionsModalAnswersOnCaption: { // TODO: Add translations
       "en": "On",
       "de": "",
       "es": "",
@@ -944,7 +937,7 @@ function LolForums()
       "tr": "",
       "it": ""
     },
-    optionsModalAnswersOffCaption: { // lfe-o-captions-answers-off
+    optionsModalAnswersOffCaption: { // TODO: Add translations
       "en": "Off",
       "de": "",
       "es": "",
@@ -956,7 +949,7 @@ function LolForums()
       "tr": "",
       "it": ""
     },
-    optionsModalAnswersPostsCaption: { // lfe-o-captions-answers-posts
+    optionsModalAnswersPostsCaption: { // TODO: Add translations
       "en": "Posts",
       "de": "",
       "es": "",
@@ -968,7 +961,7 @@ function LolForums()
       "tr": "",
       "it": ""
     },
-    optionsModalAnswersThreadsCaption: { // lfe-o-captions-answers-threads
+    optionsModalAnswersThreadsCaption: { // TODO: Add translations
       "en": "Threads",
       "de": "",
       "es": "",
@@ -980,7 +973,7 @@ function LolForums()
       "tr": "",
       "it": ""
     },
-    optionsModalAnswersSelectionCaption: { // lfe-o-captions-answers-selection
+    optionsModalAnswersSelectionCaption: { // TODO: Add translations
       "en": "Selection",
       "de": "",
       "es": "",
@@ -992,7 +985,7 @@ function LolForums()
       "tr": "",
       "it": ""
     },
-    optionsModalAnswersNoneCaption: { // lfe-o-captions-answers-none
+    optionsModalAnswersNoneCaption: { // TODO: Add translations
       "en": "None",
       "de": "",
       "es": "",
@@ -1004,7 +997,7 @@ function LolForums()
       "tr": "",
       "it": ""
     },
-    optionsModalPresetInfoCaption: { // lfe-o-captions-preset-info
+    optionsModalPresetInfoCaption: { // TODO: Add translations
       "en": "Preset values are presented in this color",
       "de": "",
       "es": "",
@@ -1016,7 +1009,7 @@ function LolForums()
       "tr": "",
       "it": ""
     },
-    optionsModalButtonSaveCaption: { // lfe-o-captions-button-save
+    optionsModalButtonSaveCaption: { // TODO: Add translations
       "en": "Save changes",
       "de": "",
       "es": "",
@@ -1028,7 +1021,7 @@ function LolForums()
       "tr": "",
       "it": ""
     },
-    optionsModalButtonDiscardCaption: { // lfe-o-captions-button-discard
+    optionsModalButtonDiscardCaption: { // TODO: Add translations
       "en": "Discard changes",
       "de": "",
       "es": "",
@@ -1169,7 +1162,7 @@ function LolForums()
     var languageId = script.getCookie('LOLLANG');
   
     // Force update
-    GM_registerMenuCommand(that.localizations.get(languageId, 'forceUpdateCaption'), function() { // TODO: switch to current language
+    GM_registerMenuCommand(that.localizations.get(languageId, 'forceUpdateCaption'), function() {
       userscript.forceUpdate();
     }, 'F');
     
@@ -1291,16 +1284,6 @@ if (options.data.updates && !dismissed)
 {
   script.updateNeccessary(function(updateNecc) {
     if (updateNecc) {
-      /*
-      $('body').prepend($('\
-        <div id="lfe-update-alert" class="alert container" style="top: 10px; position: relative; z-index: 100; width: 550px;">\
-          <button id="lfe-update-dismiss" type="button" class="close" data-dismiss="alert">&times;</button>\
-          <h5 style="margin: 0;">Updates available.</h5>\
-          <p>There is a newer Version of <strong>LoL Forum Enhance</strong> available. Click here to install the latest updates.</p>\
-          <p style="margin-bottom: 0;"><a id="lfe-update-install" class="btn btn-warning" href="#">Update</a></p>\
-        </div>\
-      '));
-      */
       $('body').prepend($(GM_getResourceText('update-alert')));
       // TODO: Add localization for update alert.
       
@@ -1317,8 +1300,6 @@ if (options.data.updates && !dismissed)
 }
 
 // options modal
-//var modalLang = 'en'; // TODO: Add localization for options modal.
-//var modalButton = $('<div id="lol-forum-enhance-settings" class="userscript-pvpnet-bar"><a href="#lfeOptionsModal" role="button" data-toggle="modal">' + forums.localizations.optionsModalButtonCaption[modalLang] + '</a></div>');
 var modalButton = $('<div id="lol-forum-enhance-settings" class="userscript-pvpnet-bar"><a href="#lfeOptionsModal" role="button" data-toggle="modal">' + forums.localizations.get(languageId, 'optionsModalButtonCaption') + '</a></div>');
 var modal = $(GM_getResourceText('options-modal'));
 $('#pvpnet-bar-inner').prepend(modalButton);
