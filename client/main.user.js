@@ -219,7 +219,8 @@ function Summoner()
     revisionDate : null,
     currentDate : null,
     summonerLevel : null,
-    summonerId : null
+    summonerId : null,
+    success : null
   };
   this.toJsonString = function()
   {
@@ -238,16 +239,19 @@ function Level1Cache()
   var cachedSummonerString = "SummonerCache";
   var level2Cache = new Level2Cache();
 
-  this.getSummoner = function(name, server, done)
+  this.getSummoner = function(name, server, found, notFound)
   {
     if (typeof cachedSummoners[name] != "undefined")
     {
-      done(cachedSummoners[name]);
+      found(cachedSummoners[name]);
     }
     else
     {
       // Perform a level2Cache call
-      level2Cache.getSummoner(name, server, function(s) {
+      level2Cache.getSummoner(name, server,
+      function(s) {
+        // summoner found
+        
         // save summoner for this function
         var summoner = s;
         
@@ -255,7 +259,19 @@ function Level1Cache()
         addSummoner(summoner);
         
         // return summoner normally
-        done(summoner);
+        found(summoner);
+      },
+      function(s) {
+        // summoner not found
+        
+        // save summoner for this function
+        var summoner = s;
+        
+        // add summoner to level1Cache
+        addSummoner(summoner);
+        
+        // callback
+        notFound(s);
       });
     }
   }
@@ -323,7 +339,7 @@ function Level2Cache()
 {
   //var getSummonerUrl = "http://passwd.ohost.de/lcapi/getSummoner.php";
   var getSummonerUrl = "http://www.piltover-libraries.net/lol-forum-enhance/getSummoner.php";
-  this.getSummoner = function(name, server, done)
+  this.getSummoner = function(name, server, found, notFound)
   {
     GM_xmlhttpRequest({
       method: "GET",
@@ -331,7 +347,8 @@ function Level2Cache()
       onload: function(response) {
         var s = new Summoner();
         s.fromJsonString(response.responseText);
-        done(s);
+        if (s.data.success) found(s);
+        else notFound(s);
       }
     });
   }
@@ -1084,7 +1101,9 @@ function LolForums()
       var orb = $(e).find('span.left_orb');
       
       // Cache system (the level-1-cache automatically calls the level-2-cache if it doesnt have the result)
-      level1Cache.getSummoner(name, that.server, function(summoner) {
+      level1Cache.getSummoner(name, that.server,
+      function(summoner) {
+        // summoner found
         
         // replace image source
         image.attr('src', GM_getResourceURL("icon" + summoner.data.profileIconId))
@@ -1094,6 +1113,12 @@ function LolForums()
         
         // save whole cache
         level1Cache.saveCache();
+      },
+      function(summoner) {
+        // summoner not found
+        
+        // TODO: Add code to handle not found summoners.
+      
       });
     });
   }
@@ -1143,7 +1168,10 @@ function LolForums()
       $("#userscript-avatar-subtitle").text(subtitle);
       
       // get summoner object
-      level1Cache.getSummoner(name, that.server, function(summoner) {      
+      level1Cache.getSummoner(name, that.server,
+      function(summoner) {
+        // summoner found
+        
         // replace image source
         $("#userscript-avatar-icon").attr('src', GM_getResourceURL("icon" + summoner.data.profileIconId))
         
@@ -1152,6 +1180,11 @@ function LolForums()
         
         // save whole cache
         level1Cache.saveCache();
+      },
+      function(summoner) {
+        // summoner not found
+        
+        // TODO: Add code to handle not found summoners.
       });
     }
   }
