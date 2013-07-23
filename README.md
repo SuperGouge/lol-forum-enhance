@@ -42,7 +42,7 @@ Choose the way you like or which has the most recent version of the script.
 
 ### Special thanks
 
-Special thanks go to @SuperGouge for providing the french translation.
+Special thanks go to [**SuperGouge**](https://github.com/SuperGouge) for providing the french translation.
 
 ### Appendix
 
