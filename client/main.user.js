@@ -21,6 +21,7 @@
 // @require     http://code.jquery.com/jquery-2.0.2.min.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/global.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/bootstrap/js/bootstrap.min.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/bootstrapx-clickover/bootstrapx-clickover.js
 // @resource    bootstrapcss https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/bootstrap/css/bootstrap.min.css
 // @resource    options-modal https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/options-modal.html
 // @resource    update-alert https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/update-alert.html
@@ -243,7 +244,8 @@ function Level1Cache()
   {
     if (typeof cachedSummoners[name] != "undefined")
     {
-      found(cachedSummoners[name]);
+      if (cachedSummoners[name].data.success) found(cachedSummoners[name]);
+      else notFound(cachedSummoners[name]);
     }
     else
     {
@@ -337,7 +339,6 @@ function Level1Cache()
 
 function Level2Cache()
 {
-  //var getSummonerUrl = "http://passwd.ohost.de/lcapi/getSummoner.php";
   var getSummonerUrl = "http://www.piltover-libraries.net/lol-forum-enhance/getSummoner.php";
   this.getSummoner = function(name, server, found, notFound)
   {
@@ -1290,6 +1291,40 @@ function TestSuite()
 //var tt = $('<br><br><a id="tt-test" href="#" data-toggle="tooltip" title="first tooltip">hover over me</a>');
 //$('#post_message_11390315 > p:nth-child(1)').append(tt);
 //$('#tt-test').tooltip();
+
+// Popover testing:
+// var x = $('#post12571431 > table:nth-child(2) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(1) > div:nth-child(1) > div:nth-child(1) > big:nth-child(1)');
+
+// posts of this user
+// http://euw.leagueoflegends.com/board/search.php?do=process&searchuser=ButWhyMe&exactname=1&showposts=1
+
+// threads of this user
+// http://euw.leagueoflegends.com/board/search.php?do=process&searchuser=ButWhyMe&exactname=1&starteronly=1&showposts=0
+
+// var name = x.html();
+/*
+x.html('\
+  <button class="btn btn-link" style="margin: 0px; padding: 0px; font-weight: bold; font-size: 13px; line-height: 16px;">\
+    '+ name + '\
+  </button>\
+');
+*/
+
+/*
+x.popover({
+  trigger: 'click',
+  content: '\
+    <div class="btn-group btn-group-vertical">\
+      <button class="btn" style="width: 200px">posts of this user</button>\
+      <button class="btn" style="width: 200px">threads of this user</button>\
+    </div>\
+  ',
+  animation: false,
+  html: true,
+  placement: 'bottom'
+});
+*/
+
 
 /*******************************
  *    Start of Main Script     *
