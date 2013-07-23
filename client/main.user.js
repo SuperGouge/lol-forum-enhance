@@ -181,7 +181,8 @@ function LfeOptions()
     avatar: true,
     wt: false,
     fek: false,
-    link: 'selection'
+    link: 'selection',
+    charset: false
   }
   
   this.loadLocal = function()
@@ -885,6 +886,18 @@ function LolForums()
       "tr": "",
       "it": ""
     },
+    optionsModalCharsetCaption: { // TODO: Add translations
+      "en": "Rework charset on displayed forum usernames:",
+      "de": "",
+      "es": "",
+      "fr": "",
+      "pl": "",
+      "ro": "",
+      "el": "",
+      "pt": "",
+      "tr": "",
+      "it": ""
+    }
     optionsModalEnlargeCaption: { // TODO: Add translations
       "en": "Enlarge Quick-Edit-Box:",
       "de": "",
@@ -1126,13 +1139,22 @@ function LolForums()
     });
   }
 
-  this.replaceNames = function()
+  this.replaceNames = function(options)
   {
     var server = that.server;
     var allNames = $('.forum_post .avatar big');
     allNames.each(function(i, e) {
       var bigNameElement = $(e);
       var name = bigNameElement.html();
+      
+      // charset encoding bugfixes for league forums
+      if (options.data.charset)
+      {
+        alert(name);
+        var name = _from_utf8(name);
+        alert(name);
+      }
+      
       bigNameElement.html('\
         <button class="btn btn-link" style="margin: 0px; padding: 0px; font-weight: bold; font-size: 13px; line-height: 16px;">\
           '+ name + '\
@@ -1380,6 +1402,7 @@ $('#pvpnet-bar-inner').prepend(modalButton);
 $('#forum_body').append(modal);
 $('#lfe-o-captions-title').text(forums.localizations.get(languageId, 'optionsModalTitleCaption'));
 $('#lfe-o-captions-updates').text(forums.localizations.get(languageId, 'optionsModalUpdatesCaption'));
+$('#lfe-o-captions-charset').text(forums.localizations.get(languageId, 'optionsModalCharsetCaption'));
 $('#lfe-o-captions-enlarge').text(forums.localizations.get(languageId, 'optionsModalEnlargeCaption'));
 $('#lfe-o-captions-avatar').text(forums.localizations.get(languageId, 'optionsModalAvatarCaption'));
 $('#lfe-o-captions-wt').text(forums.localizations.get(languageId, 'optionsModalWtCaption'));
@@ -1402,6 +1425,9 @@ $('#lfeOptionsModal').on('shown', function () {
   if (options.data.updates) $('#lfe-o-updates-on').addClass('active');
   else $('#lfe-o-updates-off').addClass('active');
 
+  if (options.data.charset) $('#lfe-o-charset-on').addClass('active');
+  else $('#lfe-o-charset-off').addClass('active');
+  
   if (options.data.enlarge) $('#lfe-o-enlarge-on').addClass('active');
   else $('#lfe-o-enlarge-off').addClass('active');
 
@@ -1420,6 +1446,7 @@ $('#lfeOptionsModal').on('shown', function () {
 // Register save-options function
 $('#lfe-o-save').click(function() {
   options.data.updates = $('#lfe-o-updates .active').data('value');
+  options.data.charset = $('#lfe-o-charset .active').data('value');
   options.data.enlarge = $('#lfe-o-enlarge .active').data('value');
   options.data.avatar = $('#lfe-o-avatar .active').data('value');
   options.data.wt = $('#lfe-o-wt .active').data('value');
@@ -1449,7 +1476,7 @@ if (forums.server != null)
   forums.replaceOwnAvatar(languageId);
   
   // replace Names to provide linking
-  forums.replaceNames();
+  forums.replaceNames(options);
   
   // replace the summoner images and levels
   forums.replaceAvatars();
