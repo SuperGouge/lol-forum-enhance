@@ -23,6 +23,7 @@
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/bootstrap-popups/client/bootstrap/js/bootstrap.min.js
 // @resource    bootstrapcss https://raw.github.com/philippwiddra/lol-forum-enhance/bootstrap-popups/client/bootstrap/css/bootstrap.min.css
 // @resource    options-modal https://raw.github.com/philippwiddra/lol-forum-enhance/bootstrap-popups/client/options-modal.html
+// @resource    update-alert https://raw.github.com/philippwiddra/lol-forum-enhance/bootstrap-popups/client/update-alert.html
 // @resource    iconUnknown http://passwd.ohost.de/lcapi/SummonerIcons/unknown.jpg
 // @resource    icon0 http://passwd.ohost.de/lcapi/SummonerIcons/0.jpg
 // @resource    icon1 http://passwd.ohost.de/lcapi/SummonerIcons/1.jpg
@@ -167,6 +168,7 @@
 // TODO: Change branchname to master on bootstrap.min.js
 // TODO: Change branchname to master on global.css
 // TODO: Change branchname to master on global.js
+// TODO: Change branchname to master on update-alert
 
 /*******************************
  *    Definition of Classes    *
@@ -1288,6 +1290,7 @@ if (options.data.updates && !dismissed)
 {
   script.updateNeccessary(function(updateNecc) {
     if (updateNecc) {
+      /*
       $('body').prepend($('\
         <div id="lfe-update-alert" class="alert container" style="top: 10px; position: relative; z-index: 100; width: 550px;">\
           <button id="lfe-update-dismiss" type="button" class="close" data-dismiss="alert">&times;</button>\
@@ -1296,6 +1299,9 @@ if (options.data.updates && !dismissed)
           <p style="margin-bottom: 0;"><a id="lfe-update-install" class="btn btn-warning" href="#">Update</a></p>\
         </div>\
       '));
+      */
+      $('body').prepend($(GM_getResourceText('update-alert')));
+      // TODO: Add localization for update alert.      
       
       $('#lfe-update-dismiss').on('click', function () {
         script.setCookie('lfe-update-dismissed', 'true', 1);
@@ -1314,11 +1320,24 @@ if (options.data.updates && !dismissed)
 //var modalButton = $('<div id="lol-forum-enhance-settings" class="userscript-pvpnet-bar"><a href="#lfeOptionsModal" role="button" data-toggle="modal">' + forums.localizations.optionsModalButtonCaption[modalLang] + '</a></div>');
 var modalButton = $('<div id="lol-forum-enhance-settings" class="userscript-pvpnet-bar"><a href="#lfeOptionsModal" role="button" data-toggle="modal">' + forums.localizations.get(languageId, 'optionsModalButtonCaption') + '</a></div>');
 var modal = $(GM_getResourceText('options-modal'));
-
-// TODO: Add localization for options modal.
-
 $('#pvpnet-bar-inner').prepend(modalButton);
 $('#forum_body').append(modal);
+$('#lfe-o-captions-title').text(forums.localizations.get(languageId, 'optionsModalTitleCaption'));
+$('#lfe-o-captions-updates').text(forums.localizations.get(languageId, 'optionsModalUpdatesCaption'));
+$('#lfe-o-captions-enlarge').text(forums.localizations.get(languageId, 'optionsModalEnlargeCaption'));
+$('#lfe-o-captions-avatar').text(forums.localizations.get(languageId, 'optionsModalAvatarCaption'));
+$('#lfe-o-captions-wt').text(forums.localizations.get(languageId, 'optionsModalWtCaption'));
+$('#lfe-o-captions-fek').text(forums.localizations.get(languageId, 'optionsModalFekCaption'));
+$('#lfe-o-captions-link').text(forums.localizations.get(languageId, 'optionsModalLinkCaption'));
+$('#lfe-o-captions-answers-on').text(forums.localizations.get(languageId, 'optionsModalAnswersOnCaption'));
+$('#lfe-o-captions-answers-off').text(forums.localizations.get(languageId, 'optionsModalAnswersOffCaption'));
+$('#lfe-o-captions-answers-posts').text(forums.localizations.get(languageId, 'optionsModalAnswersPostsCaption'));
+$('#lfe-o-captions-answers-threads').text(forums.localizations.get(languageId, 'optionsModalAnswersThreadsCaption'));
+$('#lfe-o-captions-answers-selection').text(forums.localizations.get(languageId, 'optionsModalAnswersSelectionCaption'));
+$('#lfe-o-captions-answers-none').text(forums.localizations.get(languageId, 'optionsModalAnswersNoneCaption'));
+$('#lfe-o-captions-preset-info').text(forums.localizations.get(languageId, 'optionsModalPresetInfoCaption'));
+$('#lfe-o-captions-button-save').text(forums.localizations.get(languageId, 'optionsModalButtonSaveCaption'));
+$('#lfe-o-captions-button-discard').text(forums.localizations.get(languageId, 'optionsModalButtonDiscardCaption'));
 
 // Load options into modal when shown
 $('#lfeOptionsModal').on('shown', function () {

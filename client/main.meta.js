@@ -22,7 +22,8 @@
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/bootstrap-popups/client/global.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/bootstrap-popups/client/bootstrap/js/bootstrap.min.js
 // @resource    bootstrapcss https://raw.github.com/philippwiddra/lol-forum-enhance/bootstrap-popups/client/bootstrap/css/bootstrap.min.css
-// @resource    options-modal-en https://raw.github.com/philippwiddra/lol-forum-enhance/bootstrap-popups/client/options-modal-en.html
+// @resource    options-modal https://raw.github.com/philippwiddra/lol-forum-enhance/bootstrap-popups/client/options-modal.html
+// @resource    update-alert https://raw.github.com/philippwiddra/lol-forum-enhance/bootstrap-popups/client/update-alert.html
 // @resource    iconUnknown http://passwd.ohost.de/lcapi/SummonerIcons/unknown.jpg
 // @resource    icon0 http://passwd.ohost.de/lcapi/SummonerIcons/0.jpg
 // @resource    icon1 http://passwd.ohost.de/lcapi/SummonerIcons/1.jpg
