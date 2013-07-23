@@ -40,6 +40,10 @@ Choose the way you like or which has the most recent version of the script.
 - **fast forward:** [Click this to start installation.](https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/main.user.js "Install LoL Forum Enhance via github")
 
 
+### Special thanks
+
+Special thanks go to [**SuperGouge**](https://github.com/SuperGouge) for providing the french translation.
+
 ### Appendix
 
 - Powered by [elophant](http://www.elophant.com/ "LoL Champion and Summoner Stats").

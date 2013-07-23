@@ -5,6 +5,14 @@
 .userscript-textarea {
   resize: vertical;
   min-height: 80px;
+  
+  border-color: rgba(82, 168, 236, 0.8);
+  outline: 0px none;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px rgba(82, 168, 236, 0.6);
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgb(204, 204, 204);
+  transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
+  border-radius: 4px 4px 4px 4px;
 }
 
 .userscript-clear {
@@ -82,4 +90,21 @@
   width: 20px;
   bottom: 17px;
   right: 4px;
+}
+
+.userscript-pvpnet-bar a {
+  color: rgb(0, 150, 255);
+  background: url("https://s3-us-west-2.amazonaws.com/sandworm/images/pvpnet-sprite-v2.png") repeat-x scroll 0px -42px transparent;
+  padding: 0px 10px;
+  line-height: 31px;
+  height: 31px;
+  text-transform: uppercase;
+  display: inline-block;
+  text-decoration: none;
+  border-left: 1px solid rgb(43, 43, 43);
+  border-right: 1px solid rgba(35, 35, 35, 0.7);
+}
+
+.userscript-pvpnet-bar {
+  float: right;
 }

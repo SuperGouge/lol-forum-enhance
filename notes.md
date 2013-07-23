@@ -1,5 +1,53 @@
 # Notes
 
+## Server Errors encoded as `JSON`
+
+- `Elophant Error: Summoner ... was not found.`
+- `Elophant Error: The global rate limit has been exceeded.`
+- `Elophant Error: `
+- `Elophant Error: No active connection found for the given region.`
+- `Elophant Error: Unknown AMF type '67'.`
+- `Elophant Error: No key given! Please sign up at elophant.com/league-of-legends/api.`
+
+**PHP Error implementation:**
+
+``` php
+$json_object = json_decode($json_response);
+if ($json_object->success) {
+  $x = $json_object->data; // summoner-data
+  // ...
+} else {
+  $e = $json_object->error; // error-message
+  // ...
+}
+```
+
+**Successful answer:**
+
+``` javascript
+{
+    "data": {
+        "internalName": "butwhyme",
+        "name": "ButWhyMe",
+        "acctId": 24911708,
+        "profileIconId": 539,
+        "revisionDate": "\/Date(1374434957833)\/",
+        "summonerLevel": 30,
+        "summonerId": 21405713
+    },
+    "success": true
+}
+```
+
+**Unsuccessful answer:**
+
+``` javascript
+{
+    "success": false,
+    "error": "Summoner ... was not found."
+}
+```
+
 ## Enhances search usages
 
 **Show user posts:** `http://euw.leagueoflegends.com/board/search.php?do=process&searchuser=ButWhyMe&exactname=1&showposts=1`

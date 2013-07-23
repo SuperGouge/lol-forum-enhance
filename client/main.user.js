@@ -5,7 +5,7 @@
 // @include     *.leagueoflegends.com/board/*
 // @downloadURL https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/main.user.js
 // @updateURL   https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/main.meta.js
-// @version     0.4.2
+// @version     0.5.0
 // @run-at      document-end
 // @grant       GM_xmlhttpRequest
 // @grant       GM_getResourceText
@@ -20,149 +20,193 @@
 // @resource    globalcss https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/global.css
 // @require     http://code.jquery.com/jquery-2.0.2.min.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/global.js
-// @resource    iconUnknown http://passwd.ohost.de/lcapi/SummonerIcons/unknown.jpg
-// @resource    icon0 http://passwd.ohost.de/lcapi/SummonerIcons/0.jpg
-// @resource    icon1 http://passwd.ohost.de/lcapi/SummonerIcons/1.jpg
-// @resource    icon2 http://passwd.ohost.de/lcapi/SummonerIcons/2.jpg
-// @resource    icon3 http://passwd.ohost.de/lcapi/SummonerIcons/3.jpg
-// @resource    icon4 http://passwd.ohost.de/lcapi/SummonerIcons/4.jpg
-// @resource    icon5 http://passwd.ohost.de/lcapi/SummonerIcons/5.jpg
-// @resource    icon6 http://passwd.ohost.de/lcapi/SummonerIcons/6.jpg
-// @resource    icon7 http://passwd.ohost.de/lcapi/SummonerIcons/7.jpg
-// @resource    icon8 http://passwd.ohost.de/lcapi/SummonerIcons/8.jpg
-// @resource    icon9 http://passwd.ohost.de/lcapi/SummonerIcons/9.jpg
-// @resource    icon10 http://passwd.ohost.de/lcapi/SummonerIcons/10.jpg
-// @resource    icon11 http://passwd.ohost.de/lcapi/SummonerIcons/11.jpg
-// @resource    icon12 http://passwd.ohost.de/lcapi/SummonerIcons/12.jpg
-// @resource    icon13 http://passwd.ohost.de/lcapi/SummonerIcons/13.jpg
-// @resource    icon14 http://passwd.ohost.de/lcapi/SummonerIcons/14.jpg
-// @resource    icon15 http://passwd.ohost.de/lcapi/SummonerIcons/15.jpg
-// @resource    icon16 http://passwd.ohost.de/lcapi/SummonerIcons/16.jpg
-// @resource    icon17 http://passwd.ohost.de/lcapi/SummonerIcons/17.jpg
-// @resource    icon18 http://passwd.ohost.de/lcapi/SummonerIcons/18.jpg
-// @resource    icon19 http://passwd.ohost.de/lcapi/SummonerIcons/19.jpg
-// @resource    icon20 http://passwd.ohost.de/lcapi/SummonerIcons/20.jpg
-// @resource    icon21 http://passwd.ohost.de/lcapi/SummonerIcons/21.jpg
-// @resource    icon22 http://passwd.ohost.de/lcapi/SummonerIcons/22.jpg
-// @resource    icon23 http://passwd.ohost.de/lcapi/SummonerIcons/23.jpg
-// @resource    icon24 http://passwd.ohost.de/lcapi/SummonerIcons/24.jpg
-// @resource    icon25 http://passwd.ohost.de/lcapi/SummonerIcons/25.jpg
-// @resource    icon26 http://passwd.ohost.de/lcapi/SummonerIcons/26.jpg
-// @resource    icon27 http://passwd.ohost.de/lcapi/SummonerIcons/27.jpg
-// @resource    icon28 http://passwd.ohost.de/lcapi/SummonerIcons/28.jpg
-// @resource    icon29 http://passwd.ohost.de/lcapi/SummonerIcons/29.jpg
-// @resource    icon30 http://passwd.ohost.de/lcapi/SummonerIcons/30.jpg
-// @resource    icon31 http://passwd.ohost.de/lcapi/SummonerIcons/31.jpg
-// @resource    icon32 http://passwd.ohost.de/lcapi/SummonerIcons/32.jpg
-// @resource    icon33 http://passwd.ohost.de/lcapi/SummonerIcons/33.jpg
-// @resource    icon34 http://passwd.ohost.de/lcapi/SummonerIcons/34.jpg
-// @resource    icon35 http://passwd.ohost.de/lcapi/SummonerIcons/35.jpg
-// @resource    icon36 http://passwd.ohost.de/lcapi/SummonerIcons/36.jpg
-// @resource    icon37 http://passwd.ohost.de/lcapi/SummonerIcons/37.jpg
-// @resource    icon38 http://passwd.ohost.de/lcapi/SummonerIcons/38.jpg
-// @resource    icon39 http://passwd.ohost.de/lcapi/SummonerIcons/39.jpg
-// @resource    icon40 http://passwd.ohost.de/lcapi/SummonerIcons/40.jpg
-// @resource    icon41 http://passwd.ohost.de/lcapi/SummonerIcons/41.jpg
-// @resource    icon42 http://passwd.ohost.de/lcapi/SummonerIcons/42.jpg
-// @resource    icon43 http://passwd.ohost.de/lcapi/SummonerIcons/43.jpg
-// @resource    icon44 http://passwd.ohost.de/lcapi/SummonerIcons/44.jpg
-// @resource    icon45 http://passwd.ohost.de/lcapi/SummonerIcons/45.jpg
-// @resource    icon46 http://passwd.ohost.de/lcapi/SummonerIcons/46.jpg
-// @resource    icon47 http://passwd.ohost.de/lcapi/SummonerIcons/47.jpg
-// @resource    icon48 http://passwd.ohost.de/lcapi/SummonerIcons/48.jpg
-// @resource    icon49 http://passwd.ohost.de/lcapi/SummonerIcons/49.jpg
-// @resource    icon50 http://passwd.ohost.de/lcapi/SummonerIcons/50.jpg
-// @resource    icon51 http://passwd.ohost.de/lcapi/SummonerIcons/51.jpg
-// @resource    icon52 http://passwd.ohost.de/lcapi/SummonerIcons/52.jpg
-// @resource    icon53 http://passwd.ohost.de/lcapi/SummonerIcons/53.jpg
-// @resource    icon54 http://passwd.ohost.de/lcapi/SummonerIcons/54.jpg
-// @resource    icon55 http://passwd.ohost.de/lcapi/SummonerIcons/55.jpg
-// @resource    icon56 http://passwd.ohost.de/lcapi/SummonerIcons/56.jpg
-// @resource    icon57 http://passwd.ohost.de/lcapi/SummonerIcons/57.jpg
-// @resource    icon58 http://passwd.ohost.de/lcapi/SummonerIcons/58.jpg
-// @resource    icon59 http://passwd.ohost.de/lcapi/SummonerIcons/59.jpg
-// @resource    icon60 http://passwd.ohost.de/lcapi/SummonerIcons/60.jpg
-// @resource    icon61 http://passwd.ohost.de/lcapi/SummonerIcons/61.jpg
-// @resource    icon62 http://passwd.ohost.de/lcapi/SummonerIcons/62.jpg
-// @resource    icon63 http://passwd.ohost.de/lcapi/SummonerIcons/63.jpg
-// @resource    icon64 http://passwd.ohost.de/lcapi/SummonerIcons/64.jpg
-// @resource    icon65 http://passwd.ohost.de/lcapi/SummonerIcons/65.jpg
-// @resource    icon66 http://passwd.ohost.de/lcapi/SummonerIcons/66.jpg
-// @resource    icon501 http://passwd.ohost.de/lcapi/SummonerIcons/501.jpg
-// @resource    icon502 http://passwd.ohost.de/lcapi/SummonerIcons/502.jpg
-// @resource    icon503 http://passwd.ohost.de/lcapi/SummonerIcons/503.jpg
-// @resource    icon504 http://passwd.ohost.de/lcapi/SummonerIcons/504.jpg
-// @resource    icon505 http://passwd.ohost.de/lcapi/SummonerIcons/505.jpg
-// @resource    icon506 http://passwd.ohost.de/lcapi/SummonerIcons/506.jpg
-// @resource    icon507 http://passwd.ohost.de/lcapi/SummonerIcons/507.jpg
-// @resource    icon508 http://passwd.ohost.de/lcapi/SummonerIcons/508.jpg
-// @resource    icon509 http://passwd.ohost.de/lcapi/SummonerIcons/509.jpg
-// @resource    icon510 http://passwd.ohost.de/lcapi/SummonerIcons/510.jpg
-// @resource    icon511 http://passwd.ohost.de/lcapi/SummonerIcons/511.jpg
-// @resource    icon512 http://passwd.ohost.de/lcapi/SummonerIcons/512.jpg
-// @resource    icon513 http://passwd.ohost.de/lcapi/SummonerIcons/513.jpg
-// @resource    icon514 http://passwd.ohost.de/lcapi/SummonerIcons/514.jpg
-// @resource    icon515 http://passwd.ohost.de/lcapi/SummonerIcons/515.jpg
-// @resource    icon516 http://passwd.ohost.de/lcapi/SummonerIcons/516.jpg
-// @resource    icon517 http://passwd.ohost.de/lcapi/SummonerIcons/517.jpg
-// @resource    icon518 http://passwd.ohost.de/lcapi/SummonerIcons/518.jpg
-// @resource    icon519 http://passwd.ohost.de/lcapi/SummonerIcons/519.jpg
-// @resource    icon520 http://passwd.ohost.de/lcapi/SummonerIcons/520.jpg
-// @resource    icon521 http://passwd.ohost.de/lcapi/SummonerIcons/521.jpg
-// @resource    icon522 http://passwd.ohost.de/lcapi/SummonerIcons/522.jpg
-// @resource    icon523 http://passwd.ohost.de/lcapi/SummonerIcons/523.jpg
-// @resource    icon524 http://passwd.ohost.de/lcapi/SummonerIcons/524.jpg
-// @resource    icon525 http://passwd.ohost.de/lcapi/SummonerIcons/525.jpg
-// @resource    icon526 http://passwd.ohost.de/lcapi/SummonerIcons/526.jpg
-// @resource    icon527 http://passwd.ohost.de/lcapi/SummonerIcons/527.jpg
-// @resource    icon528 http://passwd.ohost.de/lcapi/SummonerIcons/528.jpg
-// @resource    icon529 http://passwd.ohost.de/lcapi/SummonerIcons/529.jpg
-// @resource    icon530 http://passwd.ohost.de/lcapi/SummonerIcons/530.jpg
-// @resource    icon531 http://passwd.ohost.de/lcapi/SummonerIcons/531.jpg
-// @resource    icon532 http://passwd.ohost.de/lcapi/SummonerIcons/532.jpg
-// @resource    icon533 http://passwd.ohost.de/lcapi/SummonerIcons/533.jpg
-// @resource    icon534 http://passwd.ohost.de/lcapi/SummonerIcons/534.jpg
-// @resource    icon535 http://passwd.ohost.de/lcapi/SummonerIcons/535.jpg
-// @resource    icon536 http://passwd.ohost.de/lcapi/SummonerIcons/536.jpg
-// @resource    icon537 http://passwd.ohost.de/lcapi/SummonerIcons/537.jpg
-// @resource    icon538 http://passwd.ohost.de/lcapi/SummonerIcons/538.jpg
-// @resource    icon539 http://passwd.ohost.de/lcapi/SummonerIcons/539.jpg
-// @resource    icon540 http://passwd.ohost.de/lcapi/SummonerIcons/540.jpg
-// @resource    icon541 http://passwd.ohost.de/lcapi/SummonerIcons/541.jpg
-// @resource    icon542 http://passwd.ohost.de/lcapi/SummonerIcons/542.jpg
-// @resource    icon543 http://passwd.ohost.de/lcapi/SummonerIcons/543.jpg
-// @resource    icon544 http://passwd.ohost.de/lcapi/SummonerIcons/544.jpg
-// @resource    icon545 http://passwd.ohost.de/lcapi/SummonerIcons/545.jpg
-// @resource    icon546 http://passwd.ohost.de/lcapi/SummonerIcons/546.jpg
-// @resource    icon547 http://passwd.ohost.de/lcapi/SummonerIcons/547.jpg
-// @resource    icon548 http://passwd.ohost.de/lcapi/SummonerIcons/548.jpg
-// @resource    icon549 http://passwd.ohost.de/lcapi/SummonerIcons/549.jpg
-// @resource    icon550 http://passwd.ohost.de/lcapi/SummonerIcons/550.jpg
-// @resource    icon551 http://passwd.ohost.de/lcapi/SummonerIcons/551.jpg
-// @resource    icon552 http://passwd.ohost.de/lcapi/SummonerIcons/552.jpg
-// @resource    icon553 http://passwd.ohost.de/lcapi/SummonerIcons/553.jpg
-// @resource    icon554 http://passwd.ohost.de/lcapi/SummonerIcons/554.jpg
-// @resource    icon555 http://passwd.ohost.de/lcapi/SummonerIcons/555.jpg
-// @resource    icon556 http://passwd.ohost.de/lcapi/SummonerIcons/556.jpg
-// @resource    icon557 http://passwd.ohost.de/lcapi/SummonerIcons/557.jpg
-// @resource    icon558 http://passwd.ohost.de/lcapi/SummonerIcons/558.jpg
-// @resource    icon559 http://passwd.ohost.de/lcapi/SummonerIcons/559.jpg
-// @resource    icon560 http://passwd.ohost.de/lcapi/SummonerIcons/560.jpg
-// @resource    icon561 http://passwd.ohost.de/lcapi/SummonerIcons/561.jpg
-// @resource    icon562 http://passwd.ohost.de/lcapi/SummonerIcons/562.jpg
-// @resource    icon563 http://passwd.ohost.de/lcapi/SummonerIcons/563.jpg
-// @resource    icon564 http://passwd.ohost.de/lcapi/SummonerIcons/564.jpg
-// @resource    icon565 http://passwd.ohost.de/lcapi/SummonerIcons/565.jpg
-// @resource    icon566 http://passwd.ohost.de/lcapi/SummonerIcons/566.jpg
-// @resource    icon567 http://passwd.ohost.de/lcapi/SummonerIcons/567.jpg
-// @resource    icon568 http://passwd.ohost.de/lcapi/SummonerIcons/568.jpg
-// @resource    icon569 http://passwd.ohost.de/lcapi/SummonerIcons/569.jpg
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/bootstrap/js/bootstrap.min.js
+// @resource    bootstrapcss https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/bootstrap/css/bootstrap.min.css
+// @resource    options-modal https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/options-modal.html
+// @resource    update-alert https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/update-alert.html
+// @resource    iconUnknown http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/unknown.jpg
+// @resource    icon0 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/0.jpg
+// @resource    icon1 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/1.jpg
+// @resource    icon2 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/2.jpg
+// @resource    icon3 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/3.jpg
+// @resource    icon4 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/4.jpg
+// @resource    icon5 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/5.jpg
+// @resource    icon6 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/6.jpg
+// @resource    icon7 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/7.jpg
+// @resource    icon8 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/8.jpg
+// @resource    icon9 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/9.jpg
+// @resource    icon10 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/10.jpg
+// @resource    icon11 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/11.jpg
+// @resource    icon12 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/12.jpg
+// @resource    icon13 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/13.jpg
+// @resource    icon14 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/14.jpg
+// @resource    icon15 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/15.jpg
+// @resource    icon16 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/16.jpg
+// @resource    icon17 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/17.jpg
+// @resource    icon18 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/18.jpg
+// @resource    icon19 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/19.jpg
+// @resource    icon20 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/20.jpg
+// @resource    icon21 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/21.jpg
+// @resource    icon22 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/22.jpg
+// @resource    icon23 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/23.jpg
+// @resource    icon24 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/24.jpg
+// @resource    icon25 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/25.jpg
+// @resource    icon26 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/26.jpg
+// @resource    icon27 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/27.jpg
+// @resource    icon28 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/28.jpg
+// @resource    icon29 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/29.jpg
+// @resource    icon30 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/30.jpg
+// @resource    icon31 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/31.jpg
+// @resource    icon32 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/32.jpg
+// @resource    icon33 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/33.jpg
+// @resource    icon34 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/34.jpg
+// @resource    icon35 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/35.jpg
+// @resource    icon36 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/36.jpg
+// @resource    icon37 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/37.jpg
+// @resource    icon38 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/38.jpg
+// @resource    icon39 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/39.jpg
+// @resource    icon40 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/40.jpg
+// @resource    icon41 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/41.jpg
+// @resource    icon42 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/42.jpg
+// @resource    icon43 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/43.jpg
+// @resource    icon44 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/44.jpg
+// @resource    icon45 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/45.jpg
+// @resource    icon46 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/46.jpg
+// @resource    icon47 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/47.jpg
+// @resource    icon48 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/48.jpg
+// @resource    icon49 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/49.jpg
+// @resource    icon50 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/50.jpg
+// @resource    icon51 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/51.jpg
+// @resource    icon52 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/52.jpg
+// @resource    icon53 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/53.jpg
+// @resource    icon54 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/54.jpg
+// @resource    icon55 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/55.jpg
+// @resource    icon56 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/56.jpg
+// @resource    icon57 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/57.jpg
+// @resource    icon58 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/58.jpg
+// @resource    icon59 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/59.jpg
+// @resource    icon60 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/60.jpg
+// @resource    icon61 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/61.jpg
+// @resource    icon62 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/62.jpg
+// @resource    icon63 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/63.jpg
+// @resource    icon64 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/64.jpg
+// @resource    icon65 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/65.jpg
+// @resource    icon66 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/66.jpg
+// @resource    icon501 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/501.jpg
+// @resource    icon502 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/502.jpg
+// @resource    icon503 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/503.jpg
+// @resource    icon504 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/504.jpg
+// @resource    icon505 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/505.jpg
+// @resource    icon506 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/506.jpg
+// @resource    icon507 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/507.jpg
+// @resource    icon508 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/508.jpg
+// @resource    icon509 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/509.jpg
+// @resource    icon510 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/510.jpg
+// @resource    icon511 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/511.jpg
+// @resource    icon512 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/512.jpg
+// @resource    icon513 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/513.jpg
+// @resource    icon514 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/514.jpg
+// @resource    icon515 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/515.jpg
+// @resource    icon516 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/516.jpg
+// @resource    icon517 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/517.jpg
+// @resource    icon518 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/518.jpg
+// @resource    icon519 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/519.jpg
+// @resource    icon520 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/520.jpg
+// @resource    icon521 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/521.jpg
+// @resource    icon522 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/522.jpg
+// @resource    icon523 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/523.jpg
+// @resource    icon524 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/524.jpg
+// @resource    icon525 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/525.jpg
+// @resource    icon526 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/526.jpg
+// @resource    icon527 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/527.jpg
+// @resource    icon528 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/528.jpg
+// @resource    icon529 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/529.jpg
+// @resource    icon530 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/530.jpg
+// @resource    icon531 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/531.jpg
+// @resource    icon532 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/532.jpg
+// @resource    icon533 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/533.jpg
+// @resource    icon534 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/534.jpg
+// @resource    icon535 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/535.jpg
+// @resource    icon536 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/536.jpg
+// @resource    icon537 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/537.jpg
+// @resource    icon538 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/538.jpg
+// @resource    icon539 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/539.jpg
+// @resource    icon540 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/540.jpg
+// @resource    icon541 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/541.jpg
+// @resource    icon542 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/542.jpg
+// @resource    icon543 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/543.jpg
+// @resource    icon544 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/544.jpg
+// @resource    icon545 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/545.jpg
+// @resource    icon546 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/546.jpg
+// @resource    icon547 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/547.jpg
+// @resource    icon548 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/548.jpg
+// @resource    icon549 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/549.jpg
+// @resource    icon550 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/550.jpg
+// @resource    icon551 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/551.jpg
+// @resource    icon552 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/552.jpg
+// @resource    icon553 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/553.jpg
+// @resource    icon554 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/554.jpg
+// @resource    icon555 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/555.jpg
+// @resource    icon556 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/556.jpg
+// @resource    icon557 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/557.jpg
+// @resource    icon558 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/558.jpg
+// @resource    icon559 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/559.jpg
+// @resource    icon560 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/560.jpg
+// @resource    icon561 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/561.jpg
+// @resource    icon562 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/562.jpg
+// @resource    icon563 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/563.jpg
+// @resource    icon564 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/564.jpg
+// @resource    icon565 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/565.jpg
+// @resource    icon566 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/566.jpg
+// @resource    icon567 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/567.jpg
+// @resource    icon568 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/568.jpg
+// @resource    icon569 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/569.jpg
 // ==/UserScript==
 
 /*******************************
  *    Definition of Classes    *
  *******************************/
 
+function LfeOptions()
+{
+  var that = this;
+  var lfeOptionsString = 'LFEOptions';
+  
+  this.data = {
+    updates: true,
+    enlarge: true,
+    avatar: true,
+    wt: false,
+    fek: false,
+    link: 'selection'
+  }
+  
+  this.loadLocal = function()
+  {
+    try
+    {
+      var data = GM_getValue(lfeOptionsString);
+      if (data !== undefined) that.data = JSON.parse(data);
+    }
+    catch (e)
+    {
+      if (e instanceof SyntaxError)
+      {
+        // error in JSON.parse (input may be not valid JSON)
+        cachedSummoners = {};
+      }
+      else
+      {
+        throw e;
+      }
+    }
+  }
+  this.saveLocal = function()
+  {
+    GM_setValue(lfeOptionsString, JSON.stringify(that.data));
+  }
+}
+ 
 function Summoner()
 {
   var that = this;
@@ -277,7 +321,8 @@ function Level1Cache()
 
 function Level2Cache()
 {
-  var getSummonerUrl = "http://passwd.ohost.de/lcapi/getSummoner.php";
+  //var getSummonerUrl = "http://passwd.ohost.de/lcapi/getSummoner.php";
+  var getSummonerUrl = "http://www.piltover-libraries.net/lol-forum-enhance/getSummoner.php";
   this.getSummoner = function(name, server, done)
   {
     GM_xmlhttpRequest({
@@ -783,8 +828,229 @@ function LolForums()
       "pt": "",
       "tr": "",
       "it": ""
+    },
+    optionsModalButtonCaption: { // TODO: Add translations
+      "en": "LFE Options",
+      "de": "",
+      "es": "",
+      "fr": "",
+      "pl": "",
+      "ro": "",
+      "el": "",
+      "pt": "",
+      "tr": "",
+      "it": ""
+    },
+    optionsModalTitleCaption: {  // TODO: Add translations
+      "en": "LoL Forum Enhance - Options",
+      "de": "",
+      "es": "",
+      "fr": "",
+      "pl": "",
+      "ro": "",
+      "el": "",
+      "pt": "",
+      "tr": "",
+      "it": ""
+    },
+    optionsModalUpdatesCaption: { // TODO: Add translations
+      "en": "Check for updates automatically:",
+      "de": "",
+      "es": "",
+      "fr": "",
+      "pl": "",
+      "ro": "",
+      "el": "",
+      "pt": "",
+      "tr": "",
+      "it": ""
+    },
+    optionsModalEnlargeCaption: { // TODO: Add translations
+      "en": "Enlarge Quick-Edit-Box:",
+      "de": "",
+      "es": "",
+      "fr": "",
+      "pl": "",
+      "ro": "",
+      "el": "",
+      "pt": "",
+      "tr": "",
+      "it": ""
+    },
+    optionsModalAvatarCaption: { // TODO: Add translations
+      "en": "Show own avatar next to Quick-Edit-Box:",
+      "de": "",
+      "es": "",
+      "fr": "",
+      "pl": "",
+      "ro": "",
+      "el": "",
+      "pt": "",
+      "tr": "",
+      "it": ""
+    },
+    optionsModalWtCaption: { // TODO: Add translations
+      "en": "Use Wrenchman's Tools Icons if available:",
+      "de": "",
+      "es": "",
+      "fr": "",
+      "pl": "",
+      "ro": "",
+      "el": "",
+      "pt": "",
+      "tr": "",
+      "it": ""
+    },
+    optionsModalFekCaption: { // TODO: Add translations
+      "en": "User Forum Enhancement Kit's Icons if available:",
+      "de": "",
+      "es": "",
+      "fr": "",
+      "pl": "",
+      "ro": "",
+      "el": "",
+      "pt": "",
+      "tr": "",
+      "it": ""
+    },
+    optionsModalLinkCaption: { // TODO: Add translations
+      "en": "Link usernames with:",
+      "de": "",
+      "es": "",
+      "fr": "",
+      "pl": "",
+      "ro": "",
+      "el": "",
+      "pt": "",
+      "tr": "",
+      "it": ""
+    },
+    optionsModalAnswersOnCaption: { // TODO: Add translations
+      "en": "On",
+      "de": "",
+      "es": "",
+      "fr": "",
+      "pl": "",
+      "ro": "",
+      "el": "",
+      "pt": "",
+      "tr": "",
+      "it": ""
+    },
+    optionsModalAnswersOffCaption: { // TODO: Add translations
+      "en": "Off",
+      "de": "",
+      "es": "",
+      "fr": "",
+      "pl": "",
+      "ro": "",
+      "el": "",
+      "pt": "",
+      "tr": "",
+      "it": ""
+    },
+    optionsModalAnswersPostsCaption: { // TODO: Add translations
+      "en": "Posts",
+      "de": "",
+      "es": "",
+      "fr": "",
+      "pl": "",
+      "ro": "",
+      "el": "",
+      "pt": "",
+      "tr": "",
+      "it": ""
+    },
+    optionsModalAnswersThreadsCaption: { // TODO: Add translations
+      "en": "Threads",
+      "de": "",
+      "es": "",
+      "fr": "",
+      "pl": "",
+      "ro": "",
+      "el": "",
+      "pt": "",
+      "tr": "",
+      "it": ""
+    },
+    optionsModalAnswersSelectionCaption: { // TODO: Add translations
+      "en": "Selection",
+      "de": "",
+      "es": "",
+      "fr": "",
+      "pl": "",
+      "ro": "",
+      "el": "",
+      "pt": "",
+      "tr": "",
+      "it": ""
+    },
+    optionsModalAnswersNoneCaption: { // TODO: Add translations
+      "en": "None",
+      "de": "",
+      "es": "",
+      "fr": "",
+      "pl": "",
+      "ro": "",
+      "el": "",
+      "pt": "",
+      "tr": "",
+      "it": ""
+    },
+    optionsModalPresetInfoCaption: { // TODO: Add translations
+      "en": "Preset values are presented in this color",
+      "de": "",
+      "es": "",
+      "fr": "",
+      "pl": "",
+      "ro": "",
+      "el": "",
+      "pt": "",
+      "tr": "",
+      "it": ""
+    },
+    optionsModalButtonSaveCaption: { // TODO: Add translations
+      "en": "Save changes",
+      "de": "",
+      "es": "",
+      "fr": "",
+      "pl": "",
+      "ro": "",
+      "el": "",
+      "pt": "",
+      "tr": "",
+      "it": ""
+    },
+    optionsModalButtonDiscardCaption: { // TODO: Add translations
+      "en": "Discard changes",
+      "de": "",
+      "es": "",
+      "fr": "",
+      "pl": "",
+      "ro": "",
+      "el": "",
+      "pt": "",
+      "tr": "",
+      "it": ""
     }
   };
+  
+  this.localizations.get = function(lang, key)
+  {
+    var l = lang;
+    if (typeof lang == 'number')
+    {
+      l = that.localizations.langIds[lang];
+    }
+    else if (!isNaN(lang))
+    {
+      l = that.localizations.langIds[parseInt(lang)];
+    }
+    
+    var output = that.localizations[key][l];
+    if (output == '') output = that.localizations[key]["en"];
+    return output;
+  }
   
   function getServer()
   {
@@ -834,13 +1100,28 @@ function LolForums()
 
   this.getOwnName = function()
   {
+    /* Old Version:
     //TODO: Test languages on eune and asian servers. (euw and na working)
     var raw = $("#lol-pvpnet-bar-account").find(".welcome_text").contents().first().text();
     var match = raw.match(/.+, (.+)[\s]*\(/i)
-    if (match === null) return null
+    if (match === null)
+    {
+      return null;
+    }
     else
     {
       var name = match[1];
+      return name;
+    }
+    */
+    
+    var name = $('#pvpnet-bar-account-button').text();
+    if (name == '')
+    {
+      return null;
+    }
+    else
+    {
       return name;
     }
   }
@@ -856,8 +1137,7 @@ function LolForums()
       $("#userscript-avatar-name").text(name);
       
       // lookup subtitle
-      var language = that.localizations.langIds[languageId];
-      var subtitle = that.localizations.avatarSub[language];
+      var subtitle = that.localizations.get(languageId, 'avatarSub');
       
       // replace subtitle
       $("#userscript-avatar-subtitle").text(subtitle);
@@ -878,30 +1158,33 @@ function LolForums()
 
   this.registerMenuCommands = function(userscript)
   {
+    //var languageId = script.getCookie('bblanguageid');
+    var languageId = script.getCookie('LOLLANG');
+  
     // Force update
-    GM_registerMenuCommand(that.localizations.forceUpdateCaption['en'], function() { // TODO: switch to current language
+    GM_registerMenuCommand(that.localizations.get(languageId, 'forceUpdateCaption'), function() {
       userscript.forceUpdate();
     }, 'F');
     
     // Check for updates
-    GM_registerMenuCommand(that.localizations.checkUpdatesCaption['en'], function() { // TODO: switch to current language
+    GM_registerMenuCommand(that.localizations.get(languageId, 'checkUpdatesCaption'), function() {
       userscript.updateNeccessary(function(updateNecc) {
         if (updateNecc) {
-          var confirmInput = confirm(that.localizations.updatesConfirmMessage['en']); // TODO: switch to current language
+          var confirmInput = confirm(that.localizations.get(languageId, 'updatesConfirmMessage'));
           if (confirmInput) {
-            alert(that.localizations.updatesStartMessage['en']); // TODO: switch to current language
+            alert(that.localizations.get(languageId, 'updatesStartMessage'));
             userscript.forceUpdate();
           } else {
-            alert(that.localizations.updatesCanceledMessage['en']); // TODO: switch to current language
+            alert(that.localizations.get(languageId, 'updatesCanceledMessage'));
           }
         } else {
-          alert(that.localizations.noUpdatesMessage['en']); // TODO: switch to current language
+          alert(that.localizations.get(languageId, 'noUpdatesMessage'));
         }
       });
     }, 'u');
     
     // Clear local cache
-    GM_registerMenuCommand(that.localizations.clearCacheCaption['en'], function() { // TODO: switch to current language
+    GM_registerMenuCommand(that.localizations.get(languageId, 'clearCacheCaption'), function() {
       level1Cache.removeCache();
       level1Cache.loadCache();
     }, 'C');
@@ -970,6 +1253,10 @@ function TestSuite()
   }
 }
 
+// Tooltip Testing:
+//var tt = $('<br><br><a id="tt-test" href="#" data-toggle="tooltip" title="first tooltip">hover over me</a>');
+//$('#post_message_11390315 > p:nth-child(1)').append(tt);
+//$('#tt-test').tooltip();
 
 /*******************************
  *    Start of Main Script     *
@@ -978,22 +1265,104 @@ function TestSuite()
 // Initiating main Objects
 var script = new Userscript();
 var forums = new LolForums();
+var options = new LfeOptions();
+
+// load global script options
+options.loadLocal();
+
+// get actual language
+//var languageId = script.getCookie('bblanguageid');
+var languageId = script.getCookie('LOLLANG');
 
 // css style changes
-script.addGlobalStyle(GM_getResourceText("globalcss"));
+script.addGlobalStyle(GM_getResourceText('globalcss'));
+script.addGlobalStyle(GM_getResourceText('bootstrapcss'));
+
+// auto-updates
+var dismissed = script.getCookie('lfe-update-dismissed');
+if (options.data.updates && !dismissed)
+{
+  script.updateNeccessary(function(updateNecc) {
+    if (updateNecc) {
+      $('body').prepend($(GM_getResourceText('update-alert')));
+      // TODO: Add localization for update alert.
+      
+      $('#lfe-update-dismiss').on('click', function () {
+        script.setCookie('lfe-update-dismissed', 'true', 1);
+      });
+      
+      $('#lfe-update-install').on('click', function () {
+        script.forceUpdate();
+        $('#lfe-update-alert').remove();
+      });
+    }
+  });
+}
+
+// options modal
+var modalButton = $('<div id="lol-forum-enhance-settings" class="userscript-pvpnet-bar"><a href="#lfeOptionsModal" role="button" data-toggle="modal">' + forums.localizations.get(languageId, 'optionsModalButtonCaption') + '</a></div>');
+var modal = $(GM_getResourceText('options-modal'));
+$('#pvpnet-bar-inner').prepend(modalButton);
+$('#forum_body').append(modal);
+$('#lfe-o-captions-title').text(forums.localizations.get(languageId, 'optionsModalTitleCaption'));
+$('#lfe-o-captions-updates').text(forums.localizations.get(languageId, 'optionsModalUpdatesCaption'));
+$('#lfe-o-captions-enlarge').text(forums.localizations.get(languageId, 'optionsModalEnlargeCaption'));
+$('#lfe-o-captions-avatar').text(forums.localizations.get(languageId, 'optionsModalAvatarCaption'));
+$('#lfe-o-captions-wt').text(forums.localizations.get(languageId, 'optionsModalWtCaption'));
+$('#lfe-o-captions-fek').text(forums.localizations.get(languageId, 'optionsModalFekCaption'));
+$('#lfe-o-captions-link').text(forums.localizations.get(languageId, 'optionsModalLinkCaption'));
+$('#lfe-o-captions-answers-on').text(forums.localizations.get(languageId, 'optionsModalAnswersOnCaption'));
+$('#lfe-o-captions-answers-off').text(forums.localizations.get(languageId, 'optionsModalAnswersOffCaption'));
+$('#lfe-o-captions-answers-posts').text(forums.localizations.get(languageId, 'optionsModalAnswersPostsCaption'));
+$('#lfe-o-captions-answers-threads').text(forums.localizations.get(languageId, 'optionsModalAnswersThreadsCaption'));
+$('#lfe-o-captions-answers-selection').text(forums.localizations.get(languageId, 'optionsModalAnswersSelectionCaption'));
+$('#lfe-o-captions-answers-none').text(forums.localizations.get(languageId, 'optionsModalAnswersNoneCaption'));
+$('#lfe-o-captions-preset-info').text(forums.localizations.get(languageId, 'optionsModalPresetInfoCaption'));
+$('#lfe-o-captions-button-save').text(forums.localizations.get(languageId, 'optionsModalButtonSaveCaption'));
+$('#lfe-o-captions-button-discard').text(forums.localizations.get(languageId, 'optionsModalButtonDiscardCaption'));
+
+// Load options into modal when shown
+$('#lfeOptionsModal').on('shown', function () {
+  $('#lfeOptionsModal button.active').removeClass('active');
+
+  if (options.data.updates) $('#lfe-o-updates-on').addClass('active');
+  else $('#lfe-o-updates-off').addClass('active');
+
+  if (options.data.enlarge) $('#lfe-o-enlarge-on').addClass('active');
+  else $('#lfe-o-enlarge-off').addClass('active');
+
+  if (options.data.avatar) $('#lfe-o-avatar-on').addClass('active');
+  else $('#lfe-o-avatar-off').addClass('active');
+
+  if (options.data.wt) $('#lfe-o-wt-on').addClass('active');
+  else $('#lfe-o-wt-off').addClass('active');
+
+  if (options.data.fek) $('#lfe-o-fek-on').addClass('active');
+  else $('#lfe-o-fek-off').addClass('active');
+
+  $('#lfe-o-link-' + options.data.link).addClass('active');
+});
+
+// Register save-options function
+$('#lfe-o-save').click(function() {
+  options.data.updates = $('#lfe-o-updates .active').data('value');
+  options.data.enlarge = $('#lfe-o-enlarge .active').data('value');
+  options.data.avatar = $('#lfe-o-avatar .active').data('value');
+  options.data.wt = $('#lfe-o-wt .active').data('value');
+  options.data.fek = $('#lfe-o-fek .active').data('value');
+  options.data.link = $('#lfe-o-link .active').data('value');
+  options.saveLocal();
+  $('#lfeOptionsModal').modal('hide');
+});
+
+// register greasemonkey userscript menu commands
 forums.registerMenuCommands(script);
 
 // create an observer for the #posts div instance
-var observerPostsOld = 0;
-var observerPostsInitialized = false;
 var observerTarget = document.querySelector('#posts');
 var postsObserver = new MutationObserver(function(mutations) {
   mutations.forEach(function(mutation) {
-    var observerPostsNew = forums.countAllPosts();
-    if ((observerPostsInitialized) && (observerPostsNew != observerPostsOld))
-    {
-      forums.replaceAvatars();
-    }
+    forums.replaceAvatars();
   });
 });
 var observerConfig = { childList: true, subtree: true };
@@ -1002,18 +1371,11 @@ if (forums.server != null)
 {
   // server found
   
-  // get actual language
-  var languageId = script.getCookie("bblanguageid");
-  
   // replace own avatar (if name and avatar available)
   forums.replaceOwnAvatar(languageId);
   
   // replace the summoner images and levels
   forums.replaceAvatars();
-
-  // initialize observer counts and mark as ready
-  observerPostsOld = forums.countAllPosts();
-  observerPostsInitialized = true;
 
   // start observing #posts
   postsObserver.observe(observerTarget, observerConfig);
