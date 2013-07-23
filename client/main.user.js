@@ -1046,6 +1046,10 @@ function LolForums()
     {
       l = that.localizations.langIds[lang];
     }
+    else if (!isNaN(lang))
+    {
+      l = that.localizations.langIds[parseInt(lang)];
+    }
     
     var output = that.localizations[key][l];
     if (output == '') output = that.localizations[key]["en"];
