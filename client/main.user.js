@@ -1141,8 +1141,7 @@ function LolForums()
       $("#userscript-avatar-name").text(name);
       
       // lookup subtitle
-      var language = that.localizations.langIds[languageId];
-      var subtitle = that.localizations.avatarSub[language];
+      var subtitle = that.localizations.get(languageId, 'avatarSub');
       
       // replace subtitle
       $("#userscript-avatar-subtitle").text(subtitle);
@@ -1163,30 +1162,32 @@ function LolForums()
 
   this.registerMenuCommands = function(userscript)
   {
+    var languageId = script.getCookie("bblanguageid");
+  
     // Force update
-    GM_registerMenuCommand(that.localizations.forceUpdateCaption['en'], function() { // TODO: switch to current language
+    GM_registerMenuCommand(that.localizations.get(languageId, 'forceUpdateCaption'), function() { // TODO: switch to current language
       userscript.forceUpdate();
     }, 'F');
     
     // Check for updates
-    GM_registerMenuCommand(that.localizations.checkUpdatesCaption['en'], function() { // TODO: switch to current language
+    GM_registerMenuCommand(that.localizations.get(languageId, 'checkUpdatesCaption'), function() {
       userscript.updateNeccessary(function(updateNecc) {
         if (updateNecc) {
-          var confirmInput = confirm(that.localizations.updatesConfirmMessage['en']); // TODO: switch to current language
+          var confirmInput = confirm(that.localizations.get(languageId, 'updatesConfirmMessage'));
           if (confirmInput) {
-            alert(that.localizations.updatesStartMessage['en']); // TODO: switch to current language
+            alert(that.localizations.get(languageId, 'updatesStartMessage'));
             userscript.forceUpdate();
           } else {
-            alert(that.localizations.updatesCanceledMessage['en']); // TODO: switch to current language
+            alert(that.localizations.get(languageId, 'updatesCanceledMessage'));
           }
         } else {
-          alert(that.localizations.noUpdatesMessage['en']); // TODO: switch to current language
+          alert(that.localizations.get(languageId, 'noUpdatesMessage'));
         }
       });
     }, 'u');
     
     // Clear local cache
-    GM_registerMenuCommand(that.localizations.clearCacheCaption['en'], function() { // TODO: switch to current language
+    GM_registerMenuCommand(that.localizations.get(languageId, 'clearCacheCaption'), function() {
       level1Cache.removeCache();
       level1Cache.loadCache();
     }, 'C');
