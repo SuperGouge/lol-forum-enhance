@@ -897,7 +897,7 @@ function LolForums()
       "pt": "",
       "tr": "",
       "it": ""
-    }
+    },
     optionsModalEnlargeCaption: { // TODO: Add translations
       "en": "Enlarge Quick-Edit-Box:",
       "de": "",
