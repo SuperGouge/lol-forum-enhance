@@ -1150,9 +1150,7 @@ function LolForums()
       // charset encoding bugfixes for league forums
       if (options.data.charset)
       {
-        alert(name);
         var name = _from_utf8(name);
-        alert(name);
       }
       
       bigNameElement.html('\
