@@ -383,11 +383,11 @@ function Userscript()
     }
   }
   
-  this.setCookie = function(name, value, expireSeconds)
+  this.setCookie = function(name, value, expireMilliseconds)
   {
     var expireDate = new Date();
-    expireDate.setTime(expireDate.getTime() + expireSeconds);
-    document.cookie = name + "=" + escape(value) + ((expireSeconds == null) ? "" : ";expires=" + expireDate.toGMTString());
+    expireDate.setTime(expireDate.getTime() + expireMilliseconds);
+    document.cookie = name + "=" + escape(value) + ((expireMilliseconds == null) ? "" : ";expires=" + expireDate.toGMTString());
   }
   
   this.getCookie = function(name)
@@ -1386,7 +1386,7 @@ if (options.data.updates && !dismissed)
       // TODO: Add localization for update alert.
       
       $('#lfe-update-dismiss').on('click', function () {
-        script.setCookie('lfe-update-dismissed', 'true', 3600);
+        script.setCookie('lfe-update-dismissed', 'true', 60*60*1000);
       });
       
       $('#lfe-update-install').on('click', function () {
