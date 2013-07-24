@@ -1113,6 +1113,10 @@ function LolForums()
     allLeft.each(function(i, e)
     {
       var name = $(e).find("big").text();
+      
+      // replace whitespaces at the beginning and end
+      name = name.replace(/(^\s*)|(\s*$)/g, '');
+      
       var image = $(e).find("img.user_summoner_icon");
       var orb = $(e).find('span.left_orb');
       
