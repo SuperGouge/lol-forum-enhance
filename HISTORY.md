@@ -10,11 +10,15 @@
 - Check compatibility to other/newer regions
 - rework normal edit box
 - add about link
-- add click and search functionality to summoner names
+- ~~add click and search functionality to summoner names~~
 
 ---
 
 ## Version history:
+
+## 0.6.0
+- **Added** functionality to get your *special characters* in your summonernames back
+- **Added** clicking functionality to summonernames
 
 ## 0.5.0
 - **Added** Options Window
