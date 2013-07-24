@@ -5,7 +5,7 @@
 // @include     *.leagueoflegends.com/board/*
 // @downloadURL https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/main.user.js
 // @updateURL   https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/main.meta.js
-// @version     0.6.0
+// @version     0.6.1
 // @run-at      document-end
 // @grant       GM_xmlhttpRequest
 // @grant       GM_getResourceText
@@ -1149,7 +1149,7 @@ function LolForums()
     var allNames = $('.forum_post .avatar big');
     allNames.each(function(i, e) {
       var bigNameElement = $(e);
-      var name = bigNameElement.html();
+      var name = bigNameElement.text();
       
       // charset encoding bugfixes for league forums
       if (options.data.charset)
