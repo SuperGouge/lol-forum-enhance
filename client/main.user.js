@@ -170,12 +170,9 @@
  *    Definition of Classes    *
  *******************************/
 
-function LfeOptions()
-{
-  var that = this;
-  var lfeOptionsString = 'LFEOptions';
-  
-  this.data = {
+var lfeOptions = {
+  lfeOptionsString: 'LFEOptions',
+  data: {
     updates: true,
     enlarge: true,
     avatar: true,
@@ -183,33 +180,35 @@ function LfeOptions()
     fek: false,
     link: 'selection',
     charset: false
-  }
-  
-  this.loadLocal = function()
-  {
-    try
-    {
-      var data = GM_getValue(lfeOptionsString);
-      if (data !== undefined) that.data = JSON.parse(data);
+  },
+  loadLocal: function() {
+    try {
+      var temp = GM_getValue(this.lfeOptionsString);
+      if (temp !== undefined) this.data = JSON.parse(temp);
     }
-    catch (e)
-    {
+    catch (e) {
       if (e instanceof SyntaxError)
       {
         // error in JSON.parse (input may be not valid JSON)
-        cachedSummoners = {};
+        this.data = {
+          updates: true,
+          enlarge: true,
+          avatar: true,
+          wt: false,
+          fek: false,
+          link: 'selection',
+          charset: false
+        };
       }
-      else
-      {
+      else {
         throw e;
       }
     }
+  },
+  saveLocal: function() {
+    GM_setValue(this.lfeOptionsString, JSON.stringify(this.data));
   }
-  this.saveLocal = function()
-  {
-    GM_setValue(lfeOptionsString, JSON.stringify(that.data));
-  }
-}
+};
  
 function Summoner()
 {
@@ -1143,7 +1142,7 @@ function LolForums()
     });
   }
 
-  this.replaceNames = function(options)
+  this.replaceNames = function()
   {
     var server = that.server;
     var allNames = $('.forum_post .avatar big');
@@ -1152,7 +1151,7 @@ function LolForums()
       var name = bigNameElement.text();
       
       // charset encoding bugfixes for league forums
-      if (options.data.charset)
+      if (lfeOptions.data.charset)
       {
         var name = _from_utf8(name);
       }
@@ -1363,10 +1362,10 @@ function TestSuite()
 // Initiating main Objects
 var script = new Userscript();
 var forums = new LolForums();
-var options = new LfeOptions();
+var options = lfeOptions;
 
 // load global script options
-options.loadLocal();
+lfeOptions.loadLocal();
 
 // get actual language
 //var languageId = script.getCookie('bblanguageid');
@@ -1378,7 +1377,7 @@ script.addGlobalStyle(GM_getResourceText('bootstrapcss'));
 
 // auto-updates
 var dismissed = script.getCookie('lfe-update-dismissed');
-if (options.data.updates && !dismissed)
+if (lfeOptions.data.updates && !dismissed)
 {
   script.updateNeccessary(function(updateNecc) {
     if (updateNecc) {
@@ -1424,37 +1423,37 @@ $('#lfe-o-captions-button-discard').text(forums.localizations.get(languageId, 'o
 $('#lfeOptionsModal').on('shown', function () {
   $('#lfeOptionsModal button.active').removeClass('active');
 
-  if (options.data.updates) $('#lfe-o-updates-on').addClass('active');
+  if (lfeOptions.data.updates) $('#lfe-o-updates-on').addClass('active');
   else $('#lfe-o-updates-off').addClass('active');
 
-  if (options.data.charset) $('#lfe-o-charset-on').addClass('active');
+  if (lfeOptions.data.charset) $('#lfe-o-charset-on').addClass('active');
   else $('#lfe-o-charset-off').addClass('active');
   
-  if (options.data.enlarge) $('#lfe-o-enlarge-on').addClass('active');
+  if (lfeOptions.data.enlarge) $('#lfe-o-enlarge-on').addClass('active');
   else $('#lfe-o-enlarge-off').addClass('active');
 
-  if (options.data.avatar) $('#lfe-o-avatar-on').addClass('active');
+  if (lfeOptions.data.avatar) $('#lfe-o-avatar-on').addClass('active');
   else $('#lfe-o-avatar-off').addClass('active');
 
-  if (options.data.wt) $('#lfe-o-wt-on').addClass('active');
+  if (lfeOptions.data.wt) $('#lfe-o-wt-on').addClass('active');
   else $('#lfe-o-wt-off').addClass('active');
 
-  if (options.data.fek) $('#lfe-o-fek-on').addClass('active');
+  if (lfeOptions.data.fek) $('#lfe-o-fek-on').addClass('active');
   else $('#lfe-o-fek-off').addClass('active');
 
-  $('#lfe-o-link-' + options.data.link).addClass('active');
+  $('#lfe-o-link-' + lfeOptions.data.link).addClass('active');
 });
 
 // Register save-options function
 $('#lfe-o-save').click(function() {
-  options.data.updates = $('#lfe-o-updates .active').data('value');
-  options.data.charset = $('#lfe-o-charset .active').data('value');
-  options.data.enlarge = $('#lfe-o-enlarge .active').data('value');
-  options.data.avatar = $('#lfe-o-avatar .active').data('value');
-  options.data.wt = $('#lfe-o-wt .active').data('value');
-  options.data.fek = $('#lfe-o-fek .active').data('value');
-  options.data.link = $('#lfe-o-link .active').data('value');
-  options.saveLocal();
+  lfeOptions.data.updates = $('#lfe-o-updates .active').data('value');
+  lfeOptions.data.charset = $('#lfe-o-charset .active').data('value');
+  lfeOptions.data.enlarge = $('#lfe-o-enlarge .active').data('value');
+  lfeOptions.data.avatar = $('#lfe-o-avatar .active').data('value');
+  lfeOptions.data.wt = $('#lfe-o-wt .active').data('value');
+  lfeOptions.data.fek = $('#lfe-o-fek .active').data('value');
+  lfeOptions.data.link = $('#lfe-o-link .active').data('value');
+  lfeOptions.saveLocal();
   $('#lfeOptionsModal').modal('hide');
 });
 
@@ -1478,7 +1477,7 @@ if (forums.server != null)
   forums.replaceOwnAvatar(languageId);
   
   // replace Names to provide linking
-  forums.replaceNames(options);
+  forums.replaceNames();
   
   // replace the summoner images and levels
   forums.replaceAvatars();
