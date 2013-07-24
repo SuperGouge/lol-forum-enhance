@@ -388,9 +388,6 @@ function Userscript()
     var expireDate = new Date();
     expireDate.setTime(expireDate.getTime() + expireSeconds);
     document.cookie = name + "=" + escape(value) + ((expireSeconds == null) ? "" : ";expires=" + expireDate.toGMTString());
-}
-
-
   }
   
   this.getCookie = function(name)
