@@ -328,7 +328,7 @@ var localizations = {
         output = this.langIds[parseInt(keyOrId)];
       }
       return output;
-    }
+    },
     setDefaultLang: function(lang) {
       this.defaultLang = this.lookupLangKeyOrId(lang);
     },
