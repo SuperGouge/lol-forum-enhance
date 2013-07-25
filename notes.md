@@ -1,5 +1,29 @@
 # Notes
 
+## Tooltip Testing
+
+``` javascript
+var tt = $('<br><br><a id="tt-test" href="#" data-toggle="tooltip" title="first tooltip">hover over me</a>');
+$('#post_message_11390315 > p:nth-child(1)').append(tt);
+$('#tt-test').tooltip();
+```
+
+## Old version of `LoLForums.getOwnName()`
+
+``` javascript
+var raw = $("#lol-pvpnet-bar-account").find(".welcome_text").contents().first().text();
+var match = raw.match(/.+, (.+)[\s]*\(/i)
+if (match === null)
+{
+  return null;
+}
+else
+{
+  var name = match[1];
+  return name;
+}
+```
+
 ## Server Errors encoded as `JSON`
 
 - `Elophant Error: Summoner ... was not found.`

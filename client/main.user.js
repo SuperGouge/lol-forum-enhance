@@ -210,8 +210,7 @@ var lfeOptions = {
   }
 };
  
-function Summoner()
-{
+function Summoner() {
   var that = this;
   this.data = {
     internalName : null,
@@ -225,32 +224,26 @@ function Summoner()
     summonerId : null,
     success : null
   };
-  this.toJsonString = function()
-  {
+  this.toJsonString = function() {
     return JSON.stringify(that.data);
   }
-  this.fromJsonString = function(json)
-  {
+  this.fromJsonString = function(json) {
     that.data = JSON.parse(json);
   }
 }
 
-function Level1Cache()
-{
+function Level1Cache() {
   var that = this;
   var cachedSummoners = {};
   var cachedSummonerString = "SummonerCache";
   var level2Cache = new Level2Cache();
 
-  this.getSummoner = function(name, server, found, notFound)
-  {
-    if (typeof cachedSummoners[name] != "undefined")
-    {
+  this.getSummoner = function(name, server, found, notFound) {
+    if (typeof cachedSummoners[name] != "undefined") {
       if (cachedSummoners[name].data.success) found(cachedSummoners[name]);
       else notFound(cachedSummoners[name]);
     }
-    else
-    {
+    else {
       // Perform a level2Cache call
       level2Cache.getSummoner(name, server,
       function(s) {
@@ -280,73 +273,57 @@ function Level1Cache()
     }
   }
   
-  this.loadCache = function()
-  {
-    try
-    {
+  this.loadCache = function() {
+    try {
       cachedSummoners = JSON.parse(GM_getValue(cachedSummonerString, "{}"));
     }
-    catch (e)
-    {
-      if (e instanceof SyntaxError)
-      {
+    catch (e) {
+      if (e instanceof SyntaxError) {
         // error in JSON.parse (input may be not valid JSON)
         cachedSummoners = {};
       }
-      else
-      {
+      else {
         throw e;
       }
     }
   }
   
-  this.cleanCache = function()
-  {
+  this.cleanCache = function() {
     // get yesterdays Date
     var d = new Date();
     d.setDate(d.getDate() - 1);
-    
     var temp = {};
-    for (var key in cachedSummoners)
-    {
-      if (cachedSummoners.hasOwnProperty(key))
-      {
+    for (var key in cachedSummoners) {
+      if (cachedSummoners.hasOwnProperty(key)) {
         // is Summonerdata not older than a day
-        if (cachedSummoners[key].data.currentDate > d)
-        {
+        if (cachedSummoners[key].data.currentDate > d) {
           temp[key] = cachedSummoners[key];
         }
       }
     }
-    
     // only persist newer summoners
     cachedSummoners = temp;
   }
   
-  this.removeCache = function()
-  {
+  this.removeCache = function() {
     GM_deleteValue(cachedSummonerString);
   }
   
-  this.saveCache = function()
-  {
+  this.saveCache = function() {
     GM_setValue(cachedSummonerString, JSON.stringify(cachedSummoners));
   }
   
-  function addSummoner(summoner)
-  {
+  function addSummoner(summoner) {
     cachedSummoners[summoner.data.name] = summoner;
   }
 }
 
-function Level2Cache()
-{
-  var getSummonerUrl = "http://www.piltover-libraries.net/lol-forum-enhance/getSummoner.php";
-  this.getSummoner = function(name, server, found, notFound)
-  {
+function Level2Cache() {
+  var getSummonerUrl = 'http://www.piltover-libraries.net/lol-forum-enhance/getSummoner.php';
+  this.getSummoner = function(name, server, found, notFound) {
     GM_xmlhttpRequest({
-      method: "GET",
-      url: getSummonerUrl + "?summoner=" + encodeURIComponent(name) + "&server=" + server + "",
+      method: 'GET',
+      url: getSummonerUrl + '?summoner=' + encodeURIComponent(name) + '&server=' + server,
       onload: function(response) {
         var s = new Summoner();
         s.fromJsonString(response.responseText);
@@ -357,14 +334,11 @@ function Level2Cache()
   }
 }
 
-function Userscript()
-{
+function Userscript() {
   var that = this;
 
-  this.addGlobalStyle = function(css)
-  {
-    try
-    {
+  this.addGlobalStyle = function(css) {
+    try {
       var elmHead, elmStyle;
       elmHead = document.getElementsByTagName('head')[0];
       elmStyle = document.createElement('style');
@@ -372,41 +346,33 @@ function Userscript()
       elmHead.appendChild(elmStyle);
       elmStyle.innerHTML = css;
     }
-    catch (e)
-    {
-      if (!document.styleSheets.length)
-      {
+    catch (e) {
+      if (!document.styleSheets.length) {
         document.createStyleSheet();
       }
       document.styleSheets[0].cssText += css;
     }
   }
   
-  this.setCookie = function(name, value, expireMilliseconds)
-  {
+  this.setCookie = function(name, value, expireMilliseconds) {
     var expireDate = new Date();
     expireDate.setTime(expireDate.getTime() + expireMilliseconds);
-    document.cookie = name + "=" + escape(value) + ((expireMilliseconds == null) ? "" : ";expires=" + expireDate.toGMTString());
+    document.cookie = name + '=' + escape(value) + ((expireMilliseconds == null) ? '' : ';expires=' + expireDate.toGMTString());
   }
   
-  this.getCookie = function(name)
-  {
+  this.getCookie = function(name) {
     var value = document.cookie;
-    var start = value.indexOf(" " + name + "=");
-    if (start == -1)
-    {
-      start = value.indexOf(name + "=");
+    var start = value.indexOf(' ' + name + '=');
+    if (start == -1) {
+      start = value.indexOf(name + '=');
     }
-    if (start == -1)
-    {
+    if (start == -1) {
       value = null;
     }
-    else
-    {
-      start = value.indexOf("=", start) + 1;
-      var end = value.indexOf(";", start);
-      if (end == -1)
-      {
+    else {
+      start = value.indexOf('=', start) + 1;
+      var end = value.indexOf(';', start);
+      if (end == -1) {
         end = value.length;
       }
       value = unescape(value.substring(start, end));
@@ -414,19 +380,15 @@ function Userscript()
     return value;
   }
 
-  function ToolkitVersion()
-  {
+  function ToolkitVersion() {
     var that = this;
-    var orig = "";
+    var orig = '';
     var versionParts = new Array();
     
-    this.setVersion = function(string)
-    {
+    this.setVersion = function(string) {
       orig = string;
-      var splits = string.split(".");
-      
-      for (var i = 0; i < splits.length; i++)
-      {
+      var splits = string.split('.');
+      for (var i = 0; i < splits.length; i++) {
         var vp = new ToolkitVersionPart();
         vp.setVersionPart(splits[i]);
         versionParts.push(vp);
@@ -434,103 +396,78 @@ function Userscript()
     }
     
     this.getOrig = function() { return orig; }
-    this.getComputedStr = function()
-    {
-      var strOut = "";
-      
-      for (var i = 0; i < (versionParts.length - 1); i++)
-      {
+    this.getComputedStr = function() {
+      var strOut = '';
+      for (var i = 0; i < (versionParts.length - 1); i++) {
         strOut += versionParts[i].getComputedStr();
-        strOut += ".";
+        strOut += '.';
       }
-      
       // add last versionPart
       strOut += versionParts[(versionParts.length - 1)].getComputedStr();
-      
       return strOut;
     }
     this.getVersionParts = function() { return versionParts.slice(); }
     
-    this.isGreaterThan = function(version)
-    {
+    this.isGreaterThan = function(version) {
       var vp1 = versionParts;
       var vp2 = version.getVersionParts();
-      
       var l;
       if (vp1.length > vp2.length) l = vp1.length;
       else l = vp2.length;
-      
-      for (var i = 0; i < l; i++)
-      {
+      for (var i = 0; i < l; i++) {
         // set not defined versionParts to defaults (occurrs when one version has more parts than the other)
         if (vp1[i] === undefined) vp1[i] = new ToolkitVersionPart();
         if (vp2[i] === undefined) vp2[i] = new ToolkitVersionPart();
-        
         if (vp1[i].isGreaterThan(vp2[i])) return true;
         if (vp1[i].isLowerThan(vp2[i])) return false;
       }
-      
       // equal
       return false;
     }
-    this.isLowerThan = function(version)
-    {
+    this.isLowerThan = function(version) {
       var vp1 = versionParts;
       var vp2 = version.getVersionParts();
-      
       var l;
       if (vp1.length > vp2.length) l = vp1.length;
       else l = vp2.length;
-      
-      for (var i = 0; i < l; i++)
-      {
+      for (var i = 0; i < l; i++) {
         // set not defined versionParts to defaults (occurrs when one version has more parts than the other)
         if (vp1[i] === undefined) vp1[i] = new ToolkitVersionPart();
         if (vp2[i] === undefined) vp2[i] = new ToolkitVersionPart();
-        
         if (vp1[i].isGreaterThan(vp2[i])) return false;
         if (vp1[i].isLowerThan(vp2[i])) return true;
       }
-      
       // equal
       return false;
     }
-    this.isEqualTo = function(version)
-    {
+    this.isEqualTo = function(version) {
       var vp1 = versionParts;
       var vp2 = version.getVersionParts();
-      
       var l;
       if (vp1.length > vp2.length) l = vp1.length;
       else l = vp2.length;
-      
       for (var i = 0; i < l; i++)
       {
         // set not defined versionParts to defaults (occurrs when one version has more parts than the other)
         if (vp1[i] === undefined) vp1[i] = new ToolkitVersionPart();
         if (vp2[i] === undefined) vp2[i] = new ToolkitVersionPart();
-        
         if (!vp1[i].isEqualTo(vp2[i])) return false;
       }
-      
       // equal
       return true;
     }
   }
 
-  function ToolkitVersionPart()
-  {
+  function ToolkitVersionPart() {
     var that = this;
-    var orig = "";
+    var orig = '';
     var numA = 0;
-    var strB = "";
+    var strB = '';
     var numC = 0;
-    var strD = "";
+    var strD = '';
     
-    this.setVersionPart = function(string)
-    {
+    this.setVersionPart = function(string) {
       orig = string;
-      
       var m = string.match(/^([0-9-]+)?([^\d]+)?([0-9-]+)?(.+)?$/i);
       
       numA = parseInt(m[1]);
@@ -539,26 +476,24 @@ function Userscript()
       strD = m[4];
 
       if (isNaN(numA)) numA = 0;
-      if (strB === undefined) strB = "";
+      if (strB === undefined) strB = '';
       if (isNaN(numC)) numC = 0;
-      if (strD === undefined) strD = "";
+      if (strD === undefined) strD = '';
       
       // VersionPart rules:
       
       // * --> (infinity)
-      if (orig == "*")
-      {
+      if (orig == "*") {
         numA = Number.POSITIVE_INFINITY;
-        strB = "";
+        strB = '';
         numC = 0;
-        strD = "";
+        strD = '';
       }
       
       // 1.1+ --> 1.2pre
-      if (strB == "+")
-      {
+      if (strB == '+') {
         numA++;
-        strB = "pre";
+        strB = 'pre';
       }
     }
     
@@ -567,9 +502,8 @@ function Userscript()
     this.getStrB = function() { return strB; }
     this.getNumC = function() { return numC; }
     this.getStrD = function() { return strD; }
-    this.getComputedStr = function()
-    {
-      var str = "";
+    this.getComputedStr = function() {
+      var str = '';
       if (numA != 0) str += numA.toString();
       str += strB;
       if (numC != 0) str += numC.toString();
@@ -577,8 +511,7 @@ function Userscript()
       return str;
     }
     
-    this.isGreaterThan = function(versionPart)
-    {
+    this.isGreaterThan = function(versionPart) {
       var cNumA = compareNum(numA, versionPart.getNumA());
       if (cNumA == 1) return true;
       else if (cNumA == 2) return false;
@@ -598,8 +531,7 @@ function Userscript()
       // equal
       return false;
     }
-    this.isLowerThan = function(versionPart)
-    {
+    this.isLowerThan = function(versionPart) {
       var cNumA = compareNum(numA, versionPart.getNumA());
       if (cNumA == 1) return false;
       else if (cNumA == 2) return true;
@@ -619,8 +551,7 @@ function Userscript()
       // equal
       return false;
     }
-    this.isEqualTo = function(versionPart)
-    {
+    this.isEqualTo = function(versionPart) {
       var cNumA = compareNum(numA, versionPart.getNumA());
       if (cNumA != 0) return false;
       
@@ -638,25 +569,22 @@ function Userscript()
     }
     
     // always returns number of greater element (0 if equal)
-    function compareNum(num1, num2)
-    {
+    function compareNum(num1, num2) {
       if (num1 > num2) return 1;
       else if (num2 > num1) return 2;
       else return 0;
     }
-    function compareStr(str1, str2)
-    {
-      if ((str1 == "") && (str2 == "")) return 0;
-      else if ((str1 == "") && (str2 != "")) return 1;
-      else if ((str1 != "") && (str2 == "")) return 2;
+    function compareStr(str1, str2) {
+      if ((str1 == '') && (str2 == '')) return 0;
+      else if ((str1 == '') && (str2 != '')) return 1;
+      else if ((str1 != '') && (str2 == '')) return 2;
       else if (str1 > str2) return 1;
       else if (str2 > str1) return 2;
       else return 0;
     }
   }
 
-  this.compareVersions = function(a, b)
-  {
+  this.compareVersions = function(a, b) {
     // (a = b) --> 0
     // (a < b) --> -1
     // (a > b) --> 1
@@ -670,51 +598,43 @@ function Userscript()
     if (vA.isEqualTo(vB)) return 0;
     else if (vA.isLowerThan(vB)) return -1;
     else if (vA.isGreaterThan(vB)) return 1;
-    else throw "Version comparation error occurred."
+    else throw 'Version comparation error occurred.'
   }
   
-  this.getLocalVersion = function()
-  {
+  this.getLocalVersion = function() {
     return GM_info.script.version;
   }
-  this.getRemoteVersion = function(callback)
-  {
+  this.getRemoteVersion = function(callback) {
     var updateURL = GM_info.scriptMetaStr.match(/\@updateURL[ |\t]+(.+)/i)[1];
     GM_xmlhttpRequest({
-      method: "GET",
+      method: 'GET',
       url: updateURL,
       onload: function(response) {
-        if (response.status == 200)
-        {
+        if (response.status == 200) {
           var serverVersion = response.responseText.match(/\@version[ |\t]+(.+)/i)[1];
           callback(serverVersion)
         }
-        else
-        {
-          throw "Http-Get-Request-Error: " + response.status + " - " + response.statusText;
+        else {
+          throw 'Http-Get-Request-Error: ' + response.status + ' - ' + response.statusText;
         }
       }
     });
   }
-  this.updateNeccessary = function(callback)
-  {
+  this.updateNeccessary = function(callback) {
     var currentVersion = that.getLocalVersion();
     that.getRemoteVersion(function(remoteVersion) {
       var comparison = that.compareVersions(currentVersion, remoteVersion);
       if (comparison < 0) callback(true);
       else callback(false);
     });
-    
   }
-  this.forceUpdate = function()
-  {
+  this.forceUpdate = function() {
     var downloadURL = GM_info.scriptMetaStr.match(/\@downloadURL[ |\t]+(.+)/i)[1];
     GM_openInTab(downloadURL);
   }
 }
 
-function LolForums()
-{
+function LolForums() {
   var that = this;
   var level1Cache = new Level1Cache();
   level1Cache.loadCache();
@@ -1067,20 +987,17 @@ function LolForums()
     }
   };
   
-  this.localizations.get = function(lang, key)
-  {
+  this.localizations.get = function(lang, key) {
     var l = lang;
-    if (typeof lang == 'number')
-    {
+    if (typeof lang == 'number') {
       l = that.localizations.langIds[lang];
     }
-    else if (!isNaN(lang))
-    {
+    else if (!isNaN(lang)) {
       l = that.localizations.langIds[parseInt(lang)];
     }
     
     var output = that.localizations[key][l];
-    if (output == '') output = that.localizations[key]["en"];
+    if (output == '') output = that.localizations[key]['en'];
     return output;
   }
   
@@ -1088,35 +1005,31 @@ function LolForums()
   {
     // get the server from url
     var match = document.URL.match(/(na)|(euw)|(eune)|(br)/i); // TODO: Add other regions, check compatibility
-    if (match != null)
-    {
+    if (match != null) {
       // server found
       return match[0];
     }
-    else
-    {
+    else {
       // server not found
       return null;
     }
   }
   
-  this.countAllPosts = function()
-  {
+  this.countAllPosts = function() {
     return $('.forum_post img.user_summoner_icon').parent().parent().parent().parent().length;
   }
   
-  this.replaceAvatars = function()
-  {
+  this.replaceAvatars = function() {
     // get all Left items except those of rioters.
-    var allLeft = $(".forum_post img.user_summoner_icon").filter($('img[src="lol_theme/img/unknown_icon.jpg"]')).parent().parent().parent().parent();
+    var allLeft = $('.forum_post img.user_summoner_icon').filter($('img[src="lol_theme/img/unknown_icon.jpg"]')).parent().parent().parent().parent();
     allLeft.each(function(i, e)
     {
-      var name = $(e).find("big").text();
+      var name = $(e).find('big').text();
       
       // replace whitespaces at the beginning and end
       name = name.replace(/(^\s*)|(\s*$)/g, '');
       
-      var image = $(e).find("img.user_summoner_icon");
+      var image = $(e).find('img.user_summoner_icon');
       var orb = $(e).find('span.left_orb');
       
       // Cache system (the level-1-cache automatically calls the level-2-cache if it doesnt have the result)
@@ -1137,13 +1050,11 @@ function LolForums()
         // summoner not found
         
         // TODO: Add code to handle not found summoners.
-      
       });
     });
   }
 
-  this.replaceNames = function()
-  {
+  this.replaceNames = function() {
     var server = that.server;
     var allNames = $('.forum_post .avatar big');
     allNames.each(function(i, e) {
@@ -1151,11 +1062,11 @@ function LolForums()
       var name = bigNameElement.text();
       
       // charset encoding bugfixes for league forums
-      if (lfeOptions.data.charset)
-      {
+      if (lfeOptions.data.charset) {
         var name = _from_utf8(name);
       }
       
+      // TODO: Change to $(...).replaceWith(...);
       bigNameElement.html('\
         <button class="btn btn-link" style="margin: 0px; padding: 0px; font-weight: bold; font-size: 13px; line-height: 16px;">\
           '+ name + '\
@@ -1177,7 +1088,6 @@ function LolForums()
         onShown: function() {
           $('.summoner-clickover').on('click', function() {
             var link = $(this).attr('data-href');
-            //alert(link);
             GM_openInTab(link);
             $('#userscript-clickover-close').click();
           });
@@ -1186,76 +1096,38 @@ function LolForums()
     });
   }
   
-  this.getOwnName = function()
-  {
-    /* Old Version:
-    //TODO: Test languages on eune and asian servers. (euw and na working)
-    var raw = $("#lol-pvpnet-bar-account").find(".welcome_text").contents().first().text();
-    var match = raw.match(/.+, (.+)[\s]*\(/i)
-    if (match === null)
-    {
-      return null;
-    }
-    else
-    {
-      var name = match[1];
-      return name;
-    }
-    */
-    
+  this.getOwnName = function() {
     var name = $('#pvpnet-bar-account-button').text();
-    if (name == '')
-    {
+    if (name == '') {
       return null;
     }
-    else
-    {
+    else {
       return name;
     }
   }
   
-  this.replaceOwnAvatar = function(languageId)
-  {
-    // get name
+  this.replaceOwnAvatar = function(languageId) {
     var name = that.getOwnName();
-    
-    if (name != null)
-    {
-      // replace name
-      $("#userscript-avatar-name").text(name);
-      
-      // lookup subtitle
+    if (name != null) {
+      $('#userscript-avatar-name').text(name); // replace name
       var subtitle = that.localizations.get(languageId, 'avatarSub');
-      
-      // replace subtitle
-      $("#userscript-avatar-subtitle").text(subtitle);
+      $('#userscript-avatar-subtitle').text(subtitle); // replace subtitle
       
       // get summoner object
-      level1Cache.getSummoner(name, that.server,
-      function(summoner) {
-        // summoner found
-        
-        // replace image source
-        $("#userscript-avatar-icon").attr('src', GM_getResourceURL("icon" + summoner.data.profileIconId))
-        
-        // replace level
-        $("#userscript-avatar-level").text(summoner.data.summonerLevel);
-        
-        // save whole cache
+      level1Cache.getSummoner(name, that.server, function(summoner) {
+        // Summoner found:
+        $('#userscript-avatar-icon').attr('src', GM_getResourceURL('icon' + summoner.data.profileIconId)) // replace image source
+        $('#userscript-avatar-level').text(summoner.data.summonerLevel); // replace level
         level1Cache.saveCache();
-      },
-      function(summoner) {
-        // summoner not found
-        
+      }, function(summoner) {
+        // Summoner not found:
         // TODO: Add code to handle not found summoners.
       });
     }
   }
 
-  this.registerMenuCommands = function(userscript)
-  {
-    //var languageId = script.getCookie('bblanguageid');
-    var languageId = script.getCookie('LOLLANG');
+  this.registerMenuCommands = function(userscript) {
+    var languageId = script.getCookie('LOLLANG'); // get language from riot-implemented cookie
   
     // Force update
     GM_registerMenuCommand(that.localizations.get(languageId, 'forceUpdateCaption'), function() {
@@ -1270,10 +1142,12 @@ function LolForums()
           if (confirmInput) {
             alert(that.localizations.get(languageId, 'updatesStartMessage'));
             userscript.forceUpdate();
-          } else {
+          }
+          else {
             alert(that.localizations.get(languageId, 'updatesCanceledMessage'));
           }
-        } else {
+        }
+        else {
           alert(that.localizations.get(languageId, 'noUpdatesMessage'));
         }
       });
@@ -1285,91 +1159,67 @@ function LolForums()
       level1Cache.loadCache();
     }, 'C');
   }
-  
-  
 }
 
-function TestSuite()
-{
+function TestSuite() {
   var that = this;
   var tests = new Array();
 
-  this.add = function(caller, funct, args, outc, caption)
-  {
-    if ((typeof funct == "function") &&
-       (typeof caller == "object") &&
-       (typeof args == "object") &&
-       (typeof caption == "string"))
-    {
+  this.add = function(caller, funct, args, outc, caption) {
+    if ((typeof funct == 'function') &&
+       (typeof caller == 'object') &&
+       (typeof args == 'object') &&
+       (typeof caption == 'string')) {
       tests.push({ caller: caller, funct: funct, args: args, outc: outc, caption: caption });
     }
-    else
-    {
-      throw "Cannot add test. At least one argument is invalid.";
+    else {
+      throw 'Cannot add test. At least one argument is invalid.';
     }
   }
   
-  this.run = function()
-  {
-    for (var i = 0; i < tests.length; i++)
-    {
-      try
-      {
+  this.run = function() {
+    for (var i = 0; i < tests.length; i++) {
+      try {
         tests[i].out = tests[i].funct.apply(tests[i].caller, tests[i].args);
         if (tests[i].out === tests[i].outc) tests[i].result = true;
         else tests[i].result = false;
       }
-      catch (e)
-      {
+      catch (e) {
         tests[i].result = false;
         tests[i].error = e;
       }
     }
   }
   
-  this.getFailures = function()
-  {
+  this.getFailures = function() {
     var errors = new Array();
-    for (var i = 0; i < tests.length; i++)
-    {
+    for (var i = 0; i < tests.length; i++) {
       if (!tests[i].result) errors.push(tests[i]);
     }
-    return errors;  
+    return errors;
   }
   
-  this.getFailuresAsString = function()
-  {
-    var o = "";
-    for (var i = 0; i < that.getFailures().length; i++)
-    {
+  this.getFailuresAsString = function() {
+    var o = '';
+    for (var i = 0; i < that.getFailures().length; i++) {
       var f = that.getFailures()[i];
-      o += "Failure in " + f.funct.name + " (" + f.caption + ")" + "\nArguments: " + f.args.toString() + "\nExpected: " + f.outc + "\nResult: " + f.out + "\nErrors: " + f.error + "\n\n";
+      o += 'Failure in ' + f.funct.name + ' (' + f.caption + ')' + '\nArguments: ' + f.args.toString() + '\nExpected: ' + f.outc + '\nResult: ' + f.out + '\nErrors: ' + f.error + '\n\n';
     }
     return o;
   }
 }
 
-// Tooltip Testing:
-//var tt = $('<br><br><a id="tt-test" href="#" data-toggle="tooltip" title="first tooltip">hover over me</a>');
-//$('#post_message_11390315 > p:nth-child(1)').append(tt);
-//$('#tt-test').tooltip();
-
 
 /*******************************
  *    Start of Main Script     *
  *******************************/
-
+ 
 // Initiating main Objects
 var script = new Userscript();
 var forums = new LolForums();
-var options = lfeOptions;
 
-// load global script options
-lfeOptions.loadLocal();
-
-// get actual language
-//var languageId = script.getCookie('bblanguageid');
-var languageId = script.getCookie('LOLLANG');
+lfeOptions.loadLocal(); // load global script options
+var languageId = script.getCookie('LOLLANG'); // get actual language
 
 // css style changes
 script.addGlobalStyle(GM_getResourceText('globalcss'));
@@ -1377,8 +1227,7 @@ script.addGlobalStyle(GM_getResourceText('bootstrapcss'));
 
 // auto-updates
 var dismissed = script.getCookie('lfe-update-dismissed');
-if (lfeOptions.data.updates && !dismissed)
-{
+if (lfeOptions.data.updates && !dismissed) {
   script.updateNeccessary(function(updateNecc) {
     if (updateNecc) {
       $('body').prepend($(GM_getResourceText('update-alert')));
@@ -1469,23 +1318,13 @@ var postsObserver = new MutationObserver(function(mutations) {
 });
 var observerConfig = { childList: true, subtree: true };
 
-if (forums.server != null)
-{
-  // server found
-  
-  // replace own avatar (if name and avatar available)
-  forums.replaceOwnAvatar(languageId);
-  
-  // replace Names to provide linking
-  forums.replaceNames();
-  
-  // replace the summoner images and levels
-  forums.replaceAvatars();
-
-  // start observing #posts
-  postsObserver.observe(observerTarget, observerConfig);
+if (forums.server != null) {
+  // Server found:
+  forums.replaceOwnAvatar(languageId); // replace own avatar (if name and avatar available)
+  forums.replaceNames(); // replace Names and/to provide linking
+  forums.replaceAvatars(); // replace the summoner images and levels
+  postsObserver.observe(observerTarget, observerConfig); // start observing #posts
 }
-else
-{
-  // server not found
+else {
+  // Server not found:
 }
