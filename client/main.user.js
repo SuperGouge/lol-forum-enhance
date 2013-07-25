@@ -261,13 +261,13 @@ var level1Cache = {
       level2Cache.getSummoner(name, server, function(s) {
         // Summoner found:
         var summoner = s; // save summoner for this function
-        this.addSummoner(summoner); // add summoner to level1Cache
+        level1Cache.addSummoner(summoner); // add summoner to level1Cache
         found(summoner); // return summoner normally
       },
       function(s) {
         // Summoner not found:
         var summoner = s; // save summoner for this function
-        this.addSummoner(summoner); // add summoner to level1Cache
+        level1Cache.addSummoner(summoner); // add summoner to level1Cache
         notFound(s); // callback
       });
     }
@@ -997,8 +997,7 @@ function LolForums() {
   
   this.server = getServer();
   
-  function getServer()
-  {
+  function getServer() {
     // get the server from url
     var match = document.URL.match(/(na)|(euw)|(eune)|(br)/i); // TODO: Add other regions, check compatibility
     if (match != null) {
