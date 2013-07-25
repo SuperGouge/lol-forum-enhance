@@ -252,7 +252,7 @@ var level1Cache = {
   cachedSummoners: {},
   cachedSummonerString: 'SummonerCache',
   getSummoner: function(name, server, found, notFound) {
-    if (typeof this.cachedSummoners[name] != 'undefined') {
+    if (typeof this.cachedSummoners[name] !== 'undefined') {
       if (this.cachedSummoners[name].data.success) found(this.cachedSummoners[name]);
       else notFound(this.cachedSummoners[name]);
     }
@@ -1017,8 +1017,7 @@ function LolForums() {
   this.replaceAvatars = function() {
     // get all Left items except those of rioters.
     var allLeft = $('.forum_post img.user_summoner_icon').filter($('img[src="lol_theme/img/unknown_icon.jpg"]')).parent().parent().parent().parent();
-    allLeft.each(function(i, e)
-    {
+    allLeft.each(function(i, e) {
       var name = $(e).find('big').text();
       
       // replace whitespaces at the beginning and end
@@ -1028,9 +1027,8 @@ function LolForums() {
       var orb = $(e).find('span.left_orb');
       
       // Cache system (the level-1-cache automatically calls the level-2-cache if it doesnt have the result)
-      level1Cache.getSummoner(name, that.server,
-      function(summoner) {
-        // summoner found
+      level1Cache.getSummoner(name, that.server, function(summoner) {
+        // Summoner found:
         
         // replace image source
         image.attr('src', GM_getResourceURL("icon" + summoner.data.profileIconId))
@@ -1042,7 +1040,7 @@ function LolForums() {
         level1Cache.saveCache();
       },
       function(summoner) {
-        // summoner not found
+        // Summoner not found:
         
         // TODO: Add code to handle not found summoners.
       });
