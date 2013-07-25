@@ -1213,7 +1213,9 @@ function TestSuite() {
 /*******************************
  *    Start of Main Script     *
  *******************************/
- 
+
+MutationObserver = window.MutationObserver || window.WebKitMutationObserver; // Secure browser-compatibility for Chrome
+
 // Initiating main Objects
 var script = new Userscript();
 var forums = new LolForums();
