@@ -622,6 +622,37 @@ function LolForums() {
   this.server = getServer();
 
   this.localizations = {
+    defaultLang: 'en',
+    fallbackLang: 'en',
+    lookupLangKeyOrId: function(keyOrId) {
+      var output = this.fallbackLang;
+      if (typeof keyOrId === 'number') {
+        // keyOrId is int:
+        output = this.langIds[keyOrId];
+      }
+      else if (!isNaN(keyOrId)) {
+        // keyOrId is int as String:
+        output = this.langIds[parseInt(keyOrId)];
+      }
+      return output;
+    }
+    setDefaultLang: function(lang) {
+      this.defaultLang = this.lookupLangKeyOrId(lang);
+    },
+    get: function(key, lang) {
+      var l = lang;
+      if (typeof lang !== 'undefined') {
+        // lang is set:
+        l = this.lookupLangKeyOrId(lang);
+      }
+      else {
+        // lang is not set:
+        l = this.defaultLang;
+      }
+      var output = that.localizations[key][l];
+      if (output == '') output = that.localizations[key][this.fallbackLang];
+      return output;
+    },
     regions: {
       "na": "North America",
       "euw": "EU West",
@@ -966,20 +997,6 @@ function LolForums() {
     }
   };
   
-  this.localizations.get = function(lang, key) {
-    var l = lang;
-    if (typeof lang == 'number') {
-      l = that.localizations.langIds[lang];
-    }
-    else if (!isNaN(lang)) {
-      l = that.localizations.langIds[parseInt(lang)];
-    }
-    
-    var output = that.localizations[key][l];
-    if (output == '') output = that.localizations[key]['en'];
-    return output;
-  }
-  
   function getServer()
   {
     // get the server from url
@@ -1089,7 +1106,7 @@ function LolForums() {
     var name = that.getOwnName();
     if (name != null) {
       $('#userscript-avatar-name').text(name); // replace name
-      var subtitle = that.localizations.get(languageId, 'avatarSub');
+      var subtitle = that.localizations.get('avatarSub', languageId);
       $('#userscript-avatar-subtitle').text(subtitle); // replace subtitle
       
       // get summoner object
@@ -1109,31 +1126,31 @@ function LolForums() {
     var languageId = script.getCookie('LOLLANG'); // get language from riot-implemented cookie
   
     // Force update
-    GM_registerMenuCommand(that.localizations.get(languageId, 'forceUpdateCaption'), function() {
+    GM_registerMenuCommand(that.localizations.get('forceUpdateCaption', languageId), function() {
       userscript.forceUpdate();
     }, 'F');
     
     // Check for updates
-    GM_registerMenuCommand(that.localizations.get(languageId, 'checkUpdatesCaption'), function() {
+    GM_registerMenuCommand(that.localizations.get('checkUpdatesCaption', languageId), function() {
       userscript.updateNeccessary(function(updateNecc) {
         if (updateNecc) {
-          var confirmInput = confirm(that.localizations.get(languageId, 'updatesConfirmMessage'));
+          var confirmInput = confirm(that.localizations.get('updatesConfirmMessage', languageId));
           if (confirmInput) {
-            alert(that.localizations.get(languageId, 'updatesStartMessage'));
+            alert(that.localizations.get('updatesStartMessage', languageId));
             userscript.forceUpdate();
           }
           else {
-            alert(that.localizations.get(languageId, 'updatesCanceledMessage'));
+            alert(that.localizations.get('updatesCanceledMessage', languageId));
           }
         }
         else {
-          alert(that.localizations.get(languageId, 'noUpdatesMessage'));
+          alert(that.localizations.get('noUpdatesMessage', languageId));
         }
       });
     }, 'u');
     
     // Clear local cache
-    GM_registerMenuCommand(that.localizations.get(languageId, 'clearCacheCaption'), function() {
+    GM_registerMenuCommand(that.localizations.get('clearCacheCaption', languageId), function() {
       level1Cache.removeCache();
       level1Cache.loadCache();
     }, 'C');
@@ -1227,27 +1244,27 @@ if (lfeOptions.data.updates && !dismissed) {
 }
 
 // options modal
-var modalButton = $('<div id="lol-forum-enhance-settings" class="userscript-pvpnet-bar"><a href="#lfeOptionsModal" role="button" data-toggle="modal">' + forums.localizations.get(languageId, 'optionsModalButtonCaption') + '</a></div>');
+var modalButton = $('<div id="lol-forum-enhance-settings" class="userscript-pvpnet-bar"><a href="#lfeOptionsModal" role="button" data-toggle="modal">' + forums.localizations.get('optionsModalButtonCaption', languageId) + '</a></div>');
 var modal = $(GM_getResourceText('options-modal'));
 $('#pvpnet-bar-inner').prepend(modalButton);
 $('#forum_body').append(modal);
-$('#lfe-o-captions-title').text(forums.localizations.get(languageId, 'optionsModalTitleCaption'));
-$('#lfe-o-captions-updates').text(forums.localizations.get(languageId, 'optionsModalUpdatesCaption'));
-$('#lfe-o-captions-charset').text(forums.localizations.get(languageId, 'optionsModalCharsetCaption'));
-$('#lfe-o-captions-enlarge').text(forums.localizations.get(languageId, 'optionsModalEnlargeCaption'));
-$('#lfe-o-captions-avatar').text(forums.localizations.get(languageId, 'optionsModalAvatarCaption'));
-$('#lfe-o-captions-wt').text(forums.localizations.get(languageId, 'optionsModalWtCaption'));
-$('#lfe-o-captions-fek').text(forums.localizations.get(languageId, 'optionsModalFekCaption'));
-$('#lfe-o-captions-link').text(forums.localizations.get(languageId, 'optionsModalLinkCaption'));
-$('#lfe-o-captions-answers-on').text(forums.localizations.get(languageId, 'optionsModalAnswersOnCaption'));
-$('#lfe-o-captions-answers-off').text(forums.localizations.get(languageId, 'optionsModalAnswersOffCaption'));
-$('#lfe-o-captions-answers-posts').text(forums.localizations.get(languageId, 'optionsModalAnswersPostsCaption'));
-$('#lfe-o-captions-answers-threads').text(forums.localizations.get(languageId, 'optionsModalAnswersThreadsCaption'));
-$('#lfe-o-captions-answers-selection').text(forums.localizations.get(languageId, 'optionsModalAnswersSelectionCaption'));
-$('#lfe-o-captions-answers-none').text(forums.localizations.get(languageId, 'optionsModalAnswersNoneCaption'));
-$('#lfe-o-captions-preset-info').text(forums.localizations.get(languageId, 'optionsModalPresetInfoCaption'));
-$('#lfe-o-captions-button-save').text(forums.localizations.get(languageId, 'optionsModalButtonSaveCaption'));
-$('#lfe-o-captions-button-discard').text(forums.localizations.get(languageId, 'optionsModalButtonDiscardCaption'));
+$('#lfe-o-captions-title').text(forums.localizations.get('optionsModalTitleCaption', languageId));
+$('#lfe-o-captions-updates').text(forums.localizations.get('optionsModalUpdatesCaption', languageId));
+$('#lfe-o-captions-charset').text(forums.localizations.get('optionsModalCharsetCaption', languageId));
+$('#lfe-o-captions-enlarge').text(forums.localizations.get('optionsModalEnlargeCaption', languageId));
+$('#lfe-o-captions-avatar').text(forums.localizations.get('optionsModalAvatarCaption', languageId));
+$('#lfe-o-captions-wt').text(forums.localizations.get('optionsModalWtCaption', languageId));
+$('#lfe-o-captions-fek').text(forums.localizations.get('optionsModalFekCaption', languageId));
+$('#lfe-o-captions-link').text(forums.localizations.get('optionsModalLinkCaption', languageId));
+$('#lfe-o-captions-answers-on').text(forums.localizations.get('optionsModalAnswersOnCaption', languageId));
+$('#lfe-o-captions-answers-off').text(forums.localizations.get('optionsModalAnswersOffCaption', languageId));
+$('#lfe-o-captions-answers-posts').text(forums.localizations.get('optionsModalAnswersPostsCaption', languageId));
+$('#lfe-o-captions-answers-threads').text(forums.localizations.get('optionsModalAnswersThreadsCaption', languageId));
+$('#lfe-o-captions-answers-selection').text(forums.localizations.get('optionsModalAnswersSelectionCaption', languageId));
+$('#lfe-o-captions-answers-none').text(forums.localizations.get('optionsModalAnswersNoneCaption', languageId));
+$('#lfe-o-captions-preset-info').text(forums.localizations.get('optionsModalPresetInfoCaption', languageId));
+$('#lfe-o-captions-button-save').text(forums.localizations.get('optionsModalButtonSaveCaption', languageId));
+$('#lfe-o-captions-button-discard').text(forums.localizations.get('optionsModalButtonDiscardCaption', languageId));
 
 // Load options into modal when shown
 $('#lfeOptionsModal').on('shown', function () {
