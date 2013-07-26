@@ -1060,8 +1060,8 @@ function LolForums() {
                 bigNameElement.contents().replaceWith('<button class="btn btn-link userscript-name-button">' + name + '</button>');
                 bigNameElement.clickover({
                     content: '<div class="btn-group btn-group-vertical">' +
-                                  '<button class="btn btn-mini summoner-clickover" style="width: 160px" data-href="http://' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&showposts=1">Posts of this user</button>' +
-                                  '<button class="btn btn-mini summoner-clickover" style="width: 160px" data-href="http://' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&starteronly=1&showposts=0">Threads of this user</button>' +
+                                  '<button class="btn btn-small summoner-clickover" style="width: 160px" data-href="http://' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&showposts=1">Posts of this user</button>' + // TODO: Add localization
+                                  '<button class="btn btn-small summoner-clickover" style="width: 160px" data-href="http://' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&starteronly=1&showposts=0">Threads of this user</button>' + // TODO: Add localization
                               '</div>' +
                               '<button id="userscript-clickover-close" style="display: none;" data-toggle="button" data-dismiss="clickover">Close</button>',
                     animation: true,
@@ -1108,6 +1108,36 @@ function LolForums() {
                 // Summoner not found:
                 // TODO: Add code to handle not found summoners.
             });
+        }
+    };
+
+    this.replaceOwnName = function () {
+        var server = that.server;
+        e = $('#userscript-avatar-name');
+        if (!e.data('renamed')) {
+            var bigNameElement = e;
+            var name = bigNameElement.text();
+            if (lfeOptions.data.charset) name = _from_utf8(name); // charset encoding bugfixes for league forums
+            bigNameElement.contents().replaceWith('<button class="btn btn-link userscript-name-button">' + name + '</button>');
+            bigNameElement.clickover({
+                content: '<div class="btn-group btn-group-vertical">' +
+                              '<button class="btn btn-small summoner-clickover" style="width: 160px" data-href="http://' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&showposts=1">Posts of this user</button>' + // TODO: Add localization
+                              '<button class="btn btn-small summoner-clickover" style="width: 160px" data-href="http://' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&starteronly=1&showposts=0">Threads of this user</button>' + // TODO: Add localization
+                          '</div>' +
+                          '<button id="userscript-clickover-close" style="display: none;" data-toggle="button" data-dismiss="clickover">Close</button>',
+                animation: true,
+                html: true,
+                placement: 'top',
+                esc_close: 'false',
+                onShown: function () {
+                    $('.summoner-clickover').on('click', function () {
+                        var link = $(this).attr('data-href');
+                        GM_openInTab(link);
+                        $('#userscript-clickover-close').click();
+                    });
+                }
+            });
+            e.data('renamed', true);
         }
     };
 
@@ -1322,7 +1352,7 @@ var observerConfig = { childList: true, subtree: true };
 
 if (forums.server !== null) {
     // Server found:
-    // TODO: Replace Own Name
+    forums.replaceOwnName();
     forums.replaceOwnAvatar(); // replace own avatar (if name and avatar available)
     forums.replaceNames(); // replace Names and/to provide linking
     forums.replaceAvatars(); // replace the summoner images and levels
