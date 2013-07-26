@@ -1054,11 +1054,10 @@ function LolForums() {
         allNames.each(function (i, e) {
             e = $(e);
             if (!e.data('renamed')) {
-                var bigNameElement = e;
-                var name = bigNameElement.text();
+                var name = e.text();
                 if (lfeOptions.data.charset) name = _from_utf8(name); // charset encoding bugfixes for league forums
-                bigNameElement.contents().replaceWith('<button class="btn btn-link userscript-name-button">' + name + '</button>');
-                bigNameElement.clickover({
+                e.contents().replaceWith('<button class="btn btn-link userscript-name-button">' + name + '</button>');
+                e.clickover({
                     content: '<div class="btn-group btn-group-vertical">' +
                                   '<button class="btn btn-small summoner-clickover" style="width: 160px" data-href="http://' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&showposts=1">Posts of this user</button>' + // TODO: Add localization
                                   '<button class="btn btn-small summoner-clickover" style="width: 160px" data-href="http://' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&starteronly=1&showposts=0">Threads of this user</button>' + // TODO: Add localization
@@ -1094,7 +1093,6 @@ function LolForums() {
     this.replaceOwnAvatar = function () {
         var name = that.getOwnName();
         if (name !== null) {
-            $('#userscript-avatar-name').text(name); // replace name
             var subtitle = localizations.get('avatarSub');
             $('#userscript-avatar-subtitle').text(subtitle); // replace subtitle
 
@@ -1113,13 +1111,13 @@ function LolForums() {
 
     this.replaceOwnName = function () {
         var server = that.server;
+        var name = that.getOwnName();
         e = $('#userscript-avatar-name');
-        if (!e.data('renamed')) {
-            var bigNameElement = e;
-            var name = bigNameElement.text();
+        if ((!e.data('renamed')) && (name !== null)) {
             if (lfeOptions.data.charset) name = _from_utf8(name); // charset encoding bugfixes for league forums
-            bigNameElement.contents().replaceWith('<button class="btn btn-link userscript-name-button">' + name + '</button>');
-            bigNameElement.clickover({
+            e.text(name); // replace name
+            e.contents().replaceWith('<button class="btn btn-link userscript-name-button">' + name + '</button>');
+            e.clickover({
                 content: '<div class="btn-group btn-group-vertical">' +
                               '<button class="btn btn-small summoner-clickover" style="width: 160px" data-href="http://' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&showposts=1">Posts of this user</button>' + // TODO: Add localization
                               '<button class="btn btn-small summoner-clickover" style="width: 160px" data-href="http://' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&starteronly=1&showposts=0">Threads of this user</button>' + // TODO: Add localization
@@ -1352,7 +1350,7 @@ var observerConfig = { childList: true, subtree: true };
 
 if (forums.server !== null) {
     // Server found:
-    forums.replaceOwnName();
+    forums.replaceOwnName(); // replace own name to provide linking
     forums.replaceOwnAvatar(); // replace own avatar (if name and avatar available)
     forums.replaceNames(); // replace Names and/to provide linking
     forums.replaceAvatars(); // replace the summoner images and levels
