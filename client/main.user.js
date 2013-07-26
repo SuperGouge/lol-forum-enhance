@@ -1039,8 +1039,15 @@ function LolForums() {
             },
             function (summoner) {
                 // Summoner not found:
-
-                // TODO: Add code to handle not found summoners.
+                if (!image.data('overlayed')) {
+                    image.parent().append($('<div class="userscript-avatar-overlay">' +
+                                                '<span>' +
+                                                    'not found' +
+                                                '</span>' +
+                                            '</div>')); // TODO: Localization of 'not found'
+                    image.attr('src', GM_getResourceURL('iconNotFound'));
+                    image.data('overlayed', true);
+                }
             });
         });
     };

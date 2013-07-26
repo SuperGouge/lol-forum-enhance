@@ -124,3 +124,20 @@
   font-size: 13px;
   line-height: 16px;
 }
+
+.userscript-avatar-overlay {
+    position: absolute;
+    left: 33px;
+    right: 33px;
+    bottom: 12px;
+    font-size: 16px;
+}
+
+    .userscript-avatar-overlay span, .userscript-avatar-overlay span:hover {
+        height: auto !IMPORTANT;
+        width: auto !IMPORTANT;
+        display: block !IMPORTANT;
+        position: static !IMPORTANT;
+        bottom: 0px !IMPORTANT;
+        color: white;
+    }
