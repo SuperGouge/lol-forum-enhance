@@ -1222,8 +1222,8 @@ lfeOptions.loadLocal(); // load global userscript options
 localizations.defaultLang = script.getCookie('LOLLANG'); // set default language for localization from riot-implemented cookie
 
 // css style changes
-script.addGlobalStyle(GM_getResourceText('globalcss'));
 script.addGlobalStyle(GM_getResourceText('bootstrapcss'));
+script.addGlobalStyle(GM_getResourceText('globalcss'));
 
 // auto-updates
 var dismissed = script.getCookie('lfe-update-dismissed');
