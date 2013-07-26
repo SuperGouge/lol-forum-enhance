@@ -113,16 +113,16 @@
 }
 
 .userscript-name-button {
-  -webkit-user-select: text;
-  -khtml-user-select: text;
-  -moz-user-select: text;
-  -ms-user-select: text;
-  user-select: text;
-  margin: 0px;
-  padding: 0px;
-  font-weight: bold;
-  font-size: 13px;
-  line-height: 16px;
+    -webkit-user-select: text;
+    -khtml-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+    margin: 0px;
+    font-weight: bold;
+    padding: 0px !IMPORTANT;
+    font-size: 13px !IMPORTANT;
+    line-height: 16px !IMPORTANT;
 }
 
 .userscript-avatar-overlay {
