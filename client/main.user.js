@@ -1057,9 +1057,7 @@ function LolForums() {
                 name = _from_utf8(name);
             }
 
-            // TODO: Change to $(...).replaceWith(...);
-            bigNameElement.html('<button class="btn btn-link" style="margin: 0px; padding: 0px; font-weight: bold; font-size: 13px; line-height: 16px;">' + name + '</button>');
-
+            bigNameElement.contents().replaceWith('<button class="btn btn-link userscript-name-button">' + name + '</button>');
             bigNameElement.clickover({
                 content: '<div class="btn-group btn-group-vertical">' +
                               '<button class="btn btn-mini summoner-clickover" style="width: 160px" data-href="http://' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&showposts=1">Posts of this user</button>' +
