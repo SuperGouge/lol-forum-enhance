@@ -1192,6 +1192,21 @@ function TestSuite() {
     };
 }
 
+var pageHandler = {
+    runOn: function (expression, block) {
+        if (typeof block === 'undefined') throw 'block has to be defined!';
+        if (expression.test(document.URL)) {
+            block();
+        }
+    },
+    dontRunOn: function (expression, block) {
+        if (typeof block === 'undefined') throw 'block has to be defined!';
+        if (!expression.test(document.URL)) {
+            block();
+        }
+    }
+};
+
 
 /*******************************
  *    Start of Main Script     *
