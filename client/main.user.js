@@ -1314,13 +1314,15 @@ var observerTarget = document.querySelector('#posts');
 var postsObserver = new MutationObserver(function (mutations) {
     mutations.forEach(function (mutation) {
         // TODO: Check if forEach is needed, replaceAvatars itself traverses over posts.
-        forums.replaceAvatars();
+        forums.replaceNames(); // replace Names and/to provide linking
+        forums.replaceAvatars(); // replace the summoner images and levels
     });
 });
 var observerConfig = { childList: true, subtree: true };
 
 if (forums.server !== null) {
     // Server found:
+    // TODO: Replace Own Name
     forums.replaceOwnAvatar(); // replace own avatar (if name and avatar available)
     forums.replaceNames(); // replace Names and/to provide linking
     forums.replaceAvatars(); // replace the summoner images and levels
