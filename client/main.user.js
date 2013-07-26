@@ -1016,39 +1016,36 @@ function LolForums() {
         // get all Left items except those of rioters.
         var allLeft = $('.forum_post img.user_summoner_icon').filter($('img[src="lol_theme/img/unknown_icon.jpg"]')).parent().parent().parent().parent();
         allLeft.each(function (i, e) {
-            var name = $(e).find('big').text();
+            e = $(e);
+            if (!e.data('replaced')) {
+                var name = e.find('big').text();
+                name = name.replace(/(^\s*)|(\s*$)/g, ''); // replace whitespaces at the beginning and end
+                var orb = e.find('span.left_orb');
+                var image = e.find('img.user_summoner_icon');
 
-            // replace whitespaces at the beginning and end
-            name = name.replace(/(^\s*)|(\s*$)/g, '');
+                // Cache system (the level-1-cache automatically calls the level-2-cache if it doesnt have the result)
+                level1Cache.getSummoner(name, that.server, function (summoner) {
+                    // Summoner found:                
+                    image.attr('src', GM_getResourceURL("icon" + summoner.data.profileIconId)); // replace image source
+                    orb.text(summoner.data.summonerLevel); // replace level
+                    level1Cache.saveCache(); // save whole cache
 
-            var image = $(e).find('img.user_summoner_icon');
-            var orb = $(e).find('span.left_orb');
-
-            // Cache system (the level-1-cache automatically calls the level-2-cache if it doesnt have the result)
-            level1Cache.getSummoner(name, that.server, function (summoner) {
-                // Summoner found:
-
-                // replace image source
-                image.attr('src', GM_getResourceURL("icon" + summoner.data.profileIconId));
-
-                // replace level
-                orb.text(summoner.data.summonerLevel);
-
-                // save whole cache
-                level1Cache.saveCache();
-            },
-            function (summoner) {
-                // Summoner not found:
-                if (!image.data('overlayed')) {
-                    image.parent().append($('<div class="userscript-avatar-overlay">' +
-                                                '<span>' +
-                                                    'not found' +
-                                                '</span>' +
-                                            '</div>')); // TODO: Localization of 'not found'
-                    image.attr('src', GM_getResourceURL('iconNotFound'));
-                    image.data('overlayed', true);
-                }
-            });
+                },
+                function (summoner) {
+                    // Summoner not found:
+                    if (!image.data('overlayed')) {
+                        // TODO: Add code to handle not found summoners.
+                        image.parent().append($('<div class="userscript-avatar-overlay">' +
+                                                    '<span>' +
+                                                        'not found' +
+                                                    '</span>' +
+                                                '</div>'));
+                        image.attr('src', GM_getResourceURL('iconNotFound'));
+                        image.data('overlayed', true);
+                    }
+                });
+                e.data('replaced', true);
+            }
         });
     };
 
