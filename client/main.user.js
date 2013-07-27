@@ -3,8 +3,8 @@
 // @namespace   https://github.com/philippwiddra
 // @description Supplements the League of Legends forums and sites with additional functions.
 // @include     *.leagueoflegends.com/board/*
-// @downloadURL https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/main.user.js
-// @updateURL   https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/main.meta.js
+// @downloadURL https://raw.github.com/philippwiddra/lol-forum-enhance/refactoring/client/main.user.js
+// @updateURL   https://raw.github.com/philippwiddra/lol-forum-enhance/refactoring/client/main.meta.js
 // @version     0.7.0refactoring
 // @run-at      document-end
 // @grant       GM_xmlhttpRequest
@@ -17,18 +17,18 @@
 // @grant       GM_listValues
 // @grant       GM_openInTab
 // @grant       GM_registerMenuCommand
-// @resource    globalcss https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/global.css
+// @resource    globalcss https://raw.github.com/philippwiddra/lol-forum-enhance/refactoring/client/global.css
 // @require     http://code.jquery.com/jquery-2.0.2.min.js
-// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/global.js
-// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/avatar-div.js
-// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/toolkitVersions.js
-// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/bootstrap/js/bootstrap.min.js
-// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/bootstrapx-clickover/bootstrapx-clickover.js
-// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/aokura/unicode-utf8.js
-// @resource    bootstrapcss https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/bootstrap/css/bootstrap.min.css
-// @resource    options-modal https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/options-modal.html
-// @resource    update-alert https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/update-alert.html
-// @resource    avatardivhtml https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/avatar-div.html
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/refactoring/client/global.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/refactoring/client/avatar-div.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/refactoring/client/toolkitVersions.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/refactoring/client/bootstrap/js/bootstrap.min.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/refactoring/client/bootstrapx-clickover/bootstrapx-clickover.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/refactoring/client/aokura/unicode-utf8.js
+// @resource    bootstrapcss https://raw.github.com/philippwiddra/lol-forum-enhance/refactoring/client/bootstrap/css/bootstrap.min.css
+// @resource    options-modal https://raw.github.com/philippwiddra/lol-forum-enhance/refactoring/client/options-modal.html
+// @resource    update-alert https://raw.github.com/philippwiddra/lol-forum-enhance/refactoring/client/update-alert.html
+// @resource    avatardivhtml https://raw.github.com/philippwiddra/lol-forum-enhance/refactoring/client/avatar-div.html
 // @resource    iconUnknown http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/unknown.jpg
 // @resource    iconNotFound http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/notfound.jpg
 // @resource    icon0 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/0.jpg
@@ -168,6 +168,8 @@
 // @resource    icon568 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/568.jpg
 // @resource    icon569 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/569.jpg
 // ==/UserScript==
+
+// TODO: Change Branch back from refactoring to master again
 
 /*******************************
  *    Definition of Classes    *
