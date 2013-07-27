@@ -19,7 +19,6 @@
 // @grant       GM_registerMenuCommand
 // @resource    globalcss https://raw.github.com/philippwiddra/lol-forum-enhance/refactoring/client/global.css
 // @require     http://code.jquery.com/jquery-2.0.2.min.js
-// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/refactoring/client/global.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/refactoring/client/avatar-div.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/refactoring/client/toolkitVersions.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/refactoring/client/options-modal.js
