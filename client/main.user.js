@@ -1,11 +1,11 @@
-﻿// ==UserScript==
+// ==UserScript==
 // @name        LoL Forum Enhance
 // @namespace   https://github.com/philippwiddra
 // @description Supplements the League of Legends forums and sites with additional functions.
 // @include     *.leagueoflegends.com/board/*
 // @downloadURL https://raw.github.com/philippwiddra/lol-forum-enhance/refactoring/client/main.user.js
 // @updateURL   https://raw.github.com/philippwiddra/lol-forum-enhance/refactoring/client/main.meta.js
-// @version     0.7.0refactoring
+// @version     0.7.1refactoring
 // @run-at      document-end
 // @grant       GM_xmlhttpRequest
 // @grant       GM_getResourceText
@@ -22,6 +22,7 @@
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/refactoring/client/global.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/refactoring/client/avatar-div.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/refactoring/client/toolkitVersions.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/refactoring/client/options-modal.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/refactoring/client/bootstrap/js/bootstrap.min.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/refactoring/client/bootstrapx-clickover/bootstrapx-clickover.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/refactoring/client/aokura/unicode-utf8.js
@@ -963,66 +964,10 @@ if (lfeOptions.data.updates && !dismissed) {
     });
 }
 
-// options modal
-var modalButton = $('<div id="lol-forum-enhance-settings" class="userscript-pvpnet-bar"><a href="#lfeOptionsModal" role="button" data-toggle="modal">' + localizations.get('optionsModalButtonCaption') + '</a></div>');
-var modal = $(GM_getResourceText('options-modal'));
-$('#pvpnet-bar-inner').prepend(modalButton);
-$('#forum_body').append(modal);
-$('#lfe-o-captions-title').text(localizations.get('optionsModalTitleCaption'));
-$('#lfe-o-captions-updates').text(localizations.get('optionsModalUpdatesCaption'));
-$('#lfe-o-captions-charset').text(localizations.get('optionsModalCharsetCaption'));
-$('#lfe-o-captions-enlarge').text(localizations.get('optionsModalEnlargeCaption'));
-$('#lfe-o-captions-avatar').text(localizations.get('optionsModalAvatarCaption'));
-$('#lfe-o-captions-wt').text(localizations.get('optionsModalWtCaption'));
-$('#lfe-o-captions-fek').text(localizations.get('optionsModalFekCaption'));
-$('#lfe-o-captions-link').text(localizations.get('optionsModalLinkCaption'));
-$('.lfe-o-captions-answers-on').text(localizations.get('optionsModalAnswersOnCaption'));
-$('.lfe-o-captions-answers-off').text(localizations.get('optionsModalAnswersOffCaption'));
-$('.lfe-o-captions-answers-posts').text(localizations.get('optionsModalAnswersPostsCaption'));
-$('.lfe-o-captions-answers-threads').text(localizations.get('optionsModalAnswersThreadsCaption'));
-$('.lfe-o-captions-answers-selection').text(localizations.get('optionsModalAnswersSelectionCaption'));
-$('.lfe-o-captions-answers-none').text(localizations.get('optionsModalAnswersNoneCaption'));
-$('#lfe-o-captions-preset-info').text(localizations.get('optionsModalPresetInfoCaption'));
-$('#lfe-o-captions-button-save').text(localizations.get('optionsModalButtonSaveCaption'));
-$('#lfe-o-captions-button-discard').text(localizations.get('optionsModalButtonDiscardCaption'));
-
-// Load options into modal when shown
-$('#lfeOptionsModal').on('shown', function () {
-    $('#lfeOptionsModal button.active').removeClass('active');
-
-    if (lfeOptions.data.updates) $('#lfe-o-updates-on').addClass('active');
-    else $('#lfe-o-updates-off').addClass('active');
-
-    if (lfeOptions.data.charset) $('#lfe-o-charset-on').addClass('active');
-    else $('#lfe-o-charset-off').addClass('active');
-
-    if (lfeOptions.data.enlarge) $('#lfe-o-enlarge-on').addClass('active');
-    else $('#lfe-o-enlarge-off').addClass('active');
-
-    if (lfeOptions.data.avatar) $('#lfe-o-avatar-on').addClass('active');
-    else $('#lfe-o-avatar-off').addClass('active');
-
-    if (lfeOptions.data.wt) $('#lfe-o-wt-on').addClass('active');
-    else $('#lfe-o-wt-off').addClass('active');
-
-    if (lfeOptions.data.fek) $('#lfe-o-fek-on').addClass('active');
-    else $('#lfe-o-fek-off').addClass('active');
-
-    $('#lfe-o-link-' + lfeOptions.data.link).addClass('active');
-});
-
-// Register save-options function
-$('#lfe-o-save').click(function () {
-    lfeOptions.data.updates = $('#lfe-o-updates .active').data('value');
-    lfeOptions.data.charset = $('#lfe-o-charset .active').data('value');
-    lfeOptions.data.enlarge = $('#lfe-o-enlarge .active').data('value');
-    lfeOptions.data.avatar = $('#lfe-o-avatar .active').data('value');
-    lfeOptions.data.wt = $('#lfe-o-wt .active').data('value');
-    lfeOptions.data.fek = $('#lfe-o-fek .active').data('value');
-    lfeOptions.data.link = $('#lfe-o-link .active').data('value');
-    lfeOptions.saveLocal();
-    $('#lfeOptionsModal').modal('hide');
-});
+// options modal and button
+optionsModal.addButton();
+optionsModal.addModal();
+optionsModal.localize();
 
 // register greasemonkey userscript menu commands
 forums.registerMenuCommands(script);

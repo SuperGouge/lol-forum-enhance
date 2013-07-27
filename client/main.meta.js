@@ -1,11 +1,11 @@
-﻿// ==UserScript==
+// ==UserScript==
 // @name        LoL Forum Enhance
 // @namespace   https://github.com/philippwiddra
 // @description Supplements the League of Legends forums and sites with additional functions.
 // @include     *.leagueoflegends.com/board/*
 // @downloadURL https://raw.github.com/philippwiddra/lol-forum-enhance/refactoring/client/main.user.js
 // @updateURL   https://raw.github.com/philippwiddra/lol-forum-enhance/refactoring/client/main.meta.js
-// @version     0.7.0refactoring
+// @version     0.7.1refactoring
 // @run-at      document-end
 // @grant       GM_xmlhttpRequest
 // @grant       GM_getResourceText
@@ -22,6 +22,7 @@
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/refactoring/client/global.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/refactoring/client/avatar-div.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/refactoring/client/toolkitVersions.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/refactoring/client/options-modal.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/refactoring/client/bootstrap/js/bootstrap.min.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/refactoring/client/bootstrapx-clickover/bootstrapx-clickover.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/refactoring/client/aokura/unicode-utf8.js
