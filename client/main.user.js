@@ -427,6 +427,8 @@ if (riot.getForumServer() !== null) {
     posts.replaceNames(); // replace Names and/to provide linking
     posts.replaceAvatars(); // replace the summoner images and levels
     postsObserver.observe(observerTarget, observerConfig); // start observing #posts
+
+    forumDisplay.fixNamesIfEnabled(); // Replace misformated names in forum display
 }
 else {
     // Server not found:
