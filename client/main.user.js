@@ -190,7 +190,9 @@ var lfeOptions = {
     loadLocal: function () {
         try {
             var temp = GM_getValue(this.lfeOptionsString);
-            if (temp !== undefined) this.data = JSON.parse(temp);
+            if (temp !== undefined) {
+                $.extend(this.data, JSON.parse(temp));
+            }
         }
         catch (e) {
             if (e instanceof SyntaxError) {
