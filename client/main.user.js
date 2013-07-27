@@ -1,11 +1,11 @@
-// ==UserScript==
+﻿// ==UserScript==
 // @name        LoL Forum Enhance
 // @namespace   https://github.com/philippwiddra
 // @description Supplements the League of Legends forums and sites with additional functions.
 // @include     *.leagueoflegends.com/board/*
 // @downloadURL https://raw.github.com/philippwiddra/lol-forum-enhance/refactoring/client/main.user.js
 // @updateURL   https://raw.github.com/philippwiddra/lol-forum-enhance/refactoring/client/main.meta.js
-// @version     0.7.1refactoring
+// @version     0.7.3refactoring
 // @run-at      document-end
 // @grant       GM_xmlhttpRequest
 // @grant       GM_getResourceText
@@ -23,6 +23,10 @@
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/refactoring/client/avatar-div.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/refactoring/client/toolkitVersions.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/refactoring/client/options-modal.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/refactoring/client/userscript.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/refactoring/client/localizations.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/refactoring/client/caches.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/refactoring/client/edit-box.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/refactoring/client/bootstrap/js/bootstrap.min.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/refactoring/client/bootstrapx-clickover/bootstrapx-clickover.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/refactoring/client/aokura/unicode-utf8.js
@@ -172,10 +176,6 @@
 
 // TODO: Change Branch back from refactoring to master again
 
-/*******************************
- *    Definition of Classes    *
- *******************************/
-
 var lfeOptions = {
     lfeOptionsString: 'LFEOptions',
     data: {
@@ -214,7 +214,6 @@ var lfeOptions = {
         GM_setValue(this.lfeOptionsString, JSON.stringify(this.data));
     }
 };
- 
 function Summoner() {
     var that = this;
     this.data = {
@@ -236,477 +235,6 @@ function Summoner() {
         that.data = JSON.parse(json);
     };
 }
-
-var level2Cache = {
-    getSummonerUrl: 'http://www.piltover-libraries.net/lol-forum-enhance/getSummoner.php',
-    getSummoner: function (name, server, found, notFound) {
-        GM_xmlhttpRequest({
-            method: 'GET',
-            url: this.getSummonerUrl + '?summoner=' + encodeURIComponent(name) + '&server=' + server,
-            onload: function (response) {
-                var s = new Summoner();
-                s.fromJsonString(response.responseText);
-                if (s.data.success) found(s);
-                else notFound(s);
-            }
-        });
-    }
-};
-
-var level1Cache = {
-    cachedSummoners: {},
-    cachedSummonerString: 'SummonerCache',
-    getSummoner: function (name, server, found, notFound) {
-        if (typeof this.cachedSummoners[name] !== 'undefined') {
-            if (this.cachedSummoners[name].data.success) found(this.cachedSummoners[name]);
-            else notFound(this.cachedSummoners[name]);
-        }
-        else {
-            // Perform a level2Cache call
-            level2Cache.getSummoner(name, server, function (s) {
-                // Summoner found:
-                var summoner = s; // save summoner for this function
-                level1Cache.addSummoner(summoner); // add summoner to level1Cache
-                found(summoner); // return summoner normally
-            },
-            function (s) {
-                // Summoner not found:
-                var summoner = s; // save summoner for this function
-                level1Cache.addSummoner(summoner); // add summoner to level1Cache
-                notFound(s); // callback
-            });
-        }
-    },
-    loadCache: function () {
-        try {
-            this.cachedSummoners = JSON.parse(GM_getValue(this.cachedSummonerString, '{}'));
-        }
-        catch (e) {
-            if (e instanceof SyntaxError) {
-                // error in JSON.parse (input may be not valid JSON)
-                this.cachedSummoners = {};
-            }
-            else {
-                throw e;
-            }
-        }
-    },
-    cleanCache: function () {
-        var yesterday = new Date();
-        yesterday.setDate(yesterday.getDate() - 1); // get yesterdays Date
-        var temp = {};
-        for (var key in this.cachedSummoners) {
-            var match = this.cachedSummoners[key].data.currentDate.match(/(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})/);
-            var currentDate = new Date((+match[1]), (+match[2]) - 1, (+match[3]), (+match[4]), (+match[5]), (+match[6]));
-            if (this.cachedSummoners.hasOwnProperty(key)) {
-                // is Summonerdata not older than a day?
-                if (currentDate > yesterday) {
-                    temp[key] = this.cachedSummoners[key];
-                }
-            }
-        }
-        this.cachedSummoners = temp; // only persist newer summoners
-    },
-    removeCache: function () {
-        GM_deleteValue(this.cachedSummonerString);
-        this.cachedSummoners = {};
-    },
-    saveCache: function () {
-        GM_setValue(this.cachedSummonerString, JSON.stringify(this.cachedSummoners));
-    },
-    addSummoner: function (summoner) {
-        this.cachedSummoners[summoner.data.name] = summoner;
-    }
-};
-
-var localizations = {
-    defaultLang: 'en',
-    fallbackLang: 'en',
-    lookupLangKeyOrId: function (keyOrId) {
-        var output = this.fallbackLang;
-        if (typeof keyOrId === 'number') {
-            // keyOrId is int:
-            output = this.langIds[keyOrId];
-        }
-        else if (!isNaN(keyOrId)) {
-            // keyOrId is int as String:
-            output = this.langIds[parseInt(keyOrId, 10)];
-        }
-        return output;
-    },
-    setDefaultLang: function (lang) {
-        this.defaultLang = this.lookupLangKeyOrId(lang);
-    },
-    get: function (key, lang) {
-        var l = lang;
-        if (typeof lang !== 'undefined') {
-            // lang is set:
-            l = this.lookupLangKeyOrId(lang);
-        }
-        else {
-            // lang is not set:
-            l = this.defaultLang;
-        }
-        var output = this[key][l];
-        if (output === '') output = this[key][this.fallbackLang];
-        return output;
-    },
-    regions: {
-        "na": "North America",
-        "euw": "EU West",
-        "eune": "EU Nordic & East",
-        "br": "Brazil"
-    },
-    langIds: {
-        1: "en",
-        2: "de",
-        3: "es",
-        4: "fr",
-        5: "pl",
-        6: "ro",
-        7: "el",
-        8: "pt",
-        9: "tr",
-        11: "it"
-    },
-    langNamesEn: {
-        "en": "English",
-        "de": "German",
-        "es": "Spanish",
-        "fr": "French",
-        "pl": "Polish",
-        "ro": "Romanian",
-        "el": "Greek",
-        "pt": "Portuguese",
-        "tr": "Turkish",
-        "it": "Italian"
-    },
-    avatarSub: {
-        "en": "Me",
-        "de": "Ich",
-        "es": "Yo",
-        "fr": "Moi",
-        "pl": "Ja",
-        "ro": "Eu",
-        "el": "egó",
-        "pt": "Eu",
-        "tr": "ben",
-        "it": "I"
-    },
-    forceUpdateCaption: { // TODO: Add translations
-        "en": "Force update",
-        "de": "",
-        "es": "",
-        "fr": "Forcer mise à jour",
-        "pl": "",
-        "ro": "",
-        "el": "",
-        "pt": "",
-        "tr": "",
-        "it": ""
-    },
-    checkUpdatesCaption: { // TODO: Add translations
-        "en": "Check for updates",
-        "de": "",
-        "es": "",
-        "fr": "Chercher mises à jour",
-        "pl": "",
-        "ro": "",
-        "el": "",
-        "pt": "",
-        "tr": "",
-        "it": ""
-    },
-    updatesConfirmMessage: { // TODO: Add translations
-        "en": "There are updates available. Do you want to install them now?",
-        "de": "",
-        "es": "",
-        "fr": "Des mises à jour sont disponibles. Voulez-vous les installer maintenant ?",
-        "pl": "",
-        "ro": "",
-        "el": "",
-        "pt": "",
-        "tr": "",
-        "it": ""
-    },
-    updatesStartMessage: { // TODO: Add translations
-        "en": "Update started.\nPlease confirm the installation promt.",
-        "de": "",
-        "es": "",
-        "fr": "Mise à jour démarrée.\nVeuillez confirmer l'installation.",
-        "pl": "",
-        "ro": "",
-        "el": "",
-        "pt": "",
-        "tr": "",
-        "it": ""
-    },
-    updatesCanceledMessage: { // TODO: Add translations
-        "en": "Updating canceled.",
-        "de": "",
-        "es": "",
-        "fr": "Mise à jour annulée.",
-        "pl": "",
-        "ro": "",
-        "el": "",
-        "pt": "",
-        "tr": "",
-        "it": ""
-    },
-    noUpdatesMessage: { // TODO: Add translations
-        "en": "No updates available.\nYou are using the most recent version.",
-        "de": "",
-        "es": "",
-        "fr": "Aucune mise à jour disponible.\nVous utilisez la version la plus récente.",
-        "pl": "",
-        "ro": "",
-        "el": "",
-        "pt": "",
-        "tr": "",
-        "it": ""
-    },
-    clearCacheCaption: { // TODO: Add translations
-        "en": "Clear local cache",
-        "de": "",
-        "es": "",
-        "fr": "Vider le cache local",
-        "pl": "",
-        "ro": "",
-        "el": "",
-        "pt": "",
-        "tr": "",
-        "it": ""
-    },
-    aboutCaption: { // TODO: Add translations
-        "en": "About",
-        "de": "",
-        "es": "",
-        "fr": "",
-        "pl": "",
-        "ro": "",
-        "el": "",
-        "pt": "",
-        "tr": "",
-        "it": ""
-    },
-    optionsModalButtonCaption: { // TODO: Add translations
-        "en": "LFE Options",
-        "de": "",
-        "es": "",
-        "fr": "",
-        "pl": "",
-        "ro": "",
-        "el": "",
-        "pt": "",
-        "tr": "",
-        "it": ""
-    },
-    optionsModalTitleCaption: {  // TODO: Add translations
-        "en": "LoL Forum Enhance - Options",
-        "de": "",
-        "es": "",
-        "fr": "",
-        "pl": "",
-        "ro": "",
-        "el": "",
-        "pt": "",
-        "tr": "",
-        "it": ""
-    },
-    optionsModalUpdatesCaption: { // TODO: Add translations
-        "en": "Check for updates automatically:",
-        "de": "",
-        "es": "",
-        "fr": "",
-        "pl": "",
-        "ro": "",
-        "el": "",
-        "pt": "",
-        "tr": "",
-        "it": ""
-    },
-    optionsModalCharsetCaption: { // TODO: Add translations
-        "en": "Rework charset on displayed forum usernames:",
-        "de": "",
-        "es": "",
-        "fr": "",
-        "pl": "",
-        "ro": "",
-        "el": "",
-        "pt": "",
-        "tr": "",
-        "it": ""
-    },
-    optionsModalEnlargeCaption: { // TODO: Add translations
-        "en": "Enlarge Quick-Edit-Box:",
-        "de": "",
-        "es": "",
-        "fr": "",
-        "pl": "",
-        "ro": "",
-        "el": "",
-        "pt": "",
-        "tr": "",
-        "it": ""
-    },
-    optionsModalAvatarCaption: { // TODO: Add translations
-        "en": "Show own avatar next to Quick-Edit-Box:",
-        "de": "",
-        "es": "",
-        "fr": "",
-        "pl": "",
-        "ro": "",
-        "el": "",
-        "pt": "",
-        "tr": "",
-        "it": ""
-    },
-    optionsModalWtCaption: { // TODO: Add translations
-        "en": "Use Wrenchman's Tools Icons if available:",
-        "de": "",
-        "es": "",
-        "fr": "",
-        "pl": "",
-        "ro": "",
-        "el": "",
-        "pt": "",
-        "tr": "",
-        "it": ""
-    },
-    optionsModalFekCaption: { // TODO: Add translations
-        "en": "User Forum Enhancement Kit's Icons if available:",
-        "de": "",
-        "es": "",
-        "fr": "",
-        "pl": "",
-        "ro": "",
-        "el": "",
-        "pt": "",
-        "tr": "",
-        "it": ""
-    },
-    optionsModalLinkCaption: { // TODO: Add translations
-        "en": "Link usernames with:",
-        "de": "",
-        "es": "",
-        "fr": "",
-        "pl": "",
-        "ro": "",
-        "el": "",
-        "pt": "",
-        "tr": "",
-        "it": ""
-    },
-    optionsModalAnswersOnCaption: { // TODO: Add translations
-        "en": "On",
-        "de": "",
-        "es": "",
-        "fr": "",
-        "pl": "",
-        "ro": "",
-        "el": "",
-        "pt": "",
-        "tr": "",
-        "it": ""
-    },
-    optionsModalAnswersOffCaption: { // TODO: Add translations
-        "en": "Off",
-        "de": "",
-        "es": "",
-        "fr": "",
-        "pl": "",
-        "ro": "",
-        "el": "",
-        "pt": "",
-        "tr": "",
-        "it": ""
-    },
-    optionsModalAnswersPostsCaption: { // TODO: Add translations
-        "en": "Posts",
-        "de": "",
-        "es": "",
-        "fr": "",
-        "pl": "",
-        "ro": "",
-        "el": "",
-        "pt": "",
-        "tr": "",
-        "it": ""
-    },
-    optionsModalAnswersThreadsCaption: { // TODO: Add translations
-        "en": "Threads",
-        "de": "",
-        "es": "",
-        "fr": "",
-        "pl": "",
-        "ro": "",
-        "el": "",
-        "pt": "",
-        "tr": "",
-        "it": ""
-    },
-    optionsModalAnswersSelectionCaption: { // TODO: Add translations
-        "en": "Selection",
-        "de": "",
-        "es": "",
-        "fr": "",
-        "pl": "",
-        "ro": "",
-        "el": "",
-        "pt": "",
-        "tr": "",
-        "it": ""
-    },
-    optionsModalAnswersNoneCaption: { // TODO: Add translations
-        "en": "None",
-        "de": "",
-        "es": "",
-        "fr": "",
-        "pl": "",
-        "ro": "",
-        "el": "",
-        "pt": "",
-        "tr": "",
-        "it": ""
-    },
-    optionsModalPresetInfoCaption: { // TODO: Add translations
-        "en": "Preset values are presented in this color",
-        "de": "",
-        "es": "",
-        "fr": "",
-        "pl": "",
-        "ro": "",
-        "el": "",
-        "pt": "",
-        "tr": "",
-        "it": ""
-    },
-    optionsModalButtonSaveCaption: { // TODO: Add translations
-        "en": "Save changes",
-        "de": "",
-        "es": "",
-        "fr": "",
-        "pl": "",
-        "ro": "",
-        "el": "",
-        "pt": "",
-        "tr": "",
-        "it": ""
-    },
-    optionsModalButtonDiscardCaption: { // TODO: Add translations
-        "en": "Discard changes",
-        "de": "",
-        "es": "",
-        "fr": "",
-        "pl": "",
-        "ro": "",
-        "el": "",
-        "pt": "",
-        "tr": "",
-        "it": ""
-    }
-};
-
 var riot = {
     getOwnForumName: function () {
         var name = $('#pvpnet-bar-account-button').text();
@@ -719,91 +247,58 @@ var riot = {
         else return null;
     }
 };
-
-function Userscript() {
-    var that = this;
-
-    this.addGlobalStyle = function (css) {
-        try {
-            var elmHead, elmStyle;
-            elmHead = document.getElementsByTagName('head')[0];
-            elmStyle = document.createElement('style');
-            elmStyle.type = 'text/css';
-            elmHead.appendChild(elmStyle);
-            elmStyle.innerHTML = css;
+var pageHandler = {
+    runOn: function (expression, block) {
+        if (typeof block === 'undefined') throw 'block has to be defined!';
+        if (expression.test(document.URL)) {
+            block();
         }
-        catch (e) {
-            if (!document.styleSheets.length) {
-                document.createStyleSheet();
-            }
-            document.styleSheets[0].cssText += css;
+    },
+    dontRunOn: function (expression, block) {
+        if (typeof block === 'undefined') throw 'block has to be defined!';
+        if (!expression.test(document.URL)) {
+            block();
         }
-    };
+    }
+};
+function registerMenuCommands() {
+    // Force update
+    GM_registerMenuCommand(localizations.get('forceUpdateCaption'), function () {
+        userscript.forceUpdate();
+    }, 'F');
 
-    this.setCookie = function (name, value, expireMilliseconds) {
-        var expireDate = new Date();
-        expireDate.setTime(expireDate.getTime() + expireMilliseconds);
-        document.cookie = name + '=' + escape(value) + ((expireMilliseconds === null) ? '' : ';expires=' + expireDate.toGMTString());
-    };
-
-    this.getCookie = function (name) {
-        var value = document.cookie;
-        var start = value.indexOf(' ' + name + '=');
-        if (start === -1) {
-            start = value.indexOf(name + '=');
-        }
-        if (start === -1) {
-            value = null;
-        }
-        else {
-            start = value.indexOf('=', start) + 1;
-            var end = value.indexOf(';', start);
-            if (end === -1) {
-                end = value.length;
-            }
-            value = unescape(value.substring(start, end));
-        }
-        return value;
-    };
-
-    this.getLocalVersion = function () {
-        return GM_info.script.version;
-    };
-    this.getRemoteVersion = function (callback) {
-        var updateURL = GM_info.scriptMetaStr.match(/\@updateURL[ |\t]+(.+)/i)[1];
-        GM_xmlhttpRequest({
-            method: 'GET',
-            url: updateURL,
-            onload: function (response) {
-                if (response.status === 200) { // TODO: Replace "==". Is response.status a string or an int?
-                    var serverVersion = response.responseText.match(/\@version[ |\t]+(.+)/i)[1];
-                    callback(serverVersion);
+    // Check for updates
+    GM_registerMenuCommand(localizations.get('checkUpdatesCaption'), function () {
+        userscript.updateNeccessary(function (updateNecc) {
+            if (updateNecc) {
+                var confirmInput = confirm(localizations.get('updatesConfirmMessage'));
+                if (confirmInput) {
+                    alert(localizations.get('updatesStartMessage'));
+                    userscript.forceUpdate();
                 }
                 else {
-                    throw 'Http-Get-Request-Error: ' + response.status + ' - ' + response.statusText;
+                    alert(localizations.get('updatesCanceledMessage'));
                 }
             }
+            else {
+                alert(localizations.get('noUpdatesMessage'));
+            }
         });
-    };
-    this.updateNeccessary = function (callback) {
-        var currentVersion = that.getLocalVersion();
-        that.getRemoteVersion(function (remoteVersion) {
-            var comparison = toolkitVersions.compare(currentVersion, remoteVersion);
-            if (comparison < 0) callback(true);
-            else callback(false);
-        });
-    };
-    this.forceUpdate = function () {
-        var downloadURL = GM_info.scriptMetaStr.match(/\@downloadURL[ |\t]+(.+)/i)[1];
-        GM_openInTab(downloadURL);
-    };
+    }, 'u');
+
+    // Clear local cache
+    GM_registerMenuCommand(localizations.get('clearCacheCaption'), function () {
+        level1Cache.removeCache();
+        level1Cache.loadCache();
+    }, 'C');
+
+    // About
+    GM_registerMenuCommand(localizations.get('aboutCaption'), function () {
+        GM_openInTab('https://github.com/philippwiddra/lol-forum-enhance');
+    }, 'A');
 }
-
-function LolForums() { // TODO: Remove
-    var that = this;
-    
-
-    this.replaceAvatars = function () {
+var posts = {
+    replaceAvatars: function () {
         // get all Left items except those of rioters.
         var allLeft = $('.forum_post img.user_summoner_icon').filter($('img[src="lol_theme/img/unknown_icon.jpg"]')).parent().parent().parent().parent();
         allLeft.each(function (i, e) {
@@ -837,9 +332,8 @@ function LolForums() { // TODO: Remove
                 e.data('replaced', true);
             }
         });
-    };
-
-    this.replaceNames = function () {
+    },
+    replaceNames: function () {
         var server = riot.getForumServer();
         var allNames = $('.forum_post .avatar big');
         allNames.each(function (i, e) {
@@ -869,80 +363,24 @@ function LolForums() { // TODO: Remove
                 e.data('renamed', true);
             }
         });
-    };
-
-    this.registerMenuCommands = function (userscript) {
-        // Force update
-        GM_registerMenuCommand(localizations.get('forceUpdateCaption'), function () {
-            userscript.forceUpdate();
-        }, 'F');
-
-        // Check for updates
-        GM_registerMenuCommand(localizations.get('checkUpdatesCaption'), function () {
-            userscript.updateNeccessary(function (updateNecc) {
-                if (updateNecc) {
-                    var confirmInput = confirm(localizations.get('updatesConfirmMessage'));
-                    if (confirmInput) {
-                        alert(localizations.get('updatesStartMessage'));
-                        userscript.forceUpdate();
-                    }
-                    else {
-                        alert(localizations.get('updatesCanceledMessage'));
-                    }
-                }
-                else {
-                    alert(localizations.get('noUpdatesMessage'));
-                }
-            });
-        }, 'u');
-
-        // Clear local cache
-        GM_registerMenuCommand(localizations.get('clearCacheCaption'), function () {
-            level1Cache.removeCache();
-            level1Cache.loadCache();
-        }, 'C');
-
-        // About
-        GM_registerMenuCommand(localizations.get('aboutCaption'), function () {
-            GM_openInTab('https://github.com/philippwiddra/lol-forum-enhance');
-        }, 'A');
-    };
+    }
 }
 
-var pageHandler = {
-    runOn: function (expression, block) {
-        if (typeof block === 'undefined') throw 'block has to be defined!';
-        if (expression.test(document.URL)) {
-            block();
-        }
-    },
-    dontRunOn: function (expression, block) {
-        if (typeof block === 'undefined') throw 'block has to be defined!';
-        if (!expression.test(document.URL)) {
-            block();
-        }
-    }
-};
-
-
-/*******************************
- *    Start of Main Script     *
- *******************************/
+// Start of Main Script:
 
 var MutationObserver = window.MutationObserver || window.WebKitMutationObserver; // Secure browser-compatibility for Chrome
 
-// Initiating main Objects
-var script = new Userscript(); // TODO: Remove
-var forums = new LolForums(); // TODO: Remove
 level1Cache.loadCache(); // load local Cache
 level1Cache.cleanCache(); // clean old objects out of local Cache
 
 lfeOptions.loadLocal(); // load global userscript options
-localizations.defaultLang = script.getCookie('LOLLANG'); // set default language for localization from riot-implemented cookie
+localizations.defaultLang = userscript.getCookie('LOLLANG'); // set default language for localization from riot-implemented cookie
 
 // css style changes
-script.addGlobalStyle(GM_getResourceText('bootstrapcss')); // add own css styles after that, to make sure they have priority
-script.addGlobalStyle(GM_getResourceText('globalcss'));
+userscript.addGlobalStyle(GM_getResourceText('bootstrapcss')); // add own css styles after that, to make sure they have priority
+userscript.addGlobalStyle(GM_getResourceText('globalcss'));
+
+editBox.rework(); // Change (quick) edit box style
 
 // auto-updates
 var dismissed = script.getCookie('lfe-update-dismissed');
@@ -969,8 +407,7 @@ optionsModal.addButton();
 optionsModal.addModal();
 optionsModal.localize();
 
-// register greasemonkey userscript menu commands
-forums.registerMenuCommands(script);
+registerMenuCommands(); // register greasemonkey userscript menu commands
 
 // create an observer for the #posts div instance
 var observerTarget = document.querySelector('#posts');
@@ -978,8 +415,8 @@ var postsObserver = new MutationObserver(function (mutations) {
     mutations.forEach(function (mutation) {
         // TODO: Check if forEach is needed, replaceAvatars itself traverses over posts.
         // TODO: Check if attaching avatarDiv and replacing Data is needed in case of logging in without site reload.
-        forums.replaceNames(); // replace Names and/to provide linking
-        forums.replaceAvatars(); // replace the summoner images and levels
+        posts.replaceNames(); // replace Names and/to provide linking
+        posts.replaceAvatars(); // replace the summoner images and levels
     });
 });
 var observerConfig = { childList: true, subtree: true };
@@ -988,8 +425,8 @@ if (riot.getForumServer() !== null) {
     // Server found:
     avatarDiv.attach();
     avatarDiv.replaceData(); // replace own avatar (if name and avatar available) and provide linking
-    forums.replaceNames(); // replace Names and/to provide linking
-    forums.replaceAvatars(); // replace the summoner images and levels
+    posts.replaceNames(); // replace Names and/to provide linking
+    posts.replaceAvatars(); // replace the summoner images and levels
     postsObserver.observe(observerTarget, observerConfig); // start observing #posts
 }
 else {
