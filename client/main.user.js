@@ -364,7 +364,7 @@ var posts = {
             }
         });
     }
-}
+};
 
 // Start of Main Script:
 
@@ -427,7 +427,7 @@ if (riot.getForumServer() !== null) {
     avatarDiv.replaceData(); // replace own avatar (if name and avatar available) and provide linking
     posts.replaceNames(); // replace Names and/to provide linking
     posts.replaceAvatars(); // replace the summoner images and levels
-    postsObserver.observe(observerTarget, observerConfig); // start observing #posts
+    if (observerTarget) postsObserver.observe(observerTarget, observerConfig); // start observing #posts
 
     forumDisplay.fixNamesIfEnabled(); // Replace misformated names in forum display
 }
