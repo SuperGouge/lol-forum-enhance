@@ -5,7 +5,7 @@
 // @include     *.leagueoflegends.com/board/*
 // @downloadURL https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/main.user.js
 // @updateURL   https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/main.meta.js
-// @version     0.6.1
+// @version     0.7.0refactoring
 // @run-at      document-end
 // @grant       GM_xmlhttpRequest
 // @grant       GM_getResourceText
@@ -20,12 +20,15 @@
 // @resource    globalcss https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/global.css
 // @require     http://code.jquery.com/jquery-2.0.2.min.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/global.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/avatar-div.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/toolkitVersions.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/bootstrap/js/bootstrap.min.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/bootstrapx-clickover/bootstrapx-clickover.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/aokura/unicode-utf8.js
 // @resource    bootstrapcss https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/bootstrap/css/bootstrap.min.css
 // @resource    options-modal https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/options-modal.html
 // @resource    update-alert https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/update-alert.html
+// @resource    avatardivhtml https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/avatar-div.html
 // @resource    iconUnknown http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/unknown.jpg
 // @resource    iconNotFound http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/notfound.jpg
 // @resource    icon0 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/0.jpg
@@ -689,6 +692,19 @@ var localizations = {
     }
 };
 
+var riot = {
+    getOwnForumName: function () {
+        var name = $('#pvpnet-bar-account-button').text();
+        if (name === '') return null;
+        else return name;
+    },
+    getForumServer: function () {
+        var match = document.URL.match(/^(?:http\:\/\/)?(na|euw|eune|br)\.leagueoflegends\.com(?:\/.*)?$/i);
+        if (match !== null) return match[1];
+        else return null;
+    }
+};
+
 function Userscript() {
     var that = this;
 
@@ -735,226 +751,6 @@ function Userscript() {
         return value;
     };
 
-    function ToolkitVersion() {
-        var that = this;
-        var orig = '';
-        var versionParts = [];
-
-        this.setVersion = function (string) {
-            orig = string;
-            var splits = string.split('.');
-            for (var i = 0; i < splits.length; i++) {
-                var vp = new ToolkitVersionPart();
-                vp.setVersionPart(splits[i]);
-                versionParts.push(vp);
-            }
-        };
-
-        this.getOrig = function () { return orig; };
-        this.getComputedStr = function () {
-            var strOut = '';
-            for (var i = 0; i < (versionParts.length - 1) ; i++) {
-                strOut += versionParts[i].getComputedStr();
-                strOut += '.';
-            }
-            // add last versionPart
-            strOut += versionParts[(versionParts.length - 1)].getComputedStr();
-            return strOut;
-        };
-        this.getVersionParts = function () { return versionParts.slice(); };
-
-        this.isGreaterThan = function (version) {
-            var vp1 = versionParts;
-            var vp2 = version.getVersionParts();
-            var l;
-            if (vp1.length > vp2.length) l = vp1.length;
-            else l = vp2.length;
-            for (var i = 0; i < l; i++) {
-                // set not defined versionParts to defaults (occurrs when one version has more parts than the other)
-                if (vp1[i] === undefined) vp1[i] = new ToolkitVersionPart();
-                if (vp2[i] === undefined) vp2[i] = new ToolkitVersionPart();
-                if (vp1[i].isGreaterThan(vp2[i])) return true;
-                if (vp1[i].isLowerThan(vp2[i])) return false;
-            }
-            // equal
-            return false;
-        };
-        this.isLowerThan = function (version) {
-            var vp1 = versionParts;
-            var vp2 = version.getVersionParts();
-            var l;
-            if (vp1.length > vp2.length) l = vp1.length;
-            else l = vp2.length;
-            for (var i = 0; i < l; i++) {
-                // set not defined versionParts to defaults (occurrs when one version has more parts than the other)
-                if (vp1[i] === undefined) vp1[i] = new ToolkitVersionPart();
-                if (vp2[i] === undefined) vp2[i] = new ToolkitVersionPart();
-                if (vp1[i].isGreaterThan(vp2[i])) return false;
-                if (vp1[i].isLowerThan(vp2[i])) return true;
-            }
-            // equal
-            return false;
-        };
-        this.isEqualTo = function (version) {
-            var vp1 = versionParts;
-            var vp2 = version.getVersionParts();
-            var l;
-            if (vp1.length > vp2.length) l = vp1.length;
-            else l = vp2.length;
-            for (var i = 0; i < l; i++) {
-                // set not defined versionParts to defaults (occurrs when one version has more parts than the other)
-                if (vp1[i] === undefined) vp1[i] = new ToolkitVersionPart();
-                if (vp2[i] === undefined) vp2[i] = new ToolkitVersionPart();
-                if (!vp1[i].isEqualTo(vp2[i])) return false;
-            }
-            // equal
-            return true;
-        };
-    }
-
-    function ToolkitVersionPart() {
-        var that = this;
-        var orig = '';
-        var numA = 0;
-        var strB = '';
-        var numC = 0;
-        var strD = '';
-
-        this.setVersionPart = function (string) {
-            orig = string;
-            var m = string.match(/^([0-9-]+)?([^\d]+)?([0-9-]+)?(.+)?$/i);
-
-            numA = parseInt(m[1], 10);
-            strB = m[2];
-            numC = parseInt(m[3], 10);
-            strD = m[4];
-
-            if (isNaN(numA)) numA = 0;
-            if (strB === undefined) strB = '';
-            if (isNaN(numC)) numC = 0;
-            if (strD === undefined) strD = '';
-
-            // VersionPart rules:
-
-            // * --> (infinity)
-            if (orig === '*') {
-                numA = Number.POSITIVE_INFINITY;
-                strB = '';
-                numC = 0;
-                strD = '';
-            }
-
-            // 1.1+ --> 1.2pre
-            if (strB === '+') {
-                numA++;
-                strB = 'pre';
-            }
-        };
-
-        this.getOrig = function () { return orig; };
-        this.getNumA = function () { return numA; };
-        this.getStrB = function () { return strB; };
-        this.getNumC = function () { return numC; };
-        this.getStrD = function () { return strD; };
-        this.getComputedStr = function () {
-            var str = '';
-            if (numA !== 0) str += numA.toString();
-            str += strB;
-            if (numC !== 0) str += numC.toString();
-            str += strD;
-            return str;
-        };
-
-        this.isGreaterThan = function (versionPart) {
-            var cNumA = compareNum(numA, versionPart.getNumA());
-            if (cNumA === 1) return true;
-            else if (cNumA === 2) return false;
-
-            var cStrB = compareStr(strB, versionPart.getStrB());
-            if (cStrB === 1) return true;
-            else if (cStrB === 2) return false;
-
-            var cNumC = compareNum(numC, versionPart.getNumC());
-            if (cNumC === 1) return true;
-            else if (cNumC === 2) return false;
-
-            var cStrD = compareStr(strD, versionPart.getStrD());
-            if (cStrD === 1) return true;
-            else if (cStrD === 2) return false;
-
-            // equal
-            return false;
-        };
-        this.isLowerThan = function (versionPart) {
-            var cNumA = compareNum(numA, versionPart.getNumA());
-            if (cNumA === 1) return false;
-            else if (cNumA === 2) return true;
-
-            var cStrB = compareStr(strB, versionPart.getStrB());
-            if (cStrB === 1) return false;
-            else if (cStrB === 2) return true;
-
-            var cNumC = compareNum(numC, versionPart.getNumC());
-            if (cNumC === 1) return false;
-            else if (cNumC === 2) return true;
-
-            var cStrD = compareStr(strD, versionPart.getStrD());
-            if (cStrD === 1) return false;
-            else if (cStrD === 2) return true;
-
-            // equal
-            return false;
-        };
-        this.isEqualTo = function (versionPart) {
-            var cNumA = compareNum(numA, versionPart.getNumA());
-            if (cNumA !== 0) return false;
-
-            var cStrB = compareStr(strB, versionPart.getStrB());
-            if (cStrB !== 0) return false;
-
-            var cNumC = compareNum(numC, versionPart.getNumC());
-            if (cNumC !== 0) return false;
-
-            var cStrD = compareStr(strD, versionPart.getStrD());
-            if (cStrD !== 0) return false;
-
-            // equal
-            return true;
-        };
-
-        // always returns number of greater element (0 if equal)
-        function compareNum(num1, num2) {
-            if (num1 > num2) return 1;
-            else if (num2 > num1) return 2;
-            else return 0;
-        }
-        function compareStr(str1, str2) {
-            if ((str1 === '') && (str2 === '')) return 0;
-            else if ((str1 === '') && (str2 !== '')) return 1;
-            else if ((str1 !== '') && (str2 === '')) return 2;
-            else if (str1 > str2) return 1;
-            else if (str2 > str1) return 2;
-            else return 0;
-        }
-    }
-
-    this.compareVersions = function (a, b) {
-        // (a = b) --> 0
-        // (a < b) --> -1
-        // (a > b) --> 1
-
-        var vA = new ToolkitVersion();
-        var vB = new ToolkitVersion();
-
-        vA.setVersion(a);
-        vB.setVersion(b);
-
-        if (vA.isEqualTo(vB)) return 0;
-        else if (vA.isLowerThan(vB)) return -1;
-        else if (vA.isGreaterThan(vB)) return 1;
-        else throw 'Version comparation error occurred.';
-    };
-
     this.getLocalVersion = function () {
         return GM_info.script.version;
     };
@@ -977,7 +773,7 @@ function Userscript() {
     this.updateNeccessary = function (callback) {
         var currentVersion = that.getLocalVersion();
         that.getRemoteVersion(function (remoteVersion) {
-            var comparison = that.compareVersions(currentVersion, remoteVersion);
+            var comparison = toolkitVersions.compare(currentVersion, remoteVersion);
             if (comparison < 0) callback(true);
             else callback(false);
         });
@@ -988,29 +784,10 @@ function Userscript() {
     };
 }
 
-function LolForums() {
+function LolForums() { // TODO: Remove
     var that = this;
     level1Cache.loadCache();
     level1Cache.cleanCache();
-
-    this.server = getServer();
-
-    function getServer() {
-        // get the server from url
-        var match = document.URL.match(/(na)|(euw)|(eune)|(br)/i); // TODO: Add other regions, check compatibility
-        if (match !== null) {
-            // server found
-            return match[0];
-        }
-        else {
-            // server not found
-            return null;
-        }
-    }
-
-    this.countAllPosts = function () {
-        return $('.forum_post img.user_summoner_icon').parent().parent().parent().parent().length;
-    };
 
     this.replaceAvatars = function () {
         // get all Left items except those of rioters.
@@ -1024,7 +801,7 @@ function LolForums() {
                 var image = e.find('img.user_summoner_icon');
 
                 // Cache system (the level-1-cache automatically calls the level-2-cache if it doesnt have the result)
-                level1Cache.getSummoner(name, that.server, function (summoner) {
+                level1Cache.getSummoner(name, riot.getForumServer(), function (summoner) {
                     // Summoner found:                
                     image.attr('src', GM_getResourceURL("icon" + summoner.data.profileIconId)); // replace image source
                     orb.text(summoner.data.summonerLevel); // replace level
@@ -1049,7 +826,7 @@ function LolForums() {
     };
 
     this.replaceNames = function () {
-        var server = that.server;
+        var server = riot.getForumServer();
         var allNames = $('.forum_post .avatar big');
         allNames.each(function (i, e) {
             e = $(e);
@@ -1080,18 +857,8 @@ function LolForums() {
         });
     };
 
-    this.getOwnName = function () {
-        var name = $('#pvpnet-bar-account-button').text();
-        if (name === '') {
-            return null;
-        }
-        else {
-            return name;
-        }
-    };
-
     this.replaceOwnAvatar = function () {
-        var name = that.getOwnName();
+        var name = riot.getOwnForumName();
         if (name !== null) {
             var subtitle = localizations.get('avatarSub');
             $('#userscript-avatar-subtitle').text(subtitle); // replace subtitle
@@ -1110,8 +877,8 @@ function LolForums() {
     };
 
     this.replaceOwnName = function () {
-        var server = that.server;
-        var name = that.getOwnName();
+        var server = riot.getForumServer();
+        var name = riot.getOwnForumName();
         e = $('#userscript-avatar-name');
         if ((!e.data('renamed')) && (name !== null)) {
             if (lfeOptions.data.charset) name = _from_utf8(name); // charset encoding bugfixes for league forums
@@ -1169,54 +936,6 @@ function LolForums() {
             level1Cache.removeCache();
             level1Cache.loadCache();
         }, 'C');
-    };
-}
-
-function TestSuite() {
-    var that = this;
-    var tests = [];
-
-    this.add = function (caller, funct, args, outc, caption) {
-        if ((typeof funct === 'function') &&
-           (typeof caller === 'object') &&
-           (typeof args === 'object') &&
-           (typeof caption === 'string')) {
-            tests.push({ caller: caller, funct: funct, args: args, outc: outc, caption: caption });
-        }
-        else {
-            throw 'Cannot add test. At least one argument is invalid.';
-        }
-    };
-
-    this.run = function () {
-        for (var i = 0; i < tests.length; i++) {
-            try {
-                tests[i].out = tests[i].funct.apply(tests[i].caller, tests[i].args);
-                if (tests[i].out === tests[i].outc) tests[i].result = true;
-                else tests[i].result = false;
-            }
-            catch (e) {
-                tests[i].result = false;
-                tests[i].error = e;
-            }
-        }
-    };
-
-    this.getFailures = function () {
-        var errors = [];
-        for (var i = 0; i < tests.length; i++) {
-            if (!tests[i].result) errors.push(tests[i]);
-        }
-        return errors;
-    };
-
-    this.getFailuresAsString = function () {
-        var o = '';
-        for (var i = 0; i < that.getFailures().length; i++) {
-            var f = that.getFailures()[i];
-            o += 'Failure in ' + f.funct.name + ' (' + f.caption + ')' + '\nArguments: ' + f.args.toString() + '\nExpected: ' + f.outc + '\nResult: ' + f.out + '\nErrors: ' + f.error + '\n\n';
-        }
-        return o;
     };
 }
 
@@ -1342,16 +1061,17 @@ var observerTarget = document.querySelector('#posts');
 var postsObserver = new MutationObserver(function (mutations) {
     mutations.forEach(function (mutation) {
         // TODO: Check if forEach is needed, replaceAvatars itself traverses over posts.
+        // TODO: Check if attaching avatarDiv and replacing Data is needed in case of logging in without site reload.
         forums.replaceNames(); // replace Names and/to provide linking
         forums.replaceAvatars(); // replace the summoner images and levels
     });
 });
 var observerConfig = { childList: true, subtree: true };
 
-if (forums.server !== null) {
+if (riot.getForumServer() !== null) {
     // Server found:
-    forums.replaceOwnName(); // replace own name to provide linking
-    forums.replaceOwnAvatar(); // replace own avatar (if name and avatar available)
+    avatarDiv.attach();
+    avatarDiv.replaceData(); // replace own avatar (if name and avatar available) and provide linking
     forums.replaceNames(); // replace Names and/to provide linking
     forums.replaceAvatars(); // replace the summoner images and levels
     postsObserver.observe(observerTarget, observerConfig); // start observing #posts

@@ -1,5 +1,20 @@
 # Notes
 
+## Supported Servers
+
+- Does work:
+	- `na`
+	- `euw`
+	- `eune`
+	- `br`
+- Could work (not *Elophant* supported):
+	- `tr`
+	- `ru`
+- Completely new Styled (won't work without huge userscript reworks):
+	- `lan`
+	- `oce`
+	- `las`
+
 ## Tooltip Testing
 
 ``` javascript

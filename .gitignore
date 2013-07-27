@@ -24,6 +24,8 @@ client/bootstrap/img/Thumbs.db
 *.csproj
 *.config
 [Pp]roperties/
+WE-Markdown.css
+WE-Palette.css
 
 *.suo
 *.user
