@@ -382,19 +382,19 @@ userscript.addGlobalStyle(GM_getResourceText('globalcss'));
 editBox.rework(); // Change (quick) edit box style
 
 // auto-updates
-var dismissed = script.getCookie('lfe-update-dismissed');
+var dismissed = userscript.getCookie('lfe-update-dismissed');
 if (lfeOptions.data.updates && !dismissed) {
-    script.updateNeccessary(function (updateNecc) {
+    userscript.updateNeccessary(function (updateNecc) {
         if (updateNecc) {
             $('body').prepend($(GM_getResourceText('update-alert')));
             // TODO: Add localization for update alert.
 
             $('#lfe-update-dismiss').on('click', function () {
-                script.setCookie('lfe-update-dismissed', 'true', 60 * 60 * 1000);
+                userscript.setCookie('lfe-update-dismissed', 'true', 60 * 60 * 1000);
             });
 
             $('#lfe-update-install').on('click', function () {
-                script.forceUpdate();
+                userscript.forceUpdate();
                 $('#lfe-update-alert').remove();
             });
         }

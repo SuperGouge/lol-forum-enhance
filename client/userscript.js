@@ -59,7 +59,7 @@ var userscript = {
         });
     },
     updateNeccessary: function (callback) {
-        var currentVersion = that.getLocalVersion();
+        var currentVersion = userscript.getLocalVersion();
         userscript.getRemoteVersion(function (remoteVersion) {
             var comparison = toolkitVersions.compare(currentVersion, remoteVersion);
             if (comparison < 0) callback(true);
