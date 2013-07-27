@@ -5,7 +5,7 @@
 // @include     *.leagueoflegends.com/board/*
 // @downloadURL https://raw.github.com/philippwiddra/lol-forum-enhance/refactoring/client/main.user.js
 // @updateURL   https://raw.github.com/philippwiddra/lol-forum-enhance/refactoring/client/main.meta.js
-// @version     0.7.3refactoring
+// @version     0.7.4refactoring
 // @run-at      document-end
 // @grant       GM_xmlhttpRequest
 // @grant       GM_getResourceText
@@ -26,6 +26,7 @@
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/refactoring/client/localizations.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/refactoring/client/caches.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/refactoring/client/edit-box.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/refactoring/client/forum-display.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/refactoring/client/bootstrap/js/bootstrap.min.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/refactoring/client/bootstrapx-clickover/bootstrapx-clickover.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/refactoring/client/aokura/unicode-utf8.js
