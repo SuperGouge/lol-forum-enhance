@@ -476,6 +476,18 @@ var localizations = {
         "tr": "",
         "it": ""
     },
+    aboutCaption: { // TODO: Add translations
+        "en": "About",
+        "de": "",
+        "es": "",
+        "fr": "",
+        "pl": "",
+        "ro": "",
+        "el": "",
+        "pt": "",
+        "tr": "",
+        "it": ""
+    },
     optionsModalButtonCaption: { // TODO: Add translations
         "en": "LFE Options",
         "de": "",
@@ -788,8 +800,7 @@ function Userscript() {
 
 function LolForums() { // TODO: Remove
     var that = this;
-    level1Cache.loadCache();
-    level1Cache.cleanCache();
+    
 
     this.replaceAvatars = function () {
         // get all Left items except those of rioters.
@@ -838,8 +849,8 @@ function LolForums() { // TODO: Remove
                 e.contents().replaceWith('<button class="btn btn-link userscript-name-button">' + name + '</button>');
                 e.clickover({
                     content: '<div class="btn-group btn-group-vertical">' +
-                                  '<button class="btn btn-small summoner-clickover" style="width: 160px" data-href="http://' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&showposts=1">Posts of this user</button>' + // TODO: Add localization
-                                  '<button class="btn btn-small summoner-clickover" style="width: 160px" data-href="http://' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&starteronly=1&showposts=0">Threads of this user</button>' + // TODO: Add localization
+                                  '<button class="btn btn-small summoner-clickover" style="width: 160px" type="button" data-href="http://' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&showposts=1">Posts of this user</button>' + // TODO: Add localization
+                                  '<button class="btn btn-small summoner-clickover" style="width: 160px" type="button" data-href="http://' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&starteronly=1&showposts=0">Threads of this user</button>' + // TODO: Add localization
                               '</div>' +
                               '<button id="userscript-clickover-close" style="display: none;" data-toggle="button" data-dismiss="clickover">Close</button>',
                     animation: true,
@@ -857,55 +868,6 @@ function LolForums() { // TODO: Remove
                 e.data('renamed', true);
             }
         });
-    };
-
-    this.replaceOwnAvatar = function () {
-        var name = riot.getOwnForumName();
-        if (name !== null) {
-            var subtitle = localizations.get('avatarSub');
-            $('#userscript-avatar-subtitle').text(subtitle); // replace subtitle
-
-            // get summoner object
-            level1Cache.getSummoner(name, that.server, function (summoner) {
-                // Summoner found:
-                $('#userscript-avatar-icon').attr('src', GM_getResourceURL('icon' + summoner.data.profileIconId)); // replace image source
-                $('#userscript-avatar-level').text(summoner.data.summonerLevel); // replace level
-                level1Cache.saveCache();
-            }, function (summoner) {
-                // Summoner not found:
-                // TODO: Add code to handle not found summoners.
-            });
-        }
-    };
-
-    this.replaceOwnName = function () {
-        var server = riot.getForumServer();
-        var name = riot.getOwnForumName();
-        e = $('#userscript-avatar-name');
-        if ((!e.data('renamed')) && (name !== null)) {
-            if (lfeOptions.data.charset) name = _from_utf8(name); // charset encoding bugfixes for league forums
-            e.text(name); // replace name
-            e.contents().replaceWith('<button class="btn btn-link userscript-name-button">' + name + '</button>');
-            e.clickover({
-                content: '<div class="btn-group btn-group-vertical">' +
-                              '<button class="btn btn-small summoner-clickover" style="width: 160px" data-href="http://' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&showposts=1">Posts of this user</button>' + // TODO: Add localization
-                              '<button class="btn btn-small summoner-clickover" style="width: 160px" data-href="http://' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&starteronly=1&showposts=0">Threads of this user</button>' + // TODO: Add localization
-                          '</div>' +
-                          '<button id="userscript-clickover-close" style="display: none;" data-toggle="button" data-dismiss="clickover">Close</button>',
-                animation: true,
-                html: true,
-                placement: 'top',
-                esc_close: 'false',
-                onShown: function () {
-                    $('.summoner-clickover').on('click', function () {
-                        var link = $(this).attr('data-href');
-                        GM_openInTab(link);
-                        $('#userscript-clickover-close').click();
-                    });
-                }
-            });
-            e.data('renamed', true);
-        }
     };
 
     this.registerMenuCommands = function (userscript) {
@@ -938,6 +900,11 @@ function LolForums() { // TODO: Remove
             level1Cache.removeCache();
             level1Cache.loadCache();
         }, 'C');
+
+        // About
+        GM_registerMenuCommand(localizations.get('aboutCaption'), function () {
+            GM_openInTab('https://github.com/philippwiddra/lol-forum-enhance');
+        }, 'A');
     };
 }
 
@@ -964,14 +931,16 @@ var pageHandler = {
 var MutationObserver = window.MutationObserver || window.WebKitMutationObserver; // Secure browser-compatibility for Chrome
 
 // Initiating main Objects
-var script = new Userscript();
-var forums = new LolForums();
+var script = new Userscript(); // TODO: Remove
+var forums = new LolForums(); // TODO: Remove
+level1Cache.loadCache(); // load local Cache
+level1Cache.cleanCache(); // clean old objects out of local Cache
 
 lfeOptions.loadLocal(); // load global userscript options
 localizations.defaultLang = script.getCookie('LOLLANG'); // set default language for localization from riot-implemented cookie
 
 // css style changes
-script.addGlobalStyle(GM_getResourceText('bootstrapcss'));
+script.addGlobalStyle(GM_getResourceText('bootstrapcss')); // add own css styles after that, to make sure they have priority
 script.addGlobalStyle(GM_getResourceText('globalcss'));
 
 // auto-updates
