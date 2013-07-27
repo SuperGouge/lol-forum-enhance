@@ -360,6 +360,18 @@ var localizations = {
         "tr": "",
         "it": ""
     },
+    optionsModalReloadInfoCaption: { // TODO: Add translations
+        "en": "The options only take effect after you reload the page.",
+        "de": "",
+        "es": "",
+        "fr": "",
+        "pl": "",
+        "ro": "",
+        "el": "",
+        "pt": "",
+        "tr": "",
+        "it": ""
+    },
     optionsModalButtonSaveCaption: { // TODO: Add translations
         "en": "Save changes",
         "de": "",
@@ -374,6 +386,30 @@ var localizations = {
     },
     optionsModalButtonDiscardCaption: { // TODO: Add translations
         "en": "Discard changes",
+        "de": "",
+        "es": "",
+        "fr": "",
+        "pl": "",
+        "ro": "",
+        "el": "",
+        "pt": "",
+        "tr": "",
+        "it": ""
+    },
+    nameClickoverPostsCaption: { // TODO: Add translations
+        "en": "Posts of this user",
+        "de": "",
+        "es": "",
+        "fr": "",
+        "pl": "",
+        "ro": "",
+        "el": "",
+        "pt": "",
+        "tr": "",
+        "it": ""
+    },
+    nameClickoverThreadsCaption: { // TODO: Add translations
+        "en": "Threads of this user",
         "de": "",
         "es": "",
         "fr": "",

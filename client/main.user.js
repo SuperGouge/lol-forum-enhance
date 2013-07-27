@@ -348,8 +348,8 @@ var posts = {
                     e.contents().replaceWith('<button class="btn btn-link userscript-name-button">' + name + '</button>');
                     e.clickover({
                         content: '<div class="btn-group btn-group-vertical">' +
-                                      '<button class="btn btn-small summoner-clickover" style="width: 160px" type="button" data-href="http://' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&showposts=1">Posts of this user</button>' + // TODO: Add localization
-                                      '<button class="btn btn-small summoner-clickover" style="width: 160px" type="button" data-href="http://' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&starteronly=1&showposts=0">Threads of this user</button>' + // TODO: Add localization
+                                      '<button class="btn btn-small summoner-clickover" style="width: 160px" type="button" data-href="http://' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&showposts=1">' + localizations.get('nameClickoverPostsCaption') + '</button>' + // TODO: Add localization
+                                      '<button class="btn btn-small summoner-clickover" style="width: 160px" type="button" data-href="http://' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&starteronly=1&showposts=0">' + localizations.get('nameClickoverThreadsCaption') + '</button>' + // TODO: Add localization
                                   '</div>' +
                                   '<button id="userscript-clickover-close" style="display: none;" data-toggle="button" data-dismiss="clickover">Close</button>',
                         animation: true,
@@ -368,14 +368,14 @@ var posts = {
                 else if (lfeOptions.data.link === 'posts') {
                     e.contents().replaceWith('<button class="btn btn-link userscript-name-button" data-href="http://' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&showposts=1">' + name + '</button>');
                     e.click(function () {
-                        var link = $(this).attr('data-href');
+                        var link = $(this).find('.userscript-name-button').attr('data-href');
                         GM_openInTab(link);
                     });
                 }
                 else if (lfeOptions.data.link === 'threads') {
                     e.contents().replaceWith('<button class="btn btn-link userscript-name-button" data-href="http://' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&starteronly=1&showposts=0">' + name + '</button>');
                     e.click(function () {
-                        var link = $(this).attr('data-href');
+                        var link = $(this).find('.userscript-name-button').attr('data-href');
                         GM_openInTab(link);
                     });
                 }

@@ -62,6 +62,7 @@
         $('.lfe-o-captions-answers-selection').text(localizations.get('optionsModalAnswersSelectionCaption'));
         $('.lfe-o-captions-answers-none').text(localizations.get('optionsModalAnswersNoneCaption'));
         $('#lfe-o-captions-preset-info').text(localizations.get('optionsModalPresetInfoCaption'));
+        $('#lfe-o-captions-reload-info').text(localizations.get('optionsModalReloadInfoCaption'));
         $('#lfe-o-captions-button-save').text(localizations.get('optionsModalButtonSaveCaption'));
         $('#lfe-o-captions-button-discard').text(localizations.get('optionsModalButtonDiscardCaption'));
     }
