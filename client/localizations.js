@@ -2,28 +2,27 @@ var localizations = {
     defaultLang: 'en',
     fallbackLang: 'en',
     lookupLangKeyOrId: function (keyOrId) {
-        var output = this.fallbackLang;
+        var output = localizations.fallbackLang;
         if (typeof keyOrId === 'number') {
             // keyOrId is int:
-            output = this.langIds[keyOrId];
+            output = localizations.langIds[keyOrId];
         }
         else if (!isNaN(keyOrId)) {
             // keyOrId is int as String:
-            output = this.langIds[parseInt(keyOrId, 10)];
+            output = localizations.langIds[parseInt(keyOrId, 10)];
+        }
+        else if (typeof keyOrId === 'string') {
+            // keyOrId is String:
+            for (var key in localizations.langIds) {
+                if (localizations.langIds[key] === keyOrId) {
+                    output = keyOrId;
+                }
+            }
         }
         return output;
     },
     setDefaultLang: function (lang) {
-        var temp = this.lookupLangKeyOrId(lang);
-        var o = this.fallbackLang;
-        if (typeof temp === 'string') {
-            for (var key in this.langIds) {
-                if (this.langIds[key] === temp) {
-                    o = temp;
-                }
-            }
-        }
-        this.defaultLang = o;
+        this.defaultLang = this.lookupLangKeyOrId(lang);
     },
     get: function (key, lang) {
         var l = lang;
