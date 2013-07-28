@@ -96,7 +96,7 @@
 }
 
 .userscript-pvpnet-bar a {
-    color: rgb(0, 150, 255) !important;
+    color: orange !important;
     background: url("https://s3-us-west-2.amazonaws.com/sandworm/images/pvpnet-sprite-v2.png") repeat-x scroll 0px -42px transparent;
     padding: 0px 10px;
     line-height: 31px;
