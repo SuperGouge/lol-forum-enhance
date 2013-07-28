@@ -7,15 +7,17 @@ var localizations = {
             // keyOrId is int:
             output = localizations.langIds[keyOrId];
         }
-        else if (!isNaN(keyOrId)) {
-            // keyOrId is int as String:
-            output = localizations.langIds[parseInt(keyOrId, 10)];
-        }
         else if (typeof keyOrId === 'string') {
-            // keyOrId is String:
-            for (var key in localizations.langIds) {
-                if (localizations.langIds[key] === keyOrId) {
-                    output = keyOrId;
+            if (!isNaN(keyOrId)) {
+                // keyOrId is int as String:
+                output = localizations.langIds[parseInt(keyOrId, 10)];
+            }
+            else {
+                // keyOrId is String:
+                for (var key in localizations.langIds) {
+                    if (localizations.langIds[key] === keyOrId) {
+                        output = keyOrId;
+                    }
                 }
             }
         }
