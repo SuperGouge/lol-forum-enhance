@@ -1,11 +1,11 @@
-﻿// ==UserScript==
+// ==UserScript==
 // @name        LoL Forum Enhance
 // @namespace   https://github.com/philippwiddra
 // @description Supplements the League of Legends forums and sites with additional functions.
 // @include     *.leagueoflegends.com/board/*
 // @downloadURL https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/main.user.js
 // @updateURL   https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/main.meta.js
-// @version     0.6.1
+// @version     1.0.0
 // @run-at      document-end
 // @grant       GM_xmlhttpRequest
 // @grant       GM_getResourceText
@@ -19,13 +19,21 @@
 // @grant       GM_registerMenuCommand
 // @resource    globalcss https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/global.css
 // @require     http://code.jquery.com/jquery-2.0.2.min.js
-// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/global.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/avatar-div.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/toolkitVersions.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/options-modal.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/userscript.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/localizations.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/caches.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/edit-box.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/forum-display.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/bootstrap/js/bootstrap.min.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/bootstrapx-clickover/bootstrapx-clickover.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/aokura/unicode-utf8.js
 // @resource    bootstrapcss https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/bootstrap/css/bootstrap.min.css
 // @resource    options-modal https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/options-modal.html
 // @resource    update-alert https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/update-alert.html
+// @resource    avatardivhtml https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/avatar-div.html
 // @resource    iconUnknown http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/unknown.jpg
 // @resource    iconNotFound http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/notfound.jpg
 // @resource    icon0 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/0.jpg

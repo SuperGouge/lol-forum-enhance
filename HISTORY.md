@@ -1,6 +1,6 @@
 # Repository version history
 ## Goals:
-- Mark nonexistent summoners
+- ~~Mark nonexistent summoners~~
 - ~~Insert summoner icon when quick-replying~~
 - ~~Automatic update notifications~~
 - Show server status
@@ -9,12 +9,21 @@
 - ~~Client- and serverside caching~~
 - Check compatibility to other/newer regions
 - rework normal edit box
-- add about link
+- ~~add about link~~
 - ~~add click and search functionality to summoner names~~
 
 ---
 
 ## Version history:
+
+## 1.0.0
+- **Added** german translation
+- **Added** functionality to get the *special characters* of users in the threads-overview back
+- **Added** different options for username-clicks
+- **Added** text selection for usernames
+- **Added** special icon for not found users
+- **Changed** file and object structure of whole userscript to make it easier to adapt
+
 
 ## 0.6.0
 - **Added** functionality to get your *special characters* in your summonernames back
