@@ -1,4 +1,4 @@
-﻿var ToolkitVersions = {
+﻿var toolkitVersions = {
     ToolkitVersion: function () {
         var that = this;
         var orig = '';
@@ -8,7 +8,7 @@
             orig = string;
             var splits = string.split('.');
             for (var i = 0; i < splits.length; i++) {
-                var vp = new ToolkitVersionPart();
+                var vp = new toolkitVersions.ToolkitVersionPart();
                 vp.setVersionPart(splits[i]);
                 versionParts.push(vp);
             }
@@ -35,8 +35,8 @@
             else l = vp2.length;
             for (var i = 0; i < l; i++) {
                 // set not defined versionParts to defaults (occurrs when one version has more parts than the other)
-                if (vp1[i] === undefined) vp1[i] = new ToolkitVersionPart();
-                if (vp2[i] === undefined) vp2[i] = new ToolkitVersionPart();
+                if (vp1[i] === undefined) vp1[i] = new toolkitVersions.ToolkitVersionPart();
+                if (vp2[i] === undefined) vp2[i] = new toolkitVersions.ToolkitVersionPart();
                 if (vp1[i].isGreaterThan(vp2[i])) return true;
                 if (vp1[i].isLowerThan(vp2[i])) return false;
             }
@@ -51,8 +51,8 @@
             else l = vp2.length;
             for (var i = 0; i < l; i++) {
                 // set not defined versionParts to defaults (occurrs when one version has more parts than the other)
-                if (vp1[i] === undefined) vp1[i] = new ToolkitVersionPart();
-                if (vp2[i] === undefined) vp2[i] = new ToolkitVersionPart();
+                if (vp1[i] === undefined) vp1[i] = new toolkitVersions.ToolkitVersionPart();
+                if (vp2[i] === undefined) vp2[i] = new toolkitVersions.ToolkitVersionPart();
                 if (vp1[i].isGreaterThan(vp2[i])) return false;
                 if (vp1[i].isLowerThan(vp2[i])) return true;
             }
@@ -67,8 +67,8 @@
             else l = vp2.length;
             for (var i = 0; i < l; i++) {
                 // set not defined versionParts to defaults (occurrs when one version has more parts than the other)
-                if (vp1[i] === undefined) vp1[i] = new ToolkitVersionPart();
-                if (vp2[i] === undefined) vp2[i] = new ToolkitVersionPart();
+                if (vp1[i] === undefined) vp1[i] = new toolkitVersions.ToolkitVersionPart();
+                if (vp2[i] === undefined) vp2[i] = new toolkitVersions.ToolkitVersionPart();
                 if (!vp1[i].isEqualTo(vp2[i])) return false;
             }
             // equal
@@ -205,8 +205,8 @@
         // (a < b) --> -1
         // (a > b) --> 1
 
-        var vA = new this.ToolkitVersion();
-        var vB = new this.ToolkitVersion();
+        var vA = new toolkitVersions.ToolkitVersion();
+        var vB = new toolkitVersions.ToolkitVersion();
 
         vA.setVersion(a);
         vB.setVersion(b);
