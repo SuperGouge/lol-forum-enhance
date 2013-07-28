@@ -74,7 +74,7 @@ var localizations = {
     },
     forceUpdateCaption: { // TODO: Add translations
         "en": "Force update",
-        "de": "",
+        "de": "Update erzwingen",
         "es": "",
         "fr": "Forcer mise à jour",
         "pl": "",
@@ -86,7 +86,7 @@ var localizations = {
     },
     checkUpdatesCaption: { // TODO: Add translations
         "en": "Check for updates",
-        "de": "",
+        "de": "Suche nach Updates",
         "es": "",
         "fr": "Chercher mises à jour",
         "pl": "",
@@ -98,7 +98,7 @@ var localizations = {
     },
     updatesConfirmMessage: { // TODO: Add translations
         "en": "There are updates available. Do you want to install them now?",
-        "de": "",
+        "de": "Es sind Updates verfügbar. Willst du sie jetzt installieren?",
         "es": "",
         "fr": "Des mises à jour sont disponibles. Voulez-vous les installer maintenant ?",
         "pl": "",
@@ -110,7 +110,7 @@ var localizations = {
     },
     updatesStartMessage: { // TODO: Add translations
         "en": "Update started.\nPlease confirm the installation promt.",
-        "de": "",
+        "de": "Update gestartet.\nBitte akzeptiere die Installation.",
         "es": "",
         "fr": "Mise à jour démarrée.\nVeuillez confirmer l'installation.",
         "pl": "",
@@ -122,7 +122,7 @@ var localizations = {
     },
     updatesCanceledMessage: { // TODO: Add translations
         "en": "Updating canceled.",
-        "de": "",
+        "de": "Update abgebrochen.",
         "es": "",
         "fr": "Mise à jour annulée.",
         "pl": "",
@@ -134,7 +134,7 @@ var localizations = {
     },
     noUpdatesMessage: { // TODO: Add translations
         "en": "No updates available.\nYou are using the most recent version.",
-        "de": "",
+        "de": "Keine Updates verfügbar.\nDu verwendest die aktuellste Version.",
         "es": "",
         "fr": "Aucune mise à jour disponible.\nVous utilisez la version la plus récente.",
         "pl": "",
@@ -146,7 +146,7 @@ var localizations = {
     },
     clearCacheCaption: { // TODO: Add translations
         "en": "Clear local cache",
-        "de": "",
+        "de": "Lösche lokalen Cache",
         "es": "",
         "fr": "Vider le cache local",
         "pl": "",
@@ -158,7 +158,7 @@ var localizations = {
     },
     aboutCaption: { // TODO: Add translations
         "en": "About",
-        "de": "",
+        "de": "Über",
         "es": "",
         "fr": "",
         "pl": "",
@@ -170,7 +170,7 @@ var localizations = {
     },
     optionsModalButtonCaption: { // TODO: Add translations
         "en": "LFE Options",
-        "de": "",
+        "de": "LFE Optionen",
         "es": "",
         "fr": "",
         "pl": "",
@@ -182,7 +182,7 @@ var localizations = {
     },
     optionsModalTitleCaption: {  // TODO: Add translations
         "en": "LoL Forum Enhance - Options",
-        "de": "",
+        "de": "LoL Forum Enhance - Optionen",
         "es": "",
         "fr": "",
         "pl": "",
@@ -194,7 +194,7 @@ var localizations = {
     },
     optionsModalUpdatesCaption: { // TODO: Add translations
         "en": "Check for updates automatically:",
-        "de": "",
+        "de": "Suche automatisch nach Updates:",
         "es": "",
         "fr": "",
         "pl": "",
@@ -206,7 +206,7 @@ var localizations = {
     },
     optionsModalCharsetCaption: { // TODO: Add translations
         "en": "Rework charset on displayed forum usernames:",
-        "de": "",
+        "de": "Überarbeite den Zeichensatz der Forum-Benutzernamen:",
         "es": "",
         "fr": "",
         "pl": "",
@@ -218,7 +218,7 @@ var localizations = {
     },
     optionsModalEnlargeCaption: { // TODO: Add translations
         "en": "Enlarge Quick-Edit-Box:",
-        "de": "",
+        "de": "Vergrößere die Schnell-Antworten-Box:",
         "es": "",
         "fr": "",
         "pl": "",
@@ -230,7 +230,7 @@ var localizations = {
     },
     optionsModalAvatarCaption: { // TODO: Add translations
         "en": "Show own avatar next to Quick-Edit-Box:",
-        "de": "",
+        "de": "Zeige eigenen Avatar neben der Schnell-Antworten-Box:",
         "es": "",
         "fr": "",
         "pl": "",
@@ -242,7 +242,7 @@ var localizations = {
     },
     optionsModalWtCaption: { // TODO: Add translations
         "en": "Use Wrenchman's Tools Icons if available:",
-        "de": "",
+        "de": "Verwende Wrenchman's Tools Bilder wenn verfügbar:",
         "es": "",
         "fr": "",
         "pl": "",
@@ -253,8 +253,8 @@ var localizations = {
         "it": ""
     },
     optionsModalFekCaption: { // TODO: Add translations
-        "en": "User Forum Enhancement Kit's Icons if available:",
-        "de": "",
+        "en": "Use Forum Enhancement Kit's Icons if available:",
+        "de": "Verwende Forum Enhancement Kits Bilder wenn verfügbar:",
         "es": "",
         "fr": "",
         "pl": "",
@@ -266,7 +266,7 @@ var localizations = {
     },
     optionsModalLinkCaption: { // TODO: Add translations
         "en": "Link usernames with:",
-        "de": "",
+        "de": "Verlinke die Benutzernamen mit:",
         "es": "",
         "fr": "",
         "pl": "",
@@ -278,7 +278,7 @@ var localizations = {
     },
     optionsModalAnswersOnCaption: { // TODO: Add translations
         "en": "On",
-        "de": "",
+        "de": "An",
         "es": "",
         "fr": "",
         "pl": "",
@@ -290,7 +290,7 @@ var localizations = {
     },
     optionsModalAnswersOffCaption: { // TODO: Add translations
         "en": "Off",
-        "de": "",
+        "de": "Aus",
         "es": "",
         "fr": "",
         "pl": "",
@@ -302,7 +302,7 @@ var localizations = {
     },
     optionsModalAnswersPostsCaption: { // TODO: Add translations
         "en": "Posts",
-        "de": "",
+        "de": "Beiträge",
         "es": "",
         "fr": "",
         "pl": "",
@@ -314,7 +314,7 @@ var localizations = {
     },
     optionsModalAnswersThreadsCaption: { // TODO: Add translations
         "en": "Threads",
-        "de": "",
+        "de": "Themen",
         "es": "",
         "fr": "",
         "pl": "",
@@ -326,7 +326,7 @@ var localizations = {
     },
     optionsModalAnswersSelectionCaption: { // TODO: Add translations
         "en": "Selection",
-        "de": "",
+        "de": "Auswahl",
         "es": "",
         "fr": "",
         "pl": "",
@@ -338,7 +338,7 @@ var localizations = {
     },
     optionsModalAnswersNoneCaption: { // TODO: Add translations
         "en": "None",
-        "de": "",
+        "de": "Nichts",
         "es": "",
         "fr": "",
         "pl": "",
@@ -350,7 +350,7 @@ var localizations = {
     },
     optionsModalPresetInfoCaption: { // TODO: Add translations
         "en": "Preset values are presented in this color",
-        "de": "",
+        "de": "Standardwerte werden in dieser Farbe angezeigt",
         "es": "",
         "fr": "",
         "pl": "",
@@ -362,7 +362,7 @@ var localizations = {
     },
     optionsModalReloadInfoCaption: { // TODO: Add translations
         "en": "The options only take effect after you reload the page.",
-        "de": "",
+        "de": "Die Optionen werden erst nach einem Neuladen der Seite angewendet.",
         "es": "",
         "fr": "",
         "pl": "",
@@ -374,7 +374,7 @@ var localizations = {
     },
     optionsModalButtonSaveCaption: { // TODO: Add translations
         "en": "Save changes",
-        "de": "",
+        "de": "Speichere Änderungen",
         "es": "",
         "fr": "",
         "pl": "",
@@ -386,7 +386,7 @@ var localizations = {
     },
     optionsModalButtonDiscardCaption: { // TODO: Add translations
         "en": "Discard changes",
-        "de": "",
+        "de": "Verwerfe Änderungen",
         "es": "",
         "fr": "",
         "pl": "",
@@ -398,7 +398,7 @@ var localizations = {
     },
     nameClickoverPostsCaption: { // TODO: Add translations
         "en": "Posts of this user",
-        "de": "",
+        "de": "Beiträge dieses Benutzers",
         "es": "",
         "fr": "",
         "pl": "",
@@ -410,7 +410,7 @@ var localizations = {
     },
     nameClickoverThreadsCaption: { // TODO: Add translations
         "en": "Threads of this user",
-        "de": "",
+        "de": "Themen dieses Benutzers",
         "es": "",
         "fr": "",
         "pl": "",
