@@ -395,10 +395,11 @@ level1Cache.loadCache(); // load local Cache
 level1Cache.cleanCache(); // clean old objects out of local Cache
 
 lfeOptions.loadLocal(); // load global userscript options
-localizations.defaultLang = userscript.getCookie('LOLLANG'); // set default language for localization from riot-implemented cookie
+localizations.setDefaultLang(userscript.getCookie('LOLLANG')); // set default language for localization from riot-implemented cookie
+
 
 // css style changes
-userscript.addGlobalStyle(GM_getResourceText('bootstrapcss')); // add own css styles after that, to make sure they have priority
+userscript.prependGlobalStyle(GM_getResourceText('bootstrapcss'));
 userscript.addGlobalStyle(GM_getResourceText('globalcss'));
 
 editBox.rework(); // Change (quick) edit box style

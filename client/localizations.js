@@ -14,7 +14,16 @@ var localizations = {
         return output;
     },
     setDefaultLang: function (lang) {
-        this.defaultLang = this.lookupLangKeyOrId(lang);
+        var temp = this.lookupLangKeyOrId(lang);
+        var o = this.fallbackLang;
+        if (typeof temp === 'string') {
+            for (var key in this.langIds) {
+                if (this.langIds[key] === temp) {
+                    o = temp;
+                }
+            }
+        }
+        this.defaultLang = o;
     },
     get: function (key, lang) {
         var l = lang;

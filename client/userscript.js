@@ -15,6 +15,22 @@ var userscript = {
             document.styleSheets[0].cssText += css;
         }
     },
+    prependGlobalStyle: function (css) {
+        try {
+            var elmHead, elmStyle;
+            elmHead = document.getElementsByTagName('head')[0];
+            elmStyle = document.createElement('style');
+            elmStyle.type = 'text/css';
+            elmHead.insertBefore(elmStyle, elmHead.firstChild);
+            elmStyle.innerHTML = css;
+        }
+        catch (e) {
+            if (!document.styleSheets.length) {
+                document.createStyleSheet();
+            }
+            document.styleSheets[0].cssText += css;
+        }
+    },
     setCookie: function (name, value, expireMilliseconds) {
         var expireDate = new Date();
         expireDate.setTime(expireDate.getTime() + expireMilliseconds);
