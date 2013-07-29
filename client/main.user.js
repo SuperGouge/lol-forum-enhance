@@ -30,8 +30,7 @@
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/beta/client/bootstrap/js/bootstrap.min.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/beta/client/bootstrapx-clickover/bootstrapx-clickover.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/beta/client/aokura/unicode-utf8.js
-// @resource    custom-bootstrap-part-css https://raw.github.com/philippwiddra/lol-forum-enhance/beta/client/custom-bootstrap-part.css
-// @resource    normalize-class-css https://raw.github.com/philippwiddra/lol-forum-enhance/beta/client/normalize-class.css
+// @resource    prefixed-bootstrap-css https://raw.github.com/philippwiddra/lol-forum-enhance/beta/client/prefixed-bootstrap.min.css
 // @resource    bootstrapcss https://raw.github.com/philippwiddra/lol-forum-enhance/beta/client/bootstrap/css/bootstrap.min.css
 // @resource    options-modal https://raw.github.com/philippwiddra/lol-forum-enhance/beta/client/options-modal.html
 // @resource    update-alert https://raw.github.com/philippwiddra/lol-forum-enhance/beta/client/update-alert.html
@@ -346,7 +345,7 @@ var posts = {
                 if (lfeOptions.data.charset) name = _from_utf8(name); // charset encoding bugfixes for league forums
                 
                 if (lfeOptions.data.link === 'selection') {
-                    e.contents().replaceWith('<button class="btn btn-link userscript-name-button">' + name + '</button>');
+                    e.contents().replaceWith('<button class="userscript-name-button">' + name + '</button>');
                     e.clickover({
                         content: '<div class="btn-group btn-group-vertical">' +
                                       '<button class="btn btn-small summoner-clickover" style="width: 160px" type="button" data-href="http://' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&showposts=1">' + localizations.get('nameClickoverPostsCaption') + '</button>' + // TODO: URL for new Style
@@ -404,9 +403,9 @@ localizations.setDefaultLang(userscript.getCookie('LOLLANG')); // set default la
 
 // css style changes
 //userscript.prependGlobalStyle(GM_getResourceText('bootstrapcss'));
-userscript.addGlobalStyle(GM_getResourceText('custom-bootstrap-part-css')); // TODO: Check if needed
+//userscript.addGlobalStyle(GM_getResourceText('custom-bootstrap-part-css')); // TODO: Check if needed
 userscript.addGlobalStyle(GM_getResourceText('globalcss'));
-userscript.addGlobalStyle(GM_getResourceText('normalize-class-css'));
+userscript.addGlobalStyle(GM_getResourceText('prefixed-bootstrap-css'));
 
 
 editBox.rework(); // Change (quick) edit box style

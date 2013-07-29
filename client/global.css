@@ -130,7 +130,35 @@
     padding: 0px !IMPORTANT;
     font-size: 13px !IMPORTANT;
     line-height: 16px !IMPORTANT;
+    border-color: transparent;
+    cursor: pointer;
+    color: rgb(0, 136, 204);
+    border-radius: 0px 0px 0px 0px;
+    background-color: transparent;
+    background-image: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.75);
+    text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.75);
+    background-repeat: repeat-x;
+    border-width: 1px;
+    border-style: solid;
+    -moz-border-top-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-image: none;
+    -o-border-image: none;
+    -webkit-border-image: none;
+    border-image: none;
+    height: 20px;
 }
+    .userscript-name-button:hover {
+        color: rgb(0, 85, 128);
+    }
 
 .userscript-avatar-overlay {
     position: absolute;
