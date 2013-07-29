@@ -170,3 +170,9 @@
     width: 660px;
     margin-left: -330px;
 }
+
+/* Poll bar fix */
+#forum_body img[src^="images/polls/"],
+#forum_body img[src^="clear.gif"] {
+    height: 10px;
+}
