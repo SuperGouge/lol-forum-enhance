@@ -300,20 +300,20 @@ function registerMenuCommands() {
 var posts = {
     replaceAvatars: function () {
         // get all Left items except those of rioters.
-        var allLeft = $('.forum_post img.user_summoner_icon').filter($('img[src="lol_theme/img/unknown_icon.jpg"]')).parent().parent().parent().parent();
+        var allLeft = $('.post-col-left').filter($('img[src="lol_theme/img/unknown_icon.jpg"]'));
         allLeft.each(function (i, e) {
             e = $(e);
             if (!e.data('replaced')) {
-                var name = e.find('big').text();
+                var name = e.find('p.post-user').text();
                 name = name.replace(/(^\s*)|(\s*$)/g, ''); // replace whitespaces at the beginning and end
-                var orb = e.find('span.left_orb');
+                var bottomtext = e.find('p:not(.post-user)'); // TODO: temporary Hack
                 var image = e.find('img.user_summoner_icon');
 
                 // Cache system (the level-1-cache automatically calls the level-2-cache if it doesnt have the result)
                 level1Cache.getSummoner(name, riot.getForumServer(), function (summoner) {
                     // Summoner found:                
                     image.attr('src', GM_getResourceURL("icon" + summoner.data.profileIconId)); // replace image source
-                    orb.text(summoner.data.summonerLevel); // replace level
+                    bottomtext.text(bottomtext.text() + '\n' + summoner.data.summonerLevel); // replace level TODO: temporary Hack
                     level1Cache.saveCache(); // save whole cache
 
                 },
@@ -335,7 +335,7 @@ var posts = {
     },
     replaceNames: function () {
         var server = riot.getForumServer();
-        var allNames = $('.forum_post .avatar big');
+        var allNames = $('.post-col-left p.post-user');
         allNames.each(function (i, e) {
             e = $(e);
             if (!e.data('renamed')) {
