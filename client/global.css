@@ -119,7 +119,7 @@
     float: right;
 }
 
-.userscript-name-button {
+.userscript-name {
     -webkit-user-select: text;
     -khtml-user-select: text;
     -moz-user-select: text;
@@ -128,7 +128,6 @@
     margin: 0px;
     font-weight: bold;
     padding: 0px !IMPORTANT;
-    font-size: 13px !IMPORTANT;
     line-height: 16px !IMPORTANT;
     border-color: transparent;
     cursor: pointer;
@@ -154,10 +153,13 @@
     -o-border-image: none;
     -webkit-border-image: none;
     border-image: none;
-    height: 20px;
 }
-    .userscript-name-button:hover {
-        color: rgb(0, 85, 128);
+    .userscript-name:hover {
+        opacity: 0.5;
+        text-decoration: underline;
+    }
+    .userscript-name font:hover {
+        text-decoration: underline;
     }
 
 .userscript-avatar-overlay {

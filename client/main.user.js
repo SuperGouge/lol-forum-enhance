@@ -344,7 +344,9 @@ var posts = {
                 if (lfeOptions.data.charset) name = _from_utf8(name); // charset encoding bugfixes for league forums
                 
                 if (lfeOptions.data.link === 'selection') {
-                    e.contents().replaceWith('<button class="userscript-name-button">' + name + '</button>');
+                    if (e.find('font').length) e.find('font').text(name);
+                    else e.text(name);
+                    e.addClass('userscript-name');
                     e.clickover({
                         content: '<div class="btn-group btn-group-vertical">' +
                                       '<button class="btn btn-small summoner-clickover" style="width: 160px" type="button" data-href="http://' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&showposts=1">' + localizations.get('nameClickoverPostsCaption') + '</button>' + // TODO: URL for new Style
@@ -366,14 +368,20 @@ var posts = {
                     });
                 }
                 else if (lfeOptions.data.link === 'posts') {
-                    e.contents().replaceWith('<button class="btn btn-link userscript-name-button" data-href="http://' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&showposts=1">' + name + '</button>');
+                    if (e.find('font').length) e.find('font').text(name);
+                    else e.text(name);
+                    e.addClass('userscript-name');
+                    e.attr('data-href', 'http://' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&showposts=1')
                     e.click(function () {
                         var link = $(this).find('.userscript-name-button').attr('data-href');
                         GM_openInTab(link);
                     });
                 }
                 else if (lfeOptions.data.link === 'threads') {
-                    e.contents().replaceWith('<button class="btn btn-link userscript-name-button" data-href="http://' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&starteronly=1&showposts=0">' + name + '</button>');
+                    if (e.find('font').length) e.find('font').text(name);
+                    else e.text(name);
+                    e.addClass('userscript-name');
+                    e.attr('data-href', 'http://' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&starteronly=1&showposts=0')
                     e.click(function () {
                         var link = $(this).find('.userscript-name-button').attr('data-href');
                         GM_openInTab(link);
