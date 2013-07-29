@@ -5,7 +5,7 @@
 // @include     *.leagueoflegends.com/board/*
 // @downloadURL https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/main.user.js
 // @updateURL   https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/main.meta.js
-// @version     1.0.1
+// @version     1.0.2
 // @run-at      document-end
 // @grant       GM_xmlhttpRequest
 // @grant       GM_getResourceText
@@ -339,11 +339,13 @@ var posts = {
         allNames.each(function (i, e) {
             e = $(e);
             if (!e.data('renamed')) {
+                var color = e.find('font').attr('color');
                 var name = e.text();
                 if (lfeOptions.data.charset) name = _from_utf8(name); // charset encoding bugfixes for league forums
                 
                 if (lfeOptions.data.link === 'selection') {
-                    e.contents().replaceWith('<button class="btn btn-link userscript-name-button">' + name + '</button>');
+                    if (color) e.contents().replaceWith('<button class="btn btn-link userscript-name-button" style="color: ' + color + '">' + name + '</button>');
+                    else e.contents().replaceWith('<button class="btn btn-link userscript-name-button">' + name + '</button>');
                     e.clickover({
                         content: '<div class="btn-group btn-group-vertical">' +
                                       '<button class="btn btn-small summoner-clickover" style="width: 160px" type="button" data-href="http://' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&showposts=1">' + localizations.get('nameClickoverPostsCaption') + '</button>' +
