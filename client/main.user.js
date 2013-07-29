@@ -402,9 +402,7 @@ localizations.setDefaultLang(userscript.getCookie('LOLLANG')); // set default la
 
 // css style changes
 //userscript.prependGlobalStyle(GM_getResourceText('bootstrapcss'));
-//userscript.addGlobalStyle(GM_getResourceText('custom-bootstrap-part-css')); // TODO: Check if needed
 userscript.addGlobalStyle(GM_getResourceText('globalcss'));
-userscript.addGlobalStyle(GM_getResourceText('prefixed-bootstrap-css'));
 
 
 editBox.rework(); // Change (quick) edit box style
