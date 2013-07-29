@@ -5,7 +5,7 @@
 // @include     *.leagueoflegends.com/board/*
 // @downloadURL https://raw.github.com/philippwiddra/lol-forum-enhance/beta/client/main.user.js
 // @updateURL   https://raw.github.com/philippwiddra/lol-forum-enhance/beta/client/main.meta.js
-// @version     1.0.0
+// @version     1.0.0beta
 // @run-at      document-end
 // @grant       GM_xmlhttpRequest
 // @grant       GM_getResourceText
@@ -242,7 +242,8 @@ var riot = {
         else return name;
     },
     getForumServer: function () {
-        var match = document.URL.match(/^(?:http\:\/\/)?(na|euw|eune|br)\.leagueoflegends\.com(?:\/.*)?$/i);
+        //var match = document.URL.match(/^(?:http\:\/\/)?(na|euw|eune|br)\.leagueoflegends\.com(?:\/.*)?$/i); // old
+        var match = document.URL.match(/^(?:http\:\/\/)?forums\.(na|euw|eune|br)\.leagueoflegends\.com(?:\/.*)?$/i); // beta TODO: Check if thats final
         if (match !== null) return match[1];
         else return null;
     }
