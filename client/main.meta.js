@@ -30,6 +30,7 @@
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/beta/client/bootstrap/js/bootstrap.min.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/beta/client/bootstrapx-clickover/bootstrapx-clickover.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/beta/client/aokura/unicode-utf8.js
+// @resource    custom-bootstrap-part-css https://raw.github.com/philippwiddra/lol-forum-enhance/beta/client/custom-bootstrap-part.css
 // @resource    bootstrapcss https://raw.github.com/philippwiddra/lol-forum-enhance/beta/client/bootstrap/css/bootstrap.min.css
 // @resource    options-modal https://raw.github.com/philippwiddra/lol-forum-enhance/beta/client/options-modal.html
 // @resource    update-alert https://raw.github.com/philippwiddra/lol-forum-enhance/beta/client/update-alert.html
