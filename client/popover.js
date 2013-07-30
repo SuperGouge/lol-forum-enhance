@@ -71,7 +71,7 @@
                             if ((options.onHidden !== null) && shown) options.onHidden();
                         }
                         popover.css('left', positioner.position().left + (positioner.width() / 2) - (popover.width() / 2) - 10);
-                        popover.css('top', positioner.position().top - popover.height() - 30);
+                        popover.css('top', positioner.position().top + positioner.height() + 10);
                     }
                 }
             });
