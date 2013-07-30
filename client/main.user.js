@@ -360,7 +360,7 @@ var posts = {
                     e.click(function () {
                         $(this).lfePopover('toggle');
                     });
-                    e.find('button').click(function () {
+                    e.parent().find('.userscript-summoner-popover-buttons > button').click(function () {
                         var link = $(this).attr('data-href');
                         GM_openInTab(link);
                     });
