@@ -351,11 +351,14 @@ var posts = {
 
                     // New:
                     e.lfePopover({
-                        content: 'test',
-                        container: '.section-wrapper-content-wrapper'
+                        html: true,
+                        content: '<div class="userscript-summoner-popover-buttons">' +
+                                      '<button type="button" data-href="http://' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&showposts=1">' + localizations.get('nameClickoverPostsCaption') + '</button>' + // TODO: URL for new Style
+                                      '<button type="button" data-href="http://' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&starteronly=1&showposts=0">' + localizations.get('nameClickoverThreadsCaption') + '</button>' + // TODO: URL for new Style
+                                 '</div>',
                     });
                     e.click(function () {
-                        alert('test');
+                        $(this).lfePopover('toggle');
                     });
 
 
