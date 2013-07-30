@@ -363,6 +363,7 @@ var posts = {
                     e.parent().find('.userscript-summoner-popover-buttons > button').click(function () {
                         var link = $(this).attr('data-href');
                         GM_openInTab(link);
+                        e.lfePopover('hide');
                     });
                 }
                 else if (lfeOptions.data.link === 'posts') {
