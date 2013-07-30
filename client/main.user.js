@@ -27,6 +27,7 @@
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/beta/client/caches.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/beta/client/edit-box.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/beta/client/forum-display.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/beta/client/popover.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/beta/client/bootstrap/js/bootstrap.min.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/beta/client/bootstrapx-clickover/bootstrapx-clickover.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/beta/client/aokura/unicode-utf8.js
@@ -347,6 +348,19 @@ var posts = {
                     if (e.find('font').length) e.find('font').text(name);
                     else e.text(name);
                     e.addClass('userscript-name');
+
+                    // New:
+                    e.lfePopover({
+                        content: 'test',
+                        container: '.section-wrapper-content-wrapper'
+                    });
+                    e.click(function () {
+                        alert('test');
+                    });
+
+
+                    /*
+                    // Old:
                     e.clickover({
                         content: '<div class="btn-group btn-group-vertical">' +
                                       '<button class="btn btn-small summoner-clickover" style="width: 160px" type="button" data-href="http://' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&showposts=1">' + localizations.get('nameClickoverPostsCaption') + '</button>' + // TODO: URL for new Style
@@ -366,12 +380,14 @@ var posts = {
                             });
                         }
                     });
+                    */
+
                 }
                 else if (lfeOptions.data.link === 'posts') {
                     if (e.find('font').length) e.find('font').text(name);
                     else e.text(name);
                     e.addClass('userscript-name');
-                    e.attr('data-href', 'http://' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&showposts=1')
+                    e.attr('data-href', 'http://' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&showposts=1');
                     e.click(function () {
                         var link = $(this).find('.userscript-name-button').attr('data-href');
                         GM_openInTab(link);
@@ -381,7 +397,7 @@ var posts = {
                     if (e.find('font').length) e.find('font').text(name);
                     else e.text(name);
                     e.addClass('userscript-name');
-                    e.attr('data-href', 'http://' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&starteronly=1&showposts=0')
+                    e.attr('data-href', 'http://' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&starteronly=1&showposts=0');
                     e.click(function () {
                         var link = $(this).find('.userscript-name-button').attr('data-href');
                         GM_openInTab(link);
