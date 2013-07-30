@@ -360,31 +360,10 @@ var posts = {
                     e.click(function () {
                         $(this).lfePopover('toggle');
                     });
-
-
-                    /*
-                    // Old:
-                    e.clickover({
-                        content: '<div class="btn-group btn-group-vertical">' +
-                                      '<button class="btn btn-small summoner-clickover" style="width: 160px" type="button" data-href="http://' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&showposts=1">' + localizations.get('nameClickoverPostsCaption') + '</button>' + // TODO: URL for new Style
-                                      '<button class="btn btn-small summoner-clickover" style="width: 160px" type="button" data-href="http://' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&starteronly=1&showposts=0">' + localizations.get('nameClickoverThreadsCaption') + '</button>' + // TODO: URL for new Style
-                                  '</div>' +
-                                  '<button id="userscript-clickover-close" style="display: none;" data-toggle="button" data-dismiss="clickover">Close</button>',
-                        animation: true,
-                        html: true,
-                        placement: 'top',
-                        container: '.section-wrapper-content-wrapper',
-                        esc_close: 'false',
-                        onShown: function () {
-                            $('.summoner-clickover').on('click', function () {
-                                var link = $(this).attr('data-href');
-                                GM_openInTab(link);
-                                $('#userscript-clickover-close').click();
-                            });
-                        }
+                    e.find('button').click(function () {
+                        var link = $(this).attr('data-href');
+                        GM_openInTab(link);
                     });
-                    */
-
                 }
                 else if (lfeOptions.data.link === 'posts') {
                     if (e.find('font').length) e.find('font').text(name);
@@ -392,7 +371,7 @@ var posts = {
                     e.addClass('userscript-name');
                     e.attr('data-href', 'http://forums.' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&showposts=1'); // TODO: Check if URL still works when live
                     e.click(function () {
-                        var link = $(this).find('.userscript-name-button').attr('data-href');
+                        var link = $(this).attr('data-href');
                         GM_openInTab(link);
                     });
                 }
@@ -402,7 +381,7 @@ var posts = {
                     e.addClass('userscript-name');
                     e.attr('data-href', 'http://forums.' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&starteronly=1&showposts=0'); // TODO: Check if URL still works when live
                     e.click(function () {
-                        var link = $(this).find('.userscript-name-button').attr('data-href');
+                        var link = $(this).attr('data-href');
                         GM_openInTab(link);
                     });
                 }
