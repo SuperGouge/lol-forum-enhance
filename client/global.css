@@ -164,10 +164,10 @@
 
 .userscript-avatar-overlay {
     position: absolute;
-    left: 33px;
-    right: 33px;
-    bottom: 12px;
-    font-size: 16px;
+    left: 3px;
+    right: 3px;
+    bottom: 0px;
+    font-size: 13px;
 }
 
     .userscript-avatar-overlay span, .userscript-avatar-overlay span:hover {
