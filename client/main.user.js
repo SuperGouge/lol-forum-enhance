@@ -353,8 +353,8 @@ var posts = {
                     e.lfePopover({
                         html: true,
                         content: '<div class="userscript-summoner-popover-buttons">' +
-                                      '<button type="button" data-href="http://' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&showposts=1">' + localizations.get('nameClickoverPostsCaption') + '</button>' + // TODO: URL for new Style
-                                      '<button type="button" data-href="http://' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&starteronly=1&showposts=0">' + localizations.get('nameClickoverThreadsCaption') + '</button>' + // TODO: URL for new Style
+                                      '<button type="button" data-href="http://forums.' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&showposts=1">' + localizations.get('nameClickoverPostsCaption') + '</button>' + // TODO: Check if URL still works when live
+                                      '<button type="button" data-href="http://forums.' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&starteronly=1&showposts=0">' + localizations.get('nameClickoverThreadsCaption') + '</button>' + // TODO: Check if URL still works when live
                                  '</div>',
                     });
                     e.click(function () {
@@ -390,7 +390,7 @@ var posts = {
                     if (e.find('font').length) e.find('font').text(name);
                     else e.text(name);
                     e.addClass('userscript-name');
-                    e.attr('data-href', 'http://' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&showposts=1');
+                    e.attr('data-href', 'http://forums.' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&showposts=1'); // TODO: Check if URL still works when live
                     e.click(function () {
                         var link = $(this).find('.userscript-name-button').attr('data-href');
                         GM_openInTab(link);
@@ -400,7 +400,7 @@ var posts = {
                     if (e.find('font').length) e.find('font').text(name);
                     else e.text(name);
                     e.addClass('userscript-name');
-                    e.attr('data-href', 'http://' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&starteronly=1&showposts=0');
+                    e.attr('data-href', 'http://forums.' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&starteronly=1&showposts=0'); // TODO: Check if URL still works when live
                     e.click(function () {
                         var link = $(this).find('.userscript-name-button').attr('data-href');
                         GM_openInTab(link);
