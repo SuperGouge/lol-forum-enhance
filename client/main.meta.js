@@ -27,11 +27,8 @@
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/beta/client/caches.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/beta/client/edit-box.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/beta/client/forum-display.js
-// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/beta/client/popover.js
-// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/beta/client/bootstrap/js/bootstrap.min.js
-// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/beta/client/bootstrapx-clickover/bootstrapx-clickover.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/beta/client/jquery.lfepopover.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/beta/client/aokura/unicode-utf8.js
-// @resource    bootstrapcss https://raw.github.com/philippwiddra/lol-forum-enhance/beta/client/bootstrap/css/bootstrap.min.css
 // @resource    options-modal https://raw.github.com/philippwiddra/lol-forum-enhance/beta/client/options-modal.html
 // @resource    update-alert https://raw.github.com/philippwiddra/lol-forum-enhance/beta/client/update-alert.html
 // @resource    avatardivhtml https://raw.github.com/philippwiddra/lol-forum-enhance/beta/client/avatar-div.html

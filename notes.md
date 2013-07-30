@@ -1,27 +1,34 @@
 # Notes
 
-## Supported Servers
+## Elophant servers
 
-- Does work:
+- Elophant supported:
 	- `na`
 	- `euw`
 	- `eune`
 	- `br`
-- Could work (not *Elophant* supported):
+- **Not** supported:
 	- `tr`
 	- `ru`
-- Completely new Styled (won't work without huge userscript reworks):
 	- `lan`
 	- `oce`
 	- `las`
 
-## Tooltip Testing
+## League page style changes
 
-``` javascript
-var tt = $('<br><br><a id="tt-test" href="#" data-toggle="tooltip" title="first tooltip">hover over me</a>');
-$('#post_message_11390315 > p:nth-child(1)').append(tt);
-$('#tt-test').tooltip();
-```
+- Legacy:
+	- `na`
+	- `euw`
+	- `eune`
+	- `br`
+	- `tr`
+	- `ru`
+- Updated:
+	- `lan`
+	- `oce`
+	- `las`
+
+*When does the new updates go live?*
 
 ## Old version of `LoLForums.getOwnName()`
 
@@ -87,12 +94,6 @@ if ($json_object->success) {
 }
 ```
 
-## Enhances search usages
-
-**Show user posts:** `http://euw.leagueoflegends.com/board/search.php?do=process&searchuser=ButWhyMe&exactname=1&showposts=1`
-
-**Show user threads:** `http://euw.leagueoflegends.com/board/search.php?do=process&searchuser=ButWhyMe&exactname=1&starteronly=1&showposts=0`
-
 ## JavaScript Popup Windows
 
 ``` javascript
@@ -145,14 +146,3 @@ var value;
 value = localStorage.getItem('key');
 value = localStorage['key'];
 ```
-
-## `GM_*` Greasemonkey API functions
-wheather or not an API function is allowed to use or not is specified in the `*.xml`-file which contains the metadata of all scripts.
-(more precisely in the `<GRANT>` tags)
-This file will not update automatically, when you change the `@grant ...` metadata.
-You need to update **(?)** / install the userscript to change the actually used metadata.
-
-## `@resource` and updates
-Resource metadata acts completely the same like the grant (or **every** other) metadata in the case, that changes only take effect, when you update/reinstall the script.
-In addition to this, the resource data *(images, additional javascript, whatever)* will download the time you update **(?)** / install the script.
-As far as i know **only this one time** *(however, the greasemonkey wiki says, that resource-data is somehow able to update if changed)*
