@@ -311,3 +311,20 @@
             transition: background-position 0.1s linear 0s;
             background-color: rgb(230, 230, 230);
         }
+
+.userscript-summoner-level {
+    color: rgb(43, 43, 43);
+    position: absolute;
+    right: -24px;
+    bottom: -4px;
+    font-weight: bold;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-color: rgba(255, 255, 255, 0.6);
+    width: 20px;
+    -webkit-border-top-right-radius: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    -moz-border-radius-topright: 5px;
+    -moz-border-radius-bottomright: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
