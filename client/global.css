@@ -36,27 +36,13 @@
     text-align: center;
     padding: 10px 0px;
     font-size: 13px;
+    width: 15%;
 }
 
     .userscript-avatar > div {
         width: 80px;
         text-align: center;
         margin: 10px auto 5px;
-    }
-
-    .userscript-avatar big {
-        display: block;
-        font-size: 13px;
-        font-weight: bold;
-        padding-bottom: 5px;
-        color: #333;
-    }
-
-    .userscript-avatar small {
-        display: block;
-        font-size: 11px;
-        font-weight: bold;
-        color: #333;
     }
 
     /*
@@ -72,6 +58,9 @@
 
     .userscript-avatar .userscript-avatar-image-wrapper {
         position: relative;
+    }
+    .userscript-avatar .userscript-avatar-sub {
+        margin: 0px;
     }
 
 .userscipt-user-summoner-icon {

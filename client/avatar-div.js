@@ -4,6 +4,7 @@
         var avatar = $(GM_getResourceText('avatardivhtml')); // TODO: Edit for beta forum
         $('<div class="userscript-clear"></div>').insertAfter(editor);
         avatar.insertBefore(editor);
+        editor.css('float', 'left');
     },
     replaceData: function () {
         var server = riot.getForumServer();
