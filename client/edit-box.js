@@ -9,5 +9,4 @@ var editBox = {
         //editorContainer.removeAttr("style"); // TODO: Unsafe! Check if there is a better way.
         editorContainer.addClass("userscript-editor-container");
     }
-}
-
+};
