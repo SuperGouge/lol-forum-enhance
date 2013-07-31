@@ -2,7 +2,7 @@
 // @name        LoL Forum Enhance
 // @namespace   https://github.com/philippwiddra
 // @description Supplements the League of Legends forums and sites with additional functions.
-// @include     *.leagueoflegends.com/board/*
+// @include     *.leagueoflegends.com/*
 // @downloadURL https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/main.user.js
 // @updateURL   https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/main.meta.js
 // @version     1.1.0beta
@@ -403,65 +403,66 @@ var posts = {
 };
 
 // Start of Main Script:
-
 var MutationObserver = window.MutationObserver || window.WebKitMutationObserver; // Secure browser-compatibility for Chrome
 
 level1Cache.loadCache(); // load local Cache
 level1Cache.cleanCache(); // clean old objects out of local Cache
-
 lfeOptions.loadLocal(); // load global userscript options
-localizations.setDefaultLang(riot.getForumLanguageShort()); // set default language for localization from riot-implemented cookie
-userscript.addGlobalStyle(GM_getResourceText('globalcss')); // css style changes
 
-editBox.rework(); // Change (quick) edit box style TODO: Beta Forum
 
-// auto-updates
-var dismissed = userscript.getCookie('lfe-update-dismissed');
-if (lfeOptions.data.updates && !dismissed) {
-    userscript.updateNeccessary(function (updateNecc) {
-        if (updateNecc) {
-            $('body').prepend($(GM_getResourceText('update-alert'))); // TODO: Add localization for update alert.
+pageHandler.runOn(/^(?:http\:\/\/)?forums\.(na|euw|eune|br)\.leagueoflegends\.com\/board(?:\/.*)?$/i, function () { // run this only on beta-style-forums
+    localizations.setDefaultLang(riot.getForumLanguageShort()); // set default language for localization from riot-implemented cookie
+    userscript.addGlobalStyle(GM_getResourceText('globalcss')); // css style changes
 
-            $('#lfe-update-dismiss').on('click', function () {
-                userscript.setCookie('lfe-update-dismissed', 'true', 60 * 60 * 1000);
-            });
+    // auto-updates
+    var dismissed = userscript.getCookie('lfe-update-dismissed');
+    if (lfeOptions.data.updates && !dismissed) {
+        userscript.updateNeccessary(function (updateNecc) {
+            if (updateNecc) {
+                $('body').prepend($(GM_getResourceText('update-alert'))); // TODO: Add localization for update alert.
 
-            $('#lfe-update-install').on('click', function () {
-                userscript.forceUpdate();
-                $('#lfe-update-alert').remove();
-            });
-        }
+                $('#lfe-update-dismiss').on('click', function () {
+                    userscript.setCookie('lfe-update-dismissed', 'true', 60 * 60 * 1000);
+                });
+
+                $('#lfe-update-install').on('click', function () {
+                    userscript.forceUpdate();
+                    $('#lfe-update-alert').remove();
+                });
+            }
+        });
+    }
+
+    // options modal and button
+    //optionsModal.addButton(); //TODO: Rework options modal for beta-style
+    //optionsModal.addModal(); //TODO: Rework options modal for beta-style
+    //optionsModal.localize(); //TODO: Rework options modal for beta-style
+
+    registerMenuCommands(); // register greasemonkey userscript menu commands
+
+    // create an observer for the #posts div instance
+    var observerTarget = document.querySelector('#posts');
+    var postsObserver = new MutationObserver(function (mutations) {
+        mutations.forEach(function (mutation) {
+            // TODO: Check if forEach is needed, replaceAvatars itself traverses over posts.
+            // TODO: Check if attaching avatarDiv and replacing Data is needed in case of logging in without site reload.
+            posts.replaceNames(); // replace Names and/to provide linking
+            posts.replaceAvatars(); // replace the summoner images and levels
+        });
     });
-}
+    var observerConfig = { childList: true, subtree: true };
 
-// options modal and button
-//optionsModal.addButton();
-//optionsModal.addModal();
-//optionsModal.localize();
-
-registerMenuCommands(); // register greasemonkey userscript menu commands
-
-// create an observer for the #posts div instance
-var observerTarget = document.querySelector('#posts');
-var postsObserver = new MutationObserver(function (mutations) {
-    mutations.forEach(function (mutation) {
-        // TODO: Check if forEach is needed, replaceAvatars itself traverses over posts.
-        // TODO: Check if attaching avatarDiv and replacing Data is needed in case of logging in without site reload.
+    if (riot.getForumServer() !== null) {
+        // Server found:
+        avatarDiv.attach();
+        avatarDiv.replaceData(); // replace own avatar (if name and avatar available) and provide linking
         posts.replaceNames(); // replace Names and/to provide linking
         posts.replaceAvatars(); // replace the summoner images and levels
-    });
+        if (observerTarget) postsObserver.observe(observerTarget, observerConfig); // start observing #posts
+        forumDisplay.fixNamesIfEnabled(); // Replace misformated names in forum display
+        editBox.rework(); // Change (quick) edit box style
+    }
+    else {
+        // Server not found:
+    }
 });
-var observerConfig = { childList: true, subtree: true };
-
-if (riot.getForumServer() !== null) {
-    // Server found:
-    avatarDiv.attach();
-    avatarDiv.replaceData(); // replace own avatar (if name and avatar available) and provide linking
-    posts.replaceNames(); // replace Names and/to provide linking
-    posts.replaceAvatars(); // replace the summoner images and levels
-    if (observerTarget) postsObserver.observe(observerTarget, observerConfig); // start observing #posts
-    forumDisplay.fixNamesIfEnabled(); // Replace misformated names in forum display
-}
-else {
-    // Server not found:
-}

@@ -1,7 +1,7 @@
 ﻿var avatarDiv = {
     attach: function () {
         var editorContainer = $('#collapseobj_quick_reply .editor-container');
-        var avatar = $(GM_getResourceText('avatardivhtml')); // TODO: Edit for beta forum
+        var avatar = $(GM_getResourceText('avatardivhtml'));
         $('<div class="userscript-clear"></div>').insertAfter(editorContainer);
         avatar.insertBefore(editorContainer);
     },
