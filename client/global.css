@@ -33,13 +33,15 @@
 .userscript-avatar {
     float: left;
     position: relative;
-    left: -16px;
+    text-align: center;
+    padding: 10px 0px;
+    font-size: 13px;
 }
 
     .userscript-avatar > div {
-        padding-top: 10px;
-        width: 205px;
+        width: 80px;
         text-align: center;
+        margin: 10px auto 5px;
     }
 
     .userscript-avatar big {
@@ -57,6 +59,7 @@
         color: #333;
     }
 
+    /*
     .userscript-avatar a {
         position: relative;
         display: block;
@@ -64,6 +67,11 @@
         height: 100px;
         background: url("http://riot-web-static.s3.amazonaws.com/forum/ui/avatar.png") no-repeat;
         margin: 0px auto;
+    }
+    */
+
+    .userscript-avatar .userscript-avatar-image-wrapper {
+        position: relative;
     }
 
 .userscipt-user-summoner-icon {
