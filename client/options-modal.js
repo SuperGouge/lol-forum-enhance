@@ -6,7 +6,7 @@
     },
     addModal: function () {
         var modal = $(GM_getResourceText('options-modal'));
-        $('#forum_body').append(modal);
+        $('body').append(modal);
 
         // Load options into modal when shown
         $('#lfeOptionsModal').on('shown', function () {

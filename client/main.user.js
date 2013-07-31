@@ -2,10 +2,10 @@
 // @name        LoL Forum Enhance
 // @namespace   https://github.com/philippwiddra
 // @description Supplements the League of Legends forums and sites with additional functions.
-// @include     *.leagueoflegends.com/board/*
+// @include     *.leagueoflegends.com/*
 // @downloadURL https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/main.user.js
 // @updateURL   https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/main.meta.js
-// @version     1.0.3
+// @version     1.1.0beta
 // @run-at      document-end
 // @grant       GM_xmlhttpRequest
 // @grant       GM_getResourceText
@@ -27,10 +27,8 @@
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/caches.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/edit-box.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/forum-display.js
-// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/bootstrap/js/bootstrap.min.js
-// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/bootstrapx-clickover/bootstrapx-clickover.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/jquery.lfepopover.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/aokura/unicode-utf8.js
-// @resource    bootstrapcss https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/bootstrap/css/bootstrap.min.css
 // @resource    options-modal https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/options-modal.html
 // @resource    update-alert https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/update-alert.html
 // @resource    avatardivhtml https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/avatar-div.html
@@ -236,13 +234,27 @@ function Summoner() {
     };
 }
 var riot = {
+    getForumRegion: function () {
+        return userscript.getCookie('PVPNET_REGION');
+    },
+    getForumLanguage: function () {
+        return userscript.getCookie('PVPNET_LANG');
+    },
+    getForumLanguageShort: function () {
+        return riot.getForumLanguage().split('_')[0];
+    },
     getOwnForumName: function () {
         var name = $('#pvpnet-bar-account-button').text();
         if (name === '') return null;
         else return name;
     },
+    getForumAccount: function (region) {
+        if (typeof (region) === 'string') return userscript.getCookie('PVPNET_ACCT_' + region.toUpperCase());
+        else return userscript.getCookie('PVPNET_ACCT_' + riot.getForumRegion().toUpperCase());
+    },
     getForumServer: function () {
-        var match = document.URL.match(/^(?:http\:\/\/)?(na|euw|eune|br)\.leagueoflegends\.com(?:\/.*)?$/i);
+        //var match = document.URL.match(/^(?:http\:\/\/)?(na|euw|eune|br)\.leagueoflegends\.com(?:\/.*)?$/i); // old
+        var match = document.URL.match(/^(?:http\:\/\/)?forums\.(na|euw|eune|br)\.leagueoflegends\.com(?:\/.*)?$/i); // beta TODO: Check if thats final
         if (match !== null) return match[1];
         else return null;
     }
@@ -300,29 +312,27 @@ function registerMenuCommands() {
 var posts = {
     replaceAvatars: function () {
         // get all Left items except those of rioters.
-        var allLeft = $('.forum_post img.user_summoner_icon').filter($('img[src="lol_theme/img/unknown_icon.jpg"]')).parent().parent().parent().parent();
+        var allLeft = $('.post-col-left').has('img[src="lol_theme/img/unknown_icon.jpg"]');
         allLeft.each(function (i, e) {
             e = $(e);
             if (!e.data('replaced')) {
-                var name = e.find('big').text();
+                var name = e.find('p.post-user').text();
                 name = name.replace(/(^\s*)|(\s*$)/g, ''); // replace whitespaces at the beginning and end
-                var orb = e.find('span.left_orb');
                 var image = e.find('img.user_summoner_icon');
 
                 // Cache system (the level-1-cache automatically calls the level-2-cache if it doesnt have the result)
                 level1Cache.getSummoner(name, riot.getForumServer(), function (summoner) {
                     // Summoner found:                
                     image.attr('src', GM_getResourceURL("icon" + summoner.data.profileIconId)); // replace image source
-                    orb.text(summoner.data.summonerLevel); // replace level
+                    $('<div class="userscript-summoner-level">' + summoner.data.summonerLevel + '</div>').insertAfter(image);
                     level1Cache.saveCache(); // save whole cache
-
                 },
                 function (summoner) {
                     // Summoner not found:
                     if (!image.data('overlayed')) {
                         image.parent().append($('<div class="userscript-avatar-overlay">' +
                                                     '<span>' +
-                                                        'not found' +
+                                                        'not found' + // TODO: Localization
                                                     '</span>' +
                                                 '</div>'));
                         image.attr('src', GM_getResourceURL('iconNotFound'));
@@ -335,7 +345,7 @@ var posts = {
     },
     replaceNames: function () {
         var server = riot.getForumServer();
-        var allNames = $('.forum_post .avatar big');
+        var allNames = $('.post-col-left p.post-user');
         allNames.each(function (i, e) {
             e = $(e);
             if (!e.data('renamed')) {
@@ -344,45 +354,49 @@ var posts = {
                 if (lfeOptions.data.charset) name = _from_utf8(name); // charset encoding bugfixes for league forums
                 
                 if (lfeOptions.data.link === 'selection') {
-                    if (color) e.contents().replaceWith('<button class="btn btn-link userscript-name-button" style="color: ' + color + '">' + name + '</button>');
-                    else e.contents().replaceWith('<button class="btn btn-link userscript-name-button">' + name + '</button>');
-                    e.clickover({
-                        content: '<div class="btn-group btn-group-vertical">' +
-                                      '<button class="btn btn-small summoner-clickover" style="width: 160px" type="button" data-href="http://' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&showposts=1">' + localizations.get('nameClickoverPostsCaption') + '</button>' +
-                                      '<button class="btn btn-small summoner-clickover" style="width: 160px" type="button" data-href="http://' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&starteronly=1&showposts=0">' + localizations.get('nameClickoverThreadsCaption') + '</button>' +
-                                  '</div>' +
-                                  '<button id="userscript-clickover-close" style="display: none;" data-toggle="button" data-dismiss="clickover">Close</button>',
-                        animation: true,
+                    if (e.find('font').length) e.find('font').text(name);
+                    else e.text(name);
+                    e.addClass('userscript-name');
+                    e.lfePopover({
                         html: true,
-                        placement: 'top',
-                        esc_close: 'false',
-                        onShown: function () {
-                            $('.summoner-clickover').on('click', function () {
-                                var link = $(this).attr('data-href');
-                                GM_openInTab(link);
-                                $('#userscript-clickover-close').click();
-                            });
-                        }
+                        content: '<div class="userscript-summoner-popover-buttons">' +
+                                      '<button type="button" data-href="http://forums.' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&showposts=1">' + localizations.get('nameClickoverPostsCaption') + '</button>' + // TODO: Check if URL still works when live
+                                      '<button type="button" data-href="http://forums.' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&starteronly=1&showposts=0">' + localizations.get('nameClickoverThreadsCaption') + '</button>' + // TODO: Check if URL still works when live
+                                 '</div>',
+                    });
+                    e.click(function () {
+                        $(this).lfePopover('toggle');
+                    });
+                    e.parent().find('.userscript-summoner-popover-buttons > button').click(function () {
+                        var link = $(this).attr('data-href');
+                        GM_openInTab(link);
+                        e.lfePopover('hide');
                     });
                 }
                 else if (lfeOptions.data.link === 'posts') {
-                    e.contents().replaceWith('<button class="btn btn-link userscript-name-button" data-href="http://' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&showposts=1">' + name + '</button>');
+                    if (e.find('font').length) e.find('font').text(name);
+                    else e.text(name);
+                    e.addClass('userscript-name');
+                    e.attr('data-href', 'http://forums.' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&showposts=1'); // TODO: Check if URL still works when live
                     e.click(function () {
-                        var link = $(this).find('.userscript-name-button').attr('data-href');
+                        var link = $(this).attr('data-href');
                         GM_openInTab(link);
                     });
                 }
                 else if (lfeOptions.data.link === 'threads') {
-                    e.contents().replaceWith('<button class="btn btn-link userscript-name-button" data-href="http://' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&starteronly=1&showposts=0">' + name + '</button>');
+                    if (e.find('font').length) e.find('font').text(name);
+                    else e.text(name);
+                    e.addClass('userscript-name');
+                    e.attr('data-href', 'http://forums.' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&starteronly=1&showposts=0'); // TODO: Check if URL still works when live
                     e.click(function () {
-                        var link = $(this).find('.userscript-name-button').attr('data-href');
+                        var link = $(this).attr('data-href');
                         GM_openInTab(link);
                     });
                 }
                 else { // lfeOptions.data.link === 'none'
-                    e.text(name);
+                    if (e.find('font').length) e.find('font').text(name);
+                    else e.text(name);
                 }
-
                 e.data('renamed', true);
             }
         });
@@ -390,71 +404,66 @@ var posts = {
 };
 
 // Start of Main Script:
-
 var MutationObserver = window.MutationObserver || window.WebKitMutationObserver; // Secure browser-compatibility for Chrome
 
 level1Cache.loadCache(); // load local Cache
 level1Cache.cleanCache(); // clean old objects out of local Cache
-
 lfeOptions.loadLocal(); // load global userscript options
-localizations.setDefaultLang(userscript.getCookie('LOLLANG')); // set default language for localization from riot-implemented cookie
 
 
-// css style changes
-userscript.prependGlobalStyle(GM_getResourceText('bootstrapcss'));
-userscript.addGlobalStyle(GM_getResourceText('globalcss'));
+pageHandler.runOn(/^(?:http\:\/\/)?forums\.(na|euw|eune|br)\.leagueoflegends\.com\/board(?:\/.*)?$/i, function () { // run this only on beta-style-forums
+    localizations.setDefaultLang(riot.getForumLanguageShort()); // set default language for localization from riot-implemented cookie
+    userscript.addGlobalStyle(GM_getResourceText('globalcss')); // css style changes
 
-editBox.rework(); // Change (quick) edit box style
+    // auto-updates
+    var dismissed = userscript.getCookie('lfe-update-dismissed');
+    if (lfeOptions.data.updates && !dismissed) {
+        userscript.updateNeccessary(function (updateNecc) {
+            if (updateNecc) {
+                $('body').prepend($(GM_getResourceText('update-alert'))); // TODO: Add localization for update alert.
 
-// auto-updates
-var dismissed = userscript.getCookie('lfe-update-dismissed');
-if (lfeOptions.data.updates && !dismissed) {
-    userscript.updateNeccessary(function (updateNecc) {
-        if (updateNecc) {
-            $('body').prepend($(GM_getResourceText('update-alert')));
-            // TODO: Add localization for update alert.
+                $('#lfe-update-dismiss').on('click', function () {
+                    userscript.setCookie('lfe-update-dismissed', 'true', 60 * 60 * 1000);
+                });
 
-            $('#lfe-update-dismiss').on('click', function () {
-                userscript.setCookie('lfe-update-dismissed', 'true', 60 * 60 * 1000);
-            });
+                $('#lfe-update-install').on('click', function () {
+                    userscript.forceUpdate();
+                    $('#lfe-update-alert').remove();
+                });
+            }
+        });
+    }
 
-            $('#lfe-update-install').on('click', function () {
-                userscript.forceUpdate();
-                $('#lfe-update-alert').remove();
-            });
-        }
+    // options modal and button
+    //optionsModal.addButton(); //TODO: Rework options modal for beta-style
+    //optionsModal.addModal(); //TODO: Rework options modal for beta-style
+    //optionsModal.localize(); //TODO: Rework options modal for beta-style
+
+    registerMenuCommands(); // register greasemonkey userscript menu commands
+
+    // create an observer for the #posts div instance
+    var observerTarget = document.querySelector('#posts');
+    var postsObserver = new MutationObserver(function (mutations) {
+        mutations.forEach(function (mutation) {
+            // TODO: Check if forEach is needed, replaceAvatars itself traverses over posts.
+            // TODO: Check if attaching avatarDiv and replacing Data is needed in case of logging in without site reload.
+            posts.replaceNames(); // replace Names and/to provide linking
+            posts.replaceAvatars(); // replace the summoner images and levels
+        });
     });
-}
+    var observerConfig = { childList: true, subtree: true };
 
-// options modal and button
-optionsModal.addButton();
-optionsModal.addModal();
-optionsModal.localize();
-
-registerMenuCommands(); // register greasemonkey userscript menu commands
-
-// create an observer for the #posts div instance
-var observerTarget = document.querySelector('#posts');
-var postsObserver = new MutationObserver(function (mutations) {
-    mutations.forEach(function (mutation) {
-        // TODO: Check if forEach is needed, replaceAvatars itself traverses over posts.
-        // TODO: Check if attaching avatarDiv and replacing Data is needed in case of logging in without site reload.
+    if (riot.getForumServer() !== null) {
+        // Server found:
+        avatarDiv.attach();
+        avatarDiv.replaceData(); // replace own avatar (if name and avatar available) and provide linking
         posts.replaceNames(); // replace Names and/to provide linking
         posts.replaceAvatars(); // replace the summoner images and levels
-    });
+        if (observerTarget) postsObserver.observe(observerTarget, observerConfig); // start observing #posts
+        forumDisplay.fixNamesIfEnabled(); // Replace misformated names in forum display
+        editBox.rework(); // Change (quick) edit box style
+    }
+    else {
+        // Server not found:
+    }
 });
-var observerConfig = { childList: true, subtree: true };
-
-if (riot.getForumServer() !== null) {
-    // Server found:
-    avatarDiv.attach();
-    avatarDiv.replaceData(); // replace own avatar (if name and avatar available) and provide linking
-    posts.replaceNames(); // replace Names and/to provide linking
-    posts.replaceAvatars(); // replace the summoner images and levels
-    if (observerTarget) postsObserver.observe(observerTarget, observerConfig); // start observing #posts
-
-    forumDisplay.fixNamesIfEnabled(); // Replace misformated names in forum display
-}
-else {
-    // Server not found:
-}
