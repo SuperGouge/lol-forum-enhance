@@ -23,11 +23,15 @@
 }
 
 .userscript-editor-container {
+    /*
     overflow: hidden;
     position: relative;
     left: -16px;
     width: auto;
     max-width: none;
+    */
+    width: 85%;
+    float: left
 }
 
 .userscript-avatar {
