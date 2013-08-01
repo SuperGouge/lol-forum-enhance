@@ -16,6 +16,10 @@
 
 ## Version history:
 
+## 1.1.0beta
+- **Changed** whole style of the add-on to work with the new design of the forums
+- Options menu not available until its ported to new design (soon)
+
 ## 1.0.0
 - **Added** german translation
 - **Added** functionality to get the *special characters* of users in the threads-overview back
