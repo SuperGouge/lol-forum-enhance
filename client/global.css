@@ -405,9 +405,9 @@
     display: inline-block;
     color: #666666;
     font-family: arial;
-    font-size: 15px;
+    font-size: 12px;
     font-weight: normal;
-    padding: 6px 19px;
+    padding: 3px 10px;
     text-decoration: none;
     -webkit-text-shadow: 1px 1px 0px #ffffff;
     text-shadow: 1px 1px 0px #ffffff;
@@ -418,29 +418,17 @@
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#e9e9e9', endColorstr='#f9f9f9');
 	background-color:#e9e9e9;
 }
-    .userscript-btn .active {
-        -moz-box-shadow: inset 0px 0px 0px 0px #7d81f5;
-        -webkit-box-shadow: inset 0px 0px 0px 0px #7d81f5;
-        box-shadow: inset 0px 0px 0px 0px #7d81f5;
+    .userscript-btn.active {
         background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #697bff), color-stop(1, #3939e3) );
         background: -moz-linear-gradient( center top, #697bff 5%, #3939e3 100% );
         filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#697bff', endColorstr='#3939e3');
         background-color: #697bff;
-        -moz-border-radius: 12px;
-        -webkit-border-radius: 12px;
-        border-radius: 12px;
         border: 1px solid #596fff;
-        display: inline-block;
         color: #ffffff;
-        font-family: arial;
-        font-size: 15px;
-        font-weight: normal;
-        padding: 6px 19px;
-        text-decoration: none;
         -webkit-text-shadow: 1px 1px 0px #5462cc;
         text-shadow: 1px 1px 0px #5462cc;
     }
-        .userscript-btn .active:hover {
+        .userscript-btn.active:hover {
             background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #3939e3), color-stop(1, #697bff) );
             background: -moz-linear-gradient( center top, #3939e3 5%, #697bff 100% );
             filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3939e3', endColorstr='#697bff');
@@ -454,6 +442,7 @@
 }
     .userscript-btn-group > .userscript-btn {
         float: left;
+        margin-left: -1px;
     }
     .userscript-btn-group > .userscript-btn:first-child {
         margin-left: 0px;

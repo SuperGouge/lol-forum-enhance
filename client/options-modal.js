@@ -7,9 +7,9 @@
             $('#lfeOptionsModal').trigger('openModal');
         });
 
-        $('.userscript-options-modal .userscript-btn-group .userscript-btn').click(function () {
+        $('.userscript-options-modal .userscript-btn-group > .userscript-btn').click(function () {
             var button = $(this);
-            button.siblings('.userscript-btn').removeClass('.active');
+            button.siblings().removeClass('active');
             button.addClass('active');
         });
     },
