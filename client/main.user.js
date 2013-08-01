@@ -435,9 +435,9 @@ pageHandler.runOn(/^(?:http\:\/\/)?forums\.(na|euw|eune|br)\.leagueoflegends\.co
     }
 
     // options modal and button
-    //optionsModal.addButton(); //TODO: Rework options modal for beta-style
-    //optionsModal.addModal(); //TODO: Rework options modal for beta-style
-    //optionsModal.localize(); //TODO: Rework options modal for beta-style
+    optionsModal.addButton(); //TODO: Rework options modal for beta-style
+    optionsModal.addModal(); //TODO: Rework options modal for beta-style
+    optionsModal.localize(); //TODO: Rework options modal for beta-style
 
     registerMenuCommands(); // register greasemonkey userscript menu commands
 
