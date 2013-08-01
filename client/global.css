@@ -43,7 +43,7 @@
     width: 15%;
 }
 
-    .userscript-avatar > div {
+    .userscript-avatar > div:first-child {
         width: 80px;
         text-align: center;
         margin: 10px auto 5px;
@@ -461,7 +461,7 @@ table.userscript-table {
     }
         .userscript-btn.btn-x:active {
             position: relative;
-            top: 1px;
+            top: -14px;
         }
 
 .userscript-btn-group {
