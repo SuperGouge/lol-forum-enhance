@@ -355,16 +355,16 @@
 
     }
     
-.userscript-table {
+table.userscript-table {
     border-collapse: collapse;
     width: 100%;
     margin-top: 1em;
 }
-    .userscript-table .table-striped tbody tr:nth-child(2n+1) td,
-    .userscript-table .table-striped tbody tr:nth-child(2n+1) th {
+    table.userscript-table .table-striped tbody tr:nth-child(2n+1) td,
+    table.userscript-table .table-striped tbody tr:nth-child(2n+1) th {
         background-color: rgba(0, 0, 0, 0.05);
     }
-    .userscript-table .td {
+    table.userscript-table .td {
         padding: 0px 10px;
     }
 
