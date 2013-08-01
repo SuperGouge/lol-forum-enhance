@@ -3,7 +3,7 @@
 # Exclude actual settings. You do not want to hand out your passwords to someone.
 server/Settings.class.php
 
-# Exclude summoner icons to keep the repo small.
+# Exclude summoner icons
 server/SummonerIcons/*.jpg
 server/SummonerIcons/*.png
 server/SummonerIcons/*.gif
@@ -17,6 +17,11 @@ client/SummonerIcons/*.bmp
 client/SummonerIcons/Thumbs.db
 
 client/bootstrap/img/Thumbs.db
+
+# Exclude teaser image files in forums/
+forums/*.jpg
+forums/*.psd
+forums/Thumbs.db
 
 ## Ignore Visual Studio files
 
