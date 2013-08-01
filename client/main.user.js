@@ -18,6 +18,7 @@
 // @grant       GM_openInTab
 // @grant       GM_registerMenuCommand
 // @resource    globalcss https://raw.github.com/philippwiddra/lol-forum-enhance/testing/client/global.css
+// @resource    glyphicons-css https://raw.github.com/philippwiddra/lol-forum-enhance/testing/client/glyphicons.css
 // @require     http://code.jquery.com/jquery-2.0.2.min.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/testing/client/avatar-div.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/testing/client/toolkitVersions.js
@@ -414,6 +415,7 @@ lfeOptions.loadLocal(); // load global userscript options
 pageHandler.runOn(/^(?:http\:\/\/)?forums\.(na|euw|eune|br)\.leagueoflegends\.com\/board(?:\/.*)?$/i, function () { // run this only on beta-style-forums
     localizations.setDefaultLang(riot.getForumLanguageShort()); // set default language for localization from riot-implemented cookie
     userscript.addGlobalStyle(GM_getResourceText('globalcss')); // css style changes
+    userscript.addGlobalStyle(GM_getResourceText('glyphicons-css')); // add glyphicons css
 
     // auto-updates TODO: Check if style works in beta forums
     var dismissed = userscript.getCookie('lfe-update-dismissed');
@@ -435,9 +437,9 @@ pageHandler.runOn(/^(?:http\:\/\/)?forums\.(na|euw|eune|br)\.leagueoflegends\.co
     }
 
     // options modal and button
-    optionsModal.addButton(); //TODO: Rework options modal for beta-style
-    optionsModal.addModal(); //TODO: Rework options modal for beta-style
-    optionsModal.localize(); //TODO: Rework options modal for beta-style
+    optionsModal.addButton();
+    optionsModal.addModal();
+    optionsModal.localize();
 
     registerMenuCommands(); // register greasemonkey userscript menu commands
 
@@ -461,6 +463,14 @@ pageHandler.runOn(/^(?:http\:\/\/)?forums\.(na|euw|eune|br)\.leagueoflegends\.co
         posts.replaceAvatars(); // replace the summoner images and levels
         if (observerTarget) postsObserver.observe(observerTarget, observerConfig); // start observing #posts
         forumDisplay.fixNamesIfEnabled(); // Replace misformated names in forum display
+
+        // replace quote author names special chars
+        if (lfeOptions.data.charset) {
+            $('div.quote-message > div:first-child > strong:first-child').each(function (i, e) {
+                $(e).text(_from_utf8($(e).text()));
+            });
+        }
+
         editBox.rework(); // Change (quick) edit box style
     }
     else {

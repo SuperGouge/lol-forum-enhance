@@ -18,6 +18,7 @@
 // @grant       GM_openInTab
 // @grant       GM_registerMenuCommand
 // @resource    globalcss https://raw.github.com/philippwiddra/lol-forum-enhance/testing/client/global.css
+// @resource    glyphicons-css https://raw.github.com/philippwiddra/lol-forum-enhance/testing/client/glyphicons.css
 // @require     http://code.jquery.com/jquery-2.0.2.min.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/testing/client/avatar-div.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/testing/client/toolkitVersions.js
