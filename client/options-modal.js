@@ -6,12 +6,6 @@
         modalButton.click(function () {
             $('#lfeOptionsModal').trigger('openModal');
         });
-
-        $('.userscript-options-modal .userscript-btn-group > .userscript-btn').click(function () {
-            var button = $(this);
-            button.siblings().removeClass('active');
-            button.addClass('active');
-        });
     },
     addModal: function () {
         var modal = $(GM_getResourceText('options-modal'));
@@ -66,6 +60,13 @@
             lfeOptions.data.link = $('#lfe-o-link .active').data('value');
             lfeOptions.saveLocal();
             $('#lfeOptionsModal').modal('hide');
+        });
+
+        // Register option selection events
+        $('.userscript-options-modal .userscript-btn-group > .userscript-btn').click(function () {
+            var button = $(this);
+            button.siblings().removeClass('active');
+            button.addClass('active');
         });
     },
     localize: function () {
