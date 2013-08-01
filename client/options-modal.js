@@ -3,6 +3,15 @@
         // TODO: Load Button from html-file
         var modalButton = $('<div id="lol-forum-enhance-settings" class="userscript-pvpnet-bar"><a href="#lfeOptionsModal" role="button" data-toggle="modal">' + localizations.get('optionsModalButtonCaption') + '</a></div>');
         $('#pvpnet-bar-inner').prepend(modalButton);
+        modalButton.click(function () {
+            $('#lfeOptionsModal').trigger('openModal');
+        });
+
+        $('.userscript-options-modal .btn-group .userscript-btn').click(function () {
+            var button = $(this);
+            button.siblings('.userscript-btn').removeClass('.active');
+            button.addClass('active');
+        });
     },
     addModal: function () {
         var modal = $(GM_getResourceText('options-modal'));
