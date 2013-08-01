@@ -2,14 +2,10 @@
 // @name        LoL Forum Enhance
 // @namespace   https://github.com/philippwiddra
 // @description Supplements the League of Legends forums and sites with additional functions.
-// @include     *.leagueoflegends.com/board/*
+// @include     *.leagueoflegends.com/*
 // @downloadURL https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/main.user.js
 // @updateURL   https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/main.meta.js
-<<<<<<< HEAD
-// @version     1.0.3
-=======
 // @version     1.1.0beta
->>>>>>> beta
 // @run-at      document-end
 // @grant       GM_xmlhttpRequest
 // @grant       GM_getResourceText
@@ -33,6 +29,7 @@
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/forum-display.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/jquery.lfepopover.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/aokura/unicode-utf8.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/flaviusmatis/easyModal/jquery.easyModal.js
 // @resource    options-modal https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/options-modal.html
 // @resource    update-alert https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/update-alert.html
 // @resource    avatardivhtml https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/avatar-div.html

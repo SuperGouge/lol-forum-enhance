@@ -29,6 +29,7 @@
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/forum-display.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/jquery.lfepopover.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/aokura/unicode-utf8.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/flaviusmatis/easyModal/jquery.easyModal.js
 // @resource    options-modal https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/options-modal.html
 // @resource    update-alert https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/update-alert.html
 // @resource    avatardivhtml https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/avatar-div.html
@@ -410,12 +411,11 @@ level1Cache.loadCache(); // load local Cache
 level1Cache.cleanCache(); // clean old objects out of local Cache
 lfeOptions.loadLocal(); // load global userscript options
 
-
 pageHandler.runOn(/^(?:http\:\/\/)?forums\.(na|euw|eune|br)\.leagueoflegends\.com\/board(?:\/.*)?$/i, function () { // run this only on beta-style-forums
     localizations.setDefaultLang(riot.getForumLanguageShort()); // set default language for localization from riot-implemented cookie
     userscript.addGlobalStyle(GM_getResourceText('globalcss')); // css style changes
 
-    // auto-updates
+    // auto-updates TODO: Check if style works in beta forums
     var dismissed = userscript.getCookie('lfe-update-dismissed');
     if (lfeOptions.data.updates && !dismissed) {
         userscript.updateNeccessary(function (updateNecc) {

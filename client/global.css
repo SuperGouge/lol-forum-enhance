@@ -329,3 +329,27 @@
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
 }
+
+.userscript-options-modal {
+    display: none;
+}
+
+.userscript-pull-left {
+    float: left;
+}
+
+.userscript-pull-right {
+    float: right;
+}
+
+.userscript-text-warning {
+    color: orange;
+}
+
+.userscript-text-info {
+    color: blue;
+}
+
+.userscript-clearfix {
+    clear: both;
+}

@@ -8,29 +8,42 @@
         var modal = $(GM_getResourceText('options-modal'));
         $('body').append(modal);
 
-        // Load options into modal when shown
-        $('#lfeOptionsModal').on('shown', function () {
-            $('#lfeOptionsModal button.active').removeClass('active');
+        $('#lfeOptionsModal').easyModal({
+            top: 100,
+            autoOpen: false,
+            overlayOpacity: 0.5,
+            overlayColor: '#000',
+            overlayClose: true,
+            closeOnEscape: true,
+            closeButtonClass: '.userscript-options-modal-close',
+            onOpen: function (modal) {
+                //$(modal).append('Opened!');
 
-            if (lfeOptions.data.updates) $('#lfe-o-updates-on').addClass('active');
-            else $('#lfe-o-updates-off').addClass('active');
+                $('#lfeOptionsModal button.active').removeClass('active');
 
-            if (lfeOptions.data.charset) $('#lfe-o-charset-on').addClass('active');
-            else $('#lfe-o-charset-off').addClass('active');
+                if (lfeOptions.data.updates) $('#lfe-o-updates-on').addClass('active');
+                else $('#lfe-o-updates-off').addClass('active');
 
-            if (lfeOptions.data.enlarge) $('#lfe-o-enlarge-on').addClass('active');
-            else $('#lfe-o-enlarge-off').addClass('active');
+                if (lfeOptions.data.charset) $('#lfe-o-charset-on').addClass('active');
+                else $('#lfe-o-charset-off').addClass('active');
 
-            if (lfeOptions.data.avatar) $('#lfe-o-avatar-on').addClass('active');
-            else $('#lfe-o-avatar-off').addClass('active');
+                if (lfeOptions.data.enlarge) $('#lfe-o-enlarge-on').addClass('active');
+                else $('#lfe-o-enlarge-off').addClass('active');
 
-            if (lfeOptions.data.wt) $('#lfe-o-wt-on').addClass('active');
-            else $('#lfe-o-wt-off').addClass('active');
+                if (lfeOptions.data.avatar) $('#lfe-o-avatar-on').addClass('active');
+                else $('#lfe-o-avatar-off').addClass('active');
 
-            if (lfeOptions.data.fek) $('#lfe-o-fek-on').addClass('active');
-            else $('#lfe-o-fek-off').addClass('active');
+                if (lfeOptions.data.wt) $('#lfe-o-wt-on').addClass('active');
+                else $('#lfe-o-wt-off').addClass('active');
 
-            $('#lfe-o-link-' + lfeOptions.data.link).addClass('active');
+                if (lfeOptions.data.fek) $('#lfe-o-fek-on').addClass('active');
+                else $('#lfe-o-fek-off').addClass('active');
+
+                $('#lfe-o-link-' + lfeOptions.data.link).addClass('active');
+            },
+            onClose: function (modal) {
+                //$(modal).append('Closed!');
+            }
         });
 
         // Register save-options function
