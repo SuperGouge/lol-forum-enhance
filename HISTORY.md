@@ -1,18 +1,4 @@
 # Repository version history
-## Goals:
-- ~~Mark nonexistent summoners~~
-- ~~Insert summoner icon when quick-replying~~
-- ~~Automatic update notifications~~
-- Show server status
-- ~~Enlarge quick edit box~~
-- ~~show own avatar besides quick edit box~~
-- ~~Client- and serverside caching~~
-- Check compatibility to other/newer regions
-- rework normal edit box
-- ~~add about link~~
-- ~~add click and search functionality to summoner names~~
-
----
 
 ## Version history:
 
