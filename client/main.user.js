@@ -5,7 +5,7 @@
 // @include     *.leagueoflegends.com/*
 // @downloadURL https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/main.user.js
 // @updateURL   https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/main.meta.js
-// @version     1.1.0beta
+// @version     1.2.0
 // @run-at      document-end
 // @grant       GM_xmlhttpRequest
 // @grant       GM_getResourceText
@@ -18,6 +18,7 @@
 // @grant       GM_openInTab
 // @grant       GM_registerMenuCommand
 // @resource    globalcss https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/global.css
+// @resource    glyphicons-css https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/glyphicons.css
 // @require     http://code.jquery.com/jquery-2.0.2.min.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/avatar-div.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/toolkitVersions.js
@@ -29,6 +30,7 @@
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/forum-display.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/jquery.lfepopover.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/aokura/unicode-utf8.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/flaviusmatis/easyModal/jquery.easyModal.js
 // @resource    options-modal https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/options-modal.html
 // @resource    update-alert https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/update-alert.html
 // @resource    avatardivhtml https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/avatar-div.html
@@ -352,7 +354,20 @@ var posts = {
                 var color = e.find('font').attr('color');
                 var name = e.text();
                 if (lfeOptions.data.charset) name = _from_utf8(name); // charset encoding bugfixes for league forums
-                
+
+                /*
+                var found = false;
+                var summoner;
+                level1Cache.getSummoner(name, riot.getForumServer(), function (s) {
+                    found = true;
+                    summoner = s;
+                },
+                function (s) {
+                    found = false;
+                });
+                var url = 'http://www.lolking.net/summoner/'+server+'/'+summoner.data.summonerId;
+                */
+
                 if (lfeOptions.data.link === 'selection') {
                     if (e.find('font').length) e.find('font').text(name);
                     else e.text(name);
@@ -410,12 +425,12 @@ level1Cache.loadCache(); // load local Cache
 level1Cache.cleanCache(); // clean old objects out of local Cache
 lfeOptions.loadLocal(); // load global userscript options
 
-
 pageHandler.runOn(/^(?:http\:\/\/)?forums\.(na|euw|eune|br)\.leagueoflegends\.com\/board(?:\/.*)?$/i, function () { // run this only on beta-style-forums
     localizations.setDefaultLang(riot.getForumLanguageShort()); // set default language for localization from riot-implemented cookie
     userscript.addGlobalStyle(GM_getResourceText('globalcss')); // css style changes
+    userscript.addGlobalStyle(GM_getResourceText('glyphicons-css')); // add glyphicons css
 
-    // auto-updates
+    // auto-updates TODO: Check if style works in beta forums
     var dismissed = userscript.getCookie('lfe-update-dismissed');
     if (lfeOptions.data.updates && !dismissed) {
         userscript.updateNeccessary(function (updateNecc) {
@@ -435,9 +450,9 @@ pageHandler.runOn(/^(?:http\:\/\/)?forums\.(na|euw|eune|br)\.leagueoflegends\.co
     }
 
     // options modal and button
-    //optionsModal.addButton(); //TODO: Rework options modal for beta-style
-    //optionsModal.addModal(); //TODO: Rework options modal for beta-style
-    //optionsModal.localize(); //TODO: Rework options modal for beta-style
+    optionsModal.addButton();
+    optionsModal.addModal();
+    optionsModal.localize();
 
     registerMenuCommands(); // register greasemonkey userscript menu commands
 
@@ -461,6 +476,14 @@ pageHandler.runOn(/^(?:http\:\/\/)?forums\.(na|euw|eune|br)\.leagueoflegends\.co
         posts.replaceAvatars(); // replace the summoner images and levels
         if (observerTarget) postsObserver.observe(observerTarget, observerConfig); // start observing #posts
         forumDisplay.fixNamesIfEnabled(); // Replace misformated names in forum display
+
+        // replace quote author names special chars
+        if (lfeOptions.data.charset) {
+            $('div.quote-message > div:first-child > strong:first-child').each(function (i, e) {
+                $(e).text(_from_utf8($(e).text()));
+            });
+        }
+
         editBox.rework(); // Change (quick) edit box style
     }
     else {

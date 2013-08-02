@@ -16,6 +16,10 @@
 
 ## Version history:
 
+## 1.2.0
+- **Added** options menu in new design
+- **Added** *special character support* for quote authors
+
 ## 1.1.0beta
 - **Changed** whole style of the add-on to work with the new design of the forums
 - Options menu not available until its ported to new design (soon)
