@@ -1,7 +1,7 @@
 ﻿var optionsModal = {
     addButton: function () {
         // TODO: Load Button from html-file
-        var modalButton = $('<div id="lol-forum-enhance-settings" class="userscript-pvpnet-bar"><i class="userscript-icon-white userscript-icon-wrench"></i> <a href="#lfeOptionsModal" role="button" data-toggle="modal">' + localizations.get('optionsModalButtonCaption') + '</a></div>');
+        var modalButton = $('<div id="lol-forum-enhance-settings" class="userscript-pvpnet-bar"><a href="#lfeOptionsModal" role="button" data-toggle="modal"><i class="userscript-icon-white userscript-icon-wrench"></i> ' + localizations.get('optionsModalButtonCaption') + '</a></div>');
         $('#pvpnet-bar-inner').prepend(modalButton);
         modalButton.click(function () {
             $('#lfeOptionsModal').trigger('openModal');
