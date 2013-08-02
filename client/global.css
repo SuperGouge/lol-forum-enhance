@@ -528,6 +528,12 @@ table.userscript-btn-group tbody {
     border-collapse: collapse;
     display: table;
 }
+    table.userscript-btn-group td {
+        padding: 0px;
+    }
+    table.userscript-btn-group .userscript-btn {
+        width: 100%;
+    }
     table.userscript-btn-group td:first-child .userscript-btn {
         margin-left: 0px;
         border-top-right-radius: 0px;
