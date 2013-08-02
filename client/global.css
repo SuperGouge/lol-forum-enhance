@@ -403,6 +403,16 @@ table.userscript-table {
         border-radius: 12px;
     }
 
+.userscript-updates-modal-button {
+    left: 20px;
+    right: auto;
+    background-color: rgb(190, 157, 30);
+    display: none;
+}
+.userscript-updates-modal-button:hover {
+    background-color: rgb(195, 175, 99);
+}
+
 .userscript-pull-left {
     float: left;
 }
