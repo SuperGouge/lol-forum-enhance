@@ -23,6 +23,7 @@
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/testing/client/avatar-div.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/testing/client/toolkitVersions.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/testing/client/options-modal.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/testing/client/update-modal.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/testing/client/userscript.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/testing/client/localizations.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/testing/client/caches.js
