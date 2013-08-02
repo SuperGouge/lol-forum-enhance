@@ -528,8 +528,17 @@ table.userscript-btn-group tbody {
     border-collapse: collapse;
     display: table;
 }
-    table.userscript-btn-group .userscript-btn {
-        width: 100%;
+    table.userscript-btn-group td:first-child .userscript-btn {
+        margin-left: 0px;
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 0px;
+    }
+    table.userscript-btn-group td:not(:first-child):not(:last-child) .userscript-btn {
+        border-radius: 0px 0px 0px 0px;
+    }
+    table.userscript-btn-group td:last-child .userscript-btn{
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 0px;
     }
 
 .userscript-btn-group {
