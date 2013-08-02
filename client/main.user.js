@@ -354,7 +354,20 @@ var posts = {
                 var color = e.find('font').attr('color');
                 var name = e.text();
                 if (lfeOptions.data.charset) name = _from_utf8(name); // charset encoding bugfixes for league forums
-                
+
+                /*
+                var found = false;
+                var summoner;
+                level1Cache.getSummoner(name, riot.getForumServer(), function (s) {
+                    found = true;
+                    summoner = s;
+                },
+                function (s) {
+                    found = false;
+                });
+                var url = 'http://www.lolking.net/summoner/'+server+'/'+summoner.data.summonerId;
+                */
+
                 if (lfeOptions.data.link === 'selection') {
                     if (e.find('font').length) e.find('font').text(name);
                     else e.text(name);
