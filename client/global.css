@@ -363,21 +363,24 @@ table.userscript-table {
     width: 300px;
 }
     .userscript-updates-modal > .header {
-        margin: 0px 0px 20px 10px;
+        margin: 0px 0px 10px 0px;
     }
         .userscript-updates-modal > .header h1 {
             font-weight: normal;
             font-family: "Adobe Garamond Pro",Garamond,Baskerville,"Baskerville Old Face","Hoefler Text","Times New Roman",serif;
             line-height: 1em;
-            margin: 10px 0px 0px;
+            margin: 0px;
             font-size: 1.4em;
         }
 
     .userscript-updates-modal > .body {
-        margin: 10px 0px;
+        margin: 0px 0px 10px 0px;
     }
     .userscript-updates-modal > .footer {
         margin: 0px 10px 0px 0px;
+    }
+    .userscript-updates-modal table.userscript-table {
+        margin: 0px;
     }
     .userscript-updates-modal .userscript-btn {
         font-size: 12px;

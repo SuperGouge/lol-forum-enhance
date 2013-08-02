@@ -6,7 +6,7 @@
         $('#lfeUpdatesModal').easyModal({
             top: 100,
             autoOpen: false,
-            overlayOpacity: 0.5,
+            overlayOpacity: 0,
             overlayColor: '#000',
             overlayClose: false,
             closeOnEscape: false,
@@ -18,7 +18,12 @@
                 //$(modal).append('Closed!');
             }
         });
-        
+        $('#lfeUpdatesModal').css('top', 'auto');
+        $('#lfeUpdatesModal').css('left', 'auto');
+        $('#lfeUpdatesModal').css('right', '10px');
+        $('#lfeUpdatesModal').css('bottom', '30px');
+        $('#lfeUpdatesModal').next().css('pointer-events', 'none');
+
         $('#lfe-update-dismiss').on('click', function () {
             userscript.setCookie('lfe-update-dismissed', 'true', 60 * 60 * 1000);
         });
