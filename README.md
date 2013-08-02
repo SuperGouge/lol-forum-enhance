@@ -11,13 +11,15 @@ Once they are requested, the icons are cached on our servers for at least 12 hou
 
 - Forum *summoner icon replacement* based on actual selected icon
 - No need to configure and *no log in to a third party site*
-- The mini-bullet normally filled with `??` are replaced with the *actual summoner level*
-- Riot member symbols and mini-bullets are left as they are
+- The *actual summoner level* is shown beside the summoner icon
+- Riot member symbols are left as they are
 - 12 hour serverside caching to keep server usage low
 - 24 hour local caching so you won't load the same summoners data over and over again while just browse a conversation
 - *Rework quick edit box* to get it more useful and fitting better into the whole forums style
 - Show a small *avatar* with you own information besides the quick edit box
-- No performance loss, all request-functions are running async. The pages will load as fast as they always do.
+- No performance loss, all request-functions are running async. The pages will load as fast as they always do
+- Full support for the *new forums*
+- Fix for *wrong coded special characters* in usernames, so they can be displayed normally
 
 
 ### How to install
@@ -51,8 +53,8 @@ Special thanks go to [**SuperGouge**](https://github.com/SuperGouge) for providi
 - This tool in the [german euw forums](http://euw.leagueoflegends.com/board/showthread.php?p=12498364 "Lol Forum Enhance on german League EUW forums").
 - We are using these third-party libraries:
   - [jQuery](https://github.com/jquery/jquery "jQuery on github")
-  - [Twitter Bootstrap](https://github.com/twitter/bootstrap "Bootstrap on github")
-  - [bootstrapx-clickover](https://github.com/lecar-red/bootstrapx-clickover "bootstrapx-clickover on github")
+  - [Unicode <-> UTF-8](http://homepage3.nifty.com/aokura/jscript/utf8.html "AOK's JavaScript Library - utf8")
+  - [easyModal.js](http://flaviusmatis.github.io/easyModal.js/ "A minimal jQuery modal that works with your CSS")
 
 ### Frequently Asked Questions - FAQ
 
@@ -71,5 +73,11 @@ It won't. We just download the icons once at installation. After that they are s
 > What's the difference between this script and the [FEK](http://fek.worreh.com/ "Forum Enhancer Kit") or the [Wrenchman's Tools](http://tools.wrenchbox.de/ "Wrenchman's Tools - Avatars")?
 
 All these tools may seem similar, but there are some major and minor differences. The biggest one is, that this script don't need to be configured, and doesn't force you to log in to a third person website. You can't use your own pictures, you are bound to the official ones. This also prevents you from seeing others with not-league-related avatars or icons you do not want to see at all.
+
+---
+
+> Does this script work with the new forum version?
+
+It does and was in fact completely re-edited for it.
 
 ---
