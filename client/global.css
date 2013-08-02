@@ -522,24 +522,32 @@ a#userscript-updates-button:hover {
             top: -14px;
         }
 
+table.userscript-btn-group {
+    width: 100%;
+    border-collapse: collapse;
+}
+    table.userscript-btn-group .userscript-btn {
+        width: 100%;
+    }
+
 .userscript-btn-group {
     padding: 0px;
     margin: 0px;
     display: inline-block;
 }
-    .userscript-btn-group > .userscript-btn {
+    .userscript-btn-group .userscript-btn {
         float: left;
         margin-left: -1px;
     }
-    .userscript-btn-group > .userscript-btn:first-child {
+    .userscript-btn-group .userscript-btn:first-child {
         margin-left: 0px;
         border-top-right-radius: 0px;
         border-bottom-right-radius: 0px;
     }
-    .userscript-btn-group > .userscript-btn:not(:first-child):not(:last-child) {
+    .userscript-btn-group .userscript-btn:not(:first-child):not(:last-child) {
         border-radius: 0px 0px 0px 0px;
     }
-    .userscript-btn-group > .userscript-btn:last-child {
+    .userscript-btn-group .userscript-btn:last-child {
         border-top-left-radius: 0px;
         border-bottom-left-radius: 0px;
     }

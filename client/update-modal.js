@@ -48,9 +48,7 @@
         if (lfeOptions.data.updates && !dismissed) {
             userscript.updateNeccessary(function (updateNecc) {
                 if (updateNecc) {
-                    userscript.getLocalVersion(function (v) {
-                        $('#userscript-own-version').text(v);
-                    });
+                    $('#userscript-own-version').text(userscript.getLocalVersion());
                     userscript.getRemoteVersion(function (v) {
                         $('#userscript-new-version').text(v);
                     })
