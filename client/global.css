@@ -522,9 +522,11 @@ a#userscript-updates-button:hover {
             top: -14px;
         }
 
-table.userscript-btn-group {
+table.userscript-btn-group,
+table.userscript-btn-group tbody {
     width: 100%;
     border-collapse: collapse;
+    display: table;
 }
     table.userscript-btn-group .userscript-btn {
         width: 100%;
