@@ -43,7 +43,7 @@
     width: 15%;
 }
 
-    .userscript-avatar > div:first-child {
+    .userscript-avatar > div.content-border.post-avatar {
         width: 80px;
         text-align: center;
         margin: 10px auto 5px;
