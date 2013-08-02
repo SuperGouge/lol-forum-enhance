@@ -312,7 +312,7 @@ function registerMenuCommands() {
     }, 'A');
 }
 var posts = {
-    replaceAvatars: function () {
+    replaceAvatars: function () { // runs after replace Names
         // get all Left items except those of rioters.
         var allLeft = $('.post-col-left').has('img[src="lol_theme/img/unknown_icon.jpg"]');
         allLeft.each(function (i, e) {
@@ -345,7 +345,7 @@ var posts = {
             }
         });
     },
-    replaceNames: function () {
+    replaceNames: function () { // runs before replace Avatars
         var server = riot.getForumServer();
         var allNames = $('.post-col-left p.post-user');
         allNames.each(function (i, e) {
@@ -430,24 +430,10 @@ pageHandler.runOn(/^(?:http\:\/\/)?forums\.(na|euw|eune|br)\.leagueoflegends\.co
     userscript.addGlobalStyle(GM_getResourceText('globalcss')); // css style changes
     userscript.addGlobalStyle(GM_getResourceText('glyphicons-css')); // add glyphicons css
 
-    // auto-updates TODO: Check if style works in beta forums
-    var dismissed = userscript.getCookie('lfe-update-dismissed');
-    if (lfeOptions.data.updates && !dismissed) {
-        userscript.updateNeccessary(function (updateNecc) {
-            if (updateNecc) {
-                $('body').prepend($(GM_getResourceText('update-alert'))); // TODO: Add localization for update alert.
-
-                $('#lfe-update-dismiss').on('click', function () {
-                    userscript.setCookie('lfe-update-dismissed', 'true', 60 * 60 * 1000);
-                });
-
-                $('#lfe-update-install').on('click', function () {
-                    userscript.forceUpdate();
-                    $('#lfe-update-alert').remove();
-                });
-            }
-        });
-    }
+    // update modal
+    updateModal.addModal();
+    updateModal.localize();
+    updateModal.showIfNeccessary();
 
     // options modal and button
     optionsModal.addButton();
