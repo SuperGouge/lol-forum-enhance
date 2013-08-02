@@ -48,8 +48,12 @@
         if (lfeOptions.data.updates && !dismissed) {
             userscript.updateNeccessary(function (updateNecc) {
                 if (updateNecc) {
-                    $('#userscript-own-version').test(userscript.getLocalVersion());
-                    $('#userscript-new-version').text(userscript.getRemoteVersion());
+                    userscript.getLocalVersion(function (v) {
+                        $('#userscript-own-version').text(v);
+                    });
+                    userscript.getRemoteVersion(function (v) {
+                        $('#userscript-new-version').text(v);
+                    })
                     $('#userscript-updates-button').css('display', 'block');
                 }
             });
