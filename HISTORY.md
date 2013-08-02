@@ -1,5 +1,3 @@
-# Repository version history
-
 ## Version history:
 
 ## 1.2.0
