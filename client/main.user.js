@@ -432,6 +432,7 @@ pageHandler.runOn(/^(?:http\:\/\/)?forums\.(na|euw|eune|br)\.leagueoflegends\.co
     userscript.addGlobalStyle(GM_getResourceText('glyphicons-css')); // add glyphicons css
 
     // update modal
+    updateModal.addButton();
     updateModal.addModal();
     updateModal.localize();
     updateModal.showIfNeccessary();

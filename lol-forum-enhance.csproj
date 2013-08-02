@@ -213,6 +213,7 @@
     <Content Include="client\SummonerIcons\unknown.jpg" />
     <Content Include="client\toolkitVersions.js" />
     <Content Include="client\update-alert.html" />
+    <Content Include="client\update-modal.js" />
     <Content Include="client\userscript.js" />
     <Content Include="server\SummonerIcons\0.jpg" />
     <Content Include="server\SummonerIcons\1.jpg" />
