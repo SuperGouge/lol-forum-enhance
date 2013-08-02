@@ -18,25 +18,24 @@
                 //$(modal).append('Closed!');
             }
         });
-
+        
         $('#lfe-update-dismiss').on('click', function () {
             userscript.setCookie('lfe-update-dismissed', 'true', 60 * 60 * 1000);
         });
 
         $('#lfe-update-install').on('click', function () {
             userscript.forceUpdate();
-            //$('#lfe-update-alert').remove();
         });
     },
     localize: function () {
-
+        // TODO: localization
     },
     showIfNeccessary: function () {
         var dismissed = userscript.getCookie('lfe-update-dismissed');
         if (lfeOptions.data.updates && !dismissed) {
             userscript.updateNeccessary(function (updateNecc) {
                 if (updateNecc) {
-
+                    $('#lfeUpdatesModal').trigger('openModal');
                 }
             });
         }
