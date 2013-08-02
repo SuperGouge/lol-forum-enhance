@@ -403,13 +403,13 @@ table.userscript-table {
         border-radius: 12px;
     }
 
-a.userscript-updates-modal-button {
+a#userscript-updates-button {
     left: 20px;
     right: auto;
     background-color: rgb(190, 157, 30);
     display: none;
 }
-a.userscript-updates-modal-button:hover {
+a#userscript-updates-button:hover {
     background-color: rgb(195, 175, 99);
 }
 

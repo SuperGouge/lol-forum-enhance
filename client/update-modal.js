@@ -1,6 +1,6 @@
 ﻿var updateModal = {
     addButton: function () {
-        var button = $('<a id="userscript-updates-button" class="userscript-updates-modal-button" href="#">LFE Updates available!</a>'); // TODO: localization
+        var button = $('<a id="userscript-updates-button" href="#">LFE Updates available!</a>'); // TODO: localization
         $('#website-feedback').append(button);
         $('#userscript-updates-button').on('click', function () {
             $('#lfeUpdatesModal').trigger('openModal');
