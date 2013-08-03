@@ -1,20 +1,8 @@
-# Repository version history
-## Goals:
-- ~~Mark nonexistent summoners~~
-- ~~Insert summoner icon when quick-replying~~
-- ~~Automatic update notifications~~
-- Show server status
-- ~~Enlarge quick edit box~~
-- ~~show own avatar besides quick edit box~~
-- ~~Client- and serverside caching~~
-- Check compatibility to other/newer regions
-- rework normal edit box
-- ~~add about link~~
-- ~~add click and search functionality to summoner names~~
+# Version history:
 
----
-
-## Version history:
+## 1.3.0
+- **Added** [Lolking.net](http://www.lolking.net/ "League of Legends Summoner Stats") connection when linking usernames with options-selection
+- **Fixed** automatic updates window
 
 ## 1.2.0
 - **Added** options menu in new design

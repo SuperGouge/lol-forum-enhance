@@ -1,6 +1,6 @@
 ﻿var updateModal = {
     addButton: function () {
-        var button = $('<a id="userscript-updates-button" href="#">LFE updates available!</a>'); // TODO: localization
+        var button = $('<a id="userscript-updates-button" href="#">LFE updates available!</a>');
         $('#website-feedback').append(button);
         $('#userscript-updates-button').on('click', function () {
             $('#lfeUpdatesModal').trigger('openModal');
@@ -8,7 +8,7 @@
     },
     addModal: function () {
         var updateModal = $(GM_getResourceText('update-alert'));
-        $('body').append(updateModal); // TODO: Add localization for update alert.
+        $('body').append(updateModal);
 
         $('#lfeUpdatesModal').easyModal({
             top: 100,

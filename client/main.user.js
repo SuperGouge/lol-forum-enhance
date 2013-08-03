@@ -419,6 +419,93 @@ var posts = {
     }
 };
 
+
+function replacePosts() {
+    var server = riot.getForumServer();
+    // get all Left items except those of rioters.
+    //var allLeft = $('.post-col-left').has('img[src="lol_theme/img/unknown_icon.jpg"]');
+    var allLeft = $('.post-col-left');
+    allLeft.each(function (i, e) {
+        e = $(e);
+        if (!e.data('replaced')) {
+            var nameElem = e.find('p.post-user');
+            var name = nameElem.text();
+            name = name.replace(/(^\s*)|(\s*$)/g, ''); // replace whitespaces at the beginning and end
+            if (lfeOptions.data.charset) name = _from_utf8(name); // charset encoding bugfixes for league forums
+
+            var isRiot = false;
+            if (e.has('img[src="lol_theme/img/unknown_icon.jpg"]').length === 0) isRiot = true;
+            
+            if (nameElem.find('font').length) nameElem.find('font').text(name);
+            else nameElem.text(name);
+            nameElem.addClass('userscript-name');
+
+            if (lfeOptions.data.link === 'selection') {
+                nameElem.lfePopover({
+                    html: true,
+                    content: '<div class="userscript-summoner-popover-buttons">' +
+                                  '<button type="button" data-href="http://forums.' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&showposts=1">' + localizations.get('nameClickoverPostsCaption') + '</button>' + // TODO: Check if URL still works when live
+                                  '<button type="button" data-href="http://forums.' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&starteronly=1&showposts=0">' + localizations.get('nameClickoverThreadsCaption') + '</button>' + // TODO: Check if URL still works when live
+                             '</div>',
+                });
+                nameElem.click(function () {
+                    $(this).lfePopover('toggle');
+                });
+                nameElem.parent().find('.userscript-summoner-popover-buttons > button').click(function () {
+                    var link = $(this).attr('data-href');
+                    GM_openInTab(link);
+                    nameElem.lfePopover('hide');
+                });
+            }
+            else if (lfeOptions.data.link === 'posts') {
+                nameElem.attr('data-href', 'http://forums.' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&showposts=1'); // TODO: Check if URL still works when live
+                nameElem.click(function () {
+                    var link = $(this).attr('data-href');
+                    GM_openInTab(link);
+                });
+            }
+            else if (lfeOptions.data.link === 'threads') {
+                nameElem.attr('data-href', 'http://forums.' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&starteronly=1&showposts=0'); // TODO: Check if URL still works when live
+                nameElem.click(function () {
+                    var link = $(this).attr('data-href');
+                    GM_openInTab(link);
+                });
+            }
+            else { // lfeOptions.data.link === 'none'
+
+            }
+
+            if (!isRiot) {
+                var image = e.find('img.user_summoner_icon');
+                // Cache system (the level-1-cache automatically calls the level-2-cache if it doesnt have the result)
+                level1Cache.getSummoner(name, riot.getForumServer(), function (summoner) {
+                    // Summoner found:                
+                    image.attr('src', GM_getResourceURL("icon" + summoner.data.profileIconId)); // replace image source
+                    $('<div class="userscript-summoner-level">' + summoner.data.summonerLevel + '</div>').insertAfter(image);
+
+                    // Add Lolking.net profile
+                    nameElem.find('div.userscript-summoner-popover-buttons').append($('<button type="button" data-href="http://www.lolking.net/summoner/' + server + '/' + summoner.data.summonerId + '">' + 'Visit lolking profile' + '</button>')); // TODO: Localization
+
+                    level1Cache.saveCache(); // save whole cache
+                },
+                function (summoner) {
+                    // Summoner not found:
+                    if (!image.data('overlayed')) {
+                        image.parent().append($('<div class="userscript-avatar-overlay">' +
+                                                    '<span>' +
+                                                        'not found' + // TODO: Localization
+                                                    '</span>' +
+                                                '</div>'));
+                        image.attr('src', GM_getResourceURL('iconNotFound'));
+                        image.data('overlayed', true);
+                    }
+                });
+            }
+            e.data('replaced', true);
+        }
+    });
+}
+
 // Start of Main Script:
 var MutationObserver = window.MutationObserver || window.WebKitMutationObserver; // Secure browser-compatibility for Chrome
 
@@ -450,8 +537,9 @@ pageHandler.runOn(/^(?:http\:\/\/)?forums\.(na|euw|eune|br)\.leagueoflegends\.co
         mutations.forEach(function (mutation) {
             // TODO: Check if forEach is needed, replaceAvatars itself traverses over posts.
             // TODO: Check if attaching avatarDiv and replacing Data is needed in case of logging in without site reload.
-            posts.replaceNames(); // replace Names and/to provide linking
-            posts.replaceAvatars(); // replace the summoner images and levels
+            replacePosts();
+            //posts.replaceNames(); // replace Names and/to provide linking
+            //posts.replaceAvatars(); // replace the summoner images and levels
         });
     });
     var observerConfig = { childList: true, subtree: true };
@@ -460,8 +548,9 @@ pageHandler.runOn(/^(?:http\:\/\/)?forums\.(na|euw|eune|br)\.leagueoflegends\.co
         // Server found:
         avatarDiv.attach();
         avatarDiv.replaceData(); // replace own avatar (if name and avatar available) and provide linking
-        posts.replaceNames(); // replace Names and/to provide linking
-        posts.replaceAvatars(); // replace the summoner images and levels
+        //posts.replaceNames(); // replace Names and/to provide linking
+        //posts.replaceAvatars(); // replace the summoner images and levels
+        replacePosts();
         if (observerTarget) postsObserver.observe(observerTarget, observerConfig); // start observing #posts
         forumDisplay.fixNamesIfEnabled(); // Replace misformated names in forum display
 
