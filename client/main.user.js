@@ -451,11 +451,6 @@ function replacePosts() {
                 nameElem.click(function () {
                     $(this).lfePopover('toggle');
                 });
-                nameElem.parent().find('.userscript-summoner-popover-buttons > button').click(function () {
-                    var link = $(this).attr('data-href');
-                    GM_openInTab(link);
-                    nameElem.lfePopover('hide');
-                });
             }
             else if (lfeOptions.data.link === 'posts') {
                 nameElem.attr('data-href', 'http://forums.' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&showposts=1'); // TODO: Check if URL still works when live
@@ -484,7 +479,7 @@ function replacePosts() {
                     $('<div class="userscript-summoner-level">' + summoner.data.summonerLevel + '</div>').insertAfter(image);
 
                     // Add Lolking.net profile
-                    nameElem.find('div.userscript-summoner-popover-buttons').append($('<button type="button" data-href="http://www.lolking.net/summoner/' + server + '/' + summoner.data.summonerId + '">' + 'Visit lolking profile' + '</button>')); // TODO: Localization
+                    nameElem.parent().find('div.userscript-summoner-popover-buttons').append($('<button type="button" data-href="http://www.lolking.net/summoner/' + server + '/' + summoner.data.summonerId + '">' + 'Visit lolking profile' + '</button>')); // TODO: Localization
 
                     level1Cache.saveCache(); // save whole cache
                 },
@@ -501,6 +496,13 @@ function replacePosts() {
                     }
                 });
             }
+
+            nameElem.parent().find('.userscript-summoner-popover-buttons > button').click(function () {
+                var link = $(this).attr('data-href');
+                GM_openInTab(link);
+                nameElem.lfePopover('hide');
+            });
+
             e.data('replaced', true);
         }
     });
