@@ -513,5 +513,17 @@ var localizations = {
         "pt": "",
         "tr": "",
         "it": ""
+    },
+    nameClickoverLolkingCaption: { // TODO: Add translations
+        "en": "Lolking profile",
+        "de": "Lolking Profil",
+        "es": "",
+        "fr": "",
+        "pl": "",
+        "ro": "",
+        "el": "",
+        "pt": "",
+        "tr": "",
+        "it": ""
     }
 };

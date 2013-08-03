@@ -479,7 +479,9 @@ function replacePosts() {
                     $('<div class="userscript-summoner-level">' + summoner.data.summonerLevel + '</div>').insertAfter(image);
 
                     // Add Lolking.net profile
-                    nameElem.parent().find('div.userscript-summoner-popover-buttons').append($('<button type="button" data-href="http://www.lolking.net/summoner/' + server + '/' + summoner.data.summonerId + '">' + 'Visit lolking profile' + '</button>')); // TODO: Localization
+                    if (lfeOptions.data.link === 'selection') {
+                        nameElem.parent().find('div.userscript-summoner-popover-buttons').append($('<button type="button" data-href="http://www.lolking.net/summoner/' + server + '/' + summoner.data.summonerId + '">' + localizations.get('nameClickoverLolkingCaption') + '</button>'));
+                    }
 
                     level1Cache.saveCache(); // save whole cache
                 },
