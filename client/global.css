@@ -355,6 +355,64 @@ table.userscript-table {
     float: right;
 }
 
+.userscript-updates-modal {
+    display: none;
+    background: none repeat scroll 0% 0% white;
+    padding: 10px;
+    border-radius: 10px 10px 10px 10px;
+    width: 300px;
+}
+    .userscript-updates-modal > .header {
+        margin: 0px 0px 10px 0px;
+    }
+        .userscript-updates-modal > .header h1 {
+            font-weight: normal;
+            font-family: "Adobe Garamond Pro",Garamond,Baskerville,"Baskerville Old Face","Hoefler Text","Times New Roman",serif;
+            line-height: 1em;
+            margin: 0px;
+            font-size: 1.4em;
+        }
+
+    .userscript-updates-modal > .body {
+        margin: 0px 0px 10px 0px;
+    }
+    .userscript-updates-modal > .footer {
+        margin: 0px 10px 0px 0px;
+    }
+    .userscript-updates-modal table.userscript-table {
+        margin: 0px;
+    }
+    .userscript-updates-modal .userscript-btn {
+        font-size: 12px;
+        padding: 3px 10px;
+        border-radius: 12px;
+    }
+    .userscript-updates-modal .userscript-btn.active {
+        font-size: 12px;
+        padding: 3px 10px;
+        border-radius: 12px;
+    }
+    .userscript-updates-modal .userscript-btn.btn-success {
+        font-size: 12px;
+        padding: 3px 10px;
+        border-radius: 12px;
+    }
+    .userscript-updates-modal .userscript-btn.btn-danger {
+        font-size: 12px;
+        padding: 3px 10px;
+        border-radius: 12px;
+    }
+
+a#userscript-updates-button {
+    left: 20px;
+    right: auto;
+    background-color: rgb(190, 157, 30);
+    display: none;
+}
+a#userscript-updates-button:hover {
+    background-color: rgb(195, 175, 99);
+}
+
 .userscript-pull-left {
     float: left;
 }
@@ -464,24 +522,49 @@ table.userscript-table {
             top: -14px;
         }
 
-.userscript-btn-group {
-    padding: 0px;
-    margin: 0px;
-    display: inline-block;
+table.userscript-btn-group,
+table.userscript-btn-group tbody {
+    width: 100%;
+    border-collapse: collapse;
+    display: table;
 }
-    .userscript-btn-group > .userscript-btn {
-        float: left;
-        margin-left: -1px;
+    table.userscript-btn-group td {
+        padding: 0px;
     }
-    .userscript-btn-group > .userscript-btn:first-child {
+    table.userscript-btn-group .userscript-btn {
+        width: 100%;
+    }
+    table.userscript-btn-group td:first-child .userscript-btn {
         margin-left: 0px;
         border-top-right-radius: 0px;
         border-bottom-right-radius: 0px;
     }
-    .userscript-btn-group > .userscript-btn:not(:first-child):not(:last-child) {
+    table.userscript-btn-group td:not(:first-child):not(:last-child) .userscript-btn {
         border-radius: 0px 0px 0px 0px;
     }
-    .userscript-btn-group > .userscript-btn:last-child {
+    table.userscript-btn-group td:last-child .userscript-btn{
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 0px;
+    }
+
+div.userscript-btn-group {
+    padding: 0px;
+    margin: 0px;
+    display: inline-block;
+}
+    div.userscript-btn-group .userscript-btn {
+        float: left;
+        margin-left: -1px;
+    }
+    div.userscript-btn-group .userscript-btn:first-child {
+        margin-left: 0px;
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 0px;
+    }
+    div.userscript-btn-group .userscript-btn:not(:first-child):not(:last-child) {
+        border-radius: 0px 0px 0px 0px;
+    }
+    div.userscript-btn-group .userscript-btn:last-child {
         border-top-left-radius: 0px;
         border-bottom-left-radius: 0px;
     }

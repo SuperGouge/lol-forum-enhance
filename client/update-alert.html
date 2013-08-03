@@ -1,14 +1,50 @@
-<div id="lfe-update-alert" class="alert container" style="top: 10px; position: relative; z-index: 100; width: 550px;">
-  <button id="lfe-update-dismiss" type="button" class="close" data-dismiss="alert">&times;</button>
-  <h5 style="margin: 0;">
-    Updates available.
-  </h5>
-  <p>
-    There is a newer Version of LoL Forum Enhance available. Click here to install the latest updates.
-  </p>
-  <p style="margin-bottom: 0;">
-    <a id="lfe-update-install" class="btn btn-warning" href="#">
-      Update
-    </a>
-  </p>
+<div id="lfeUpdatesModal" class="userscript-updates-modal">
+    <div class="header">
+        <h1 class="title">
+            <span id="lfe-u-captions-title">Updates available</span>
+        </h1>
+    </div>
+    <div class="body">
+        <p>
+            <span id="lfe-u-captions-text">There is a newer Version of LoL Forum Enhance available. Please click the button to update and confirm the installation window.</span>
+        </p>
+        <table class="userscript-table">
+            <tr>
+                <td>
+                    <span id="lfe-u-captions-own-version">Your version:</span>
+                </td>
+                <td>
+                    <span id="userscript-own-version">0.0.0</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span id="lfe-u-captions-new-version">New version:</span>
+                </td>
+                <td>
+                    <span id="userscript-new-version">0.0.0</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="footer">
+        <table class="userscript-pull-right userscript-btn-group">
+            <tbody>
+                <tr>
+                    <td>
+                        <button id="lfe-update-install" class="userscript-update-modal-close userscript-btn btn-success" type="button">
+                            <i class="userscript-icon-white userscript-icon-download"></i> 
+                            <span id="lfe-u-captions-button-update">Update now.</span>
+                        </button>
+                    </td>
+                    <td>
+                        <button id="lfe-update-dismiss" class="userscript-update-modal-close userscript-btn btn-danger" type="button">
+                            <i class="userscript-icon-white userscript-icon-time"></i> 
+                            <span id="lfe-u-captions-button-dismiss">Do it later.</span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>

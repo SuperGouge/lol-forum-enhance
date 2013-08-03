@@ -1,0 +1,482 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1FB91E8A-C547-49D8-BC4B-AE7B3ABB562F}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>lol_forum_enhance</RootNamespace>
+    <AssemblyName>lol-forum-enhance</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="client\aokura\unicode-utf8.js" />
+    <Content Include="client\avatar-div.html" />
+    <Content Include="client\avatar-div.js" />
+    <Content Include="client\flaviusmatis\easyModal\jquery.easyModal.js" />
+    <Content Include="client\glyphicons.css" />
+    <Content Include="client\jquery.lfepopover.js" />
+    <Content Include="client\caches.js" />
+    <Content Include="client\forum-display.js" />
+    <Content Include="client\global.css" />
+    <Content Include="client\edit-box.js" />
+    <Content Include="client\localizations.js" />
+    <Content Include="client\main.meta.js" />
+    <Content Include="client\main.user.js" />
+    <Content Include="client\options-modal.html" />
+    <Content Include="client\options-modal.js" />
+    <Content Include="client\SummonerIcons\0.jpg" />
+    <Content Include="client\SummonerIcons\1.jpg" />
+    <Content Include="client\SummonerIcons\10.jpg" />
+    <Content Include="client\SummonerIcons\11.jpg" />
+    <Content Include="client\SummonerIcons\12.jpg" />
+    <Content Include="client\SummonerIcons\13.jpg" />
+    <Content Include="client\SummonerIcons\14.jpg" />
+    <Content Include="client\SummonerIcons\15.jpg" />
+    <Content Include="client\SummonerIcons\16.jpg" />
+    <Content Include="client\SummonerIcons\17.jpg" />
+    <Content Include="client\SummonerIcons\18.jpg" />
+    <Content Include="client\SummonerIcons\19.jpg" />
+    <Content Include="client\SummonerIcons\2.jpg" />
+    <Content Include="client\SummonerIcons\20.jpg" />
+    <Content Include="client\SummonerIcons\21.jpg" />
+    <Content Include="client\SummonerIcons\22.jpg" />
+    <Content Include="client\SummonerIcons\23.jpg" />
+    <Content Include="client\SummonerIcons\24.jpg" />
+    <Content Include="client\SummonerIcons\25.jpg" />
+    <Content Include="client\SummonerIcons\26.jpg" />
+    <Content Include="client\SummonerIcons\27.jpg" />
+    <Content Include="client\SummonerIcons\28.jpg" />
+    <Content Include="client\SummonerIcons\29.jpg" />
+    <Content Include="client\SummonerIcons\3.jpg" />
+    <Content Include="client\SummonerIcons\30.jpg" />
+    <Content Include="client\SummonerIcons\31.jpg" />
+    <Content Include="client\SummonerIcons\32.jpg" />
+    <Content Include="client\SummonerIcons\33.jpg" />
+    <Content Include="client\SummonerIcons\34.jpg" />
+    <Content Include="client\SummonerIcons\35.jpg" />
+    <Content Include="client\SummonerIcons\36.jpg" />
+    <Content Include="client\SummonerIcons\37.jpg" />
+    <Content Include="client\SummonerIcons\38.jpg" />
+    <Content Include="client\SummonerIcons\39.jpg" />
+    <Content Include="client\SummonerIcons\4.jpg" />
+    <Content Include="client\SummonerIcons\40.jpg" />
+    <Content Include="client\SummonerIcons\41.jpg" />
+    <Content Include="client\SummonerIcons\42.jpg" />
+    <Content Include="client\SummonerIcons\43.jpg" />
+    <Content Include="client\SummonerIcons\44.jpg" />
+    <Content Include="client\SummonerIcons\45.jpg" />
+    <Content Include="client\SummonerIcons\46.jpg" />
+    <Content Include="client\SummonerIcons\47.jpg" />
+    <Content Include="client\SummonerIcons\48.jpg" />
+    <Content Include="client\SummonerIcons\49.jpg" />
+    <Content Include="client\SummonerIcons\5.jpg" />
+    <Content Include="client\SummonerIcons\50.jpg" />
+    <Content Include="client\SummonerIcons\501.jpg" />
+    <Content Include="client\SummonerIcons\502.jpg" />
+    <Content Include="client\SummonerIcons\503.jpg" />
+    <Content Include="client\SummonerIcons\504.jpg" />
+    <Content Include="client\SummonerIcons\505.jpg" />
+    <Content Include="client\SummonerIcons\506.jpg" />
+    <Content Include="client\SummonerIcons\507.jpg" />
+    <Content Include="client\SummonerIcons\508.jpg" />
+    <Content Include="client\SummonerIcons\509.jpg" />
+    <Content Include="client\SummonerIcons\51.jpg" />
+    <Content Include="client\SummonerIcons\510.jpg" />
+    <Content Include="client\SummonerIcons\511.jpg" />
+    <Content Include="client\SummonerIcons\512.jpg" />
+    <Content Include="client\SummonerIcons\513.jpg" />
+    <Content Include="client\SummonerIcons\514.jpg" />
+    <Content Include="client\SummonerIcons\515.jpg" />
+    <Content Include="client\SummonerIcons\516.jpg" />
+    <Content Include="client\SummonerIcons\517.jpg" />
+    <Content Include="client\SummonerIcons\518.jpg" />
+    <Content Include="client\SummonerIcons\519.jpg" />
+    <Content Include="client\SummonerIcons\52.jpg" />
+    <Content Include="client\SummonerIcons\520.jpg" />
+    <Content Include="client\SummonerIcons\521.jpg" />
+    <Content Include="client\SummonerIcons\522.jpg" />
+    <Content Include="client\SummonerIcons\523.jpg" />
+    <Content Include="client\SummonerIcons\524.jpg" />
+    <Content Include="client\SummonerIcons\525.jpg" />
+    <Content Include="client\SummonerIcons\526.jpg" />
+    <Content Include="client\SummonerIcons\527.jpg" />
+    <Content Include="client\SummonerIcons\528.jpg" />
+    <Content Include="client\SummonerIcons\529.jpg" />
+    <Content Include="client\SummonerIcons\53.jpg" />
+    <Content Include="client\SummonerIcons\530.jpg" />
+    <Content Include="client\SummonerIcons\531.jpg" />
+    <Content Include="client\SummonerIcons\532.jpg" />
+    <Content Include="client\SummonerIcons\533.jpg" />
+    <Content Include="client\SummonerIcons\534.jpg" />
+    <Content Include="client\SummonerIcons\535.jpg" />
+    <Content Include="client\SummonerIcons\536.jpg" />
+    <Content Include="client\SummonerIcons\537.jpg" />
+    <Content Include="client\SummonerIcons\538.jpg" />
+    <Content Include="client\SummonerIcons\539.jpg" />
+    <Content Include="client\SummonerIcons\54.jpg" />
+    <Content Include="client\SummonerIcons\540.jpg" />
+    <Content Include="client\SummonerIcons\541.jpg" />
+    <Content Include="client\SummonerIcons\542.jpg" />
+    <Content Include="client\SummonerIcons\543.jpg" />
+    <Content Include="client\SummonerIcons\544.jpg" />
+    <Content Include="client\SummonerIcons\545.jpg" />
+    <Content Include="client\SummonerIcons\546.jpg" />
+    <Content Include="client\SummonerIcons\547.jpg" />
+    <Content Include="client\SummonerIcons\548.jpg" />
+    <Content Include="client\SummonerIcons\549.jpg" />
+    <Content Include="client\SummonerIcons\55.jpg" />
+    <Content Include="client\SummonerIcons\550.jpg" />
+    <Content Include="client\SummonerIcons\551.jpg" />
+    <Content Include="client\SummonerIcons\552.jpg" />
+    <Content Include="client\SummonerIcons\553.jpg" />
+    <Content Include="client\SummonerIcons\554.jpg" />
+    <Content Include="client\SummonerIcons\555.jpg" />
+    <Content Include="client\SummonerIcons\556.jpg" />
+    <Content Include="client\SummonerIcons\557.jpg" />
+    <Content Include="client\SummonerIcons\558.jpg" />
+    <Content Include="client\SummonerIcons\559.jpg" />
+    <Content Include="client\SummonerIcons\56.jpg" />
+    <Content Include="client\SummonerIcons\560.jpg" />
+    <Content Include="client\SummonerIcons\561.jpg" />
+    <Content Include="client\SummonerIcons\562.jpg" />
+    <Content Include="client\SummonerIcons\563.jpg" />
+    <Content Include="client\SummonerIcons\564.jpg" />
+    <Content Include="client\SummonerIcons\565.jpg" />
+    <Content Include="client\SummonerIcons\566.jpg" />
+    <Content Include="client\SummonerIcons\567.jpg" />
+    <Content Include="client\SummonerIcons\568.jpg" />
+    <Content Include="client\SummonerIcons\569.jpg" />
+    <Content Include="client\SummonerIcons\57.jpg" />
+    <Content Include="client\SummonerIcons\58.jpg" />
+    <Content Include="client\SummonerIcons\59.jpg" />
+    <Content Include="client\SummonerIcons\6.jpg" />
+    <Content Include="client\SummonerIcons\60.jpg" />
+    <Content Include="client\SummonerIcons\61.jpg" />
+    <Content Include="client\SummonerIcons\62.jpg" />
+    <Content Include="client\SummonerIcons\63.jpg" />
+    <Content Include="client\SummonerIcons\64.jpg" />
+    <Content Include="client\SummonerIcons\65.jpg" />
+    <Content Include="client\SummonerIcons\66.jpg" />
+    <Content Include="client\SummonerIcons\7.jpg" />
+    <Content Include="client\SummonerIcons\8.jpg" />
+    <Content Include="client\SummonerIcons\9.jpg" />
+    <Content Include="client\SummonerIcons\files.txt" />
+    <Content Include="client\SummonerIcons\notfound.jpg" />
+    <Content Include="client\SummonerIcons\unknown.jpg" />
+    <Content Include="client\toolkitVersions.js" />
+    <Content Include="client\update-alert.html" />
+    <Content Include="client\update-modal.js" />
+    <Content Include="client\userscript.js" />
+    <Content Include="server\SummonerIcons\0.jpg" />
+    <Content Include="server\SummonerIcons\1.jpg" />
+    <Content Include="server\SummonerIcons\10.jpg" />
+    <Content Include="server\SummonerIcons\11.jpg" />
+    <Content Include="server\SummonerIcons\12.jpg" />
+    <Content Include="server\SummonerIcons\13.jpg" />
+    <Content Include="server\SummonerIcons\14.jpg" />
+    <Content Include="server\SummonerIcons\15.jpg" />
+    <Content Include="server\SummonerIcons\16.jpg" />
+    <Content Include="server\SummonerIcons\17.jpg" />
+    <Content Include="server\SummonerIcons\18.jpg" />
+    <Content Include="server\SummonerIcons\19.jpg" />
+    <Content Include="server\SummonerIcons\2.jpg" />
+    <Content Include="server\SummonerIcons\20.jpg" />
+    <Content Include="server\SummonerIcons\21.jpg" />
+    <Content Include="server\SummonerIcons\22.jpg" />
+    <Content Include="server\SummonerIcons\23.jpg" />
+    <Content Include="server\SummonerIcons\24.jpg" />
+    <Content Include="server\SummonerIcons\25.jpg" />
+    <Content Include="server\SummonerIcons\26.jpg" />
+    <Content Include="server\SummonerIcons\27.jpg" />
+    <Content Include="server\SummonerIcons\28.jpg" />
+    <Content Include="server\SummonerIcons\29.jpg" />
+    <Content Include="server\SummonerIcons\3.jpg" />
+    <Content Include="server\SummonerIcons\30.jpg" />
+    <Content Include="server\SummonerIcons\31.jpg" />
+    <Content Include="server\SummonerIcons\32.jpg" />
+    <Content Include="server\SummonerIcons\33.jpg" />
+    <Content Include="server\SummonerIcons\34.jpg" />
+    <Content Include="server\SummonerIcons\35.jpg" />
+    <Content Include="server\SummonerIcons\36.jpg" />
+    <Content Include="server\SummonerIcons\37.jpg" />
+    <Content Include="server\SummonerIcons\38.jpg" />
+    <Content Include="server\SummonerIcons\39.jpg" />
+    <Content Include="server\SummonerIcons\4.jpg" />
+    <Content Include="server\SummonerIcons\40.jpg" />
+    <Content Include="server\SummonerIcons\41.jpg" />
+    <Content Include="server\SummonerIcons\42.jpg" />
+    <Content Include="server\SummonerIcons\43.jpg" />
+    <Content Include="server\SummonerIcons\44.jpg" />
+    <Content Include="server\SummonerIcons\45.jpg" />
+    <Content Include="server\SummonerIcons\46.jpg" />
+    <Content Include="server\SummonerIcons\47.jpg" />
+    <Content Include="server\SummonerIcons\48.jpg" />
+    <Content Include="server\SummonerIcons\49.jpg" />
+    <Content Include="server\SummonerIcons\5.jpg" />
+    <Content Include="server\SummonerIcons\50.jpg" />
+    <Content Include="server\SummonerIcons\501.jpg" />
+    <Content Include="server\SummonerIcons\502.jpg" />
+    <Content Include="server\SummonerIcons\503.jpg" />
+    <Content Include="server\SummonerIcons\504.jpg" />
+    <Content Include="server\SummonerIcons\505.jpg" />
+    <Content Include="server\SummonerIcons\506.jpg" />
+    <Content Include="server\SummonerIcons\507.jpg" />
+    <Content Include="server\SummonerIcons\508.jpg" />
+    <Content Include="server\SummonerIcons\509.jpg" />
+    <Content Include="server\SummonerIcons\51.jpg" />
+    <Content Include="server\SummonerIcons\510.jpg" />
+    <Content Include="server\SummonerIcons\511.jpg" />
+    <Content Include="server\SummonerIcons\512.jpg" />
+    <Content Include="server\SummonerIcons\513.jpg" />
+    <Content Include="server\SummonerIcons\514.jpg" />
+    <Content Include="server\SummonerIcons\515.jpg" />
+    <Content Include="server\SummonerIcons\516.jpg" />
+    <Content Include="server\SummonerIcons\517.jpg" />
+    <Content Include="server\SummonerIcons\518.jpg" />
+    <Content Include="server\SummonerIcons\519.jpg" />
+    <Content Include="server\SummonerIcons\52.jpg" />
+    <Content Include="server\SummonerIcons\520.jpg" />
+    <Content Include="server\SummonerIcons\521.jpg" />
+    <Content Include="server\SummonerIcons\522.jpg" />
+    <Content Include="server\SummonerIcons\523.jpg" />
+    <Content Include="server\SummonerIcons\524.jpg" />
+    <Content Include="server\SummonerIcons\525.jpg" />
+    <Content Include="server\SummonerIcons\526.jpg" />
+    <Content Include="server\SummonerIcons\527.jpg" />
+    <Content Include="server\SummonerIcons\528.jpg" />
+    <Content Include="server\SummonerIcons\529.jpg" />
+    <Content Include="server\SummonerIcons\53.jpg" />
+    <Content Include="server\SummonerIcons\530.jpg" />
+    <Content Include="server\SummonerIcons\531.jpg" />
+    <Content Include="server\SummonerIcons\532.jpg" />
+    <Content Include="server\SummonerIcons\533.jpg" />
+    <Content Include="server\SummonerIcons\534.jpg" />
+    <Content Include="server\SummonerIcons\535.jpg" />
+    <Content Include="server\SummonerIcons\536.jpg" />
+    <Content Include="server\SummonerIcons\537.jpg" />
+    <Content Include="server\SummonerIcons\538.jpg" />
+    <Content Include="server\SummonerIcons\539.jpg" />
+    <Content Include="server\SummonerIcons\54.jpg" />
+    <Content Include="server\SummonerIcons\540.jpg" />
+    <Content Include="server\SummonerIcons\541.jpg" />
+    <Content Include="server\SummonerIcons\542.jpg" />
+    <Content Include="server\SummonerIcons\543.jpg" />
+    <Content Include="server\SummonerIcons\544.jpg" />
+    <Content Include="server\SummonerIcons\545.jpg" />
+    <Content Include="server\SummonerIcons\546.jpg" />
+    <Content Include="server\SummonerIcons\547.jpg" />
+    <Content Include="server\SummonerIcons\548.jpg" />
+    <Content Include="server\SummonerIcons\549.jpg" />
+    <Content Include="server\SummonerIcons\55.jpg" />
+    <Content Include="server\SummonerIcons\550.jpg" />
+    <Content Include="server\SummonerIcons\551.jpg" />
+    <Content Include="server\SummonerIcons\552.jpg" />
+    <Content Include="server\SummonerIcons\553.jpg" />
+    <Content Include="server\SummonerIcons\554.jpg" />
+    <Content Include="server\SummonerIcons\555.jpg" />
+    <Content Include="server\SummonerIcons\556.jpg" />
+    <Content Include="server\SummonerIcons\557.jpg" />
+    <Content Include="server\SummonerIcons\558.jpg" />
+    <Content Include="server\SummonerIcons\559.jpg" />
+    <Content Include="server\SummonerIcons\56.jpg" />
+    <Content Include="server\SummonerIcons\560.jpg" />
+    <Content Include="server\SummonerIcons\561.jpg" />
+    <Content Include="server\SummonerIcons\562.jpg" />
+    <Content Include="server\SummonerIcons\563.jpg" />
+    <Content Include="server\SummonerIcons\564.jpg" />
+    <Content Include="server\SummonerIcons\565.jpg" />
+    <Content Include="server\SummonerIcons\566.jpg" />
+    <Content Include="server\SummonerIcons\567.jpg" />
+    <Content Include="server\SummonerIcons\568.jpg" />
+    <Content Include="server\SummonerIcons\569.jpg" />
+    <Content Include="server\SummonerIcons\57.jpg" />
+    <Content Include="server\SummonerIcons\58.jpg" />
+    <Content Include="server\SummonerIcons\59.jpg" />
+    <Content Include="server\SummonerIcons\6.jpg" />
+    <Content Include="server\SummonerIcons\60.jpg" />
+    <Content Include="server\SummonerIcons\61.jpg" />
+    <Content Include="server\SummonerIcons\62.jpg" />
+    <Content Include="server\SummonerIcons\63.jpg" />
+    <Content Include="server\SummonerIcons\64.jpg" />
+    <Content Include="server\SummonerIcons\65.jpg" />
+    <Content Include="server\SummonerIcons\66.jpg" />
+    <Content Include="server\SummonerIcons\7.jpg" />
+    <Content Include="server\SummonerIcons\8.jpg" />
+    <Content Include="server\SummonerIcons\9.jpg" />
+    <Content Include="server\SummonerIcons\image 100.jpg" />
+    <Content Include="server\SummonerIcons\image 101.jpg" />
+    <Content Include="server\SummonerIcons\image 106.jpg" />
+    <Content Include="server\SummonerIcons\image 107.jpg" />
+    <Content Include="server\SummonerIcons\image 112.jpg" />
+    <Content Include="server\SummonerIcons\image 113.jpg" />
+    <Content Include="server\SummonerIcons\image 115.jpg" />
+    <Content Include="server\SummonerIcons\image 116.jpg" />
+    <Content Include="server\SummonerIcons\image 118.jpg" />
+    <Content Include="server\SummonerIcons\image 120.jpg" />
+    <Content Include="server\SummonerIcons\image 122.jpg" />
+    <Content Include="server\SummonerIcons\image 125.jpg" />
+    <Content Include="server\SummonerIcons\image 126.jpg" />
+    <Content Include="server\SummonerIcons\image 127.jpg" />
+    <Content Include="server\SummonerIcons\image 128.jpg" />
+    <Content Include="server\SummonerIcons\image 129.jpg" />
+    <Content Include="server\SummonerIcons\image 130.jpg" />
+    <Content Include="server\SummonerIcons\image 131.jpg" />
+    <Content Include="server\SummonerIcons\image 132.jpg" />
+    <Content Include="server\SummonerIcons\image 133.jpg" />
+    <Content Include="server\SummonerIcons\image 134.jpg" />
+    <Content Include="server\SummonerIcons\image 135.jpg" />
+    <Content Include="server\SummonerIcons\image 136.jpg" />
+    <Content Include="server\SummonerIcons\image 137.jpg" />
+    <Content Include="server\SummonerIcons\image 138.jpg" />
+    <Content Include="server\SummonerIcons\image 19.png" />
+    <Content Include="server\SummonerIcons\image 23.jpg" />
+    <Content Include="server\SummonerIcons\image 24.jpg" />
+    <Content Include="server\SummonerIcons\image 25.jpg" />
+    <Content Include="server\SummonerIcons\image 26.jpg" />
+    <Content Include="server\SummonerIcons\image 27.jpg" />
+    <Content Include="server\SummonerIcons\image 28.jpg" />
+    <Content Include="server\SummonerIcons\image 30.jpg" />
+    <Content Include="server\SummonerIcons\image 37.jpg" />
+    <Content Include="server\SummonerIcons\image 4.jpg" />
+    <Content Include="server\SummonerIcons\image 40.jpg" />
+    <Content Include="server\SummonerIcons\image 44.jpg" />
+    <Content Include="server\SummonerIcons\image 46.jpg" />
+    <Content Include="server\SummonerIcons\image 48.jpg" />
+    <Content Include="server\SummonerIcons\image 49.jpg" />
+    <Content Include="server\SummonerIcons\image 50.jpg" />
+    <Content Include="server\SummonerIcons\image 51.jpg" />
+    <Content Include="server\SummonerIcons\image 52.jpg" />
+    <Content Include="server\SummonerIcons\image 6.jpg" />
+    <Content Include="server\SummonerIcons\image 61.jpg" />
+    <Content Include="server\SummonerIcons\image 64.jpg" />
+    <Content Include="server\SummonerIcons\image 7.jpg" />
+    <Content Include="server\SummonerIcons\image 70.jpg" />
+    <Content Include="server\SummonerIcons\image 73.jpg" />
+    <Content Include="server\SummonerIcons\image 76.jpg" />
+    <Content Include="server\SummonerIcons\image 78.jpg" />
+    <Content Include="server\SummonerIcons\image 80.jpg" />
+    <Content Include="server\SummonerIcons\image 81.jpg" />
+    <Content Include="server\SummonerIcons\image 82.jpg" />
+    <Content Include="server\SummonerIcons\image 83.jpg" />
+    <Content Include="server\SummonerIcons\image 84.jpg" />
+    <Content Include="server\SummonerIcons\image 90.png" />
+    <Content Include="server\SummonerIcons\image 91.jpg" />
+    <Content Include="server\SummonerIcons\image 93.jpg" />
+    <Content Include="server\SummonerIcons\image 94.jpg" />
+    <Content Include="server\SummonerIcons\image 95.jpg" />
+    <Content Include="server\SummonerIcons\image 96.jpg" />
+    <Content Include="server\SummonerIcons\image 97.jpg" />
+    <Content Include="server\SummonerIcons\image 98.jpg" />
+    <Content Include="server\SummonerIcons\notfound.jpg" />
+    <Content Include="server\SummonerIcons\unknown.jpg" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include=".gitattributes" />
+    <Content Include=".gitignore" />
+    <Content Include="client\SummonerIcons\Thumbs.db" />
+    <Content Include="HISTORY.md" />
+    <Content Include="LICENSE" />
+    <Content Include="notes.md" />
+    <Content Include="README.md" />
+    <Content Include="server\getSummoner.php" />
+    <Content Include="server\Settings.class.php.dist" />
+    <Content Include="server\Summoner.class.php" />
+    <Content Include="server\SummonerIcons\Thumbs.db" />
+    <Content Include="userscripts-org\description.md" />
+    <Content Include="userscripts-org\metadata.yml" />
+    <Content Include="client\flaviusmatis\easyModal\README.md" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="tests\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>52469</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:52438/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

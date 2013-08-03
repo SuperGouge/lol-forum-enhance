@@ -429,5 +429,101 @@ var localizations = {
         "pt": "",
         "tr": "",
         "it": ""
+    },
+    updateButtonDismiss: { // TODO: Add translations
+        "en": "Do it later.",
+        "de": "Später.",
+        "es": "",
+        "fr": "",
+        "pl": "",
+        "ro": "",
+        "el": "",
+        "pt": "",
+        "tr": "",
+        "it": ""
+    },
+    updateButtonUpdate: { // TODO: Add translations
+        "en": "Update now.",
+        "de": "Jetzt aktualisieren.",
+        "es": "",
+        "fr": "",
+        "pl": "",
+        "ro": "",
+        "el": "",
+        "pt": "",
+        "tr": "",
+        "it": ""
+    },
+    updateNewVersionCaption: { // TODO: Add translations
+        "en": "New version:",
+        "de": "Neue Version:",
+        "es": "",
+        "fr": "",
+        "pl": "",
+        "ro": "",
+        "el": "",
+        "pt": "",
+        "tr": "",
+        "it": ""
+    },
+    updateOwnVersionCaption: { // TODO: Add translations
+        "en": "Your version:",
+        "de": "Deine Version:",
+        "es": "",
+        "fr": "",
+        "pl": "",
+        "ro": "",
+        "el": "",
+        "pt": "",
+        "tr": "",
+        "it": ""
+    },
+    updateTextCaption: { // TODO: Add translations
+        "en": "There is a newer version of LoL Forum Enhance available. Please click the button to update and confirm the installation window.",
+        "de": "Es ist eine neue Version von LoL Forum Enhance verfügbar. Bitte drücke den Button zum Updaten und akzeptiere das Installationsfenster.",
+        "es": "",
+        "fr": "",
+        "pl": "",
+        "ro": "",
+        "el": "",
+        "pt": "",
+        "tr": "",
+        "it": ""
+    },
+    updateTitleCaption: { // TODO: Add translations
+        "en": "Updates available",
+        "de": "Updates verfügbar",
+        "es": "",
+        "fr": "",
+        "pl": "",
+        "ro": "",
+        "el": "",
+        "pt": "",
+        "tr": "",
+        "it": ""
+    },
+    updateAvailableButton: { // TODO: Add translations
+        "en": "LFE updates available!",
+        "de": "LFE Updates verfügbar!",
+        "es": "",
+        "fr": "",
+        "pl": "",
+        "ro": "",
+        "el": "",
+        "pt": "",
+        "tr": "",
+        "it": ""
+    },
+    nameClickoverLolkingCaption: { // TODO: Add translations
+        "en": "Lolking profile",
+        "de": "Lolking Profil",
+        "es": "",
+        "fr": "",
+        "pl": "",
+        "ro": "",
+        "el": "",
+        "pt": "",
+        "tr": "",
+        "it": ""
     }
 };

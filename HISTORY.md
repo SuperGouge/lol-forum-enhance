@@ -1,4 +1,8 @@
-## Version history:
+# Version history:
+
+## 1.3.0
+- **Added** [Lolking.net](http://www.lolking.net/ "League of Legends Summoner Stats") connection when linking usernames with options-selection
+- **Fixed** automatic updates window
 
 ## 1.2.0
 - **Added** options menu in new design
