@@ -3,9 +3,9 @@
 // @namespace   https://github.com/philippwiddra
 // @description Supplements the League of Legends forums and sites with additional functions.
 // @include     *.leagueoflegends.com/*
-// @downloadURL https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/main.user.js
-// @updateURL   https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/main.meta.js
-// @version     1.3.0
+// @downloadURL https://raw.github.com/philippwiddra/lol-forum-enhance/first-page/client/main.user.js
+// @updateURL   https://raw.github.com/philippwiddra/lol-forum-enhance/first-page/client/main.meta.js
+// @version     1.4.0
 // @run-at      document-end
 // @grant       GM_xmlhttpRequest
 // @grant       GM_getResourceText
@@ -17,24 +17,24 @@
 // @grant       GM_listValues
 // @grant       GM_openInTab
 // @grant       GM_registerMenuCommand
-// @resource    globalcss https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/global.css
-// @resource    glyphicons-css https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/glyphicons.css
+// @resource    globalcss https://raw.github.com/philippwiddra/lol-forum-enhance/first-page/client/global.css
+// @resource    glyphicons-css https://raw.github.com/philippwiddra/lol-forum-enhance/first-page/client/glyphicons.css
 // @require     http://code.jquery.com/jquery-2.0.2.min.js
-// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/avatar-div.js
-// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/toolkitVersions.js
-// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/options-modal.js
-// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/update-modal.js
-// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/userscript.js
-// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/localizations.js
-// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/caches.js
-// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/edit-box.js
-// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/forum-display.js
-// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/jquery.lfepopover.js
-// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/aokura/unicode-utf8.js
-// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/flaviusmatis/easyModal/jquery.easyModal.js
-// @resource    options-modal https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/options-modal.html
-// @resource    update-alert https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/update-alert.html
-// @resource    avatardivhtml https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/avatar-div.html
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/first-page/client/avatar-div.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/first-page/client/toolkitVersions.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/first-page/client/options-modal.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/first-page/client/update-modal.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/first-page/client/userscript.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/first-page/client/localizations.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/first-page/client/caches.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/first-page/client/edit-box.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/first-page/client/forum-display.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/first-page/client/jquery.lfepopover.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/first-page/client/aokura/unicode-utf8.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/first-page/client/flaviusmatis/easyModal/jquery.easyModal.js
+// @resource    options-modal https://raw.github.com/philippwiddra/lol-forum-enhance/first-page/client/options-modal.html
+// @resource    update-alert https://raw.github.com/philippwiddra/lol-forum-enhance/first-page/client/update-alert.html
+// @resource    avatardivhtml https://raw.github.com/philippwiddra/lol-forum-enhance/first-page/client/avatar-div.html
 // @resource    iconUnknown http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/unknown.jpg
 // @resource    iconNotFound http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/notfound.jpg
 // @resource    icon0 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/0.jpg
@@ -541,9 +541,7 @@ pageHandler.runOn(/^(?:http\:\/\/)?forums\.(na|euw|eune|br)\.leagueoflegends\.co
         mutations.forEach(function (mutation) {
             // TODO: Check if forEach is needed, replaceAvatars itself traverses over posts.
             // TODO: Check if attaching avatarDiv and replacing Data is needed in case of logging in without site reload.
-            replacePosts();
-            //posts.replaceNames(); // replace Names and/to provide linking
-            //posts.replaceAvatars(); // replace the summoner images and levels
+            replacePosts(); // replace names, avatars and provide linking of summoners
         });
     });
     var observerConfig = { childList: true, subtree: true };
@@ -552,9 +550,7 @@ pageHandler.runOn(/^(?:http\:\/\/)?forums\.(na|euw|eune|br)\.leagueoflegends\.co
         // Server found:
         avatarDiv.attach();
         avatarDiv.replaceData(); // replace own avatar (if name and avatar available) and provide linking
-        //posts.replaceNames(); // replace Names and/to provide linking
-        //posts.replaceAvatars(); // replace the summoner images and levels
-        replacePosts();
+        replacePosts(); // replace names, avatars and provide linking of summoners
         if (observerTarget) postsObserver.observe(observerTarget, observerConfig); // start observing #posts
         forumDisplay.fixNamesIfEnabled(); // Replace misformated names in forum display
 
@@ -564,6 +560,10 @@ pageHandler.runOn(/^(?:http\:\/\/)?forums\.(na|euw|eune|br)\.leagueoflegends\.co
                 $(e).text(_from_utf8($(e).text()));
             });
         }
+
+        // add a pager-link to the first page if neccessary
+        var firstPageUrl = $('div.pager > a:nth-child(2)').attr('href').match(/^(.+)\&page=[0-9]+$/i)[1];
+        $('div.pager > a:nth-child(2)[href*="&page="]').before('<a href="' + firstPageUrl + '" title="Go to first page">1</a><span>...</span>') // TODO: localization
 
         editBox.rework(); // Change (quick) edit box style
     }

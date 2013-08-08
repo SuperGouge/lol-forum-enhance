@@ -1,5 +1,8 @@
 # Version history:
 
+## 1.4.0
+- **Added** a *pager-link to the first page*, if none is existent
+
 ## 1.3.0
 - **Added** [Lolking.net](http://www.lolking.net/ "League of Legends Summoner Stats") connection when linking usernames with options-selection
 - **Fixed** automatic updates window
