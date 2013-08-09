@@ -564,7 +564,7 @@ pageHandler.runOn(/^(?:http\:\/\/)?forums\.(na|euw|eune|br)\.leagueoflegends\.co
         // add a pager-link to the first page if necessary
         var firstPageUrlMatch = $('div.pager > a:nth-child(2)').attr('href').match(/^(.+)\&page=[0-9]+$/i);
         if (firstPageUrlMatch) {
-            $('div.pager > a:nth-child(2)[href*="&page="]').before('<a href="' + firstPageUrlMatch[1] + '" title="Go to first page">1</a><span>...</span>') // TODO: localization
+            $('div.pager > a:nth-child(2)[href*="&page="]').before('<a href="' + firstPageUrlMatch[1] + '" title="' + localizations.get('paginationFirstPageTitle') + '">1</a><span>...</span>');
         }
         // remove unnecessary pager-links
         $('div.pager > a.active').each(function (i, e) {
@@ -577,12 +577,12 @@ pageHandler.runOn(/^(?:http\:\/\/)?forums\.(na|euw|eune|br)\.leagueoflegends\.co
         $('div.pager').each(function (i, e) {
             e = $(e);
             var lastPage = e.children().slice(-2, -1).text();
-            var currentPage = e.children('.active').text();
+            var currentPage = parseInt(e.children('.active').text(), 10);
             var exampleUrl = $('div.pager > a[href*="&page="]').attr('href');
             var selection = $('<select class="userscript-page-selection">');
-            for (var i = 1; i <= lastPage; i++) {
-                if (currentPage == i) selection.append('<option value="' + exampleUrl.replace(/^(.*\&page=)[0-9]+(.*)$/g, '$1' + i + '$2') + '" selected="selected">' + i + '</option>');
-                else selection.append('<option value="' + exampleUrl.replace(/^(.*\&page=)[0-9]+(.*)$/g, '$1' + i + '$2') + '">' + i + '</option>');
+            for (var j = 1; j <= lastPage; j++) {
+                if (currentPage === j) selection.append('<option value="' + exampleUrl.replace(/^(.*\&page=)[0-9]+(.*)$/g, '$1' + j + '$2') + '" selected="selected">' + j + '</option>');
+                else selection.append('<option value="' + exampleUrl.replace(/^(.*\&page=)[0-9]+(.*)$/g, '$1' + j + '$2') + '">' + j + '</option>');
             }
             e.children(':last-child').before(selection);
         });
