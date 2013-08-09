@@ -449,6 +449,7 @@
     <Content Include="client\flaviusmatis\easyModal\README.md" />
     <Content Include="client\global.less" />
     <Content Include="client\less\glyphicons.less" />
+    <Content Include="client\less\colorfix.less" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

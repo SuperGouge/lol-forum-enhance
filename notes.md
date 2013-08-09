@@ -1,5 +1,15 @@
 # Notes
 
+## Using Greasemonkey assets in css
+
+``` css
+#header {
+    background: url("greasemonkey-script:fcc91ec6-0b59-4348-b8e6-03f2084553d8/icon539") no-repeat scroll 50% 0px transparent;
+}
+
+/* greasemonkey-script:fcc91ec6-0b59-4348-b8e6-03f2084553d8/icon539 */
+```
+
 ## Elophant servers
 
 - Elophant supported:
