@@ -61,11 +61,21 @@
     <Content Include="client\avatar-div.html" />
     <Content Include="client\avatar-div.js" />
     <Content Include="client\flaviusmatis\easyModal\jquery.easyModal.js" />
-    <Content Include="client\glyphicons.css" />
+    <Content Include="client\global.css">
+      <DependentUpon>global.less</DependentUpon>
+    </Content>
+    <Content Include="client\global.min.css">
+      <DependentUpon>global.less</DependentUpon>
+    </Content>
+    <Content Include="client\less\glyphicons.css">
+      <DependentUpon>glyphicons.less</DependentUpon>
+    </Content>
+    <Content Include="client\less\glyphicons.min.css">
+      <DependentUpon>glyphicons.less</DependentUpon>
+    </Content>
     <Content Include="client\jquery.lfepopover.js" />
     <Content Include="client\caches.js" />
     <Content Include="client\forum-display.js" />
-    <Content Include="client\global.css" />
     <Content Include="client\edit-box.js" />
     <Content Include="client\localizations.js" />
     <Content Include="client\main.meta.js" />
@@ -437,6 +447,8 @@
     <Content Include="userscripts-org\description.md" />
     <Content Include="userscripts-org\metadata.yml" />
     <Content Include="client\flaviusmatis\easyModal\README.md" />
+    <Content Include="client\global.less" />
+    <Content Include="client\less\glyphicons.less" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
