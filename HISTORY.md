@@ -1,7 +1,9 @@
 # Version history:
 
-## 1.4.0
+## 1.4.1
 - **Added** a *pager-link to the first page*, if none is existent
+- **Added** function to *remove unnecessary pager-links* and therefor fixing styling issues on original site
+- **Added** a *page-select-box* to get to a particular threat- or forums-page instantly
 
 ## 1.3.0
 - **Added** [Lolking.net](http://www.lolking.net/ "League of Legends Summoner Stats") connection when linking usernames with options-selection

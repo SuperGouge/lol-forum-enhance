@@ -5,7 +5,7 @@
 // @include     *.leagueoflegends.com/*
 // @downloadURL https://raw.github.com/philippwiddra/lol-forum-enhance/first-page/client/main.user.js
 // @updateURL   https://raw.github.com/philippwiddra/lol-forum-enhance/first-page/client/main.meta.js
-// @version     1.4.0
+// @version     1.4.1first-page
 // @run-at      document-end
 // @grant       GM_xmlhttpRequest
 // @grant       GM_getResourceText

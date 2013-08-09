@@ -568,3 +568,12 @@ div.userscript-btn-group {
         border-top-left-radius: 0px;
         border-bottom-left-radius: 0px;
     }
+
+select.userscript-page-selection {
+    border: 1px solid rgb(192, 192, 192);
+    background: none repeat scroll 0% 0% rgb(243, 244, 244);
+    text-decoration: none;
+    height: 25px;
+    vertical-align: middle;
+    padding: 1px;
+}

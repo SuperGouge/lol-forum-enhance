@@ -5,7 +5,7 @@
 // @include     *.leagueoflegends.com/*
 // @downloadURL https://raw.github.com/philippwiddra/lol-forum-enhance/first-page/client/main.user.js
 // @updateURL   https://raw.github.com/philippwiddra/lol-forum-enhance/first-page/client/main.meta.js
-// @version     1.4.0
+// @version     1.4.1first-page
 // @run-at      document-end
 // @grant       GM_xmlhttpRequest
 // @grant       GM_getResourceText
@@ -561,9 +561,35 @@ pageHandler.runOn(/^(?:http\:\/\/)?forums\.(na|euw|eune|br)\.leagueoflegends\.co
             });
         }
 
-        // add a pager-link to the first page if neccessary
-        var firstPageUrl = $('div.pager > a:nth-child(2)').attr('href').match(/^(.+)\&page=[0-9]+$/i)[1];
-        $('div.pager > a:nth-child(2)[href*="&page="]').before('<a href="' + firstPageUrl + '" title="Go to first page">1</a><span>...</span>') // TODO: localization
+        // add a pager-link to the first page if necessary
+        var firstPageUrlMatch = $('div.pager > a:nth-child(2)').attr('href').match(/^(.+)\&page=[0-9]+$/i);
+        if (firstPageUrlMatch) {
+            $('div.pager > a:nth-child(2)[href*="&page="]').before('<a href="' + firstPageUrlMatch[1] + '" title="Go to first page">1</a><span>...</span>') // TODO: localization
+        }
+        // remove unnecessary pager-links
+        $('div.pager > a.active').each(function (i, e) {
+            e = $(e);
+            e.prevAll().slice(2, -3).remove();
+            e.nextAll().slice(2, -3).remove();
+        });
+
+        // add select box to pager-links
+        $('div.pager').each(function (i, e) {
+            e = $(e);
+            var lastPage = e.children().slice(-2, -1).text();
+            var currentPage = e.children('.active').text();
+            var exampleUrl = $('div.pager > a[href*="&page="]').attr('href');
+            var selection = $('<select class="userscript-page-selection">');
+            for (var i = 1; i <= lastPage; i++) {
+                if (currentPage == i) selection.append('<option value="' + exampleUrl.replace(/^(.*\&page=)[0-9]+(.*)$/g, '$1' + i + '$2') + '" selected="selected">' + i + '</option>');
+                else selection.append('<option value="' + exampleUrl.replace(/^(.*\&page=)[0-9]+(.*)$/g, '$1' + i + '$2') + '">' + i + '</option>');
+            }
+            e.children(':last-child').before(selection);
+        });
+
+        $('.userscript-page-selection').change(function () {
+            window.location.href = this.value;
+        });
 
         editBox.rework(); // Change (quick) edit box style
     }
