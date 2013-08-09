@@ -1,5 +1,8 @@
 # Version history:
 
+## 1.4.3
+- **Fixed** a bug with singe-page forum thread
+
 ## 1.4.2
 - **Added** a *pager-link to the first page*, if none is existent
 - **Added** function to *remove unnecessary pager-links* and therefor fixing styling issues on original site
