@@ -1,9 +1,10 @@
 # Version history:
 
-## 1.4.1
+## 1.4.2
 - **Added** a *pager-link to the first page*, if none is existent
 - **Added** function to *remove unnecessary pager-links* and therefor fixing styling issues on original site
 - **Added** a *page-select-box* to get to a particular threat- or forums-page instantly
+- Refactored core files to support `.less` stylesheets. Client now works with minified css, so styles should apply slightly faster
 
 ## 1.3.0
 - **Added** [Lolking.net](http://www.lolking.net/ "League of Legends Summoner Stats") connection when linking usernames with options-selection
