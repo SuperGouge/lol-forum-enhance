@@ -1,5 +1,8 @@
 # Version history:
 
+## 1.4.4
+- **Fixed** a display bug on the update button
+
 ## 1.4.3
 - **Fixed** a bug with singe-page forum thread
 

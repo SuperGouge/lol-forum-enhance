@@ -790,13 +790,13 @@ table.userscript-table.table-striped tbody tr:nth-child(2n+1) th {
   border-radius: 12px;
   font-size: 12px;
 }
-#userscript-updates-button {
+#website-feedback #userscript-updates-button {
   right: auto;
   left: 20px;
   display: none;
   background-color: #be9d1e;
 }
-#userscript-updates-button:hover {
+#website-feedback #userscript-updates-button:hover {
   background-color: #debb31;
 }
 .userscript-pull-left {
