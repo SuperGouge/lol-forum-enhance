@@ -525,5 +525,17 @@ var localizations = {
         "pt": "",
         "tr": "",
         "it": ""
+    },
+    paginationFirstPageTitle: { // TODO: Add translations
+        "en": "Go to first page",
+        "de": "Zur ersten Seite",
+        "es": "",
+        "fr": "",
+        "pl": "",
+        "ro": "",
+        "el": "",
+        "pt": "",
+        "tr": "",
+        "it": ""
     }
 };
