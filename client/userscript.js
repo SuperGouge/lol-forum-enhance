@@ -1,4 +1,23 @@
 var userscript = {
+    resolveCssAnnotations: function (aCss) {
+        var css = aCss;
+
+        var re = /(\/\*!? *@resolve:)(.*?)( *\*\/)/;
+        var matches = css.match(re);
+        while (matches) {
+            var before = matches[1];
+            var match = matches[2];
+            var after = matches[3];
+
+            // perform custom replacement
+            var newMatch = match.replace(/GM_getResourceURL\(['"](.*?)['"]\)/g, GM_getResourceURL('$1')); // GM_getResource resolve
+
+            css = css.replace(before + match + after, newMatch);
+            matches = css.match(re);
+        }
+
+        return css;
+    },
     addGlobalStyle: function (css) {
         try {
             var elmHead, elmStyle;
@@ -6,7 +25,7 @@ var userscript = {
             elmStyle = document.createElement('style');
             elmStyle.type = 'text/css';
             elmHead.appendChild(elmStyle);
-            elmStyle.innerHTML = css;
+            elmStyle.innerHTML = resolveCssAnnotations(css);
         }
         catch (e) {
             if (!document.styleSheets.length) {
@@ -22,7 +41,7 @@ var userscript = {
             elmStyle = document.createElement('style');
             elmStyle.type = 'text/css';
             elmHead.insertBefore(elmStyle, elmHead.firstChild);
-            elmStyle.innerHTML = css;
+            elmStyle.innerHTML = resolveCssAnnotations(css);
         }
         catch (e) {
             if (!document.styleSheets.length) {
