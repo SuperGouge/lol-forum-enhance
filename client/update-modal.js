@@ -51,7 +51,7 @@
                     $('#userscript-own-version').text(userscript.getLocalVersion());
                     userscript.getRemoteVersion(function (v) {
                         $('#userscript-new-version').text(v);
-                    })
+                    });
                     $('#userscript-updates-button').css('display', 'block');
                 }
             });

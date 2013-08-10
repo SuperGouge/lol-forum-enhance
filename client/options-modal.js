@@ -43,10 +43,10 @@
                 else $('#lfe-o-fek-off').addClass('active');
 
                 $('#lfe-o-link-' + lfeOptions.data.link).addClass('active');
-            },
-            onClose: function (modal) {
-                //$(modal).append('Closed!');
             }
+            /* onClose: function (modal) {
+                //$(modal).append('Closed!');
+            } */
         });
 
         // Register save-options function

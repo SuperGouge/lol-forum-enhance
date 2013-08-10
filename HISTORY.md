@@ -1,5 +1,8 @@
 # Version history:
 
+## 1.5.0
+- **Added** option to *emulate the design of the old forums* (mainly by Makozer and @BenneX)
+
 ## 1.4.4
 - **Fixed** a display bug on the update button
 

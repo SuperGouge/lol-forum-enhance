@@ -85,7 +85,7 @@
 
         this.setVersionPart = function (string) {
             orig = string;
-            var m = string.match(/^([0-9-]+)?([^\d]+)?([0-9-]+)?(.+)?$/i);
+            var m = string.match(/^([0-9\-]+)?([^\d]+)?([0-9\-]+)?(.+)?$/i);
 
             numA = parseInt(m[1], 10);
             strB = m[2];

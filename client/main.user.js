@@ -3,9 +3,9 @@
 // @namespace   https://github.com/philippwiddra
 // @description Supplements the League of Legends forums and sites with additional functions.
 // @include     *.leagueoflegends.com/*
-// @downloadURL https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/main.user.js
-// @updateURL   https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/main.meta.js
-// @version     1.4.4
+// @downloadURL https://raw.github.com/philippwiddra/lol-forum-enhance/colorfix/client/main.user.js
+// @updateURL   https://raw.github.com/philippwiddra/lol-forum-enhance/colorfix/client/main.meta.js
+// @version     1.5.0colorfix
 // @run-at      document-end
 // @grant       GM_xmlhttpRequest
 // @grant       GM_getResourceText
@@ -17,23 +17,26 @@
 // @grant       GM_listValues
 // @grant       GM_openInTab
 // @grant       GM_registerMenuCommand
-// @resource    global-css-min https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/global.min.css
+// @resource    global-css-min https://raw.github.com/philippwiddra/lol-forum-enhance/colorfix/client/global.min.css
 // @require     http://code.jquery.com/jquery-2.0.2.min.js
-// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/avatar-div.js
-// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/toolkitVersions.js
-// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/options-modal.js
-// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/update-modal.js
-// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/userscript.js
-// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/localizations.js
-// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/caches.js
-// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/edit-box.js
-// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/forum-display.js
-// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/jquery.lfepopover.js
-// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/aokura/unicode-utf8.js
-// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/flaviusmatis/easyModal/jquery.easyModal.js
-// @resource    options-modal https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/options-modal.html
-// @resource    update-alert https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/update-alert.html
-// @resource    avatardivhtml https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/avatar-div.html
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/colorfix/client/avatar-div.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/colorfix/client/toolkitVersions.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/colorfix/client/options-modal.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/colorfix/client/update-modal.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/colorfix/client/userscript.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/colorfix/client/localizations.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/colorfix/client/caches.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/colorfix/client/edit-box.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/colorfix/client/forum-display.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/colorfix/client/jquery.lfepopover.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/colorfix/client/aokura/unicode-utf8.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/colorfix/client/flaviusmatis/easyModal/jquery.easyModal.js
+// @resource    options-modal https://raw.github.com/philippwiddra/lol-forum-enhance/colorfix/client/options-modal.html
+// @resource    update-alert https://raw.github.com/philippwiddra/lol-forum-enhance/colorfix/client/update-alert.html
+// @resource    avatardivhtml https://raw.github.com/philippwiddra/lol-forum-enhance/colorfix/client/avatar-div.html
+// @resource    colorfix-top https://raw.github.com/philippwiddra/lol-forum-enhance/colorfix/client/ColorfixImages/section-wrapper-top.jpg
+// @resource    colorfix-content https://raw.github.com/philippwiddra/lol-forum-enhance/colorfix/client/ColorfixImages/section-wrapper-content.png
+// @resource    colorfix-bottom https://raw.github.com/philippwiddra/lol-forum-enhance/colorfix/client/ColorfixImages/section-wrapper-bottom.png
 // @resource    iconUnknown http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/unknown.jpg
 // @resource    iconNotFound http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/notfound.jpg
 // @resource    icon0 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/0.jpg
@@ -320,7 +323,7 @@ function replacePosts() {
             var nameElem = e.find('p.post-user');
             var name = nameElem.text();
             name = name.replace(/(^\s*)|(\s*$)/g, ''); // replace whitespaces at the beginning and end
-            if (lfeOptions.data.charset) name = _from_utf8(name); // charset encoding bugfixes for league forums
+            if (lfeOptions.data.charset) name = fromUtf8(name); // charset encoding bugfixes for league forums
 
             var isRiot = false;
             if (e.has('img[src="lol_theme/img/unknown_icon.jpg"]').length === 0) isRiot = true;
@@ -355,16 +358,14 @@ function replacePosts() {
                     GM_openInTab(link);
                 });
             }
-            else { // lfeOptions.data.link === 'none'
-
-            }
+            // else lfeOptions.data.link === 'none' { }
 
             if (!isRiot) {
                 var image = e.find('img.user_summoner_icon');
                 // Cache system (the level-1-cache automatically calls the level-2-cache if it doesnt have the result)
                 level1Cache.getSummoner(name, riot.getForumServer(), function (summoner) {
-                    // Summoner found:                
-                    image.attr('src', GM_getResourceURL("icon" + summoner.data.profileIconId)); // replace image source
+                    // Summoner found:
+                    image.attr('src', GM_getResourceURL('icon' + summoner.data.profileIconId)); // replace image source
                     $('<div class="userscript-summoner-level">' + summoner.data.summonerLevel + '</div>').insertAfter(image);
 
                     // Add Lolking.net profile
@@ -445,7 +446,7 @@ pageHandler.runOn(/^(?:http\:\/\/)?forums\.(na|euw|eune|br)\.leagueoflegends\.co
         // replace quote author names special chars
         if (lfeOptions.data.charset) {
             $('div.quote-message > div:first-child > strong:first-child').each(function (i, e) {
-                $(e).text(_from_utf8($(e).text()));
+                $(e).text(fromUtf8($(e).text()));
             });
         }
 
@@ -483,7 +484,5 @@ pageHandler.runOn(/^(?:http\:\/\/)?forums\.(na|euw|eune|br)\.leagueoflegends\.co
 
         editBox.rework(); // Change (quick) edit box style
     }
-    else {
-        // Server not found:
-    }
+    // else Server not found: { }
 });
