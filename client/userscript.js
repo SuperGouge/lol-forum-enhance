@@ -10,7 +10,7 @@ var userscript = {
             var after = matches[3];
 
             // perform custom replacement
-            var newMatch = match.replace(/GM_getResourceURL\(['"](.*?)['"]\)/g, GM_getResourceURL('$1')); // GM_getResource resolve
+            var newMatch = match.replace(/GM_getResourceURL\(['"](.*?)['"]\)/g, '"' + GM_getResourceURL('$1') + '"'); // GM_getResource resolve
 
             css = css.replace(before + match + after, newMatch);
             matches = css.match(re);
@@ -25,7 +25,7 @@ var userscript = {
             elmStyle = document.createElement('style');
             elmStyle.type = 'text/css';
             elmHead.appendChild(elmStyle);
-            elmStyle.innerHTML = resolveCssAnnotations(css);
+            elmStyle.innerHTML = userscript.resolveCssAnnotations(css);
         }
         catch (e) {
             if (!document.styleSheets.length) {
@@ -41,7 +41,7 @@ var userscript = {
             elmStyle = document.createElement('style');
             elmStyle.type = 'text/css';
             elmHead.insertBefore(elmStyle, elmHead.firstChild);
-            elmStyle.innerHTML = resolveCssAnnotations(css);
+            elmStyle.innerHTML = userscript.resolveCssAnnotations(css);
         }
         catch (e) {
             if (!document.styleSheets.length) {

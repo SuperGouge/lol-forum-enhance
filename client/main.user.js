@@ -5,7 +5,7 @@
 // @include     *.leagueoflegends.com/*
 // @downloadURL https://raw.github.com/philippwiddra/lol-forum-enhance/colorfix/client/main.user.js
 // @updateURL   https://raw.github.com/philippwiddra/lol-forum-enhance/colorfix/client/main.meta.js
-// @version     1.5.0colorfix
+// @version     1.5.1colorfix
 // @run-at      document-end
 // @grant       GM_xmlhttpRequest
 // @grant       GM_getResourceText
