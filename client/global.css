@@ -439,10 +439,10 @@
 .userscript-icon-fullscreen {
   background-position: -456px -144px;
 }
-/*! Title: LoL Forum Colorfix Extended
-   Based on: https://dl.dropboxusercontent.com/u/...lforum.user.js by Makozer
-   Author: Lord BenneX
-   License: LGPL http://www.gnu.org/licenses/lgpl.html  */
+/*! LoL Forum Colorfix Extended
+    Based on https://dl.dropboxusercontent.com/u/...lforum.user.js by Makozer
+    Author: Lord BenneX
+    License: LGPL http://www.gnu.org/licenses/lgpl.html  */
 html body {
   background: url("http://cdn.leagueoflegends.com/lolkit/1.0.27/resources/images/bg-default.jpg") repeat fixed 0 0 transparent !important;
 }
@@ -480,11 +480,11 @@ html body {
 
 }
 .section-wrapper .section-wrapper-content {
-  /*! @resolve: background: url(GM_getResourceURL('colorfix-content')) no-repeat scroll 50% 0 transparent !important; */
+  /*! @resolve: background: url(GM_getResourceURL('colorfix-content')) repeat-y scroll 50% 0 transparent !important; */
 
 }
 .section-wrapper .section-wrapper-bottom {
-  /*! @resolve: background: url(GM_getResourceURL('colorfix-bottom')) no-repeat scroll 50% 0 transparent !important; */
+  /*! @resolve: background: url(GM_getResourceURL('colorfix-bottom')) no-repeat scroll 50% -284px transparent !important; */
 
 }
 .backdrop {
