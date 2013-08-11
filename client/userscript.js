@@ -18,7 +18,7 @@ var userscript = {
 
         return css;
     },
-    addGlobalStyle: function (css, id, enabled) {
+    addGlobalStyle: function (css, id) {
         /*
         try {
             var elmHead, elmStyle;
@@ -39,11 +39,9 @@ var userscript = {
         if (id) style = $('<style id="' + id + '" type="text/css">');
         else style = $('<style type="text/css">');
         style.text(userscript.resolveCssAnnotations(css));
-        if (enabled) style.removeAttr('disabled');
-        else style.attr('disabled', 'disabled');
         $('head').append(style);
     },
-    prependGlobalStyle: function (css, id, enabled) {
+    prependGlobalStyle: function (css, id) {
         /*
         try {
             var elmHead, elmStyle;
@@ -64,19 +62,7 @@ var userscript = {
         if (id) style = $('<style id="' + id + '" type="text/css">');
         else style = $('<style type="text/css">');
         style.text(userscript.resolveCssAnnotations(css));
-        if (enabled) style.removeAttr('disabled');
-        else style.attr('disabled', 'disabled');
         $('head').prepend(style);
-    },
-    disableGlobalStyle: function (id) {
-        $('#' + id).attr('disabled', 'disabled');
-    },
-    enableGlobalStyle: function (id) {
-        $('#' + id).removeAttr('disabled');
-    },
-    switchGlobalStyle: function (id, enableState) {
-        if (enableState) $('#' + id).removeAttr('disabled');
-        else $('#' + id).attr('disabled', 'disabled');
     },
     setCookie: function (name, value, expireMilliseconds) {
         var expireDate = new Date();

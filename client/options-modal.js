@@ -63,7 +63,6 @@
             lfeOptions.data.link = $('#lfe-o-link .active').data('value');
             lfeOptions.data.colorfix = $('#lfe-o-colorfix .active').data('value');
             lfeOptions.saveLocal();
-            userscript.switchGlobalStyle('lfe-colorfix-css', lfeOptions.data.colorfix);
             $('#lfeOptionsModal').easyModal('hide');
         });
 
