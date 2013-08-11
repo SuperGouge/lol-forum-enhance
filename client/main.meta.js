@@ -5,7 +5,7 @@
 // @include     *.leagueoflegends.com/*
 // @downloadURL https://raw.github.com/philippwiddra/lol-forum-enhance/colorfix/client/main.user.js
 // @updateURL   https://raw.github.com/philippwiddra/lol-forum-enhance/colorfix/client/main.meta.js
-// @version     1.5.1colorfix
+// @version     1.5.2colorfix
 // @run-at      document-end
 // @grant       GM_xmlhttpRequest
 // @grant       GM_getResourceText
@@ -18,6 +18,7 @@
 // @grant       GM_openInTab
 // @grant       GM_registerMenuCommand
 // @resource    global-css-min https://raw.github.com/philippwiddra/lol-forum-enhance/colorfix/client/global.min.css
+// @resource    colorfix-css-min https://raw.github.com/philippwiddra/lol-forum-enhance/colorfix/client/less/colorfix.min.css
 // @require     http://code.jquery.com/jquery-2.0.2.min.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/colorfix/client/avatar-div.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/colorfix/client/toolkitVersions.js

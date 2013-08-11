@@ -371,8 +371,8 @@ var localizations = {
         'it': ''
     },
     optionsModalReloadInfoCaption: { // TODO: Add translations
-        'en': 'The options only take effect after you reload the page.',
-        'de': 'Die Optionen werden erst nach einem Neuladen der Seite angewendet.',
+        'en': 'Some options only take effect after you reload the page.',
+        'de': 'Manche Optionen werden erst nach einem Neuladen der Seite angewendet.',
         'es': '',
         'fr': '',
         'pl': '',
@@ -529,6 +529,18 @@ var localizations = {
     paginationFirstPageTitle: { // TODO: Add translations
         'en': 'Go to first page',
         'de': 'Zur ersten Seite',
+        'es': '',
+        'fr': '',
+        'pl': '',
+        'ro': '',
+        'el': '',
+        'pt': '',
+        'tr': '',
+        'it': ''
+    },
+    optionsModalColorfixCaption: { // TODO: Add translations
+        'en': 'Emulate the old forums design:',
+        'de': 'Emuliere das Design des alten Forums:',
         'es': '',
         'fr': '',
         'pl': '',

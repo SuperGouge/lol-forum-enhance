@@ -5,7 +5,7 @@
 // @include     *.leagueoflegends.com/*
 // @downloadURL https://raw.github.com/philippwiddra/lol-forum-enhance/colorfix/client/main.user.js
 // @updateURL   https://raw.github.com/philippwiddra/lol-forum-enhance/colorfix/client/main.meta.js
-// @version     1.5.1colorfix
+// @version     1.5.2colorfix
 // @run-at      document-end
 // @grant       GM_xmlhttpRequest
 // @grant       GM_getResourceText
@@ -18,6 +18,7 @@
 // @grant       GM_openInTab
 // @grant       GM_registerMenuCommand
 // @resource    global-css-min https://raw.github.com/philippwiddra/lol-forum-enhance/colorfix/client/global.min.css
+// @resource    colorfix-css-min https://raw.github.com/philippwiddra/lol-forum-enhance/colorfix/client/less/colorfix.min.css
 // @require     http://code.jquery.com/jquery-2.0.2.min.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/colorfix/client/avatar-div.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/colorfix/client/toolkitVersions.js
@@ -186,7 +187,8 @@ var lfeOptions = {
         wt: false,
         fek: false,
         link: 'selection',
-        charset: false
+        charset: false,
+        colorfix: false
     },
     loadLocal: function () {
         try {
@@ -403,13 +405,14 @@ function replacePosts() {
 // Start of Main Script:
 var MutationObserver = window.MutationObserver || window.WebKitMutationObserver; // Secure browser-compatibility for Chrome
 
-level1Cache.loadCache(); // load local Cache
-level1Cache.cleanCache(); // clean old objects out of local Cache
-lfeOptions.loadLocal(); // load global userscript options
+level1Cache.loadCache();
+level1Cache.cleanCache();
+lfeOptions.loadLocal();
 
 pageHandler.runOn(/^(?:http\:\/\/)?forums\.(na|euw|eune|br)\.leagueoflegends\.com\/board(?:\/.*)?$/i, function () { // run this only on beta-style-forums
-    localizations.setDefaultLang(riot.getForumLanguageShort()); // set default language for localization from riot-implemented cookie
-    userscript.addGlobalStyle(GM_getResourceText('global-css-min')); // add compiled and minified css file
+    localizations.setDefaultLang(riot.getForumLanguageShort());
+    userscript.addGlobalStyle(GM_getResourceText('global-css-min'), 'lfe-css');
+    userscript.addGlobalStyle(GM_getResourceText('colorfix-css-min'), 'lfe-colorfix-css', lfeOptions.data.colorfix);
 
     // update modal
     updateModal.addButton();
