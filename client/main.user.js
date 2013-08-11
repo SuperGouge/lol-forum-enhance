@@ -333,12 +333,17 @@ function replacePosts() {
                 nameElem.lfePopover({
                     html: true,
                     content: '<div class="userscript-summoner-popover-buttons">' +
-                                  '<button type="button" data-href="http://forums.' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&showposts=1">' + localizations.get('nameClickoverPostsCaption') + '</button>' + // TODO: Check if URL still works when live
-                                  '<button type="button" data-href="http://forums.' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&starteronly=1&showposts=0">' + localizations.get('nameClickoverThreadsCaption') + '</button>' + // TODO: Check if URL still works when live
+                                  '<button class="leagueForumsButton" type="button" data-href="http://forums.' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&showposts=1">' + localizations.get('nameClickoverPostsCaption') + '</button>' + // TODO: Check if URL still works when live
+                                  '<button class="leagueForumsButton" type="button" data-href="http://forums.' + server + '.leagueoflegends.com/board/search.php?do=process&searchuser=' + name + '&exactname=1&starteronly=1&showposts=0">' + localizations.get('nameClickoverThreadsCaption') + '</button>' + // TODO: Check if URL still works when live
                              '</div>',
                 });
                 nameElem.click(function () {
                     $(this).lfePopover('toggle');
+                });
+                nameElem.parent().find('.userscript-summoner-popover-buttons .leagueForumsButton').click(function () {
+                    var link = $(this).attr('data-href');
+                    GM_openInTab(link);
+                    nameElem.lfePopover('hide');
                 });
             }
             else if (lfeOptions.data.link === 'posts') {
@@ -369,9 +374,14 @@ function replacePosts() {
 
                     // Add Lolking.net profile
                     if (lfeOptions.data.link === 'selection') {
-                        nameElem.parent().find('div.userscript-summoner-popover-buttons').append($('<button type="button" data-href="http://www.lolking.net/summoner/' + server + '/' + summoner.data.summonerId + '">' + localizations.get('nameClickoverLolkingCaption') + '</button>'));
+                        var lolkingButton = $('<button class="lolkingButton" type="button" data-href="http://www.lolking.net/summoner/' + server + '/' + summoner.data.summonerId + '">' + localizations.get('nameClickoverLolkingCaption') + '</button>');
+                        nameElem.parent().find('div.userscript-summoner-popover-buttons').append(lolkingButton);
+                        lolkingButton.click(function () {
+                            var link = $(this).attr('data-href');
+                            GM_openInTab(link);
+                            nameElem.lfePopover('hide');
+                        });
                     }
-
                     level1Cache.saveCache(); // save whole cache
                 },
                 function (summoner) {
@@ -387,13 +397,6 @@ function replacePosts() {
                     }
                 });
             }
-
-            nameElem.parent().find('.userscript-summoner-popover-buttons > button').click(function () {
-                var link = $(this).attr('data-href');
-                GM_openInTab(link);
-                nameElem.lfePopover('hide');
-            });
-
             e.data('replaced', true);
         }
     });
