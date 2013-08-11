@@ -39,11 +39,11 @@ html body {
 
 }
 .section-wrapper .section-wrapper-content {
-  /*! @resolve: background: url(GM_getResourceURL('colorfix-content')) no-repeat scroll 50% 0 transparent !important; */
+  /*! @resolve: background: url(GM_getResourceURL('colorfix-content')) repeat-y scroll 50% 0 transparent !important; */
 
 }
 .section-wrapper .section-wrapper-bottom {
-  /*! @resolve: background: url(GM_getResourceURL('colorfix-bottom')) no-repeat scroll 50% 0 transparent !important; */
+  /*! @resolve: background: url(GM_getResourceURL('colorfix-bottom')) no-repeat scroll 50% -284px transparent !important; */
 
 }
 .backdrop {
