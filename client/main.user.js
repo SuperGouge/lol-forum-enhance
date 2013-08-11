@@ -411,7 +411,7 @@ lfeOptions.loadLocal();
 
 pageHandler.runOn(/^(?:http\:\/\/)?forums\.(na|euw|eune|br)\.leagueoflegends\.com\/board(?:\/.*)?$/i, function () { // run this only on beta-style-forums
     localizations.setDefaultLang(riot.getForumLanguageShort());
-    userscript.addGlobalStyle(GM_getResourceText('global-css-min'), 'lfe-css');
+    userscript.addGlobalStyle(GM_getResourceText('global-css-min'), 'lfe-css', true);
     userscript.addGlobalStyle(GM_getResourceText('colorfix-css-min'), 'lfe-colorfix-css', lfeOptions.data.colorfix);
 
     // update modal

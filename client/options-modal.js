@@ -64,7 +64,7 @@
             lfeOptions.data.colorfix = $('#lfe-o-colorfix .active').data('value');
             lfeOptions.saveLocal();
             userscript.switchGlobalStyle('lfe-colorfix-css', lfeOptions.data.colorfix);
-            $('#lfeOptionsModal').modal('hide');
+            $('#lfeOptionsModal').easyModal('hide');
         });
 
         // Register option selection events
