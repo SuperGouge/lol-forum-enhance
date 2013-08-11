@@ -1,5 +1,8 @@
 # Version history:
 
+## 1.4.5
+- **Fixed** a bug which occasionally rendered the lolking buttons not clickable
+
 ## 1.4.4
 - **Fixed** a display bug on the update button
 
