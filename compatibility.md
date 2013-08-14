@@ -1,11 +1,12 @@
 # Compatibility comparison
 Compatibility comparison for different user script engines and the necessary functions.
+
 from: https://github.com/scriptish/scriptish/wiki/Comparison-Table
 
 ## used Greasemonkey API
 - **Necessary:**
   - `GM_deleteValue`
-    - local cache
+      - local cache
     - *Firefox* Greasemonkey: ok
     - *Chrome* Tampermonkey: ok
     - *Safari* GreaseKit: **no**
