@@ -3,9 +3,9 @@
 // @namespace   https://github.com/philippwiddra
 // @description Supplements the League of Legends forums and sites with additional functions.
 // @include     *.leagueoflegends.com/*
-// @downloadURL https://raw.github.com/philippwiddra/lol-forum-enhance/colorfix/client/main.user.js
-// @updateURL   https://raw.github.com/philippwiddra/lol-forum-enhance/colorfix/client/main.meta.js
-// @version     1.5.2colorfix
+// @downloadURL https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/main.user.js
+// @updateURL   https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/main.meta.js
+// @version     1.5.2
 // @run-at      document-end
 // @grant       GM_xmlhttpRequest
 // @grant       GM_getResourceText
@@ -17,27 +17,27 @@
 // @grant       GM_listValues
 // @grant       GM_openInTab
 // @grant       GM_registerMenuCommand
-// @resource    global-css-min https://raw.github.com/philippwiddra/lol-forum-enhance/colorfix/client/global.min.css
-// @resource    colorfix-css-min https://raw.github.com/philippwiddra/lol-forum-enhance/colorfix/client/less/colorfix.min.css
+// @resource    global-css-min https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/global.min.css
+// @resource    colorfix-css-min https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/less/colorfix.min.css
 // @require     http://code.jquery.com/jquery-2.0.2.min.js
-// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/colorfix/client/avatar-div.js
-// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/colorfix/client/toolkitVersions.js
-// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/colorfix/client/options-modal.js
-// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/colorfix/client/update-modal.js
-// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/colorfix/client/userscript.js
-// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/colorfix/client/localizations.js
-// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/colorfix/client/caches.js
-// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/colorfix/client/edit-box.js
-// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/colorfix/client/forum-display.js
-// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/colorfix/client/jquery.lfepopover.js
-// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/colorfix/client/aokura/unicode-utf8.js
-// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/colorfix/client/flaviusmatis/easyModal/jquery.easyModal.js
-// @resource    options-modal https://raw.github.com/philippwiddra/lol-forum-enhance/colorfix/client/options-modal.html
-// @resource    update-alert https://raw.github.com/philippwiddra/lol-forum-enhance/colorfix/client/update-alert.html
-// @resource    avatardivhtml https://raw.github.com/philippwiddra/lol-forum-enhance/colorfix/client/avatar-div.html
-// @resource    colorfix-top https://raw.github.com/philippwiddra/lol-forum-enhance/colorfix/client/ColorfixImages/section-wrapper-top.jpg
-// @resource    colorfix-content https://raw.github.com/philippwiddra/lol-forum-enhance/colorfix/client/ColorfixImages/section-wrapper-content.png
-// @resource    colorfix-bottom https://raw.github.com/philippwiddra/lol-forum-enhance/colorfix/client/ColorfixImages/section-wrapper-bottom.png
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/avatar-div.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/toolkitVersions.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/options-modal.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/update-modal.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/userscript.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/localizations.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/caches.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/edit-box.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/forum-display.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/jquery.lfepopover.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/aokura/unicode-utf8.js
+// @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/flaviusmatis/easyModal/jquery.easyModal.js
+// @resource    options-modal https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/options-modal.html
+// @resource    update-alert https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/update-alert.html
+// @resource    avatardivhtml https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/avatar-div.html
+// @resource    colorfix-top https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/ColorfixImages/section-wrapper-top.jpg
+// @resource    colorfix-content https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/ColorfixImages/section-wrapper-content.png
+// @resource    colorfix-bottom https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/ColorfixImages/section-wrapper-bottom.png
 // @resource    iconUnknown http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/unknown.jpg
 // @resource    iconNotFound http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/notfound.jpg
 // @resource    icon0 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/0.jpg
