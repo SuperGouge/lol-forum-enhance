@@ -1,12 +1,32 @@
 var userscript = {
-    addGlobalStyle: function (css) {
+    resolveCssAnnotations: function (aCss) {
+        var css = aCss;
+
+        var re = /(\/\*!? *@resolve:)(.*?)( *\*\/)/;
+        var matches = css.match(re);
+        while (matches) {
+            var before = matches[1];
+            var match = matches[2];
+            var after = matches[3];
+
+            // perform custom replacement
+            var newMatch = match.replace(/GM_getResourceURL\(['"](.*?)['"]\)/g, '"' + GM_getResourceURL('$1') + '"'); // GM_getResource resolve
+
+            css = css.replace(before + match + after, newMatch);
+            matches = css.match(re);
+        }
+
+        return css;
+    },
+    addGlobalStyle: function (css, id) {
+        /*
         try {
             var elmHead, elmStyle;
             elmHead = document.getElementsByTagName('head')[0];
             elmStyle = document.createElement('style');
             elmStyle.type = 'text/css';
             elmHead.appendChild(elmStyle);
-            elmStyle.innerHTML = css;
+            elmStyle.innerHTML = userscript.resolveCssAnnotations(css);
         }
         catch (e) {
             if (!document.styleSheets.length) {
@@ -14,15 +34,22 @@ var userscript = {
             }
             document.styleSheets[0].cssText += css;
         }
+        */
+        var style;
+        if (id) style = $('<style id="' + id + '" type="text/css">');
+        else style = $('<style type="text/css">');
+        style.text(userscript.resolveCssAnnotations(css));
+        $('head').append(style);
     },
-    prependGlobalStyle: function (css) {
+    prependGlobalStyle: function (css, id) {
+        /*
         try {
             var elmHead, elmStyle;
             elmHead = document.getElementsByTagName('head')[0];
             elmStyle = document.createElement('style');
             elmStyle.type = 'text/css';
             elmHead.insertBefore(elmStyle, elmHead.firstChild);
-            elmStyle.innerHTML = css;
+            elmStyle.innerHTML = userscript.resolveCssAnnotations(css);
         }
         catch (e) {
             if (!document.styleSheets.length) {
@@ -30,6 +57,12 @@ var userscript = {
             }
             document.styleSheets[0].cssText += css;
         }
+        */
+        var style;
+        if (id) style = $('<style id="' + id + '" type="text/css">');
+        else style = $('<style type="text/css">');
+        style.text(userscript.resolveCssAnnotations(css));
+        $('head').prepend(style);
     },
     setCookie: function (name, value, expireMilliseconds) {
         var expireDate = new Date();

@@ -60,6 +60,9 @@
     <Content Include="client\aokura\unicode-utf8.js" />
     <Content Include="client\avatar-div.html" />
     <Content Include="client\avatar-div.js" />
+    <Content Include="client\ColorfixImages\section-wrapper-bottom.png" />
+    <Content Include="client\ColorfixImages\section-wrapper-content.png" />
+    <Content Include="client\ColorfixImages\section-wrapper-top.jpg" />
     <Content Include="client\flaviusmatis\easyModal\jquery.easyModal.js" />
     <Content Include="client\global.css">
       <DependentUpon>global.less</DependentUpon>

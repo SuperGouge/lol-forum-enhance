@@ -43,10 +43,13 @@
                 else $('#lfe-o-fek-off').addClass('active');
 
                 $('#lfe-o-link-' + lfeOptions.data.link).addClass('active');
-            },
-            onClose: function (modal) {
-                //$(modal).append('Closed!');
+
+                if (lfeOptions.data.colorfix) $('#lfe-o-colorfix-on').addClass('active');
+                else $('#lfe-o-colorfix-off').addClass('active');
             }
+            /* onClose: function (modal) {
+                //$(modal).append('Closed!');
+            } */
         });
 
         // Register save-options function
@@ -58,8 +61,9 @@
             lfeOptions.data.wt = $('#lfe-o-wt .active').data('value');
             lfeOptions.data.fek = $('#lfe-o-fek .active').data('value');
             lfeOptions.data.link = $('#lfe-o-link .active').data('value');
+            lfeOptions.data.colorfix = $('#lfe-o-colorfix .active').data('value');
             lfeOptions.saveLocal();
-            $('#lfeOptionsModal').modal('hide');
+            $('#lfeOptionsModal').easyModal('hide');
         });
 
         // Register option selection events
@@ -88,5 +92,6 @@
         $('#lfe-o-captions-reload-info').text(localizations.get('optionsModalReloadInfoCaption'));
         $('#lfe-o-captions-button-save').text(localizations.get('optionsModalButtonSaveCaption'));
         $('#lfe-o-captions-button-discard').text(localizations.get('optionsModalButtonDiscardCaption'));
+        $('#lfe-o-captions-colorfix').text(localizations.get('optionsModalColorfixCaption'));
     }
 };

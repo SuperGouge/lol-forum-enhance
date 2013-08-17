@@ -5,7 +5,7 @@
 // @include     *.leagueoflegends.com/*
 // @downloadURL https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/main.user.js
 // @updateURL   https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/main.meta.js
-// @version     1.4.5
+// @version     1.5.2
 // @run-at      document-end
 // @grant       GM_xmlhttpRequest
 // @grant       GM_getResourceText
@@ -18,6 +18,7 @@
 // @grant       GM_openInTab
 // @grant       GM_registerMenuCommand
 // @resource    global-css-min https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/global.min.css
+// @resource    colorfix-css-min https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/less/colorfix.min.css
 // @require     http://code.jquery.com/jquery-2.0.2.min.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/avatar-div.js
 // @require     https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/toolkitVersions.js
@@ -34,6 +35,9 @@
 // @resource    options-modal https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/options-modal.html
 // @resource    update-alert https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/update-alert.html
 // @resource    avatardivhtml https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/avatar-div.html
+// @resource    colorfix-top https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/ColorfixImages/section-wrapper-top.jpg
+// @resource    colorfix-content https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/ColorfixImages/section-wrapper-content.png
+// @resource    colorfix-bottom https://raw.github.com/philippwiddra/lol-forum-enhance/master/client/ColorfixImages/section-wrapper-bottom.png
 // @resource    iconUnknown http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/unknown.jpg
 // @resource    iconNotFound http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/notfound.jpg
 // @resource    icon0 http://www.piltover-libraries.net/lol-forum-enhance/SummonerIcons/0.jpg

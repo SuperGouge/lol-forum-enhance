@@ -50,14 +50,14 @@
 					'position' : 'fixed',
 					'z-index': 2001,
 					'left' : 50 + '%',
-					'top' : parseInt(o.top) > -1 ? o.top + 'px' : 50 + '%'
+					'top' : parseInt(o.top, 10) > -1 ? o.top + 'px' : 50 + '%'
 				});
 
 				$modal.bind('openModal', function(){
 					$(this).css({
 						'display' : 'block',
 						'margin-left' : -($modal.outerWidth()/2) + 'px',
-						'margin-top' : (parseInt(o.top) > -1 ? 0 : -($modal.outerHeight()/2)) + 'px'
+						'margin-top' : (parseInt(o.top, 10) > -1 ? 0 : -($modal.outerHeight()/2)) + 'px'
 					});
 					$overlay.fadeIn(200, function(){
 						if (o.onOpen && typeof (o.onOpen) === 'function') {
@@ -85,7 +85,7 @@
 
 				$(document).keydown(function(e) {
 					// ESCAPE key pressed
-					if (o.closeOnEscape && e.keyCode == 27) {
+					if (o.closeOnEscape && e.keyCode === 27) {
 						$modal.trigger('closeModal');
 					}
 				});
