@@ -2,9 +2,6 @@
     Based on https://dl.dropboxusercontent.com/u/...lforum.user.js by Makozer
     Author: Lord BenneX
     License: LGPL http://www.gnu.org/licenses/lgpl.html  */
-html body {
-  background: url("http://cdn.leagueoflegends.com/lolkit/1.0.27/resources/images/bg-default.jpg") repeat fixed 0 0 transparent !important;
-}
 .post-row .quote {
   margin-top: 20px;
   padding: 4px;
@@ -45,9 +42,4 @@ html body {
 .section-wrapper .section-wrapper-bottom {
   /*! @resolve: background: url(GM_getResourceURL('colorfix-bottom')) no-repeat scroll 50% -284px transparent !important; */
 
-}
-.backdrop {
-  display: none !important;
-  background-color: none;
-  background-image: none;
 }
